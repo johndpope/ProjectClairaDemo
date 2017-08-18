@@ -10,8 +10,10 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    var chartersChoice = [String : Any]()
-    var part_mapJson = [String : Any]()
+    var chartersChoice = [String : String]()
+    var part_mapJson = [String : [String : Any]]()
+    var parts = [String : [String : [String : Any]]]()
+    var partsMeta = [String : Any]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +27,7 @@ class ViewController: UIViewController {
                 if let json = json as? [String : Any] {
                     print(json)
                     if let characters = json["character"] as? [String : Any] {
-                        self.chartersChoice = characters["choices"] as! [String  :Any]
+                        self.chartersChoice = characters["choices"] as! [String  : String]
                         self.get_partMapData()
                     }
                 }
@@ -36,7 +38,7 @@ class ViewController: UIViewController {
     func get_partMapData() {
         APICall.shared.partsMap_APICall { (json, isSuccess) in
             if isSuccess {
-                if let json = json as? [String : Any] {
+                if let json = json as? [String : [String : Any]] {
                     print(json)
                     self.part_mapJson = json
                     self.get_Parts()
@@ -49,13 +51,54 @@ class ViewController: UIViewController {
     func get_Parts() {
         APICall.shared.parts_APICall { (json, isSuccess) in
             if isSuccess {
-                if let json = json as? [String : Any] {
+                if let json = json as? [String : [String : [String : Any]]] {
                     print(json)
-                    self.part_mapJson = json
+                    self.parts = json
+                    self.get_Parts_Meta()
                 }
             }
         }
     }
+    
+    func get_Parts_Meta() {
+        APICall.shared.parts_APICall { (json, isSuccess) in
+            if isSuccess {
+                if let json = json as? [String : Any] {
+                    print(json)
+                    self.partsMeta = json
+                    self.generateSturcture()
+                }
+            }
+        }
+    }
+
+    func generateSturcture() {
+//        for (choice, option) in self.chartersChoice {
+//            if let partsMapMatch = self.part_mapJson[choice]?[option] as? [String: Any] {
+//                for (part, mapMatch) in partsMapMatch {
+//                    for (matchKey, value) in (mapMatch as! [String : Any]) {
+//                        
+//                    }
+//                }
+//            }
+//        }
+        
+        chartersChoice.forEach { (choice, option)  in
+            if let partsMapMatch = self.part_mapJson[choice]?[option] as? [String: [String : [String : Any]]] {
+                partsMapMatch.forEach({ (part, mapMatch) in
+                    mapMatch.forEach({ (matchKey, matchValueObj) in
+                        matchValueObj.forEach({ (key, value)  in
+                            self.parts[part]?[matchKey]?[key] = value
+                        })
+                    })
+                })
+            }
+        }
+        print(self.parts)
+    }
+    
+    
+    
 }
 
 class APICall {
