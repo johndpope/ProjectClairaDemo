@@ -129,7 +129,8 @@ class ViewController: UIViewController {
                                 "file" : fileName,
                                 "fileWidth" : fileWidth,
                                 "fileHeight" : fileHeight,
-                                "joints" : fileJoints]
+                                "joints" : fileJoints,
+                                "x" : "", "y" : ""]
         
         }
         
@@ -140,6 +141,7 @@ class ViewController: UIViewController {
         var contextPoseData = [String : [String : Any]]()
         var contextPositionX = ""
         var contextPositionY = ""
+       
         if let metaData = contextJson["meta_data"] as? [String : String] {
             contextWidth = metaData["width"] ?? ""
             contextHeight = metaData["height"] ?? ""
@@ -161,15 +163,18 @@ class ViewController: UIViewController {
                 }
             }
         }
-        
+        print(contextPoseData)
+
      contextPoseData.forEach { (partName, locations) in
         if let dic2 = svgDataDic[partName] {
             let mergedic = self.merge(dic1: locations, dic2: dic2)
-            print(mergedic)
+            //print(mergedic)
             contextPoseData[partName] = mergedic
         }
         }
-        
+        print("=========================")
+
+        print(contextPoseData)
     }
     
     func merge(dic1: [String : Any], dic2: [String : Any])-> [String : Any] {
