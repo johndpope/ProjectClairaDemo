@@ -10,6 +10,8 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet var webView: UIWebView!
+    
     var chartersChoice = [String : String]()
     var part_mapJson = [String : [String : Any]]()
     var parts = [String : [String : [String : Any]]]()
@@ -19,11 +21,19 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //showImageInWebView()
         self.getCharters()
         self.get_Context_Data()
     }
 
 
+    func showImageInWebView() {
+        if let filePath = Bundle.main.path(forResource: "BP001_BT001_OA011_BV008", ofType: "svg") {
+            let htmlString = "<html><body><img src=\"file://\(filePath)\" width=\"150\" height=\"150\"></body></html>"
+            webView.loadHTMLString(htmlString, baseURL: nil)
+        }
+    }
+    
     
     func getCharters() {
         APICall.shared.characterAPICall { (json, isSuccess) in
@@ -114,10 +124,14 @@ class ViewController: UIViewController {
         let fileName = self.generateFileName(fileInfo: structure["file"] as! [String : String])
         let attributes = self.getAttributes(attributeInfo: structure["attributes"] as! [String : String])
         
-        var fileWidth = ""
-        var fileHeight = ""
+        var fileWidth = "0"
+        var fileHeight = "0"
         var fileJoints: [String : Any] = [:]
         
+        if bodyPart == "top_layer" {
+            print("got top_layer")
+        }
+
         if let fileMeta = self.partsMeta[fileName] {
             //fileWidth = fileMeta["width"]
             fileWidth = (fileMeta as! [String : Any])["width"] as! String
@@ -127,8 +141,8 @@ class ViewController: UIViewController {
         
         svgDataDic[bodyPart] = ["body_part" : bodyPart,
                                 "file" : fileName,
-                                "fileWidth" : fileWidth,
-                                "fileHeight" : fileHeight,
+                                "width" : fileWidth,
+                                "height" : fileHeight,
                                 "joints" : fileJoints,
                                 "x" : "", "y" : ""]
         
@@ -136,15 +150,15 @@ class ViewController: UIViewController {
         
         print(svgDataDic)
         
-        var contextWidth = ""
-        var contextHeight = ""
+        var contextWidth = "0"
+        var contextHeight = "0"
         var contextPoseData = [String : [String : Any]]()
         var contextPositionX = ""
         var contextPositionY = ""
        
         if let metaData = contextJson["meta_data"] as? [String : String] {
-            contextWidth = metaData["width"] ?? ""
-            contextHeight = metaData["height"] ?? ""
+            contextWidth = metaData["width"] ?? "0"
+            contextHeight = metaData["height"] ?? "0"
         }
         
         if let layers = contextJson["layers"] as? [String : Any] {
@@ -175,7 +189,97 @@ class ViewController: UIViewController {
         print("=========================")
 
         print(contextPoseData)
+        
+        
+        var firstPart: [String : Any] = [:]
+        var firstPartKey = ""
+        
+        contextPoseData.forEach { (key, partData) in
+            firstPart = partData
+            firstPartKey = key
+            return
+        }
+        
+        let specifiedCood = ["x" : contextPositionX, "y" : contextPositionY]
+        let fp_width = firstPart["width"] as! String
+        let fp_height = firstPart["height"] as! String
+        let fp_scale = firstPart["scale"] as! String
+        let w = Double(fp_width)!
+        let h = Double(fp_height)!
+        let s = Double(fp_scale)!
+        
+        let centralShift  = getCentralObjectCoords(coord: specifiedCood, width: w * s , height: h * s)
+        
+        contextPoseData[firstPartKey]?["x"] = centralShift["x"]
+        contextPoseData[firstPartKey]?["y"] = centralShift["y"]
+        
+        contextPoseData.forEach { (parentName, parentData) in
+            var parentDt = parentData
+            let w = parentData["width"] as! String
+            let h = parentData["height"] as! String
+            let s = parentData["scale"] as! String
+            let parent_scale = Double(s)!
+            let parent_width = Double(w)! * parent_scale
+            let parent_height = Double(h)! * parent_scale
+            parentDt["width"] = "\(parent_width)"
+            parentDt["height"] = "\(parent_height)"
+            contextPoseData[parentName] = parentDt
+            
+            if let joints = parentData["joints"] as? [String : [String : String]] {
+                joints.forEach({ (childName, internalJointCoords) in
+                    if let child = contextPoseData[childName], let cx = child["x"] as? String, cx.isEmpty {
+                        print(child)
+                        
+                        //calculat global joints coord
+                        let pX = parentData["x"] as! String
+                        let pY = parentData["y"] as! String
+                        let parentAngle = parentData["angle"] as! String
+
+                        let ijX = internalJointCoords["x"]!
+                        let ijY = internalJointCoords["y"]!
+                        //convert into float
+                        
+                        let pxf = Double(pX)!
+                        let pyf = Double(pY)!
+                        let paf = Double(parentAngle)!
+                        let ijxf = Double(ijX)!
+                        let ijyf = Double(ijY)!
+                        
+                        let para1 = ["x" : pxf, "y" : pyf]
+                        let para2 = ["x" : ijxf * paf, "y" : ijyf * paf]
+                        
+                        let globalJointCoords = self.getJointGlobal(objGlobal: para1, jointInternal: para2, angle: paf)
+                        
+                    }
+                })
+            }
+            
+
+            
+        }
+        
     }
+    
+    func getJointGlobal(objGlobal: [String : Double], jointInternal : [String : Double], angle: Double) {
+        
+    }
+    
+    func transformCoordWithRotation(jointInternal: [String : Double], angle: Double)-> [String : Double] {
+        let x = jointInternal["x"]!
+        let y = jointInternal["y"]!
+        let a = 0 - (angle * Double.pi / 180.0)
+        let sin_a = sin(a)
+        let cos_a = cos(a)
+        let coord =  ["x" : (y * sin_a + x * cos_a), "y" : (y * cos_a - x * sin_a)]
+        return coord
+    }
+    
+    func getCentralObjectCoords(coord: [String : String], width: Double, height: Double)-> [String : String] {
+        let cx = Double(coord["x"]!)!
+        let cy = Double(coord["y"]!)!
+        return ["x" : "\(cx - (width/2))", "y" : "\(cy - (height/2))"]
+    }
+    
     
     func merge(dic1: [String : Any], dic2: [String : Any])-> [String : Any] {
         var dic = dic1

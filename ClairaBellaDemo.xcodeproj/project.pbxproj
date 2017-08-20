@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		791A5B891F48A6C200BA0188 /* car_black.png in Resources */ = {isa = PBXBuildFile; fileRef = 791A5B881F48A6C200BA0188 /* car_black.png */; };
+		791A5B8B1F48AA4A00BA0188 /* BP001_BT001_OA011_BV008.svg in Resources */ = {isa = PBXBuildFile; fileRef = 791A5B8A1F48AA4A00BA0188 /* BP001_BT001_OA011_BV008.svg */; };
 		795421631F460DE500DBBBE0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795421621F460DE500DBBBE0 /* AppDelegate.swift */; };
 		795421651F460DE500DBBBE0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795421641F460DE500DBBBE0 /* ViewController.swift */; };
 		795421681F460DE500DBBBE0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 795421661F460DE500DBBBE0 /* Main.storyboard */; };
@@ -15,6 +17,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		791A5B881F48A6C200BA0188 /* car_black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = car_black.png; sourceTree = "<group>"; };
+		791A5B8A1F48AA4A00BA0188 /* BP001_BT001_OA011_BV008.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = BP001_BT001_OA011_BV008.svg; sourceTree = "<group>"; };
 		7954215F1F460DE500DBBBE0 /* ClairaBellaDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ClairaBellaDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		795421621F460DE500DBBBE0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		795421641F460DE500DBBBE0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -54,6 +58,8 @@
 		795421611F460DE500DBBBE0 /* ClairaBellaDemo */ = {
 			isa = PBXGroup;
 			children = (
+				791A5B8A1F48AA4A00BA0188 /* BP001_BT001_OA011_BV008.svg */,
+				791A5B881F48A6C200BA0188 /* car_black.png */,
 				795421621F460DE500DBBBE0 /* AppDelegate.swift */,
 				795421641F460DE500DBBBE0 /* ViewController.swift */,
 				795421661F460DE500DBBBE0 /* Main.storyboard */,
@@ -123,8 +129,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				791A5B8B1F48AA4A00BA0188 /* BP001_BT001_OA011_BV008.svg in Resources */,
 				7954216D1F460DE500DBBBE0 /* LaunchScreen.storyboard in Resources */,
 				7954216A1F460DE500DBBBE0 /* Assets.xcassets in Resources */,
+				791A5B891F48A6C200BA0188 /* car_black.png in Resources */,
 				795421681F460DE500DBBBE0 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
