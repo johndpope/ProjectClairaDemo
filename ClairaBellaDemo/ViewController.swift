@@ -93,6 +93,7 @@ class ViewController: UIViewController {
             if isSuccess {
                 if let json = json as? [String : [String : Any]] {
                     print(json)
+
                     self.contextJson = json[self.wantedContext]!
                 }
             }
@@ -114,6 +115,7 @@ class ViewController: UIViewController {
         }
         print(self.parts)
         self.buildSVGs()
+
     }
     
     
@@ -126,7 +128,7 @@ class ViewController: UIViewController {
         
         var fileWidth = "0"
         var fileHeight = "0"
-        var fileJoints: [String : Any] = [:]
+        var fileJoints: [String : [String : String]] = [:]
         
         if bodyPart == "top_layer" {
             print("got top_layer")
@@ -136,7 +138,8 @@ class ViewController: UIViewController {
             //fileWidth = fileMeta["width"]
             fileWidth = (fileMeta as! [String : Any])["width"] as! String
             fileHeight = (fileMeta as! [String : Any])["height"] as! String
-            fileJoints = (fileMeta as! [String : Any])["joints"] as! [String : Any]
+            fileJoints = (fileMeta as! [String : Any])["joints"] as! [String : [String : String]]
+            print(fileJoints)
         }
         
         svgDataDic[bodyPart] = ["body_part" : bodyPart,
@@ -190,15 +193,40 @@ class ViewController: UIViewController {
 
         print(contextPoseData)
         
+        let orderArr = ["torso_bottom",
+                        "torso_top",
+                        "top_layer",
+                        "expression" ,
+                        "right_upper_arm",
+                        "left_upper_arm",
+                        "right_upper_leg",
+                        "left_upper_leg" ,
+                        "right_lower_arm",
+                        "left_lower_arm",
+                        "right_lower_leg",
+                        "left_lower_leg" ,
+                        "eyes" ,
+                        "eye_wear" ,
+                        "head_wear" ,
+                        "hair_style" ,
+                        "left_hand" ,
+                        "right_hand" ,
+                        "right_boot_leg" ,
+                        "left_boot_leg" ,
+                        "right_foot" ,
+                        "left_foot"
+        ]
+        var cpd = [String : [String : Any]]()
+
+        var firstPartKey = orderArr.first!
+
+        var firstPart: [String : Any] = contextPoseData[firstPartKey]!
         
-        var firstPart: [String : Any] = [:]
-        var firstPartKey = ""
-        
-        contextPoseData.forEach { (key, partData) in
-            firstPart = partData
-            firstPartKey = key
-            return
-        }
+//        contextPoseData.forEach { (key, partData) in
+//            firstPart = partData
+//            firstPartKey = key
+//            return
+//        }
         
         let specifiedCood = ["x" : contextPositionX, "y" : contextPositionY]
         let fp_width = firstPart["width"] as! String
@@ -212,9 +240,10 @@ class ViewController: UIViewController {
         
         contextPoseData[firstPartKey]?["x"] = centralShift["x"]
         contextPoseData[firstPartKey]?["y"] = centralShift["y"]
-        
-        contextPoseData.forEach { (parentName, parentData) in
+        orderArr.forEach { parentName in
+            let parentData = contextPoseData[parentName]!
             var parentDt = parentData
+            
             let w = parentData["width"] as! String
             let h = parentData["height"] as! String
             let s = parentData["scale"] as! String
@@ -225,6 +254,9 @@ class ViewController: UIViewController {
             parentDt["height"] = "\(parent_height)"
             contextPoseData[parentName] = parentDt
             
+            if parentName == "torso_top" {
+                print("abc")
+            }
             if let joints = parentData["joints"] as? [String : [String : String]] {
                 joints.forEach({ (childName, internalJointCoords) in
                     if let child = contextPoseData[childName], let cx = child["x"] as? String, cx.isEmpty {
@@ -234,43 +266,97 @@ class ViewController: UIViewController {
                         let pX = parentData["x"] as! String
                         let pY = parentData["y"] as! String
                         let parentAngle = parentData["angle"] as! String
-
+                        
                         let ijX = internalJointCoords["x"]!
                         let ijY = internalJointCoords["y"]!
                         //convert into float
                         
-                        let pxf = Double(pX)!
-                        let pyf = Double(pY)!
+                        let pxf = Double(pX) ?? 0
+                        let pyf = Double(pY) ?? 0
                         let paf = Double(parentAngle)!
                         let ijxf = Double(ijX)!
                         let ijyf = Double(ijY)!
                         
                         let para1 = ["x" : pxf, "y" : pyf]
-                        let para2 = ["x" : ijxf * paf, "y" : ijyf * paf]
+                        let para2 = ["x" : ijxf * parent_scale, "y" : ijyf * parent_scale]
+                        
+                        if childName == "torso_top" {
+                            print("abc")
+                        }
                         
                         let globalJointCoords = self.getJointGlobal(objGlobal: para1, jointInternal: para2, angle: paf)
                         
+                        let cs = contextPoseData[childName]!["scale"] as! String
+                        let childScale = Double(cs)!
+                        
+                        
+                        var jointX = "0"
+                        var jointY = "0"
+                        
+                        if let parentCoodsInChildJoints = (contextPoseData[childName]?["joints"] as? [String : [String : String]])?[parentName] {
+                            jointX = parentCoodsInChildJoints["x"]!
+                            jointY = parentCoodsInChildJoints["y"]!
+                        }
+                        
+                        let ca = contextPoseData[childName]!["angle"] as! String
+                        
+                        //convert into double
+                        let jointxd = Double(jointX)!
+                        let jointyd = Double(jointY)!
+                        let childAngle = Double(ca)!
+                        
+                        let globalChildCoord = self.getObjectGlobal(globalJointCoords, ["x" : jointxd * childScale, "y" : jointyd * childScale], childAngle)
+                        contextPoseData[childName]!["x"] = "\(globalChildCoord["x"]!)"
+                        contextPoseData[childName]!["y"] = "\(globalChildCoord["y"]!)"
+                        
                     }
                 })
+                
             }
             
-
             
+
         }
+//        contextPoseData.forEach { (parentName, parentData) in
+//            
+//        }
         
+        NSLog("%@", contextPoseData)
+
+
+        generateHTLM(for: contextPoseData)
+
     }
     
-    func getJointGlobal(objGlobal: [String : Double], jointInternal : [String : Double], angle: Double) {
+    func getJointGlobal(objGlobal: [String : Double], jointInternal : [String : Double], angle: Double)-> [String : Double] {
+        let transformCoord = transformCoordWithRotation(jointInternal,  angle)
+        let tcx = transformCoord["x"]!
+        let tcy = transformCoord["y"]!
+        let ogx = objGlobal["x"]!
+        let ogy = objGlobal["y"]!
         
+        let coord = ["x" : ogx + tcx, "y" : ogy + tcy]
+        return coord
     }
     
-    func transformCoordWithRotation(jointInternal: [String : Double], angle: Double)-> [String : Double] {
+    func getObjectGlobal(_ jointGlobal : [String : Double], _ jointInternal: [String : Double], _ angle: Double)-> [String : Double] {
+        let transformCoords = transformCoordWithRotation(jointInternal, angle)
+        let tcx = transformCoords["x"]!
+        let tcy = transformCoords["y"]!
+        let jgx = jointGlobal["x"]!
+        let jgy = jointGlobal["y"]!
+        
+        let coord = ["x" : jgx - tcx, "y" : jgy - tcy]
+        return coord
+    }
+    
+    func transformCoordWithRotation(_ jointInternal: [String : Double], _ angle: Double)-> [String : Double] {
         let x = jointInternal["x"]!
         let y = jointInternal["y"]!
         let a = 0 - (angle * Double.pi / 180.0)
         let sin_a = sin(a)
         let cos_a = cos(a)
-        let coord =  ["x" : (y * sin_a + x * cos_a), "y" : (y * cos_a - x * sin_a)]
+        let coord =  ["x" : y * sin_a + x * cos_a, "y" : y * cos_a - x * sin_a]
         return coord
     }
     
@@ -323,8 +409,46 @@ class ViewController: UIViewController {
     func getAttributes(attributeInfo: [String : String]) {
         print(attributeInfo)
     }
+    
+    
+    func generateHTLM(for poseData: [String : [String : Any]]) {
+        let htmlHeadStyle = "<!DOCTYPE html><html><head><title>test</title><style type=\"text/css\">*{margin:0;pading:0;border:0;} html, body{height:100%;} body{background-color: transparent !important;} div#canvas{position: relative;margin:0 auto;width:500px;height:800px;border:1px solid lightpink;overflow: hidden;} img{position: absolute;width: 100%;transform-origin: top left;}</style></head>"
+        
+        var htmlBody = "<body><div id=\"canvas\">"
+        poseData.forEach { (bodyPart, data) in
+            if let _ = data["x"] as? String, let _ = data["y"] as? String {
+                let fileNameWithExt = data["file"] as! String
+                let fileName = fileNameWithExt.components(separatedBy: ".").first!
+                
+                if let filePath = Bundle.main.path(forResource: fileName, ofType: "svg") {
+                    htmlBody += "<img src=\"file://\(filePath)\" style=\"\(getFileStyle(data: data))\">"
+//                     htmlBody += "<object id=\"\(bodyPart)\" type=\"image/svg+xml\" name=\"\(bodyPart)\" data=\"file://\(filePath)\" style=\"\(getFileStyle(data: data))\">"
+
+                }
+            }
+        }
+        htmlBody += "</div></body></html>"
+        let completeHtml = htmlHeadStyle + htmlBody
+        webView.loadHTMLString(completeHtml, baseURL: nil)
+
+        
+    }
+    
+    
+    func getFileStyle(data: [String : Any])-> String {
+        let top = data["y"] as! String
+        let left = data["x"] as! String
+        let layer = data["layer"] as! String
+        let width = data["width"] as! String
+        let height = data["height"] as! String
+        let angle = data["angle"] as! String
+        
+        let styleString = "top:\(top)px; left:\(left)px; z-index:\(layer); width:\(width); height:\(height); -ms-transform:rotate(\(angle)deg); -webkit-transform:rotate(\(angle)deg); transform:rotate(\(angle)deg);"
+        return styleString
+    }
 }
 
+//  htmlBody += "<object id=\"\(bodyPart)\" type=\"image/svg+xml\" name=\"\(bodyPart)\" >"
 
 
 
