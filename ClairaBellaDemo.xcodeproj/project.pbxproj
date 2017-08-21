@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		132605D51F4AA632003B6BFC /* result.html in Resources */ = {isa = PBXBuildFile; fileRef = 132605D41F4AA632003B6BFC /* result.html */; };
 		7914CD461F49C4EF00C5E908 /* BP001_BT001_OA011_BV005.svg in Resources */ = {isa = PBXBuildFile; fileRef = 7914CCB71F49C4EE00C5E908 /* BP001_BT001_OA011_BV005.svg */; };
 		7914CD471F49C4EF00C5E908 /* BP001_BT001_OA011_BV006.svg in Resources */ = {isa = PBXBuildFile; fileRef = 7914CCB81F49C4EE00C5E908 /* BP001_BT001_OA011_BV006.svg */; };
 		7914CD481F49C4EF00C5E908 /* BP001_BT001_OA011_BV007.svg in Resources */ = {isa = PBXBuildFile; fileRef = 7914CCB91F49C4EE00C5E908 /* BP001_BT001_OA011_BV007.svg */; };
@@ -159,6 +160,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		132605D41F4AA632003B6BFC /* result.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = result.html; sourceTree = "<group>"; };
 		7914CCB71F49C4EE00C5E908 /* BP001_BT001_OA011_BV005.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = BP001_BT001_OA011_BV005.svg; sourceTree = "<group>"; };
 		7914CCB81F49C4EE00C5E908 /* BP001_BT001_OA011_BV006.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = BP001_BT001_OA011_BV006.svg; sourceTree = "<group>"; };
 		7914CCB91F49C4EE00C5E908 /* BP001_BT001_OA011_BV007.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = BP001_BT001_OA011_BV007.svg; sourceTree = "<group>"; };
@@ -500,6 +502,7 @@
 				795421691F460DE500DBBBE0 /* Assets.xcassets */,
 				7954216B1F460DE500DBBBE0 /* LaunchScreen.storyboard */,
 				7954216E1F460DE500DBBBE0 /* Info.plist */,
+				132605D41F4AA632003B6BFC /* result.html */,
 			);
 			path = ClairaBellaDemo;
 			sourceTree = "<group>";
@@ -568,6 +571,7 @@
 				7914CD851F49C4EF00C5E908 /* BP005_BT002_OA000_BV004.svg in Resources */,
 				7914CD571F49C4EF00C5E908 /* BP001_BT002_OA030_BV007.svg in Resources */,
 				7914CD771F49C4EF00C5E908 /* BP004_BT002_OA000_BV000.svg in Resources */,
+				132605D51F4AA632003B6BFC /* result.html in Resources */,
 				7914CD6D1F49C4EF00C5E908 /* BP002_BT002_OA030_BV009.svg in Resources */,
 				7914CD821F49C4EF00C5E908 /* BP005_BT002_OA000_BV001.svg in Resources */,
 				7914CDCA1F49C4EF00C5E908 /* EW000.svg in Resources */,

@@ -24,6 +24,9 @@ class ViewController: UIViewController {
         //showImageInWebView()
         self.getCharters()
         self.get_Context_Data()
+        let url = URL(string: "http://45.79.169.241/svgdemo/api_tester.php")!
+        let urlrequst = URLRequest(url: url)
+        //webView.loadRequest(urlrequst)
     }
 
 
@@ -144,6 +147,7 @@ class ViewController: UIViewController {
         
         svgDataDic[bodyPart] = ["body_part" : bodyPart,
                                 "file" : fileName,
+                                "param" : attributes,
                                 "width" : fileWidth,
                                 "height" : fileHeight,
                                 "joints" : fileJoints,
@@ -406,23 +410,38 @@ class ViewController: UIViewController {
         return fileName
     }
     
-    func getAttributes(attributeInfo: [String : String]) {
-        print(attributeInfo)
+    func getAttributes(attributeInfo: [String : String])-> String {
+        var attributeString = ""
+        attributeInfo.forEach { (atrKey, atrValue) in
+            if !atrValue.isEmpty {
+                attributeString += atrKey + "=" + atrValue + "&"
+            }
+        }
+        if !attributeString.isEmpty {
+            attributeString.characters.removeLast()
+        }
+        return attributeString
     }
     
     
     func generateHTLM(for poseData: [String : [String : Any]]) {
-        let htmlHeadStyle = "<!DOCTYPE html><html><head><title>test</title><style type=\"text/css\">*{margin:0;pading:0;border:0;} html, body{height:100%;} body{background-color: transparent !important;} div#canvas{position: relative;margin:0 auto;width:500px;height:800px;border:1px solid lightpink;overflow: hidden;} img{position: absolute;width: 100%;transform-origin: top left;}</style></head>"
+        let htmlHeadStyle = "<!DOCTYPE html><html><head><title>test</title><style type=\"text/css\">*{margin:0;pading:0;border:0;} html, body{height:100%;} body{background-color: transparent !important;} div#canvas{position: relative;margin:0 auto;width:500px;height:800px;border:1px solid lightpink;overflow: hidden;} object{position: absolute;width: 100%;transform-origin: top left;}</style></head>"
+        
+        if let htmlFilePath = Bundle.main.path(forResource: "result", ofType: "html") {
+             let fileURl = URL(fileURLWithPath: htmlFilePath)
+            
+        }
         
         var htmlBody = "<body><div id=\"canvas\">"
         poseData.forEach { (bodyPart, data) in
             if let _ = data["x"] as? String, let _ = data["y"] as? String {
                 let fileNameWithExt = data["file"] as! String
                 let fileName = fileNameWithExt.components(separatedBy: ".").first!
-                
+                let attributes = data["param"] as! String
                 if let filePath = Bundle.main.path(forResource: fileName, ofType: "svg") {
-                    htmlBody += "<img src=\"file://\(filePath)\" style=\"\(getFileStyle(data: data))\">"
-//                     htmlBody += "<object id=\"\(bodyPart)\" type=\"image/svg+xml\" name=\"\(bodyPart)\" data=\"file://\(filePath)\" style=\"\(getFileStyle(data: data))\">"
+                    
+                    //htmlBody += "<img src=\"file://\(filePath)\" style=\"\(getFileStyle(data: data))\">"
+                     htmlBody += "<object id=\"\(bodyPart)\" type=\"image/svg+xml\" name=\"\(bodyPart)\" data=\"file://\(filePath)?\(attributes)\" style=\"\(getFileStyle(data: data))\"></object>"
 
                 }
             }
@@ -443,7 +462,7 @@ class ViewController: UIViewController {
         let height = data["height"] as! String
         let angle = data["angle"] as! String
         
-        let styleString = "top:\(top)px; left:\(left)px; z-index:\(layer); width:\(width); height:\(height); -ms-transform:rotate(\(angle)deg); -webkit-transform:rotate(\(angle)deg); transform:rotate(\(angle)deg);"
+        let styleString = "top:\(top)px; left:\(left)px; z-index:\(layer); width:\(width)px; height:\(height)px; -ms-transform:rotate(\(angle)deg); -webkit-transform:rotate(\(angle)deg); transform:rotate(\(angle)deg);"
         return styleString
     }
 }
