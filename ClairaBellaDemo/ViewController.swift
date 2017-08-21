@@ -7,11 +7,11 @@
 //
 
 import UIKit
-
+let webroot = "http://34.252.124.216/midnight/system/asset_library/character"
 class ViewController: UIViewController {
 
     @IBOutlet var webView: UIWebView!
-    
+
     var chartersChoice = [String : String]()
     var part_mapJson = [String : [String : Any]]()
     var parts = [String : [String : [String : Any]]]()
@@ -439,9 +439,11 @@ class ViewController: UIViewController {
                 let fileName = fileNameWithExt.components(separatedBy: ".").first!
                 let attributes = data["param"] as! String
                 if let filePath = Bundle.main.path(forResource: fileName, ofType: "svg") {
-                    
+                    if fileNameWithExt == "HS001.svg" {
+                        
+                    }
                     //htmlBody += "<img src=\"file://\(filePath)\" style=\"\(getFileStyle(data: data))\">"
-                     htmlBody += "<object id=\"\(bodyPart)\" type=\"image/svg+xml\" name=\"\(bodyPart)\" data=\"file://\(filePath)?\(attributes)\" style=\"\(getFileStyle(data: data))\"></object>"
+                     htmlBody += "<object id=\"\(bodyPart)\" type=\"image/svg+xml\" name=\"\(bodyPart)\" data=\"\(webroot)/\(fileNameWithExt)?\(attributes)\" style=\"\(getFileStyle(data: data))\"></object>"
 
                 }
             }
