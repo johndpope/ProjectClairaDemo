@@ -8,6 +8,8 @@
 
 import UIKit
 
+let webroot = "http://34.252.124.216/midnight/system/asset_library/character"
+
 class ViewController: UIViewController {
 
     @IBOutlet var webView: UIWebView!
@@ -21,28 +23,17 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //showImageInWebView()
         self.getCharters()
         self.get_Context_Data()
-        let url = URL(string: "http://45.79.169.241/svgdemo/api_tester.php")!
-        let urlrequst = URLRequest(url: url)
-        //webView.loadRequest(urlrequst)
     }
 
 
-    func showImageInWebView() {
-        if let filePath = Bundle.main.path(forResource: "BP001_BT001_OA011_BV008", ofType: "svg") {
-            let htmlString = "<html><body><img src=\"file://\(filePath)\" width=\"150\" height=\"150\"></body></html>"
-            webView.loadHTMLString(htmlString, baseURL: nil)
-        }
-    }
     
     
     func getCharters() {
         APICall.shared.characterAPICall { (json, isSuccess) in
             if isSuccess {
                 if let json = json as? [String : Any] {
-                    print(json)
                     if let characters = json["character"] as? [String : Any] {
                         self.chartersChoice = characters["choices"] as! [String  : String]
                         self.get_partMapData()
@@ -57,7 +48,6 @@ class ViewController: UIViewController {
         APICall.shared.partsMap_APICall { (json, isSuccess) in
             if isSuccess {
                 if let json = json as? [String : [String : Any]] {
-                    print(json)
                     self.part_mapJson = json
                     self.get_Parts()
                 }
@@ -70,7 +60,6 @@ class ViewController: UIViewController {
         APICall.shared.parts_APICall { (json, isSuccess) in
             if isSuccess {
                 if let json = json as? [String : [String : [String : Any]]] {
-                    print(json)
                     self.parts = json
                     self.get_Parts_Meta()
                 }
@@ -83,9 +72,8 @@ class ViewController: UIViewController {
         APICall.shared.parts_meta_APICall { (json, isSuccess) in
             if isSuccess {
                 if let json = json as? [String : Any] {
-                    print(json)
                     self.partsMeta = json
-                    self.generateSturcture()
+                    self.generateDataSturcture()
                 }
             }
         }
@@ -95,7 +83,6 @@ class ViewController: UIViewController {
         APICall.shared.context_APICall { (json, isSuccess) in
             if isSuccess {
                 if let json = json as? [String : [String : Any]] {
-                    print(json)
 
                     self.contextJson = json[self.wantedContext]!
                 }
@@ -104,7 +91,7 @@ class ViewController: UIViewController {
         }
     }
     
-    func generateSturcture() {
+    func generateDataSturcture() {
         chartersChoice.forEach { (choice, option)  in
             if let partsMapMatch = self.part_mapJson[choice]?[option] as? [String: [String : [String : Any]]] {
                 partsMapMatch.forEach({ (part, mapMatch) in
@@ -116,12 +103,11 @@ class ViewController: UIViewController {
                 })
             }
         }
-        print(self.parts)
         self.buildSVGs()
 
     }
     
-    
+    //
     func buildSVGs() {
         var svgDataDic = [String : [String : Any]]()
         
@@ -133,12 +119,8 @@ class ViewController: UIViewController {
         var fileHeight = "0"
         var fileJoints: [String : [String : String]] = [:]
         
-        if bodyPart == "top_layer" {
-            print("got top_layer")
-        }
 
         if let fileMeta = self.partsMeta[fileName] {
-            //fileWidth = fileMeta["width"]
             fileWidth = (fileMeta as! [String : Any])["width"] as! String
             fileHeight = (fileMeta as! [String : Any])["height"] as! String
             fileJoints = (fileMeta as! [String : Any])["joints"] as! [String : [String : String]]
@@ -151,11 +133,9 @@ class ViewController: UIViewController {
                                 "width" : fileWidth,
                                 "height" : fileHeight,
                                 "joints" : fileJoints,
-                                "x" : "", "y" : ""]
-        
+                                "x" : "", "y" : ""] //fill later
         }
         
-        print(svgDataDic)
         
         var contextWidth = "0"
         var contextHeight = "0"
@@ -184,19 +164,19 @@ class ViewController: UIViewController {
                 }
             }
         }
-        print(contextPoseData)
 
-     contextPoseData.forEach { (partName, locations) in
-        if let dic2 = svgDataDic[partName] {
-            let mergedic = self.merge(dic1: locations, dic2: dic2)
-            //print(mergedic)
-            contextPoseData[partName] = mergedic
+        //mearge contextpose data
+        contextPoseData.forEach { (partName, locations) in
+            if let dic2 = svgDataDic[partName] {
+                let mergedic = self.merge(dic1: locations, dic2: dic2)
+                //print(mergedic)
+                contextPoseData[partName] = mergedic
+            }
         }
-        }
-        print("=========================")
 
-        print(contextPoseData)
-        
+        //orderArr : this array is used for maintain the order of part_locations for temparory base.
+        //currently we are not receiving proper order of parts as define in contexts.json api.
+        //once api will update with proper order index, we will remove this orderArr.
         let orderArr = ["torso_bottom",
                         "torso_top",
                         "top_layer",
@@ -220,7 +200,6 @@ class ViewController: UIViewController {
                         "right_foot" ,
                         "left_foot"
         ]
-        var cpd = [String : [String : Any]]()
 
         var firstPartKey = orderArr.first!
 
@@ -284,10 +263,6 @@ class ViewController: UIViewController {
                         let para1 = ["x" : pxf, "y" : pyf]
                         let para2 = ["x" : ijxf * parent_scale, "y" : ijyf * parent_scale]
                         
-                        if childName == "torso_top" {
-                            print("abc")
-                        }
-                        
                         let globalJointCoords = self.getJointGlobal(objGlobal: para1, jointInternal: para2, angle: paf)
                         
                         let cs = contextPoseData[childName]!["scale"] as! String
@@ -318,20 +293,43 @@ class ViewController: UIViewController {
                 
             }
             
-            
-
         }
 //        contextPoseData.forEach { (parentName, parentData) in
 //            
 //        }
         
-        NSLog("%@", contextPoseData)
+        //NSLog("%@", contextPoseData)
 
-
-        generateHTLM(for: contextPoseData)
+        generateHTLM(for: contextPoseData, contextSize: CGSize(width: Double(contextWidth)!, height: Double(contextHeight)!))
 
     }
     
+    
+    func generateHTLM(for poseData: [String : [String : Any]], contextSize: CGSize) {
+        let htmlHeadStyle = "<!DOCTYPE html><html><head><title>test</title><style type=\"text/css\">*{margin:0;pading:0;border:0;} html, body{height:100%;} body{background-color: transparent !important;} div#canvas{position: relative;margin:0 auto;width:\(contextSize.width)px;height:\(contextSize.height)px;border:1px solid lightpink;overflow: hidden;} object{position: absolute;width: 100%;transform-origin: top left;}</style></head>"
+        
+        
+        var htmlBody = "<body><div id=\"canvas\">"
+        poseData.forEach { (bodyPart, data) in
+            if let _ = data["x"] as? String, let _ = data["y"] as? String {
+                let fileName = data["file"] as! String
+                let attributes = data["param"] as! String
+                
+                htmlBody += "<object id=\"\(bodyPart)\" type=\"image/svg+xml\" name=\"\(bodyPart)\" data=\"\(webroot)/\(fileName)?\(attributes)\" style=\"\(getFileStyle(data: data))\"></object>"
+
+            }
+        }
+        htmlBody += "</div></body></html>"
+        let completeHtml = htmlHeadStyle + htmlBody
+        
+        //load html string in webview
+        webView.loadHTMLString(completeHtml, baseURL: nil)
+    }
+    
+    
+}
+
+extension ViewController {
     func getJointGlobal(objGlobal: [String : Double], jointInternal : [String : Double], angle: Double)-> [String : Double] {
         let transformCoord = transformCoordWithRotation(jointInternal,  angle)
         let tcx = transformCoord["x"]!
@@ -387,7 +385,7 @@ class ViewController: UIViewController {
         var bodyVariation = ""
         var otherCode = ""
         fileInfo.forEach { (key, value) in
-
+            
             switch key {
             case "body_type_code" :
                 bodyType = value
@@ -423,37 +421,6 @@ class ViewController: UIViewController {
         return attributeString
     }
     
-    
-    func generateHTLM(for poseData: [String : [String : Any]]) {
-        let htmlHeadStyle = "<!DOCTYPE html><html><head><title>test</title><style type=\"text/css\">*{margin:0;pading:0;border:0;} html, body{height:100%;} body{background-color: transparent !important;} div#canvas{position: relative;margin:0 auto;width:500px;height:800px;border:1px solid lightpink;overflow: hidden;} object{position: absolute;width: 100%;transform-origin: top left;}</style></head>"
-        
-        if let htmlFilePath = Bundle.main.path(forResource: "result", ofType: "html") {
-             let fileURl = URL(fileURLWithPath: htmlFilePath)
-            
-        }
-        
-        var htmlBody = "<body><div id=\"canvas\">"
-        poseData.forEach { (bodyPart, data) in
-            if let _ = data["x"] as? String, let _ = data["y"] as? String {
-                let fileNameWithExt = data["file"] as! String
-                let fileName = fileNameWithExt.components(separatedBy: ".").first!
-                let attributes = data["param"] as! String
-                if let filePath = Bundle.main.path(forResource: fileName, ofType: "svg") {
-                    
-                    //htmlBody += "<img src=\"file://\(filePath)\" style=\"\(getFileStyle(data: data))\">"
-                     htmlBody += "<object id=\"\(bodyPart)\" type=\"image/svg+xml\" name=\"\(bodyPart)\" data=\"file://\(filePath)?\(attributes)\" style=\"\(getFileStyle(data: data))\"></object>"
-
-                }
-            }
-        }
-        htmlBody += "</div></body></html>"
-        let completeHtml = htmlHeadStyle + htmlBody
-        webView.loadHTMLString(completeHtml, baseURL: nil)
-
-        
-    }
-    
-    
     func getFileStyle(data: [String : Any])-> String {
         let top = data["y"] as! String
         let left = data["x"] as! String
@@ -465,17 +432,14 @@ class ViewController: UIViewController {
         let styleString = "top:\(top)px; left:\(left)px; z-index:\(layer); width:\(width)px; height:\(height)px; -ms-transform:rotate(\(angle)deg); -webkit-transform:rotate(\(angle)deg); transform:rotate(\(angle)deg);"
         return styleString
     }
+
 }
-
-//  htmlBody += "<object id=\"\(bodyPart)\" type=\"image/svg+xml\" name=\"\(bodyPart)\" >"
-
 
 
 
 //APICAlls
 class APICall {
     static let shared = APICall()
-    
     
     func characterAPICall(block: @escaping (Any?, Bool)-> Void) {
         let urlString = "http://34.252.124.216/midnight/system/api/character.json"

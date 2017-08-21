@@ -151,7 +151,6 @@
 		7914CDD21F49C4EF00C5E908 /* LH000.svg in Resources */ = {isa = PBXBuildFile; fileRef = 7914CD431F49C4EF00C5E908 /* LH000.svg */; };
 		7914CDD31F49C4EF00C5E908 /* LH009.svg in Resources */ = {isa = PBXBuildFile; fileRef = 7914CD441F49C4EF00C5E908 /* LH009.svg */; };
 		7914CDD41F49C4EF00C5E908 /* RH000.svg in Resources */ = {isa = PBXBuildFile; fileRef = 7914CD451F49C4EF00C5E908 /* RH000.svg */; };
-		791A5B891F48A6C200BA0188 /* car_black.png in Resources */ = {isa = PBXBuildFile; fileRef = 791A5B881F48A6C200BA0188 /* car_black.png */; };
 		795421631F460DE500DBBBE0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795421621F460DE500DBBBE0 /* AppDelegate.swift */; };
 		795421651F460DE500DBBBE0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795421641F460DE500DBBBE0 /* ViewController.swift */; };
 		795421681F460DE500DBBBE0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 795421661F460DE500DBBBE0 /* Main.storyboard */; };
@@ -304,7 +303,6 @@
 		7914CD431F49C4EF00C5E908 /* LH000.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = LH000.svg; sourceTree = "<group>"; };
 		7914CD441F49C4EF00C5E908 /* LH009.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = LH009.svg; sourceTree = "<group>"; };
 		7914CD451F49C4EF00C5E908 /* RH000.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = RH000.svg; sourceTree = "<group>"; };
-		791A5B881F48A6C200BA0188 /* car_black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = car_black.png; sourceTree = "<group>"; };
 		7954215F1F460DE500DBBBE0 /* ClairaBellaDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ClairaBellaDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		795421621F460DE500DBBBE0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		795421641F460DE500DBBBE0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -495,7 +493,6 @@
 			isa = PBXGroup;
 			children = (
 				7914CCB61F49C4EE00C5E908 /* svgs */,
-				791A5B881F48A6C200BA0188 /* car_black.png */,
 				795421621F460DE500DBBBE0 /* AppDelegate.swift */,
 				795421641F460DE500DBBBE0 /* ViewController.swift */,
 				795421661F460DE500DBBBE0 /* Main.storyboard */,
@@ -670,7 +667,6 @@
 				7914CDA41F49C4EF00C5E908 /* BP007_BT002_OA000_BV000.svg in Resources */,
 				7914CDC11F49C4EF00C5E908 /* BP015_BT001_OA017_BV003.svg in Resources */,
 				7914CD791F49C4EF00C5E908 /* BP004_BT002_OA030_BV000.svg in Resources */,
-				791A5B891F48A6C200BA0188 /* car_black.png in Resources */,
 				7914CDA31F49C4EF00C5E908 /* BP007_BT001_OA027_BV000.svg in Resources */,
 				7914CDBE1F49C4EF00C5E908 /* BP015_BT001_OA000_BV000.svg in Resources */,
 				7914CD5A1F49C4EF00C5E908 /* BP002_BT001_OA011_BV005.svg in Resources */,
