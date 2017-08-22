@@ -8,7 +8,6 @@
 
 import UIKit
 
-let webroot = "http://34.252.124.216/midnight/system/asset_library/character"
 
 class ViewController: UIViewController {
 
@@ -19,77 +18,43 @@ class ViewController: UIViewController {
     var parts = [String : [String : [String : Any]]]()
     var partsMeta = [String : Any]()
     var contextJson = [String : Any]()
+    var choiceMenus = [ChoiceMenu]()
+    
     var wantedContext = "CX001"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.getCharters()
         self.get_Context_Data()
+        self.getInterfaceInfo()
     }
 
+    
+    
+    func generateHTLM(for poseData: [String : [String : Any]], contextSize: CGSize) {
+        let htmlHeadStyle = "<!DOCTYPE html><html><head><title>test</title><style type=\"text/css\">*{margin:0;pading:0;border:0;} html, body{height:100%;} body{background-color: transparent !important;} div#canvas{position: relative;margin:0 auto;width:\(contextSize.width)px;height:\(contextSize.height)px;border:1px solid lightpink;overflow: hidden;} object{position: absolute;width: 100%;transform-origin: top left;}</style></head>"
+        
+        
+        var htmlBody = "<body><div id=\"canvas\">"
+        poseData.forEach { (bodyPart, data) in
+            if let _ = data["x"] as? String, let _ = data["y"] as? String {
+                let fileName = data["file"] as! String
+                let attributes = data["param"] as! String
+                
+                htmlBody += "<object id=\"\(bodyPart)\" type=\"image/svg+xml\" name=\"\(bodyPart)\" data=\"\(APICall.shared.assetUrl)/character/\(fileName)?\(attributes)\" style=\"\(getFileStyle(data: data))\"></object>"
 
-    
-    
-    func getCharters() {
-        APICall.shared.characterAPICall { (json, isSuccess) in
-            if isSuccess {
-                if let json = json as? [String : Any] {
-                    if let characters = json["character"] as? [String : Any] {
-                        self.chartersChoice = characters["choices"] as! [String  : String]
-                        self.get_partMapData()
-                    }
-                }
             }
         }
-    }
-
-    
-    func get_partMapData() {
-        APICall.shared.partsMap_APICall { (json, isSuccess) in
-            if isSuccess {
-                if let json = json as? [String : [String : Any]] {
-                    self.part_mapJson = json
-                    self.get_Parts()
-                }
-            }
-
-        }
+        htmlBody += "</div></body></html>"
+        let completeHtml = htmlHeadStyle + htmlBody
+        
+        //load html string in webview
+        webView.loadHTMLString(completeHtml, baseURL: nil)
     }
     
-    func get_Parts() {
-        APICall.shared.parts_APICall { (json, isSuccess) in
-            if isSuccess {
-                if let json = json as? [String : [String : [String : Any]]] {
-                    self.parts = json
-                    self.get_Parts_Meta()
-                }
-            }
-        }
-    }
-    
-    
-    func get_Parts_Meta() {
-        APICall.shared.parts_meta_APICall { (json, isSuccess) in
-            if isSuccess {
-                if let json = json as? [String : Any] {
-                    self.partsMeta = json
-                    self.generateDataSturcture()
-                }
-            }
-        }
-    }
+}
 
-    func get_Context_Data() {
-        APICall.shared.context_APICall { (json, isSuccess) in
-            if isSuccess {
-                if let json = json as? [String : [String : Any]] {
-
-                    self.contextJson = json[self.wantedContext]!
-                }
-            }
-
-        }
-    }
+extension ViewController {
     
     func generateDataSturcture() {
         chartersChoice.forEach { (choice, option)  in
@@ -103,37 +68,37 @@ class ViewController: UIViewController {
                 })
             }
         }
+        
         self.buildSVGs()
-
     }
     
-    //
+
     func buildSVGs() {
         var svgDataDic = [String : [String : Any]]()
         
-      parts.forEach { (bodyPart, structure) in
-        let fileName = self.generateFileName(fileInfo: structure["file"] as! [String : String])
-        let attributes = self.getAttributes(attributeInfo: structure["attributes"] as! [String : String])
-        
-        var fileWidth = "0"
-        var fileHeight = "0"
-        var fileJoints: [String : [String : String]] = [:]
-        
-
-        if let fileMeta = self.partsMeta[fileName] {
-            fileWidth = (fileMeta as! [String : Any])["width"] as! String
-            fileHeight = (fileMeta as! [String : Any])["height"] as! String
-            fileJoints = (fileMeta as! [String : Any])["joints"] as! [String : [String : String]]
-            print(fileJoints)
-        }
-        
-        svgDataDic[bodyPart] = ["body_part" : bodyPart,
-                                "file" : fileName,
-                                "param" : attributes,
-                                "width" : fileWidth,
-                                "height" : fileHeight,
-                                "joints" : fileJoints,
-                                "x" : "", "y" : ""] //fill later
+        parts.forEach { (bodyPart, structure) in
+            let fileName = self.generateFileName(fileInfo: structure["file"] as! [String : String])
+            let attributes = self.getAttributes(attributeInfo: structure["attributes"] as! [String : String])
+            
+            var fileWidth = "0"
+            var fileHeight = "0"
+            var fileJoints: [String : [String : String]] = [:]
+            
+            
+            if let fileMeta = self.partsMeta[fileName] {
+                fileWidth = (fileMeta as! [String : Any])["width"] as! String
+                fileHeight = (fileMeta as! [String : Any])["height"] as! String
+                fileJoints = (fileMeta as! [String : Any])["joints"] as! [String : [String : String]]
+                print(fileJoints)
+            }
+            
+            svgDataDic[bodyPart] = ["body_part" : bodyPart,
+                                    "file" : fileName,
+                                    "param" : attributes,
+                                    "width" : fileWidth,
+                                    "height" : fileHeight,
+                                    "joints" : fileJoints,
+                                    "x" : "", "y" : ""] //fill later
         }
         
         
@@ -142,16 +107,18 @@ class ViewController: UIViewController {
         var contextPoseData = [String : [String : Any]]()
         var contextPositionX = ""
         var contextPositionY = ""
-       
+        
+        //getting context width and height
         if let metaData = contextJson["meta_data"] as? [String : String] {
             contextWidth = metaData["width"] ?? "0"
             contextHeight = metaData["height"] ?? "0"
         }
         
+        //getting part_locations and context position
         if let layers = contextJson["layers"] as? [String : Any] {
             if let zeroValue = layers["0"] as? [String : Any] {
                 if let data = zeroValue["data"] as? [String : Any] {
-                   
+                    
                     if let partLocations = data["part_locations"] as? [String : [String : String]] {
                         contextPoseData = partLocations
                     }
@@ -164,8 +131,8 @@ class ViewController: UIViewController {
                 }
             }
         }
-
-        //mearge contextpose data
+        
+        //mearge contextpose data with part locations
         contextPoseData.forEach { (partName, locations) in
             if let dic2 = svgDataDic[partName] {
                 let mergedic = self.merge(dic1: locations, dic2: dic2)
@@ -173,7 +140,7 @@ class ViewController: UIViewController {
                 contextPoseData[partName] = mergedic
             }
         }
-
+        
         //orderArr : this array is used for maintain the order of part_locations for temparory base.
         //currently we are not receiving proper order of parts as define in contexts.json api.
         //once api will update with proper order index, we will remove this orderArr.
@@ -200,16 +167,16 @@ class ViewController: UIViewController {
                         "right_foot" ,
                         "left_foot"
         ]
-
+        
         var firstPartKey = orderArr.first!
-
+        
         var firstPart: [String : Any] = contextPoseData[firstPartKey]!
         
-//        contextPoseData.forEach { (key, partData) in
-//            firstPart = partData
-//            firstPartKey = key
-//            return
-//        }
+        //        contextPoseData.forEach { (key, partData) in
+        //            firstPart = partData
+        //            firstPartKey = key
+        //            return
+        //        }
         
         let specifiedCood = ["x" : contextPositionX, "y" : contextPositionY]
         let fp_width = firstPart["width"] as! String
@@ -294,42 +261,17 @@ class ViewController: UIViewController {
             }
             
         }
-//        contextPoseData.forEach { (parentName, parentData) in
-//            
-//        }
+        //        contextPoseData.forEach { (parentName, parentData) in
+        //
+        //        }
         
         //NSLog("%@", contextPoseData)
-
+        
         generateHTLM(for: contextPoseData, contextSize: CGSize(width: Double(contextWidth)!, height: Double(contextHeight)!))
-
+        
     }
     
-    
-    func generateHTLM(for poseData: [String : [String : Any]], contextSize: CGSize) {
-        let htmlHeadStyle = "<!DOCTYPE html><html><head><title>test</title><style type=\"text/css\">*{margin:0;pading:0;border:0;} html, body{height:100%;} body{background-color: transparent !important;} div#canvas{position: relative;margin:0 auto;width:\(contextSize.width)px;height:\(contextSize.height)px;border:1px solid lightpink;overflow: hidden;} object{position: absolute;width: 100%;transform-origin: top left;}</style></head>"
-        
-        
-        var htmlBody = "<body><div id=\"canvas\">"
-        poseData.forEach { (bodyPart, data) in
-            if let _ = data["x"] as? String, let _ = data["y"] as? String {
-                let fileName = data["file"] as! String
-                let attributes = data["param"] as! String
-                
-                htmlBody += "<object id=\"\(bodyPart)\" type=\"image/svg+xml\" name=\"\(bodyPart)\" data=\"\(webroot)/\(fileName)?\(attributes)\" style=\"\(getFileStyle(data: data))\"></object>"
 
-            }
-        }
-        htmlBody += "</div></body></html>"
-        let completeHtml = htmlHeadStyle + htmlBody
-        
-        //load html string in webview
-        webView.loadHTMLString(completeHtml, baseURL: nil)
-    }
-    
-    
-}
-
-extension ViewController {
     func getJointGlobal(objGlobal: [String : Double], jointInternal : [String : Double], angle: Double)-> [String : Double] {
         let transformCoord = transformCoordWithRotation(jointInternal,  angle)
         let tcx = transformCoord["x"]!
@@ -435,86 +377,136 @@ extension ViewController {
 
 }
 
-
-
-//APICAlls
-class APICall {
-    static let shared = APICall()
+//api calls
+extension ViewController {
     
-    func characterAPICall(block: @escaping (Any?, Bool)-> Void) {
-        let urlString = "http://34.252.124.216/midnight/system/api/character.json"
-        let url = URL(string: urlString)!
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
-            if let data = data {
-                if let json = try? JSONSerialization.jsonObject(with: data, options: [.mutableContainers]) {
-                    return block(json, true)
+    func getInterfaceInfo() {
+        APICall.shared.interface_APICall { (json, isSuccess) in
+            if isSuccess {
+                if let json = json as? [String : [String : Any]] {
+                   let menus =  json.map({ (key, value) -> ChoiceMenu in
+                       return ChoiceMenu(value)
+                    })
+                    
+                    menus.forEach({ (menu) in
+                        print(menu.title)
+                        print(menu.heading)
+                    })
+                }
+            }
+        }
+    }
+    
+    func getCharters() {
+        APICall.shared.characterAPICall { (json, isSuccess) in
+            if isSuccess {
+                if let json = json as? [String : Any] {
+                    if let characters = json["character"] as? [String : Any] {
+                        self.chartersChoice = characters["choices"] as! [String  : String]
+                        self.get_partMapData()
+                    }
+                }
+            }
+        }
+    }
+    
+    
+    func get_partMapData() {
+        APICall.shared.partsMap_APICall { (json, isSuccess) in
+            if isSuccess {
+                if let json = json as? [String : [String : Any]] {
+                    self.part_mapJson = json
+                    self.get_Parts()
                 }
             }
             
-            block(nil, false)
-        }.resume()
+        }
+    }
+    
+    func get_Parts() {
+        APICall.shared.parts_APICall { (json, isSuccess) in
+            if isSuccess {
+                if let json = json as? [String : [String : [String : Any]]] {
+                    self.parts = json
+                    self.get_Parts_Meta()
+                }
+            }
+        }
+    }
+    
+    
+    func get_Parts_Meta() {
+        APICall.shared.parts_meta_APICall { (json, isSuccess) in
+            if isSuccess {
+                if let json = json as? [String : Any] {
+                    self.partsMeta = json
+                    self.generateDataSturcture()
+                }
+            }
+        }
+    }
+    
+    func get_Context_Data() {
+        APICall.shared.context_APICall { (json, isSuccess) in
+            if isSuccess {
+                if let json = json as? [String : [String : Any]] {
+                    
+                    self.contextJson = json[self.wantedContext]!
+                }
+            }
+            
+        }
+    }
+    
+}
+
+//
+
+class ChoiceMenu {
+    var title = ""
+    var icon  = ""
+    var heading = ""
+    var choice = Choice()
+    
+    init(_ json: [String : Any]) {
+        title = (json["title"] as? String) ?? ""
+        icon = (json["icon"] as? String) ?? ""
+        heading = (json["heading"] as? String) ?? ""
         
+        if let jsChoice = json["choice"] as? [String : Any] {
+            choice = Choice(jsChoice)
+        }
     }
+}
+
+class Choice {
+    var choiceId = ""
+    var options = [ChoiceOption]()
     
+    convenience init(_ json : [String : Any]) {
+        self.init()
+        
+        choiceId = (json["choice_id"] as? String) ?? ""
+        
+        if let jsOptions = json["options"] as? [String : [String : Any]] {
+           options = jsOptions.map({ (key, option) -> ChoiceOption in
+                return ChoiceOption(option)
+            })
+        }
+    }
+}
+
+class ChoiceOption {
+    var name = ""
+    var choice = Choice ()
     
-    func partsMap_APICall(block: @escaping (Any?, Bool)-> Void) {
-        let urlString = "http://34.252.124.216/midnight/system/api/parts_map.json"
-        let url = URL(string: urlString)!
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
-            if let data = data {
-                if let json = try? JSONSerialization.jsonObject(with: data, options: [.mutableContainers]) {
-                    return block(json, true)
-                }
-            }
-            
-            block(nil, false)
-        }.resume()
+    convenience init(_ json: [String : Any]) {
+        self.init()
+        name = (json["name"] as? String) ?? ""
+       
+        if let jsChoice = json["choice"] as? [String : Any] {
+            choice = Choice(jsChoice)
+        }
 
     }
-    
-    func parts_APICall(block: @escaping (Any?, Bool)-> Void) {
-        let urlString = "http://34.252.124.216/midnight/system/api/parts.json"
-        let url = URL(string: urlString)!
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
-            if let data = data {
-                if let json = try? JSONSerialization.jsonObject(with: data, options: [.mutableContainers]) {
-                    return block(json, true)
-                }
-            }
-            
-            block(nil, false)
-        }.resume()
-        
-    }
-    
-    func parts_meta_APICall(block: @escaping (Any?, Bool)-> Void) {
-        let urlString = "http://34.252.124.216/midnight/system/api/parts_meta.json"
-        let url = URL(string: urlString)!
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
-            if let data = data {
-                if let json = try? JSONSerialization.jsonObject(with: data, options: [.mutableContainers]) {
-                    return block(json, true)
-                }
-            }
-            
-            block(nil, false)
-        }.resume()
-        
-    }
-
-    func context_APICall(block: @escaping (Any?, Bool)-> Void) {
-        let urlString = "http://34.252.124.216/midnight/system/api/contexts.json"
-        let url = URL(string: urlString)!
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
-            if let data = data {
-                if let json = try? JSONSerialization.jsonObject(with: data, options: [.mutableContainers]) {
-                    return block(json, true)
-                }
-            }
-            
-            block(nil, false)
-            }.resume()
-        
-    }
-
 }
