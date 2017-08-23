@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		130931121F4D46B300184A3B /* CharacterGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 130931111F4D46B300184A3B /* CharacterGenerator.swift */; };
 		132605D51F4AA632003B6BFC /* result.html in Resources */ = {isa = PBXBuildFile; fileRef = 132605D41F4AA632003B6BFC /* result.html */; };
 		7936B7C71F4CAA0100E11054 /* APICalls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7936B7C61F4CAA0100E11054 /* APICalls.swift */; };
 		795421631F460DE500DBBBE0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795421621F460DE500DBBBE0 /* AppDelegate.swift */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		130931111F4D46B300184A3B /* CharacterGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharacterGenerator.swift; sourceTree = "<group>"; };
 		132605D41F4AA632003B6BFC /* result.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = result.html; sourceTree = "<group>"; };
 		7936B7C61F4CAA0100E11054 /* APICalls.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APICalls.swift; sourceTree = "<group>"; };
 		7954215F1F460DE500DBBBE0 /* ClairaBellaDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ClairaBellaDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -66,6 +68,7 @@
 				7954216E1F460DE500DBBBE0 /* Info.plist */,
 				132605D41F4AA632003B6BFC /* result.html */,
 				7936B7C61F4CAA0100E11054 /* APICalls.swift */,
+				130931111F4D46B300184A3B /* CharacterGenerator.swift */,
 			);
 			path = ClairaBellaDemo;
 			sourceTree = "<group>";
@@ -146,6 +149,7 @@
 				795421651F460DE500DBBBE0 /* ViewController.swift in Sources */,
 				795421631F460DE500DBBBE0 /* AppDelegate.swift in Sources */,
 				7936B7C71F4CAA0100E11054 /* APICalls.swift in Sources */,
+				130931121F4D46B300184A3B /* CharacterGenerator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
