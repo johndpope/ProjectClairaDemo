@@ -437,6 +437,7 @@ extension CharacterGenerator {
                 let attributes = data["param"] as! String
                 
                 htmlBody += "<object id=\"\(bodyPart)\" type=\"image/svg+xml\" name=\"\(bodyPart)\" data=\"\(APICall.shared.assetUrl)/character/\(fileName)?\(attributes)\" style=\"\(getFileStyle(data: data))\"></object>"
+                print(htmlBody)
                 
             }
         }
