@@ -15,7 +15,7 @@ class APICall {
     static let shared = APICall()
     
     let baseUrl =  "http://34.252.124.216/midnight/system/api"
-    let assetUrl = "http://34.252.124.216/midnight/system/asset_library"
+    //let assetUrl = "http://34.252.124.216/midnight/system/asset_library"
     
     enum APIName {
         static var getCharacters = "/character.json"

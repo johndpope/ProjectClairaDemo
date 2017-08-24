@@ -407,23 +407,33 @@ extension CharacterGenerator {
     
     
     private func generateHTLM(for poseData: [String : [String : Any]], contextSize: CGSize) {
+        
         let htmlHeadStyle = "<!DOCTYPE html><html><head><title>test</title><style type=\"text/css\">*{margin:0;pading:0;border:0;} html, body{height:100%;} body{background-color: transparent !important;} div#canvas{position: relative;margin:0 auto;width:\(contextSize.width)px;height:\(contextSize.height)px;border:1px solid lightpink;overflow: hidden;} object{position: absolute;width: 100%;transform-origin: top left;}</style></head>"
         
         
         var htmlBody = "<body><div id=\"canvas\">"
+        //Generate html for svg images
         poseData.forEach { (bodyPart, data) in
             if let _ = data["x"] as? String, let _ = data["y"] as? String {
-                let fileName = data["file"] as! String
-                let attributes = data["param"] as! String
                 
-                htmlBody += "<object id=\"\(bodyPart)\" type=\"image/svg+xml\" name=\"\(bodyPart)\" data=\"\(APICall.shared.assetUrl)/character/\(fileName)?\(attributes)\" style=\"\(getFileStyle(data: data))\"></object>"
-                print(htmlBody)
+                let fileNameWithEx = data["file"] as! String
+                let fileName = fileNameWithEx.components(separatedBy: ".").first!
+                let attributes = data["param"] as! String
+               
+                if let filePath = Bundle.main.path(forResource: fileName, ofType: "svg") {
+                    let pathWithColorAtt = filePath + "?" + attributes
+                    
+                    htmlBody += "<object id=\"\(bodyPart)\" type=\"image/svg+xml\" name=\"\(bodyPart)\" data=\"file://\(pathWithColorAtt)\" style=\"\(getFileStyle(data: data))\"></object>"
+                }
+                
                 
             }
         }
+        
         htmlBody += "</div></body></html>"
         let completeHtml = htmlHeadStyle + htmlBody
-        
+        //print(completeHtml)
+
         resultBlock(completeHtml)
     }
     
@@ -458,7 +468,7 @@ class ChoiceMenu {
     
     init(_ json: [String : Any]) {
         title = (json["title"] as? String) ?? ""
-        icon = APICall.shared.assetUrl + "/" + ((json["icon"] as? String) ?? "")
+        icon = "https://google.com" //APICall.shared.assetUrl + "/" + ((json["icon"] as? String) ?? "")
         heading = (json["heading"] as? String) ?? ""
         
         if let jsChoice = json["choice"] as? [String : Any] {
