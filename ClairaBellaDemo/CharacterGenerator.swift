@@ -17,7 +17,7 @@ class CharacterGenerator {
         }
     }
 
-    fileprivate var chartersChoice = [String : String]()
+     var chartersChoice = [String : String]()
     fileprivate var part_mapJson = [String : [String : Any]]()
     fileprivate var parts = [String : [String : [String : Any]]]()
     fileprivate var partsMeta = [String : Any]()
@@ -30,7 +30,6 @@ class CharacterGenerator {
     
     init() {
         self.getCharters_json()
-        self.get_Context_json()
         self.getInterface_json()
     }
  
@@ -49,18 +48,6 @@ class CharacterGenerator {
         }
     }
     
-    private func get_Context_json() {
-        APICall.shared.context_APICall { (json, isSuccess) in
-            if isSuccess {
-                if let json = json as? [String : [String : Any]] {
-                    
-                    self.contextJson = json[self.wantedContext]!
-                }
-            }
-            
-        }
-    }
-
     private func getCharters_json() {
         APICall.shared.characterAPICall { (json, isSuccess) in
             if isSuccess {
@@ -104,12 +91,27 @@ class CharacterGenerator {
             if isSuccess {
                 if let json = json as? [String : Any] {
                     self.partsMeta = json
-                    self.generateCharacter()
+                    self.get_Context_json()
+
                 }
             }
         }
     }
     
+    private func get_Context_json() {
+        APICall.shared.context_APICall { (json, isSuccess) in
+            if isSuccess {
+                if let json = json as? [String : [String : Any]] {
+                    
+                    self.contextJson = json[self.wantedContext]!
+                    self.generateCharacter()
+                }
+            }
+            
+        }
+    }
+    
+
 }
 
 extension CharacterGenerator {
@@ -468,7 +470,7 @@ class ChoiceMenu {
     
     init(_ json: [String : Any]) {
         title = (json["title"] as? String) ?? ""
-        icon = "https://google.com" //APICall.shared.assetUrl + "/" + ((json["icon"] as? String) ?? "")
+        icon = APICall.shared.assetUrl + "/" + ((json["icon"] as? String) ?? "")
         heading = (json["heading"] as? String) ?? ""
         
         if let jsChoice = json["choice"] as? [String : Any] {
