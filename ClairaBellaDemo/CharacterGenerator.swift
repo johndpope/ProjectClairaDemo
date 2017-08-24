@@ -181,7 +181,7 @@ extension CharacterGenerator {
             if let zeroValue = layers["0"] as? [String : Any] {
                 if let data = zeroValue["data"] as? [String : Any] {
                     
-                    if let partLocations = data["part_locations"] as? [String : [String : String]] {
+                    if let partLocations = data["part_locations"] as? [String : [String : [String : String]]] {
                         contextPoseData = partLocations
                     }
                     
@@ -194,6 +194,23 @@ extension CharacterGenerator {
             }
         }
         
+        //------------------------------------------------------
+        //find out the part locatons in proper order
+        var partsKey  = [String]()
+        let sortedIndexs = contextPoseData.map { Int($0.key)!}.sorted()
+        let sortedLocations = sortedIndexs.map {contextPoseData["\($0)"]!}
+        var partLocs = [String : Any]()
+        
+        sortedLocations.forEach { (dic) in
+            for (key, value) in dic {
+                partLocs[key] = value
+                partsKey.append(key)
+            }
+        }
+        
+        contextPoseData = partLocs as! [String : [String : Any]]
+        //-------------------------------------------------------
+        
         //mearge contextpose data with part locations
         contextPoseData.forEach { (partName, locations) in
             if let dic2 = svgDataDic[partName] {
@@ -202,43 +219,10 @@ extension CharacterGenerator {
                 contextPoseData[partName] = mergedic
             }
         }
-        
-        //orderArr : this array is used for maintain the order of part_locations for temparory base.
-        //currently we are not receiving proper order of parts as define in contexts.json api.
-        //once api will update with proper order index, we will remove this orderArr.
-        let orderArr = ["torso_bottom",
-                        "torso_top",
-                        "top_layer",
-                        "expression" ,
-                        "right_upper_arm",
-                        "left_upper_arm",
-                        "right_upper_leg",
-                        "left_upper_leg" ,
-                        "right_lower_arm",
-                        "left_lower_arm",
-                        "right_lower_leg",
-                        "left_lower_leg" ,
-                        "eyes" ,
-                        "eye_wear" ,
-                        "head_wear" ,
-                        "hair_style" ,
-                        "left_hand" ,
-                        "right_hand" ,
-                        "right_boot_leg" ,
-                        "left_boot_leg" ,
-                        "right_foot" ,
-                        "left_foot"
-        ]
-        
-        var firstPartKey = orderArr.first!
-        
+
+        let firstPartKey = partsKey.first!
         var firstPart: [String : Any] = contextPoseData[firstPartKey]!
         
-        //        contextPoseData.forEach { (key, partData) in
-        //            firstPart = partData
-        //            firstPartKey = key
-        //            return
-        //        }
         
         let specifiedCood = ["x" : contextPositionX, "y" : contextPositionY]
         let fp_width = firstPart["width"] as! String
@@ -252,7 +236,7 @@ extension CharacterGenerator {
         
         contextPoseData[firstPartKey]?["x"] = centralShift["x"]
         contextPoseData[firstPartKey]?["y"] = centralShift["y"]
-        orderArr.forEach { parentName in
+        partsKey.forEach { parentName in
             let parentData = contextPoseData[parentName]!
             var parentDt = parentData
             
@@ -323,12 +307,8 @@ extension CharacterGenerator {
             }
             
         }
-        //        contextPoseData.forEach { (parentName, parentData) in
-        //
-        //        }
         
-        //NSLog("%@", contextPoseData)
-        
+        //Generate html with contextPoseData.
         generateHTLM(for: contextPoseData, contextSize: CGSize(width: Double(contextWidth)!, height: Double(contextHeight)!))
         
     }
@@ -474,9 +454,11 @@ class ChoiceMenu {
     var heading = ""
     var choice = Choice()
     
+    var selected = false
+    
     init(_ json: [String : Any]) {
         title = (json["title"] as? String) ?? ""
-        icon = APICall.shared.assetUrl + ((json["icon"] as? String) ?? "")
+        icon = APICall.shared.assetUrl + "/" + ((json["icon"] as? String) ?? "")
         heading = (json["heading"] as? String) ?? ""
         
         if let jsChoice = json["choice"] as? [String : Any] {
@@ -506,6 +488,7 @@ class ChoiceOption {
     var name = ""
     var choice = Choice ()
     
+    var selected = false
     convenience init(_ json: [String : Any]) {
         self.init()
         name = (json["name"] as? String) ?? ""
