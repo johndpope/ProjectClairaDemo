@@ -76,6 +76,7 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.section == 0 {
@@ -93,10 +94,19 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func setSelected(choice: Choice) {
+        guard let selectedOption = choice.options.filter({$0.selected}).first else {return}
+        charGenerator.chartersChoice[choice.choiceId] = selectedOption.name
+        charGenerator.generateCharacter()
         
+        if !selectedOption.choice.options.isEmpty {
+            setSelected(choice: selectedOption.choice)
+        }
     }
 
+    func changeUserSelection() {
+        setSelected(choice: charGenerator.choiceMenus.filter({$0.selected}).first!.choice)
+    }
 }
 
 
@@ -155,8 +165,10 @@ class MenuTableViewCell: UITableViewCell,  UICollectionViewDataSource, UICollect
         menu.selected = true
         lblTitle.text = menu.heading
         viewcontroller?.reloadInterfaceMenus()
+        viewcontroller?.changeUserSelection()
     }
 
+    
 }
 
 class OptionsTableViewCell: UITableViewCell,  UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -202,12 +214,8 @@ class OptionsTableViewCell: UITableViewCell,  UICollectionViewDataSource, UIColl
         choice.options.forEach({$0.selected = false})
         option.selected = true
         
-        if option.choice.options.isEmpty {
-            viewcontroller?.charGenerator.chartersChoice[choice.choiceId] = option.name
-            viewcontroller?.charGenerator.generateCharacter()
-        } 
         viewcontroller?.reloadInterfaceMenus()
-
+        viewcontroller?.changeUserSelection()
     }
     
 }
