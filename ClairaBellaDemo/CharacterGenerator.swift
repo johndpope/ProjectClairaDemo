@@ -405,13 +405,14 @@ extension CharacterGenerator {
         return attributeString
     }
     
-    
+    //Generate html from structured json. 
     private func generateHTLM(for poseData: [String : [String : Any]], contextSize: CGSize) {
         
         let htmlHeadStyle = "<!DOCTYPE html><html><head><title>test</title><style type=\"text/css\">*{margin:0;pading:0;border:0;} html, body{height:100%;} body{background-color: transparent !important;} div#canvas{position: relative;margin:0 auto;width:\(contextSize.width)px;height:\(contextSize.height)px;border:1px solid lightpink;overflow: hidden;} object{position: absolute;width: 100%;transform-origin: top left;}</style></head>"
         
         
         var htmlBody = "<body><div id=\"canvas\">"
+       
         //Generate html for svg images
         poseData.forEach { (bodyPart, data) in
             if let _ = data["x"] as? String, let _ = data["y"] as? String {
@@ -432,8 +433,8 @@ extension CharacterGenerator {
         
         htmlBody += "</div></body></html>"
         let completeHtml = htmlHeadStyle + htmlBody
-        //print(completeHtml)
-
+       
+        //call result block
         resultBlock(completeHtml)
     }
     
