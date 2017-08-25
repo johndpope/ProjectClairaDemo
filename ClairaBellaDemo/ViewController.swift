@@ -14,6 +14,8 @@ class ViewController: UIViewController {
     @IBOutlet var webView: UIWebView!
     @IBOutlet var tableView: UITableView!
     
+    var optionsList = [Choice]()
+
     var charGenerator: CharacterGenerator! {
         didSet {
             setCharGeneratorResultBlock()
@@ -40,18 +42,26 @@ class ViewController: UIViewController {
     
     //MARK: TableViewDelegate and DataSource
     
-
+    
+    func reloadInterfaceMenus() {
+        optionsList.removeAll()
+        tableView.reloadData()
+    }
 }
 
 extension ViewController : UITableViewDelegate, UITableViewDataSource {
     
-    var sectionCount: Int {
-        var count = 1
-        
-        if let selectedMenu = charGenerator.choiceMenus.filter({$0.selected}).first {
-            count += selectedMenu.choice.options.isEmpty ? 0 : 1
+    func sectionCount(in choice:Choice)-> Int {
+        var subChoice: Choice?
+        if let selectedOption = choice.options.filter({$0.selected}).first {
+             subChoice = selectedOption.choice
         }
-        return count
+        
+        if !choice.options.isEmpty{
+            optionsList.append(choice)
+        }
+        return choice.options.isEmpty ? 0 : 1 + (subChoice == nil ? 0 : sectionCount(in: subChoice!))
+
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -59,8 +69,10 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return sectionCount
+        let mainMenuChoice = charGenerator.choiceMenus.filter({$0.selected}).first?.choice
+        return 1 + (mainMenuChoice == nil ? 0 : sectionCount(in: mainMenuChoice!))
     }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
@@ -74,13 +86,14 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource {
 
         } else {//optionsCell
             let cell = tableView.dequeueReusableCell(withIdentifier: "optionsCell") as! OptionsTableViewCell
-            cell.options = charGenerator.choiceMenus.filter({$0.selected}).first?.choice.options ?? []
+            cell.viewcontroller = self
+            cell.choice = optionsList[indexPath.section-1]
             
             return cell
         }
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
     }
 
@@ -141,33 +154,60 @@ class MenuTableViewCell: UITableViewCell,  UICollectionViewDataSource, UICollect
         let menu = menus[indexPath.row]
         menu.selected = true
         lblTitle.text = menu.heading
-        viewcontroller?.tableView.reloadData()
+        viewcontroller?.reloadInterfaceMenus()
     }
 
 }
 
 class OptionsTableViewCell: UITableViewCell,  UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     @IBOutlet var collView: UICollectionView!
-    var options = [ChoiceOption]()
+    var choice: Choice! {
+        didSet {
+            collView.reloadData()
+        }
+    }
+    
+    weak var viewcontroller: ViewController?
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return options.count
+        return choice?.options.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CollectionViewCell
-        let option = options[indexPath.row]
+        let option = choice.options[indexPath.row]
         //cell.imgView.setImage(url: URL(string: menu.icon)!)
         cell.lblTitle.text = option.name
+        if option.selected {
+            cell.imgView.layer.borderColor = UIColor.red.cgColor
+            cell.imgView.layer.borderWidth = 2
+        } else  {
+            cell.imgView.layer.borderColor = UIColor.clear.cgColor
+            cell.imgView.layer.borderWidth = 0
+        }
+
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 50, height: 50)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let option = choice.options[indexPath.row]
+        choice.options.forEach({$0.selected = false})
+        option.selected = true
+        
+        if option.choice.options.isEmpty {
+            viewcontroller?.charGenerator.chartersChoice[choice.choiceId] = option.name
+            viewcontroller?.charGenerator.generateCharacter()
+        } 
+        viewcontroller?.reloadInterfaceMenus()
+
     }
     
 }
