@@ -8,133 +8,54 @@
 
 import UIKit
 
+class Character {
+    var name = ""
+    var choices = [String : String]()
+    var charHtml: String?
+}
 
-class CharacterGenerator {
+class CharacterHTMLBuilder {
     
-    var choiceMenus = [ChoiceMenu]() {
-        didSet {
-            interfaceMenuResultBlock(choiceMenus)
-        }
-    }
-    
-    var chartersChoice = [String : String]()
+    var defaultChoices = [String : String]()
     var charHTMLString: String?
     var charName = ""
+    var wantedContext = "CX001"
     
     fileprivate var part_mapJson = [String : [String : Any]]()
     fileprivate var parts = [String : [String : [String : Any]]]()
     fileprivate var partsMeta = [String : Any]()
     fileprivate var contextJson = [String : Any]()
     
-    var wantedContext = "CX001"
-    
     var resultBlock: (String)->Void = {_ in}
-    var interfaceMenuResultBlock: ([ChoiceMenu])->Void = {_ in}
-    
-    init() {
-        self.getCharters_json()
-        self.getInterface_json()
-    }
-    
-    
-    private func getInterface_json() {
-        APICall.shared.interface_APICall { (json, isSuccess) in
-            if isSuccess {
-                if let json = json as? [String : [String : Any]] {
-                    let menus =  json.map({ (key, value) -> ChoiceMenu in
-                        return ChoiceMenu(value)
-                    })
-                    
-                    self.choiceMenus = menus
-                }
-            }
-        }
-    }
-    
-    private func getCharters_json() {
-        APICall.shared.characterAPICall { (json, isSuccess) in
-            if isSuccess {
-                if let json = json as? [String : Any] {
-                    if let characters = json["character"] as? [String : Any] {
-                        self.chartersChoice = characters["choices"] as! [String  : String]
-                        self.get_partMap_json()
-                    }
-                }
-            }
-        }
-    }
-    
-    
-    private func get_partMap_json() {
-        APICall.shared.partsMap_APICall { (json, isSuccess) in
-            if isSuccess {
-                if let json = json as? [String : [String : Any]] {
-                    self.part_mapJson = json
-                    self.get_Parts_json()
-                }
-            }
-            
-        }
-    }
-    
-    private func get_Parts_json() {
-        APICall.shared.parts_APICall { (json, isSuccess) in
-            if isSuccess {
-                if let json = json as? [String : [String : [String : Any]]] {
-                    self.parts = json
-                    self.get_PartsMeta_json()
-                }
-            }
-        }
-    }
-    
-    
-    private func get_PartsMeta_json() {
-        APICall.shared.parts_meta_APICall { (json, isSuccess) in
-            if isSuccess {
-                if let json = json as? [String : Any] {
-                    self.partsMeta = json
-                    self.get_Context_json()
-                    
-                }
-            }
-        }
-    }
-    
-    private func get_Context_json() {
-        APICall.shared.context_APICall { (json, isSuccess) in
-            if isSuccess {
-                if let json = json as? [String : [String : Any]] {
-                    
-                    self.contextJson = json[self.wantedContext]!
-                    self.generateCharacter()
-                }
-            }
-            
-        }
-    }
-    
-    
-    func saveCharacter(block: @escaping (Bool)->Void) {
-        let json = ["choices" : chartersChoice,
-                    "saved_name": "save_vikash",
-                    "source": "ios_app",
-                    "brand": "claireabella"] as [String : Any]
-        APICall.shared.saveCharacter_APICall(json: json) { (response, success) in
-            block(success)
-        }
-    }
-    
-}
 
-extension CharacterGenerator {
-    //call this func for regenerating new character as per user's selected choices.
-    func generateCharacter() {
-        self.generateDataSturcture()
+    class func defaultBuilder()->CharacterHTMLBuilder {
+        let builder = CharacterHTMLBuilder()
+        builder.loadBuildData()
+        return builder
     }
     
-    private func generateDataSturcture() {
-        chartersChoice.forEach { (choice, option)  in
+    func upateCharacter() {
+       buildCharHTML(with: defaultChoices, block: nil)
+    }
+    
+    func defaultCharHTML(block: @escaping (String)->Void) {
+        buildCharHTML(with: self.defaultChoices, block: block)
+    }
+    
+    func buildCharHTML(with choices: [String : String], block: ((String)->Void)? = nil) {
+        if let block = block {
+            resultBlock = block
+        }
+        generateHtml(with: choices)
+    }
+    
+    private func loadBuildData() {
+        self.getDefaultChoices()
+    }
+    
+    //call this func for regenerating new character as per user's selected choices.
+    fileprivate func generateHtml(with choices: [String : String]) {
+        choices.forEach { (choice, option)  in
             if let partsMapMatch = self.part_mapJson[choice]?[option] as? [String: [String : [String : Any]]] {
                 partsMapMatch.forEach({ (part, mapMatch) in
                     mapMatch.forEach({ (matchKey, matchValueObj) in
@@ -162,7 +83,7 @@ extension CharacterGenerator {
             var fileJoints: [String : [String : String]] = [:]
             
             
-            if let fileMeta = self.partsMeta[fileName] {
+            if let fileMeta = self.partsMeta[fileName + ".svg"] {
                 fileWidth = (fileMeta as! [String : Any])["width"] as! String
                 fileHeight = (fileMeta as! [String : Any])["height"] as! String
                 fileJoints = (fileMeta as! [String : Any])["joints"] as! [String : [String : String]]
@@ -249,8 +170,11 @@ extension CharacterGenerator {
         
         let centralShift  = getCentralObjectCoords(coord: specifiedCood, width: w * s , height: h * s)
         
+        //set the position of first part
         contextPoseData[firstPartKey]?["x"] = centralShift["x"]
         contextPoseData[firstPartKey]?["y"] = centralShift["y"]
+        
+        //calculate and set the actual postion and rotation of each part.
         partsKey.forEach { parentName in
             let parentData = contextPoseData[parentName]!
             var parentDt = parentData
@@ -265,9 +189,6 @@ extension CharacterGenerator {
             parentDt["height"] = "\(parent_height)"
             contextPoseData[parentName] = parentDt
             
-            if parentName == "torso_top" {
-                print("abc")
-            }
             if let joints = parentData["joints"] as? [String : [String : String]] {
                 joints.forEach({ (childName, internalJointCoords) in
                     if let child = contextPoseData[childName], let cx = child["x"] as? String, cx.isEmpty {
@@ -399,9 +320,9 @@ extension CharacterGenerator {
             }
             
             if otherCode.isEmpty {
-                fileName = bodyPart + "_" + bodyType + "_" + outfitArticle + "_" + bodyVariation + ".svg"
+                fileName = bodyPart + "_" + bodyType + "_" + outfitArticle + "_" + bodyVariation
             } else {
-                fileName = otherCode + ".svg"
+                fileName = otherCode
             }
         }
         return fileName
@@ -431,9 +352,7 @@ extension CharacterGenerator {
         //Generate html for svg images
         poseData.forEach { (bodyPart, data) in
             if let _ = data["x"] as? String, let _ = data["y"] as? String {
-                
-                let fileNameWithEx = data["file"] as! String
-                let fileName = fileNameWithEx.components(separatedBy: ".").first!
+                let fileName = data["file"] as! String
                 let attributes = data["param"] as! String
                 
                 if let filePath = Bundle.main.path(forResource: fileName, ofType: "svg") {
@@ -467,11 +386,139 @@ extension CharacterGenerator {
         let styleString = "top:\(top)px; left:\(left)px; z-index:\(layer); width:\(width)px; height:\(height)px; -ms-transform:rotate(\(angle)deg); -webkit-transform:rotate(\(angle)deg); transform:rotate(\(angle)deg);"
         return styleString
     }
+
 }
 
+extension CharacterHTMLBuilder {
+    
+    func getDefaultChoices() {
+        CharBuilderAPI.shared.getCharters_json { choices in
+            self.defaultChoices = choices
+            self.getPartsMap()
+        }
+    }
+    
+    func getPartsMap() {
+        CharBuilderAPI.shared.get_partMap_json { partMap in
+            self.part_mapJson = partMap
+            self.getParts()
+        }
+    }
+    
+    func getParts() {
+        CharBuilderAPI.shared.get_Parts_json { parts in
+            self.parts = parts
+            self.getPartsMeta()
+        }
+    }
+    
+    func getPartsMeta() {
+        CharBuilderAPI.shared.get_PartsMeta_json { partMeta in
+            self.partsMeta = partMeta
+            self.getContexts()
+        }
+    }
+    
+    func getContexts() {
+        CharBuilderAPI.shared.get_Context_json { contexts in
+            self.contextJson = contexts[self.wantedContext]!
+            self.generateHtml(with: self.defaultChoices)
+        }
+    }
+
+}
+
+    
 
 
 
+class CharBuilderAPI {
+    static let shared = CharBuilderAPI()
+    
+    func getInterface_json(block: @escaping ([ChoiceMenu])->Void) {
+        APICall.shared.interface_APICall { (json, isSuccess) in
+            if isSuccess {
+                if let json = json as? [String : [String : Any]] {
+                    let menus =  json.map({ (key, value) -> ChoiceMenu in
+                        return ChoiceMenu(value)
+                    })
+                    
+                    block(menus)
+                }
+            }
+        }
+    }
+    
+
+    func getCharters_json(block: @escaping ([String : String])-> Void) {
+        APICall.shared.characterAPICall { (json, isSuccess) in
+            if isSuccess {
+                if let json = json as? [String : Any] {
+                    if let characters = json["character"] as? [String : Any] {
+                        let chartersChoice = characters["choices"] as! [String  : String]
+                        block(chartersChoice)
+                    }
+                }
+            } else {
+                //
+            }
+        }
+    }
+    
+    
+    func get_partMap_json(block: @escaping ([String : [String : Any]])-> Void) {
+        APICall.shared.partsMap_APICall { (json, isSuccess) in
+            if isSuccess {
+                if let json = json as? [String : [String : Any]] {
+                    block(json)
+                }
+            } else {
+                //
+            }
+            
+        }
+    }
+    
+    func get_Parts_json(block: @escaping ([String : [String : [String : Any]]])->Void) {
+        APICall.shared.parts_APICall { (json, isSuccess) in
+            if isSuccess {
+                if let json = json as? [String : [String : [String : Any]]] {
+                    block(json)
+                }
+            } else {
+                //
+            }
+        }
+    }
+    
+    
+    func get_PartsMeta_json(block: @escaping ([String : Any])-> Void) {
+        APICall.shared.parts_meta_APICall { (json, isSuccess) in
+            if isSuccess {
+                if let json = json as? [String : Any] {
+                    block(json)
+                }
+            } else {
+                //
+            }
+        }
+    }
+    
+    func get_Context_json(block: @escaping ([String : [String : Any]])->Void) {
+        APICall.shared.context_APICall { (json, isSuccess) in
+            if isSuccess {
+                if let json = json as? [String : [String : Any]] {
+                    block(json)
+                }
+            } else {
+                //
+            }
+            
+        }
+    }
+    
+    
+}
 
 
 

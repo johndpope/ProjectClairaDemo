@@ -19,13 +19,13 @@ class SaveCharacterVC: UIViewController,UITextFieldDelegate {
     @IBOutlet weak var save_btn: UIButton!
 
     //this json object required for saving character.
-    var charGenerator: CharacterGenerator!
+    var character: Character!
     @IBOutlet var webView: UIWebView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let charHtml = charGenerator.charHTMLString {
+        if let charHtml = character.charHtml {
             webView.loadHTMLString(charHtml, baseURL: nil)
             webView.scrollView.setZoomScale(1.1, animated: false)
         }
@@ -72,7 +72,7 @@ class SaveCharacterVC: UIViewController,UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         guard let text = textField.text else { return true }
         let newLength = text.characters.count + string.characters.count - range.length
-        charGenerator.charName = text
+        character.name = text
         return newLength <= 10 // Bool
     }
     
@@ -135,15 +135,15 @@ class SaveCharacterVC: UIViewController,UITextFieldDelegate {
         }
          if  (name_textfield.text?.characters.count)! > 0 {
             indicator.startAnimating()
-            charGenerator.saveCharacter{[weak self] success in
-                self?.indicator.stopAnimating()
-                if success {
-                    showAlert(message: "Character saved successfully.", isCharacterSaved: success)
-
-                } else {
-                    showAlert(message: "Something went wrong.")
-                }
-            }
+//            charGenerator.saveCharacter{[weak self] success in
+//                self?.indicator.stopAnimating()
+//                if success {
+//                    showAlert(message: "Character saved successfully.", isCharacterSaved: success)
+//
+//                } else {
+//                    showAlert(message: "Something went wrong.")
+//                }
+//            }
          } else {
             showAlert(message: "Character name is required.")
 

@@ -16,9 +16,12 @@ class CharacterBuilderVC: UIViewController {
     @IBOutlet var tableView: UITableView!
     @IBOutlet var horizontalConstraints: [NSLayoutConstraint]?
     
+    var interfaceMenus = [ChoiceMenu]()
+        
+
     var optionsList = [CharacterChoice]()
     
-    var charGenerator: CharacterGenerator! {
+    var charGenerator: CharacterHTMLBuilder! {
         didSet {
             setCharGeneratorResultBlock()
         }
@@ -29,7 +32,16 @@ class CharacterBuilderVC: UIViewController {
         super.viewDidLoad()
         updateConstraints()
         webView.scrollView.setZoomScale(1.1, animated: false)
-        charGenerator = CharacterGenerator()
+        
+        charGenerator = CharacterHTMLBuilder.defaultBuilder()
+        
+        CharBuilderAPI.shared.getInterface_json { menus in
+            self.interfaceMenus = menus
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+
     }
     
     
@@ -45,14 +57,11 @@ class CharacterBuilderVC: UIViewController {
     
     func setCharGeneratorResultBlock() {
         charGenerator.resultBlock = { [weak self] htmlString in
-            self?.webView.loadHTMLString(htmlString, baseURL: nil)
-        }
-        
-        charGenerator.interfaceMenuResultBlock = {[weak self] menus in
             DispatchQueue.main.async {
-                self?.tableView.reloadData()
+                self?.webView.loadHTMLString(htmlString, baseURL: nil)
             }
         }
+        
     }
     
     //MARK: TableViewDelegate and DataSource
@@ -87,7 +96,10 @@ class CharacterBuilderVC: UIViewController {
     
     @IBAction func saveCharacter_btnClicked(_ sender: UIButton) {
         if let  savCharVC = self.storyboard?.instantiateViewController(withIdentifier: "SaveCharacterVC") as? SaveCharacterVC {
-            savCharVC.charGenerator = charGenerator
+            let character = Character()
+            character.choices = self.charGenerator.defaultChoices
+            character.charHtml = self.charGenerator.charHTMLString
+            savCharVC.character  = character
             self.navigationController?.pushViewController(savCharVC, animated: true)
         }
     }
@@ -113,7 +125,7 @@ extension CharacterBuilderVC : UITableViewDelegate, UITableViewDataSource {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        let mainMenuChoice = charGenerator.choiceMenus.filter({$0.selected}).first?.choice
+        let mainMenuChoice = interfaceMenus.filter({$0.selected}).first?.choice
         return 1 + (mainMenuChoice == nil ? 0 : sectionCount(in: mainMenuChoice!))
     }
     
@@ -125,7 +137,7 @@ extension CharacterBuilderVC : UITableViewDelegate, UITableViewDataSource {
         
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "menuCell") as! MenuTableViewCell
-            cell.menus = charGenerator.choiceMenus
+            cell.menus = interfaceMenus
             cell.viewcontroller = self
             return cell
             
@@ -140,16 +152,17 @@ extension CharacterBuilderVC : UITableViewDelegate, UITableViewDataSource {
     
     func setSelected(choice: CharacterChoice) {
         guard let selectedOption = choice.options.filter({$0.selected}).first else {return}
-        charGenerator.chartersChoice[choice.choiceId] = selectedOption.name
-        charGenerator.generateCharacter()
+        charGenerator.defaultChoices[choice.choiceId] = selectedOption.name
         
+        charGenerator.upateCharacter()
+
         if !selectedOption.choice.options.isEmpty {
             setSelected(choice: selectedOption.choice)
         }
     }
     
     func changeUserSelection() {
-        setSelected(choice: charGenerator.choiceMenus.filter({$0.selected}).first!.choice)
+        setSelected(choice: interfaceMenus.filter({$0.selected}).first!.choice)
     }
 }
 
