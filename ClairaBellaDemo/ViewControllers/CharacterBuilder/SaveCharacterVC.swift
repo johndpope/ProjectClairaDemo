@@ -134,16 +134,8 @@ class SaveCharacterVC: UIViewController,UITextFieldDelegate {
 
         }
          if  (name_textfield.text?.characters.count)! > 0 {
-            indicator.startAnimating()
-//            charGenerator.saveCharacter{[weak self] success in
-//                self?.indicator.stopAnimating()
-//                if success {
-//                    showAlert(message: "Character saved successfully.", isCharacterSaved: success)
-//
-//                } else {
-//                    showAlert(message: "Something went wrong.")
-//                }
-//            }
+            self.saveCharacterAPICAll()
+            
          } else {
             showAlert(message: "Character name is required.")
 
@@ -151,6 +143,38 @@ class SaveCharacterVC: UIViewController,UITextFieldDelegate {
        
     }
     
+    
+    func saveCharacterAPICAll() {
+        
+        func showAlert(message: String) {
+            let alertController = UIAlertController(title: message, message: "", preferredStyle: .alert)
+            
+            let OKAction = UIAlertAction(title: "OK", style: .default, handler: {
+                alert -> Void in
+                    _ = self.navigationController?.popViewController(animated: true)
+                
+            })
+            alertController.addAction(OKAction)
+            
+            self.present(alertController, animated: true, completion: nil)
+            
+        }
+        
+        indicator.startAnimating()
+
+        let params = ["choices" : character.choices,
+                    "saved_name": character.name,
+                    "source": "ios_app",
+                    "brand": "claireabella"] as [String : Any]
+        APICall.shared.saveCharacter_APICall(json: params) { (response, success) in
+            self.indicator.stopAnimating()
+            if success {
+                showAlert(message: "Character saved successfully.")
+            } else {
+                showAlert(message: "Something went wrong.")
+            }
+        }
+    }
     
 
 func getCurrentTimeStampWOMiliseconds(dateToConvert: NSDate) -> String {
