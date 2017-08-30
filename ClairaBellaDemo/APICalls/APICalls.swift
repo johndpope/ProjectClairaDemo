@@ -139,4 +139,22 @@ class APICall {
     }
 
     
+    func getSavedCharaters_APICall(username: String, block: @escaping ResponseBlock) {
+        let urlString = "https://yff8t38cs8.execute-api.eu-west-1.amazonaws.com/latest/characters/" + username
+        
+        let url = URL(string: urlString)!
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+            if let data = data {
+                if let json = try? JSONSerialization.jsonObject(with: data, options: [.mutableContainers]) {
+                    return block(json, true)
+                }
+            }
+            
+            block(nil, false)
+            }.resume()
+        
+    }
+    
+
+    
 }

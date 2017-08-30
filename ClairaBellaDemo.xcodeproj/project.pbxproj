@@ -206,6 +206,7 @@
 		795421631F460DE500DBBBE0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795421621F460DE500DBBBE0 /* AppDelegate.swift */; };
 		795421681F460DE500DBBBE0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 795421661F460DE500DBBBE0 /* Main.storyboard */; };
 		7954216D1F460DE500DBBBE0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7954216B1F460DE500DBBBE0 /* LaunchScreen.storyboard */; };
+		79DAB6A81F571CA00019C37D /* SavedCharListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DAB6A71F571CA00019C37D /* SavedCharListVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -410,6 +411,7 @@
 		795421671F460DE500DBBBE0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7954216C1F460DE500DBBBE0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7954216E1F460DE500DBBBE0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		79DAB6A71F571CA00019C37D /* SavedCharListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedCharListVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -655,6 +657,7 @@
 		79183D591F550FFF00A00D50 /* CharacterBuilder */ = {
 			isa = PBXGroup;
 			children = (
+				79DAB6A71F571CA00019C37D /* SavedCharListVC.swift */,
 				79183D621F5514B600A00D50 /* SaveCharacterVC.swift */,
 				79183D5A1F550FFF00A00D50 /* CharacterGenerator.swift */,
 				79183D5B1F55100000A00D50 /* CharacterBuilderVC.swift */,
@@ -978,6 +981,7 @@
 				795421631F460DE500DBBBE0 /* AppDelegate.swift in Sources */,
 				79183D601F55102900A00D50 /* APICalls.swift in Sources */,
 				79183D631F5514B600A00D50 /* SaveCharacterVC.swift in Sources */,
+				79DAB6A81F571CA00019C37D /* SavedCharListVC.swift in Sources */,
 				79183D5D1F55100000A00D50 /* CharacterBuilderVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
