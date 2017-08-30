@@ -11,7 +11,8 @@ import UIKit
 class SavedCharListVC: UIViewController {
     @IBOutlet var tableView: UITableView!
     @IBOutlet var collView: UICollectionView!
-    
+    @IBOutlet var horizontalConstraints: [NSLayoutConstraint]?
+   
     var savedChars = [Character]()
     var charGenerator: CharacterHTMLBuilder! {
         didSet {
@@ -29,6 +30,7 @@ class SavedCharListVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        updateConstraints()
         setUI()
         charGenerator = CharacterHTMLBuilder.defaultBuilder()
     }
@@ -41,6 +43,16 @@ class SavedCharListVC: UIViewController {
         collView.frame = fr
     }
     
+    func updateConstraints() {
+        if let horizontalConstraints = horizontalConstraints {
+            for constraint in horizontalConstraints {
+                let v1 = constraint.constant
+                let v2 = v1 * widthRatio
+                constraint.constant = v2
+            }
+        }
+    }
+
     @IBAction func createNewChar_btnClicked(_ sender: UIButton) {
         self.performSegue(withIdentifier: "NewCharVCSegue", sender: nil)
     }
@@ -73,17 +85,32 @@ class SavedCharListVC: UIViewController {
 
 extension SavedCharListVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return 3
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "actionButtonCell")!
-        return cell
+        if indexPath.row == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "actionButtonCell")!
+            return cell
+            
+        } else if indexPath.row == 1 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "createCharBtnCell")!
+            return cell
+        } else {//personalizedAdsCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "personalizedAdsCell")!
+            return cell
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 70
+        if indexPath.row == 0{
+            return 70
+        } else if indexPath.row == 1 {
+            return 150
+        } else {
+            return 300
+        }
     }
 }
 

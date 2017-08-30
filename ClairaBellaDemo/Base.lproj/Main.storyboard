@@ -398,7 +398,7 @@
         <!--Saved Char ListVC-->
         <scene sceneID="Me0-uX-g9j">
             <objects>
-                <viewController storyboardIdentifier="DeleteCharacterVC" id="LjG-Tk-0tP" customClass="SavedCharListVC" customModule="ClairaBellaDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DeleteCharacterVC" automaticallyAdjustsScrollViewInsets="NO" id="LjG-Tk-0tP" customClass="SavedCharListVC" customModule="ClairaBellaDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="2Y0-K4-FT0"/>
                         <viewControllerLayoutGuide type="bottom" id="RcZ-xA-oWS"/>
@@ -450,12 +450,17 @@ for each of your friends?</string>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ANP-eu-Xhd">
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_catwalk_1.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="hn5-II-x9r">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="280" id="A7T-2W-rsb"/>
+                                </constraints>
+                            </imageView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ANP-eu-Xhd">
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <collectionView key="tableHeaderView" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" dataMode="prototypes" id="2ZO-05-Vpo">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="282"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="vUZ-KN-T3P">
                                         <size key="itemSize" width="366" height="275"/>
                                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -470,14 +475,14 @@ for each of your friends?</string>
                                                 <rect key="frame" x="0.0" y="0.0" width="366" height="275"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <subviews>
-                                                    <webView contentMode="scaleToFill" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="J3s-sw-eDm">
-                                                        <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <webView opaque="NO" contentMode="scaleToFill" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="J3s-sw-eDm">
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     </webView>
                                                 </subviews>
                                             </view>
                                             <constraints>
                                                 <constraint firstItem="J3s-sw-eDm" firstAttribute="leading" secondItem="nXQ-tA-RcA" secondAttribute="leading" id="5uG-p4-j3b"/>
-                                                <constraint firstItem="J3s-sw-eDm" firstAttribute="top" secondItem="nXQ-tA-RcA" secondAttribute="top" id="6En-yd-LPP"/>
+                                                <constraint firstItem="J3s-sw-eDm" firstAttribute="top" secondItem="nXQ-tA-RcA" secondAttribute="top" constant="-20" id="6En-yd-LPP"/>
                                                 <constraint firstAttribute="trailing" secondItem="J3s-sw-eDm" secondAttribute="trailing" id="e3M-q7-NPW"/>
                                                 <constraint firstAttribute="bottom" secondItem="J3s-sw-eDm" secondAttribute="bottom" id="var-lP-Ai5"/>
                                             </constraints>
@@ -493,11 +498,11 @@ for each of your friends?</string>
                                     </connections>
                                 </collectionView>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="actionButtonCell" rowHeight="70" id="wdJ-Lc-4j9">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="actionButtonCell" rowHeight="70" id="wdJ-Lc-4j9">
                                         <rect key="frame" x="0.0" y="310" width="375" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wdJ-Lc-4j9" id="rUY-jK-yGK">
-                                            <frame key="frameInset" width="375" height="69"/>
+                                            <frame key="frameInset" width="375" height="70"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="sZo-0u-wTv">
@@ -525,12 +530,66 @@ for each of your friends?</string>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="151" id="xzJ-b0-Let">
-                                        <rect key="frame" x="0.0" y="380" width="375" height="151"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="createCharBtnCell" rowHeight="150" id="xzJ-b0-Let">
+                                        <rect key="frame" x="0.0" y="380" width="375" height="150"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xzJ-b0-Let" id="Ga3-do-XAX">
                                             <frame key="frameInset" width="375" height="150"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AgH-5S-Ir8">
+                                                    <color key="backgroundColor" red="0.92941176470588238" green="0.59607843137254901" blue="0.88235294117647056" alpha="0.93669658690000002" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="110" id="PYP-lM-1ag"/>
+                                                    </constraints>
+                                                </view>
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="GetFileAttachment" translatesAutoresizingMaskIntoConstraints="NO" id="RLC-pV-z0j"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b0W-YQ-1Ab">
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="68" id="omg-pR-F1P"/>
+                                                        <constraint firstAttribute="width" constant="268" id="zJm-jn-GCp"/>
+                                                    </constraints>
+                                                    <state key="normal" backgroundImage="Create_More_Character"/>
+                                                    <connections>
+                                                        <action selector="createNewChar_btnClicked:" destination="LjG-Tk-0tP" eventType="touchUpInside" id="iI1-tQ-qXW"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="RLC-pV-z0j" firstAttribute="leading" secondItem="Ga3-do-XAX" secondAttribute="leading" id="2Px-W8-lbx"/>
+                                                <constraint firstAttribute="trailing" secondItem="RLC-pV-z0j" secondAttribute="trailing" id="4Hn-5r-YC0"/>
+                                                <constraint firstAttribute="bottom" secondItem="RLC-pV-z0j" secondAttribute="bottom" id="4ey-R3-xhW"/>
+                                                <constraint firstItem="b0W-YQ-1Ab" firstAttribute="centerX" secondItem="Ga3-do-XAX" secondAttribute="centerX" id="55R-O9-eGD"/>
+                                                <constraint firstItem="AgH-5S-Ir8" firstAttribute="leading" secondItem="Ga3-do-XAX" secondAttribute="leading" id="Sjn-16-sND"/>
+                                                <constraint firstItem="RLC-pV-z0j" firstAttribute="top" secondItem="Ga3-do-XAX" secondAttribute="top" id="Z1D-1B-tJD"/>
+                                                <constraint firstAttribute="bottom" secondItem="AgH-5S-Ir8" secondAttribute="bottom" id="aoh-5D-eeB"/>
+                                                <constraint firstAttribute="bottom" secondItem="b0W-YQ-1Ab" secondAttribute="bottom" id="dyS-7P-fLC"/>
+                                                <constraint firstAttribute="trailing" secondItem="AgH-5S-Ir8" secondAttribute="trailing" id="rRd-Oy-xbn"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="personalizedAdsCell" rowHeight="300" id="q0N-FG-HZz">
+                                        <rect key="frame" x="0.0" y="530" width="375" height="300"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="q0N-FG-HZz" id="t1M-QI-APO">
+                                            <frame key="frameInset" width="375" height="300"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Whn-Ob-f0B">
+                                                    <color key="backgroundColor" red="0.92941176469999998" green="0.59607843140000005" blue="0.88235294119999996" alpha="0.93669658690000002" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </view>
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" image="secound_Image" translatesAutoresizingMaskIntoConstraints="NO" id="c3A-7T-mIe"/>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="Whn-Ob-f0B" secondAttribute="bottom" id="7h0-ZR-XpE"/>
+                                                <constraint firstItem="Whn-Ob-f0B" firstAttribute="leading" secondItem="t1M-QI-APO" secondAttribute="leading" id="Bb0-rh-y0E"/>
+                                                <constraint firstItem="Whn-Ob-f0B" firstAttribute="top" secondItem="t1M-QI-APO" secondAttribute="top" id="FXq-Fg-QZ4"/>
+                                                <constraint firstAttribute="bottom" secondItem="c3A-7T-mIe" secondAttribute="bottom" id="QNV-UQ-1Eh"/>
+                                                <constraint firstAttribute="trailing" secondItem="c3A-7T-mIe" secondAttribute="trailing" id="czq-Fz-Xzu"/>
+                                                <constraint firstItem="c3A-7T-mIe" firstAttribute="leading" secondItem="t1M-QI-APO" secondAttribute="leading" id="dTT-J1-Ipr"/>
+                                                <constraint firstAttribute="trailing" secondItem="Whn-Ob-f0B" secondAttribute="trailing" id="ogz-2y-9a0"/>
+                                                <constraint firstItem="c3A-7T-mIe" firstAttribute="top" secondItem="t1M-QI-APO" secondAttribute="top" id="yjD-6b-euU"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
@@ -554,16 +613,15 @@ for each of your friends?</string>
                                     <constraint firstItem="YYN-W7-gFI" firstAttribute="centerX" secondItem="4Mh-Lm-Cj1" secondAttribute="centerX" id="z0e-Hm-rcK"/>
                                 </constraints>
                             </view>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" image="GetFileAttachment" translatesAutoresizingMaskIntoConstraints="NO" id="RLC-pV-z0j">
-                                <frame key="frameInset" minX="108" minY="462" width="143" height="124"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="gQ6-7i-irE" secondAttribute="trailing" id="7w1-uq-Skc"/>
                             <constraint firstItem="RcZ-xA-oWS" firstAttribute="top" secondItem="gQ6-7i-irE" secondAttribute="bottom" id="B4g-LB-ftj"/>
+                            <constraint firstAttribute="trailing" secondItem="hn5-II-x9r" secondAttribute="trailing" id="ESZ-uS-aCv"/>
                             <constraint firstItem="4Mh-Lm-Cj1" firstAttribute="leading" secondItem="oya-oL-Ihv" secondAttribute="leading" id="Ez2-sY-SKy"/>
+                            <constraint firstItem="hn5-II-x9r" firstAttribute="leading" secondItem="oya-oL-Ihv" secondAttribute="leading" id="NTw-Pe-mwl"/>
+                            <constraint firstItem="hn5-II-x9r" firstAttribute="top" secondItem="4Mh-Lm-Cj1" secondAttribute="bottom" id="TWX-2x-iG1"/>
                             <constraint firstItem="gQ6-7i-irE" firstAttribute="leading" secondItem="oya-oL-Ihv" secondAttribute="leading" id="V8y-ur-150"/>
                             <constraint firstItem="ANP-eu-Xhd" firstAttribute="top" secondItem="2Y0-K4-FT0" secondAttribute="bottom" constant="44" id="ZY8-Xp-8c9"/>
                             <constraint firstAttribute="trailing" secondItem="4Mh-Lm-Cj1" secondAttribute="trailing" id="cli-dL-YGk"/>
@@ -578,7 +636,8 @@ for each of your friends?</string>
                     <connections>
                         <outlet property="collView" destination="2ZO-05-Vpo" id="6Eh-4V-9jv"/>
                         <outlet property="tableView" destination="ANP-eu-Xhd" id="gwm-Ko-7bz"/>
-                        <segue destination="icg-ez-Ek9" kind="show" id="UUh-Zz-Z2w"/>
+                        <outletCollection property="horizontalConstraints" destination="A7T-2W-rsb" collectionClass="NSMutableArray" id="ylw-YY-Exd"/>
+                        <segue destination="icg-ez-Ek9" kind="show" identifier="NewCharVCSegue" id="UUh-Zz-Z2w"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QBR-ER-ZfT" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -602,5 +661,6 @@ for each of your friends?</string>
         <image name="background_catwalk_1.jpg" width="1080" height="566"/>
         <image name="close_btn" width="73" height="35"/>
         <image name="oval" width="180" height="30"/>
+        <image name="secound_Image" width="319" height="261"/>
     </resources>
 </document>
