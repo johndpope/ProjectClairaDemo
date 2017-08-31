@@ -147,7 +147,7 @@ extension SavedCharListVC : iCarouselDelegate, iCarouselDataSource {
     }
     
     func carousel(_ carousel: iCarousel, valueFor option: iCarouselOption, withDefault value: CGFloat) -> CGFloat {
-        return value 
+        return value //
     }
 }
 
