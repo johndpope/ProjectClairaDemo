@@ -7,9 +7,12 @@
 //
 
 import UIKit
+import iCarousel
 
 class SavedCharListVC: UIViewController {
     @IBOutlet var tableView: UITableView!
+    @IBOutlet var carouselView: iCarousel!
+    
     @IBOutlet var collView: UICollectionView!
     @IBOutlet var horizontalConstraints: [NSLayoutConstraint]?
    
@@ -38,9 +41,11 @@ class SavedCharListVC: UIViewController {
 
     func setUI() {
         let collviewHeight = 275 * widthRatio
-        var fr = collView.frame
+        var fr = carouselView.frame
         fr.size.height = collviewHeight
-        collView.frame = fr
+        carouselView.frame = fr
+        carouselView.type = .linear
+        
     }
     
     func updateConstraints() {
@@ -71,7 +76,7 @@ class SavedCharListVC: UIViewController {
                     })
                     
                     DispatchQueue.main.async {
-                        self.collView.reloadData()
+                        self.carouselView.reloadData()
                     }
                 }
                 
@@ -114,41 +119,36 @@ extension SavedCharListVC: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
-extension SavedCharListVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+
+extension SavedCharListVC : iCarouselDelegate, iCarouselDataSource {
+    func numberOfItems(in carousel: iCarousel) -> Int {
         return savedChars.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "charCell", for: indexPath) as! CharCollectionViewCell
-        let character  = savedChars[indexPath.item]
-        
-        if let html = character.charHtml {
-            cell.charHTML = html
+    func carousel(_ carousel: iCarousel, viewForItemAt index: Int, reusing view: UIView?) -> UIView {
+        var itemView: CarouselItemView
+        if let iView = view as? CarouselItemView {
+            itemView = iView
         } else {
-            charGenerator.buildCharHTMLWith(choices: character.choices, block: { html in
-                cell.charHTML = html
+            itemView = CarouselItemView.loadView()
+            itemView.frame = CGRect(x: 0, y: 0, width: 180 * widthRatio, height: 275*widthRatio)
+        }
+        
+        let char = savedChars[index]
+        if let html = char.charHtml {
+            itemView.htmlString = html
+        } else {
+            charGenerator.buildCharHTMLWith(choices: char.choices, block: { html in
+                itemView.htmlString = html
             })
         }
-        return cell
+
+        return itemView
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return collectionView.frame.size
+    func carousel(_ carousel: iCarousel, valueFor option: iCarouselOption, withDefault value: CGFloat) -> CGFloat {
+        return value 
     }
 }
 
-class CharCollectionViewCell: UICollectionViewCell {
-    @IBOutlet var webView: UIWebView!
-    
-    var charHTML: String = "" {
-        didSet {
-            webView.loadHTMLString(charHTML, baseURL: nil)
-        }
-    }
-}
 

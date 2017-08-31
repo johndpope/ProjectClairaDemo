@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		132605D51F4AA632003B6BFC /* result.html in Resources */ = {isa = PBXBuildFile; fileRef = 132605D41F4AA632003B6BFC /* result.html */; };
+		1332FBD21F57EC94003E3217 /* CarouselItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1332FBD11F57EC94003E3217 /* CarouselItemView.xib */; };
+		1332FBD41F57ECA6003E3217 /* CarouselItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1332FBD31F57ECA6003E3217 /* CarouselItemView.swift */; };
+		67A1F6B28B7089DC15FA837D /* Pods_ClairaBellaDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35A99DE8EB24D02764ED70FD /* Pods_ClairaBellaDemo.framework */; };
 		79183B7A1F550F2800A00D50 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79183B791F550F2800A00D50 /* Assets.xcassets */; };
 		79183C9A1F550FF600A00D50 /* BP001_BT001_OA011_BV005.svg in Resources */ = {isa = PBXBuildFile; fileRef = 79183BDB1F550FF500A00D50 /* BP001_BT001_OA011_BV005.svg */; };
 		79183C9B1F550FF600A00D50 /* BP001_BT001_OA011_BV006.svg in Resources */ = {isa = PBXBuildFile; fileRef = 79183BDC1F550FF500A00D50 /* BP001_BT001_OA011_BV006.svg */; };
@@ -211,6 +214,11 @@
 
 /* Begin PBXFileReference section */
 		132605D41F4AA632003B6BFC /* result.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = result.html; sourceTree = "<group>"; };
+		1332FBD11F57EC94003E3217 /* CarouselItemView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CarouselItemView.xib; sourceTree = "<group>"; };
+		1332FBD31F57ECA6003E3217 /* CarouselItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarouselItemView.swift; sourceTree = "<group>"; };
+		35A99DE8EB24D02764ED70FD /* Pods_ClairaBellaDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ClairaBellaDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4E3CB6A597CC857291E48488 /* Pods-ClairaBellaDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ClairaBellaDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ClairaBellaDemo/Pods-ClairaBellaDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		521D4AFBB295765553039816 /* Pods-ClairaBellaDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ClairaBellaDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-ClairaBellaDemo/Pods-ClairaBellaDemo.release.xcconfig"; sourceTree = "<group>"; };
 		79183B791F550F2800A00D50 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		79183BDB1F550FF500A00D50 /* BP001_BT001_OA011_BV005.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = BP001_BT001_OA011_BV005.svg; sourceTree = "<group>"; };
 		79183BDC1F550FF500A00D50 /* BP001_BT001_OA011_BV006.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = BP001_BT001_OA011_BV006.svg; sourceTree = "<group>"; };
@@ -419,12 +427,39 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				67A1F6B28B7089DC15FA837D /* Pods_ClairaBellaDemo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1332FBD01F57EC86003E3217 /* CarouselView */ = {
+			isa = PBXGroup;
+			children = (
+				1332FBD11F57EC94003E3217 /* CarouselItemView.xib */,
+				1332FBD31F57ECA6003E3217 /* CarouselItemView.swift */,
+			);
+			name = CarouselView;
+			sourceTree = "<group>";
+		};
+		658F767CA63C4438E5BD6B3F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				35A99DE8EB24D02764ED70FD /* Pods_ClairaBellaDemo.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		76CC09AFF2D9B378E5CD6C9C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				4E3CB6A597CC857291E48488 /* Pods-ClairaBellaDemo.debug.xcconfig */,
+				521D4AFBB295765553039816 /* Pods-ClairaBellaDemo.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		79183BD81F550FF500A00D50 /* Images */ = {
 			isa = PBXGroup;
 			children = (
@@ -657,6 +692,7 @@
 		79183D591F550FFF00A00D50 /* CharacterBuilder */ = {
 			isa = PBXGroup;
 			children = (
+				1332FBD01F57EC86003E3217 /* CarouselView */,
 				79DAB6A71F571CA00019C37D /* SavedCharListVC.swift */,
 				79183D621F5514B600A00D50 /* SaveCharacterVC.swift */,
 				79183D5A1F550FFF00A00D50 /* CharacterGenerator.swift */,
@@ -687,6 +723,8 @@
 			children = (
 				795421611F460DE500DBBBE0 /* ClairaBellaDemo */,
 				795421601F460DE500DBBBE0 /* Products */,
+				76CC09AFF2D9B378E5CD6C9C /* Pods */,
+				658F767CA63C4438E5BD6B3F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -720,9 +758,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 795421711F460DE500DBBBE0 /* Build configuration list for PBXNativeTarget "ClairaBellaDemo" */;
 			buildPhases = (
+				4935836107D5C221296F4965 /* [CP] Check Pods Manifest.lock */,
 				7954215B1F460DE500DBBBE0 /* Sources */,
 				7954215C1F460DE500DBBBE0 /* Frameworks */,
 				7954215D1F460DE500DBBBE0 /* Resources */,
+				E3D380639F058B03213650C4 /* [CP] Embed Pods Frameworks */,
+				E93FCDFE0A36DA8089701B1C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -912,6 +953,7 @@
 				79183CCD1F550FF600A00D50 /* BP004_BT002_OA030_BV000.svg in Resources */,
 				7954216D1F460DE500DBBBE0 /* LaunchScreen.storyboard in Resources */,
 				79183CF71F550FF600A00D50 /* BP007_BT001_OA027_BV000.svg in Resources */,
+				1332FBD21F57EC94003E3217 /* CarouselItemView.xib in Resources */,
 				79183D121F550FF600A00D50 /* BP015_BT001_OA000_BV000.svg in Resources */,
 				79183CAE1F550FF600A00D50 /* BP002_BT001_OA011_BV005.svg in Resources */,
 				79183CCA1F550FF600A00D50 /* BP004_BT001_OA030_BV000.svg in Resources */,
@@ -972,6 +1014,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		4935836107D5C221296F4965 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		E3D380639F058B03213650C4 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ClairaBellaDemo/Pods-ClairaBellaDemo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E93FCDFE0A36DA8089701B1C /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ClairaBellaDemo/Pods-ClairaBellaDemo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		7954215B1F460DE500DBBBE0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -982,6 +1072,7 @@
 				79183D601F55102900A00D50 /* APICalls.swift in Sources */,
 				79183D631F5514B600A00D50 /* SaveCharacterVC.swift in Sources */,
 				79DAB6A81F571CA00019C37D /* SavedCharListVC.swift in Sources */,
+				1332FBD41F57ECA6003E3217 /* CarouselItemView.swift in Sources */,
 				79183D5D1F55100000A00D50 /* CharacterBuilderVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1101,6 +1192,7 @@
 		};
 		795421721F460DE500DBBBE0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4E3CB6A597CC857291E48488 /* Pods-ClairaBellaDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = LCSDGY3TVW;
@@ -1114,6 +1206,7 @@
 		};
 		795421731F460DE500DBBBE0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 521D4AFBB295765553039816 /* Pods-ClairaBellaDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = LCSDGY3TVW;
