@@ -119,7 +119,7 @@ class APICall {
     }
     
     
-    func saveCharacter_APICall(json: [String : Any], block: @escaping ResponseBlock) {
+    func createNewCharacter_APICall(json: [String : Any], block: @escaping ResponseBlock) {
         let url = URL(string: "https://yff8t38cs8.execute-api.eu-west-1.amazonaws.com/latest/characters/test@test.com")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -155,6 +155,42 @@ class APICall {
         
     }
     
+    
+    func deleteCharacter_APICall(createdDate: String, block: @escaping ResponseBlock) {
+        let urlString = "https://yff8t38cs8.execute-api.eu-west-1.amazonaws.com/latest/characters/test@test.com?date_created=\(createdDate)"
+        let url = URL(string: urlString)!
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+            if let data = data {
+                if let json = try? JSONSerialization.jsonObject(with: data, options: [.mutableContainers]) {
+                    return block(json, true)
+                }
+            }
+            
+            block(nil, false)
+            }.resume()
+
+        
+    }
+    
+    func updateCharacter_APICall(character:Character, block: @escaping ResponseBlock) {
+        let urlString  = "https://yff8t38cs8.execute-api.eu-west-1.amazonaws.com/latest/characters/test@test.com?date_created=\(character.createdDate)"
+        let url = URL(string: urlString)!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        let data = try? JSONSerialization.data(withJSONObject: character.choices, options: .prettyPrinted)
+        request.httpBody = data
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let data = data {
+                if let json = try? JSONSerialization.jsonObject(with: data, options: [.mutableContainers]) {
+                    return block(json, true)
+                }
+            }
+            
+            block(nil, false)
+            
+            }.resume()
+        
+    }
 
     
 }

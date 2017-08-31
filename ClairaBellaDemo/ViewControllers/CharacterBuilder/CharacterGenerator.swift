@@ -12,6 +12,7 @@ class Character {
     var name = ""
     var choices = [String : String]()
     var charHtml: String?
+    var createdDate = ""
 }
 
 class CharacterHTMLBuilder {

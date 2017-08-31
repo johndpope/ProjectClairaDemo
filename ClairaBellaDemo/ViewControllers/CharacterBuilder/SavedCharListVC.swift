@@ -23,6 +23,8 @@ class SavedCharListVC: UIViewController {
         }
     }
     
+    var currentCharIndex = 0
+    
     func setCharGeneratorResultBlock() {
         charGenerator.resultBlock = { [weak self] htmlString in
             self?.getSavedChars()
@@ -58,36 +60,35 @@ class SavedCharListVC: UIViewController {
         }
     }
 
+}
+
+
+//MARK:- IBActions
+extension SavedCharListVC {
     @IBAction func createNewChar_btnClicked(_ sender: UIButton) {
         self.performSegue(withIdentifier: "NewCharVCSegue", sender: nil)
     }
 
-    
-    func getSavedChars() {
-        APICall.shared.getSavedCharaters_APICall(username: "test@test.com") { (response, success) in
-            if success {
-                print(response!)
-                if let jsonArr = response as? [[String : Any]] {
-                    self.savedChars = jsonArr.map({ (json) -> Character in
-                        let choice = json["choices"] as! [String : String]
-                        let character = Character()
-                        character.choices = choice
-                        return character
-                    })
-                    
-                    DispatchQueue.main.async {
-                        self.carouselView.reloadData()
-                    }
-                }
-                
-            } else {
-                
-            }
-        }
+    @IBAction func deleteChar_btnClicked(_ sender: UIButton) {
+        let char = savedChars[currentCharIndex]
+        self.deleteCharacter(char: char)
     }
     
+    @IBAction func editChar_btnClicked(_ sender: UIButton) {
+        let char = savedChars[currentCharIndex]
+    }
+
+    @IBAction func shareChar_btnClicked(_ sender: UIButton) {
+        let char = savedChars[currentCharIndex]
+    }
+
+    @IBAction func emojis_btnClicked(_ sender: UIButton) {
+    }
+
 }
 
+
+//MARK:- TableView DataSource and Delegate
 extension SavedCharListVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 3
@@ -110,7 +111,7 @@ extension SavedCharListVC: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 0{
-            return 70
+            return 80
         } else if indexPath.row == 1 {
             return 150
         } else {
@@ -119,7 +120,7 @@ extension SavedCharListVC: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
-
+//MARK:- iCarousel DataSource and Delegate
 extension SavedCharListVC : iCarouselDelegate, iCarouselDataSource {
     func numberOfItems(in carousel: iCarousel) -> Int {
         return savedChars.count
@@ -149,6 +150,54 @@ extension SavedCharListVC : iCarouselDelegate, iCarouselDataSource {
     func carousel(_ carousel: iCarousel, valueFor option: iCarouselOption, withDefault value: CGFloat) -> CGFloat {
         return value 
     }
+    
+    func carousel(_ carousel: iCarousel, didSelectItemAt index: Int) {
+        currentCharIndex = index
+    }
 }
 
+//MARK:- API Calls
+extension SavedCharListVC {
+    func deleteCharacter(char: Character) {
+        APICall.shared.deleteCharacter_APICall(createdDate: char.createdDate) { (response, success) in
+            if success {
+               if let index =  self.savedChars.index(where: { (ch) -> Bool in
+                    return char.createdDate == ch.createdDate
+               }) {
+                self.savedChars.remove(at: index)
+                DispatchQueue.main.async {
+                    self.carouselView.reloadData()
+                }
+            }
+        }
+    }
+    }
+    
+    func getSavedChars() {
+        APICall.shared.getSavedCharaters_APICall(username: "test@test.com") { (response, success) in
+            if success {
+                print(response!)
+                if let jsonArr = response as? [[String : Any]] {
+                    self.savedChars = jsonArr.map({ (json) -> Character in
+                        let choice = json["choices"] as! [String : String]
+                        let character = Character()
+                        character.choices = choice
+                        character.createdDate = json["date_created"] as! String
+                        character.name = json["saved_name"] as! String
+                        return character
+                    })
+                    
+                    DispatchQueue.main.async {
+                        self.carouselView.reloadData()
+                    }
+                }
+                
+            } else {
+                
+            }
+        }
+    }
+    
+
+}
 
