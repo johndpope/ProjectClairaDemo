@@ -193,7 +193,7 @@ extension SavedCharListVC {
     }
     
     func getSavedChars() {
-        APICall.shared.getSavedCharaters_APICall(username: "testv@test.com") { (response, success) in
+        APICall.shared.getSavedCharaters_APICall(username: "test@test.com") { (response, success) in
             if success {
                 print(response!)
                 if let jsonArr = response as? [[String : Any]] {

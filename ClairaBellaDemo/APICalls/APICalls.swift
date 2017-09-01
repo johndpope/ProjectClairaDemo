@@ -14,6 +14,10 @@ import Foundation
 class APICall {
     static let shared = APICall()
     
+    private init() {
+        
+    }
+    
     let baseUrl =  "http://34.252.124.216/midnight/system/api"
     let assetUrl = "http://34.252.124.216/midnight/system/asset_library"
     
@@ -157,7 +161,7 @@ class APICall {
     
     
     func deleteCharacter_APICall(createdDate: String, block: @escaping ResponseBlock) {
-        let urlString = "https://yff8t38cs8.execute-api.eu-west-1.amazonaws.com/latest/characters/testv@test.com?date_created=\(createdDate)"
+        let urlString = "https://yff8t38cs8.execute-api.eu-west-1.amazonaws.com/latest/characters/test@test.com?date_created=\(createdDate)"
         let url = URL(string: urlString)!
         var request = URLRequest(url: url)
         request.httpMethod = "DELETE"
@@ -175,7 +179,7 @@ class APICall {
     }
     
     func updateCharacter_APICall(params: [String : Any], createdDate: String, block: @escaping ResponseBlock) {
-        let urlString  = "https://yff8t38cs8.execute-api.eu-west-1.amazonaws.com/latest/characters/testv@test.com?date_created=\(createdDate)"
+        let urlString  = "https://yff8t38cs8.execute-api.eu-west-1.amazonaws.com/latest/characters/test@test.com?date_created=\(createdDate)"
         let url = URL(string: urlString)!
        
         var request = URLRequest(url: url)
