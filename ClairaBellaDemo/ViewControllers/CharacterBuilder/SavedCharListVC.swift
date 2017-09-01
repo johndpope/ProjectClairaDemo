@@ -61,7 +61,14 @@ class SavedCharListVC: UIViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "NewCharVCSegue" {
-            
+            let dest = segue.destination as! CharacterBuilderVC
+            if let char = sender as? Character {
+                dest.character = char
+                dest.isCharacterEditMode = true
+                
+            }
+            dest.charGenerator = charGenerator
+
         } else if segue.identifier == "updateCharSegue" {
             let dest = segue.destination as! SaveCharacterVC
             if let char = sender as? Character {
@@ -86,7 +93,7 @@ extension SavedCharListVC {
     
     @IBAction func editChar_btnClicked(_ sender: UIButton) {
         let char = savedChars[currentCharIndex]
-        self.performSegue(withIdentifier: "updateCharSegue", sender: char)
+        self.performSegue(withIdentifier: "NewCharVCSegue", sender: char)
     }
 
     @IBAction func shareChar_btnClicked(_ sender: UIButton) {
@@ -186,7 +193,7 @@ extension SavedCharListVC {
     }
     
     func getSavedChars() {
-        APICall.shared.getSavedCharaters_APICall(username: "test@test.com") { (response, success) in
+        APICall.shared.getSavedCharaters_APICall(username: "testv@test.com") { (response, success) in
             if success {
                 print(response!)
                 if let jsonArr = response as? [[String : Any]] {

@@ -134,7 +134,7 @@ class SaveCharacterVC: UIViewController,UITextFieldDelegate {
 
         }
          if  (name_textfield.text?.characters.count)! > 0 {
-            self.saveCharacterAPICAll()
+            isCharacterEditMode ? self.updateCharacterAPICall() : self.saveCharacterAPICAll()
             
          } else {
             showAlert(message: "Character name is required.")
@@ -177,6 +177,38 @@ class SaveCharacterVC: UIViewController,UITextFieldDelegate {
     }
     
 
+    func updateCharacterAPICall() {
+        func showAlert(message: String) {
+            let alertController = UIAlertController(title: message, message: "", preferredStyle: .alert)
+            
+            let OKAction = UIAlertAction(title: "OK", style: .default, handler: {
+                alert -> Void in
+                _ = self.navigationController?.popViewController(animated: true)
+                
+            })
+            alertController.addAction(OKAction)
+            
+            self.present(alertController, animated: true, completion: nil)
+            
+        }
+        
+        indicator.startAnimating()
+        
+        let params = ["choices" : character.choices,
+                      "saved_name": character.name,
+                      "default": true,
+                      ] as [String : Any]
+        
+        APICall.shared.updateCharacter_APICall(params: params, createdDate: character.createdDate) { (json, success) in
+            if success {
+                showAlert(message: "Character updated successfully.")
+            } else {
+                showAlert(message: "Something went wrong.")
+            }
+
+        }
+
+    }
 func getCurrentTimeStampWOMiliseconds(dateToConvert: NSDate) -> String {
     let objDateformat: DateFormatter = DateFormatter()
     objDateformat.dateFormat = "yyyy-MM-dd HH:mm:ss"

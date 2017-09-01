@@ -27,13 +27,15 @@ class CharacterBuilderVC: UIViewController {
         }
     }
     
+    var isCharacterEditMode = false
+    var character: Character!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         updateConstraints()
         webView.scrollView.setZoomScale(1.1, animated: false)
         
-        charGenerator = CharacterHTMLBuilder.defaultBuilder()
+        //charGenerator = CharacterHTMLBuilder.defaultBuilder()
         
         CharBuilderAPI.shared.getInterface_json { menus in
             self.interfaceMenus = menus
@@ -42,6 +44,10 @@ class CharacterBuilderVC: UIViewController {
             }
         }
 
+        if let charHtml = character?.charHtml {
+            webView.loadHTMLString(charHtml, baseURL: nil)
+            charGenerator.defaultChoices = character!.choices
+        }
     }
     
     
@@ -57,6 +63,12 @@ class CharacterBuilderVC: UIViewController {
     
     func setCharGeneratorResultBlock() {
         charGenerator.resultBlock = { [weak self] htmlString in
+            
+            if !self!.isCharacterEditMode && self?.character == nil {
+                self?.character =   Character()
+                self?.character.choices = self!.charGenerator.defaultChoices
+            }
+            self?.character.charHtml = htmlString
             DispatchQueue.main.async {
                 self?.webView.loadHTMLString(htmlString, baseURL: nil)
             }
@@ -96,10 +108,17 @@ class CharacterBuilderVC: UIViewController {
     
     @IBAction func saveCharacter_btnClicked(_ sender: UIButton) {
         if let  savCharVC = self.storyboard?.instantiateViewController(withIdentifier: "SaveCharacterVC") as? SaveCharacterVC {
-            let character = Character()
-            character.choices = self.charGenerator.defaultChoices
-            character.charHtml = self.charGenerator.charHTMLString
-            savCharVC.character  = character
+            if isCharacterEditMode {
+                savCharVC.character = self.character
+                
+            } else {
+                let character =   Character()
+                character.choices = self.charGenerator.defaultChoices
+                character.charHtml = self.charGenerator.charHTMLString
+                savCharVC.character  = character
+
+            }
+            savCharVC.isCharacterEditMode = self.isCharacterEditMode
             self.navigationController?.pushViewController(savCharVC, animated: true)
         }
     }
@@ -152,9 +171,9 @@ extension CharacterBuilderVC : UITableViewDelegate, UITableViewDataSource {
     
     func setSelected(choice: CharacterChoice) {
         guard let selectedOption = choice.options.filter({$0.selected}).first else {return}
-        charGenerator.defaultChoices[choice.choiceId] = selectedOption.name
+        character!.choices[choice.choiceId] = selectedOption.name
         
-        charGenerator.upateCharacter()
+        charGenerator.upateCharacter(choices: character!.choices)
 
         if !selectedOption.choice.options.isEmpty {
             setSelected(choice: selectedOption.choice)

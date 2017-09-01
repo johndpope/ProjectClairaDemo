@@ -35,8 +35,8 @@ class CharacterHTMLBuilder {
         return builder
     }
     
-    func upateCharacter() {
-        buildCharHTMLWith(choices: defaultChoices, block: nil)
+    func upateCharacter(choices: [String : String]) {
+        buildCharHTMLWith(choices: choices, block: nil)
     }
     
     func defaultCharHTML(block: @escaping (String)->Void) {
