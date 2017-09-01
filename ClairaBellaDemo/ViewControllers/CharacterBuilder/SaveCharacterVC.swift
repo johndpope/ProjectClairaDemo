@@ -166,7 +166,7 @@ class SaveCharacterVC: UIViewController,UITextFieldDelegate {
                     "saved_name": character.name,
                     "source": "ios_app",
                     "brand": "claireabella"] as [String : Any]
-        APICall.shared.saveCharacter_APICall(json: params) { (response, success) in
+        APICall.shared.createNewCharacter_APICall(json: params) { (response, success) in
             self.indicator.stopAnimating()
             if success {
                 showAlert(message: "Character saved successfully.")
