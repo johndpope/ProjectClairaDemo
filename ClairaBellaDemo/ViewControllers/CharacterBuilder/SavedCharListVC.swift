@@ -12,8 +12,7 @@ import iCarousel
 class SavedCharListVC: UIViewController {
     @IBOutlet var tableView: UITableView!
     @IBOutlet var carouselView: iCarousel!
-    
-    @IBOutlet var collView: UICollectionView!
+    @IBOutlet var emptyCharactersView: UIView!
     @IBOutlet var horizontalConstraints: [NSLayoutConstraint]?
    
     var savedChars = [Character]()
@@ -42,9 +41,9 @@ class SavedCharListVC: UIViewController {
     
 
     func setUI() {
-        let collviewHeight = 275 * widthRatio
+        let carouselViewHeight = 275 * widthRatio
         var fr = carouselView.frame
-        fr.size.height = collviewHeight
+        fr.size.height = carouselViewHeight
         carouselView.frame = fr
         carouselView.type = .linear
         
@@ -60,6 +59,17 @@ class SavedCharListVC: UIViewController {
         }
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "NewCharVCSegue" {
+            
+        } else if segue.identifier == "updateCharSegue" {
+            let dest = segue.destination as! SaveCharacterVC
+            if let char = sender as? Character {
+                dest.character = char
+                dest.isCharacterEditMode = true
+            }
+        }
+    }
 }
 
 
@@ -76,6 +86,7 @@ extension SavedCharListVC {
     
     @IBAction func editChar_btnClicked(_ sender: UIButton) {
         let char = savedChars[currentCharIndex]
+        self.performSegue(withIdentifier: "updateCharSegue", sender: char)
     }
 
     @IBAction func shareChar_btnClicked(_ sender: UIButton) {
@@ -115,7 +126,7 @@ extension SavedCharListVC: UITableViewDataSource, UITableViewDelegate {
         } else if indexPath.row == 1 {
             return 150
         } else {
-            return 300
+            return 300 * widthRatio
         }
     }
 }
@@ -132,7 +143,7 @@ extension SavedCharListVC : iCarouselDelegate, iCarouselDataSource {
             itemView = iView
         } else {
             itemView = CarouselItemView.loadView()
-            itemView.frame = CGRect(x: 0, y: 0, width: 180 * widthRatio, height: 275*widthRatio)
+            itemView.frame = CGRect(x: 0, y: 0, width: 172 * widthRatio, height: 275*widthRatio)
         }
         
         let char = savedChars[index]
@@ -141,6 +152,7 @@ extension SavedCharListVC : iCarouselDelegate, iCarouselDataSource {
         } else {
             charGenerator.buildCharHTMLWith(choices: char.choices, block: { html in
                 itemView.htmlString = html
+                char.charHtml = html
             })
         }
 

@@ -29,7 +29,7 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="8TQ-pv-d18" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="5A9-0U-xP2"/>
-                <constraint firstItem="rEi-gV-XEw" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="-70" id="5Tj-Ut-JxA"/>
+                <constraint firstItem="rEi-gV-XEw" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="-70" id="6fR-0E-5Hl"/>
                 <constraint firstAttribute="trailing" secondItem="rEi-gV-XEw" secondAttribute="trailing" id="7cD-2D-ovZ"/>
                 <constraint firstItem="rEi-gV-XEw" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="IxE-mg-OuX"/>
                 <constraint firstItem="8TQ-pv-d18" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="ZGv-Hp-NPE"/>
@@ -40,7 +40,7 @@
             <connections>
                 <outlet property="lblTitle" destination="8TQ-pv-d18" id="wVT-OD-4rY"/>
                 <outlet property="webView" destination="rEi-gV-XEw" id="Rnx-lG-AOV"/>
-                <outlet property="webViewLeadingSpace" destination="5Tj-Ut-JxA" id="AVX-8j-oZs"/>
+                <outlet property="webViewLeadingSpace" destination="6fR-0E-5Hl" id="Igw-sa-32k"/>
             </connections>
             <point key="canvasLocation" x="-203.5" y="-88.5"/>
         </view>

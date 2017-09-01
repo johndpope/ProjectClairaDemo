@@ -18,8 +18,11 @@ class SaveCharacterVC: UIViewController,UITextFieldDelegate {
     
     @IBOutlet weak var save_btn: UIButton!
 
+    var isCharacterEditMode = false
+    
     //this json object required for saving character.
     var character: Character!
+    
     @IBOutlet var webView: UIWebView!
     
     override func viewDidLoad() {
@@ -30,11 +33,8 @@ class SaveCharacterVC: UIViewController,UITextFieldDelegate {
             webView.scrollView.setZoomScale(1.1, animated: false)
         }
         
-        //right_arrowImage.isHidden = true
-        save_btn.isHidden = true
-        //Naviagtion Left button
-       // var image = UIImage.image(with: imageData!)
-        
+        save_btn.isHidden = !isCharacterEditMode
+        name_textfield.text = character.name
         
         self.name_textfield.delegate = self;
         let leftView = UILabel(frame: CGRect(x: CGFloat(10), y: CGFloat(0), width: CGFloat(7), height: CGFloat(26)))
