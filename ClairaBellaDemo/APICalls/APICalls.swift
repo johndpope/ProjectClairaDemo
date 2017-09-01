@@ -9,6 +9,7 @@
 import Foundation
 
 
+let currentUserEmail = "testa@gmail.com"
 
 //APICAlls
 class APICall {
@@ -124,7 +125,7 @@ class APICall {
     
     
     func createNewCharacter_APICall(json: [String : Any], block: @escaping ResponseBlock) {
-        let url = URL(string: "https://yff8t38cs8.execute-api.eu-west-1.amazonaws.com/latest/characters/testv@test.com")!
+        let url = URL(string: "https://yff8t38cs8.execute-api.eu-west-1.amazonaws.com/latest/characters/\(currentUserEmail)")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         let data = try? JSONSerialization.data(withJSONObject: json, options: .prettyPrinted)
@@ -132,11 +133,16 @@ class APICall {
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let data = data {
                 if let json = try? JSONSerialization.jsonObject(with: data, options: [.mutableContainers]) {
-                    return block(json, true)
+                    DispatchQueue.main.async {
+                        block(json, true)
+                    }
+                    return
                 }
             }
             
-            block(nil, false)
+            DispatchQueue.main.async {
+                block(nil, false)
+            }
             
             }.resume()
         
@@ -144,7 +150,7 @@ class APICall {
 
     
     func getSavedCharaters_APICall(username: String, block: @escaping ResponseBlock) {
-        let urlString = "https://yff8t38cs8.execute-api.eu-west-1.amazonaws.com/latest/characters/" + username
+        let urlString = "https://yff8t38cs8.execute-api.eu-west-1.amazonaws.com/latest/characters/\(currentUserEmail)"
         
         let url = URL(string: urlString)!
         URLSession.shared.dataTask(with: url) { (data, response, error) in
@@ -161,25 +167,30 @@ class APICall {
     
     
     func deleteCharacter_APICall(createdDate: String, block: @escaping ResponseBlock) {
-        let urlString = "https://yff8t38cs8.execute-api.eu-west-1.amazonaws.com/latest/characters/test@test.com?date_created=\(createdDate)"
+        let urlString = "https://yff8t38cs8.execute-api.eu-west-1.amazonaws.com/latest/characters/\(currentUserEmail)?date_created=\(createdDate)"
         let url = URL(string: urlString)!
         var request = URLRequest(url: url)
         request.httpMethod = "DELETE"
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let data = data {
                 if let json = try? JSONSerialization.jsonObject(with: data, options: [.mutableContainers]) {
-                    return block(json, true)
+                    DispatchQueue.main.async {
+                        block(json, true)
+                    }
+                    return
                 }
             }
             
-            block(nil, false)
+            DispatchQueue.main.async {
+                block(nil, false)
+            }
             
             }.resume()
         
     }
     
     func updateCharacter_APICall(params: [String : Any], createdDate: String, block: @escaping ResponseBlock) {
-        let urlString  = "https://yff8t38cs8.execute-api.eu-west-1.amazonaws.com/latest/characters/test@test.com?date_created=\(createdDate)"
+        let urlString  = "https://yff8t38cs8.execute-api.eu-west-1.amazonaws.com/latest/characters/\(currentUserEmail)?date_created=\(createdDate)"
         let url = URL(string: urlString)!
        
         var request = URLRequest(url: url)
@@ -190,11 +201,16 @@ class APICall {
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let data = data {
                 if let json = try? JSONSerialization.jsonObject(with: data, options: [.mutableContainers]) {
-                    return block(json, true)
+                    DispatchQueue.main.async {
+                        block(json, true)
+                    }
+                    return
                 }
             }
             
-            block(nil, false)
+            DispatchQueue.main.async {
+                block(nil, false)
+            }
             
             }.resume()
         

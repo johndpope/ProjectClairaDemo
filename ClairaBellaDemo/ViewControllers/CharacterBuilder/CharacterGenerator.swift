@@ -13,6 +13,7 @@ class Character {
     var choices = [String : String]()
     var charHtml: String?
     var createdDate = ""
+    var alive = false
 }
 
 class CharacterHTMLBuilder {
@@ -47,7 +48,12 @@ class CharacterHTMLBuilder {
         if let block = block {
             resultBlock = block
         }
-        generateHtml(with: choices)
+        
+       let queue = DispatchQueue(label: "characterBuilder")
+        queue.async {
+        }
+        self.buildStart(with: choices, block: block)
+
     }
     
     private func loadBuildData() {
@@ -55,7 +61,7 @@ class CharacterHTMLBuilder {
     }
     
     //call this func for regenerating new character as per user's selected choices.
-    fileprivate func generateHtml(with choices: [String : String]) {
+    fileprivate func buildStart(with choices: [String : String], block: ((String)->Void)? = nil) {
         choices.forEach { (choice, option)  in
             if let partsMapMatch = self.part_mapJson[choice]?[option] as? [String: [String : [String : Any]]] {
                 partsMapMatch.forEach({ (part, mapMatch) in
@@ -68,11 +74,11 @@ class CharacterHTMLBuilder {
             }
         }
         
-        self.buildSVGs()
+        self.buildSVGs(block)
     }
     
     
-    private func buildSVGs() {
+    private func buildSVGs(_ block: ((String)->Void)? = nil) {
         var svgDataDic = [String : [String : Any]]()
         
         parts.forEach { (bodyPart, structure) in
@@ -246,7 +252,7 @@ class CharacterHTMLBuilder {
         }
         
         //Generate html with contextPoseData.
-        generateHTLM(for: contextPoseData, contextSize: CGSize(width: Double(contextWidth)!, height: Double(contextHeight)!))
+        generateHTLM(for: contextPoseData, contextSize: CGSize(width: Double(contextWidth)!, height: Double(contextHeight)!), block: block)
         
     }
     
@@ -343,7 +349,7 @@ class CharacterHTMLBuilder {
     }
     
     //Generate html from structured json.
-    private func generateHTLM(for poseData: [String : [String : Any]], contextSize: CGSize) {
+    private func generateHTLM(for poseData: [String : [String : Any]], contextSize: CGSize, block: ((String)->Void)? = nil) {
         
         let htmlHeadStyle = "<!DOCTYPE html><html><head><title>test</title><style type=\"text/css\">*{margin:0;pading:0;border:0;} html, body{height:100%;} body{background-color: transparent !important;} div#canvas{position: relative;margin:0 auto;width:\(contextSize.width)px;height:\(contextSize.height)px;border:0px solid lightpink;overflow: hidden;} object{position: absolute;width: 100%;transform-origin: top left;}</style></head>"
         
@@ -371,8 +377,13 @@ class CharacterHTMLBuilder {
         
         self.charHTMLString = completeHtml
         //call result block
-        resultBlock(completeHtml)
-        
+        DispatchQueue.main.async {
+            if let block = block {
+                block(completeHtml)
+            } else{
+                self.resultBlock(completeHtml)
+            }
+        }
     }
     
     
@@ -423,7 +434,7 @@ extension CharacterHTMLBuilder {
     func getContexts() {
         CharBuilderAPI.shared.get_Context_json { contexts in
             self.contextJson = contexts[self.wantedContext]!
-            self.generateHtml(with: self.defaultChoices)
+            self.buildStart(with: self.defaultChoices)
         }
     }
 

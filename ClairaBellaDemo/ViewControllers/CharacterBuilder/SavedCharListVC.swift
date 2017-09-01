@@ -14,7 +14,8 @@ class SavedCharListVC: UIViewController {
     @IBOutlet var carouselView: iCarousel!
     @IBOutlet var emptyCharactersView: UIView!
     @IBOutlet var horizontalConstraints: [NSLayoutConstraint]?
-   
+    @IBOutlet var indicatorView: IndicatorView!
+    
     var savedChars = [Character]()
     var charGenerator: CharacterHTMLBuilder! {
         didSet {
@@ -22,7 +23,9 @@ class SavedCharListVC: UIViewController {
         }
     }
     
-    var currentCharIndex = 0
+    var currentCharIndex : Int {
+        return carouselView.currentItemIndex
+    }
     
     func setCharGeneratorResultBlock() {
         charGenerator.resultBlock = { [weak self] htmlString in
@@ -37,8 +40,22 @@ class SavedCharListVC: UIViewController {
         updateConstraints()
         setUI()
         charGenerator = CharacterHTMLBuilder.defaultBuilder()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.newCharacterAdded(_:)), name: NSNotification.Name(rawValue: "NewCharacterAddedNotification"), object: nil)
     }
     
+    func newCharacterAdded(_ nf: Notification) {
+        if let newChar = nf.userInfo?["NewChar"] as? Character {
+            savedChars.append(newChar)
+            showHideEmptyItemsView()
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setCharGeneratorResultBlock()
+        carouselView.reloadData()
+    }
 
     func setUI() {
         let carouselViewHeight = 275 * widthRatio
@@ -88,7 +105,19 @@ extension SavedCharListVC {
 
     @IBAction func deleteChar_btnClicked(_ sender: UIButton) {
         let char = savedChars[currentCharIndex]
-        self.deleteCharacter(char: char)
+        
+        func showAlert() {
+            let alert = UIAlertController(title: "", message: "Are you sure you want to delete this character ?", preferredStyle: .alert)
+            let yesAction = UIAlertAction(title: "Yes", style: .default) { (action) in
+                self.deleteCharacter(char: char)
+            }
+            let noAction = UIAlertAction(title: "No", style: .cancel, handler: nil)
+            alert.addAction(noAction)
+            alert.addAction(yesAction)
+            self.present(alert, animated: true, completion: nil)
+        }
+        
+        showAlert()
     }
     
     @IBAction func editChar_btnClicked(_ sender: UIButton) {
@@ -109,7 +138,7 @@ extension SavedCharListVC {
 //MARK:- TableView DataSource and Delegate
 extension SavedCharListVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return savedChars.isEmpty ? 0 : 3
     }
     
     
@@ -170,53 +199,86 @@ extension SavedCharListVC : iCarouselDelegate, iCarouselDataSource {
         return value //
     }
     
-    func carousel(_ carousel: iCarousel, didSelectItemAt index: Int) {
-        currentCharIndex = index
-    }
 }
 
 //MARK:- API Calls
 extension SavedCharListVC {
     func deleteCharacter(char: Character) {
+        indicatorView.startAnimating()
         APICall.shared.deleteCharacter_APICall(createdDate: char.createdDate) { (response, success) in
+            self.indicatorView.stopAnimating()
             if success {
-               if let index =  self.savedChars.index(where: { (ch) -> Bool in
+                if let index =  self.savedChars.index(where: { (ch) -> Bool in
                     return char.createdDate == ch.createdDate
-               }) {
-                self.savedChars.remove(at: index)
-                DispatchQueue.main.async {
+                }) {
+                    self.savedChars.remove(at: index)
                     self.carouselView.reloadData()
+                    self.showHideEmptyItemsView()
                 }
             }
         }
     }
-    }
     
     func getSavedChars() {
+        self.indicatorView.startAnimating()
         APICall.shared.getSavedCharaters_APICall(username: "test@test.com") { (response, success) in
             if success {
                 print(response!)
                 if let jsonArr = response as? [[String : Any]] {
-                    self.savedChars = jsonArr.map({ (json) -> Character in
+                    let charters = jsonArr.map({ (json) -> Character in
                         let choice = json["choices"] as! [String : String]
                         let character = Character()
                         character.choices = choice
                         character.createdDate = json["date_created"] as! String
                         character.name = json["saved_name"] as! String
+                        if let meta = json["meta"] as? [String : Any] {
+                            character.alive = meta["alive"] as! Bool
+                        }
                         return character
                     })
                     
+                    self.savedChars = charters.filter({$0.alive})
                     DispatchQueue.main.async {
                         self.carouselView.reloadData()
+                        self.showHideEmptyItemsView()
                     }
                 }
                 
             } else {
                 
             }
+            DispatchQueue.main.async {
+                self.indicatorView.stopAnimating()
+            }
         }
     }
     
-
+    func showHideEmptyItemsView() {
+        let noSavedItems = self.savedChars.isEmpty
+        self.tableView.isHidden = noSavedItems
+        self.emptyCharactersView.isHidden = !noSavedItems
+        self.tableView.reloadData()
+    }
 }
 
+
+
+class IndicatorView: UIView {
+    @IBOutlet var indicator: UIActivityIndicatorView!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        self.layer.cornerRadius = 5
+        self.clipsToBounds = true
+        self.isHidden = true
+    }
+    func startAnimating() {
+        self.isHidden = false
+        indicator.startAnimating()
+    }
+    
+    func stopAnimating() {
+        self.isHidden = true
+        indicator.stopAnimating()
+    }
+}

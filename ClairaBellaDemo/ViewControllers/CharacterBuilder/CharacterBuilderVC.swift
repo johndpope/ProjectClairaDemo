@@ -15,6 +15,7 @@ class CharacterBuilderVC: UIViewController {
     @IBOutlet var webView: UIWebView!
     @IBOutlet var tableView: UITableView!
     @IBOutlet var horizontalConstraints: [NSLayoutConstraint]?
+    @IBOutlet var btnSave: UIButton!
     
     var interfaceMenus = [ChoiceMenu]()
         
@@ -34,19 +35,26 @@ class CharacterBuilderVC: UIViewController {
         super.viewDidLoad()
         updateConstraints()
         webView.scrollView.setZoomScale(1.1, animated: false)
+        btnSave.isHidden = true
         
-        //charGenerator = CharacterHTMLBuilder.defaultBuilder()
-        
+
+        if !isCharacterEditMode {
+            character = Character()
+            character.choices = charGenerator.defaultChoices
+            charGenerator.upateCharacter(choices: character.choices)
+        }
         CharBuilderAPI.shared.getInterface_json { menus in
             self.interfaceMenus = menus
             DispatchQueue.main.async {
                 self.tableView.reloadData()
+                self.btnSave.isHidden = false
             }
         }
 
         if let charHtml = character?.charHtml {
             webView.loadHTMLString(charHtml, baseURL: nil)
             charGenerator.defaultChoices = character!.choices
+            btnSave.isHidden = false
         }
     }
     
@@ -87,13 +95,12 @@ class CharacterBuilderVC: UIViewController {
     
     @IBAction func btnCancel_clicked(_ sender: UIButton) {
         
-        self.tabBarController?.selectedIndex = 0
         
         let otherAlert = UIAlertController(title: "Exit Character Builder", message: "Exit & discard unsaved changes? ", preferredStyle: UIAlertControllerStyle.alert)
         
         
         let callFunction = UIAlertAction(title: "YES", style: .default, handler: {alert in
-            self.dismiss(animated: true, completion: nil)
+            self.navigationController?.popViewController(animated: true)
         } )
         
         let dismiss = UIAlertAction(title: "NO", style: .cancel, handler: nil)
@@ -107,14 +114,14 @@ class CharacterBuilderVC: UIViewController {
     
     
     @IBAction func saveCharacter_btnClicked(_ sender: UIButton) {
+        guard let _ = character.charHtml else {
+            return
+        }
         if let  savCharVC = self.storyboard?.instantiateViewController(withIdentifier: "SaveCharacterVC") as? SaveCharacterVC {
             if isCharacterEditMode {
                 savCharVC.character = self.character
                 
             } else {
-                let character =   Character()
-                character.choices = self.charGenerator.defaultChoices
-                character.charHtml = self.charGenerator.charHTMLString
                 savCharVC.character  = character
 
             }

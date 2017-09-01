@@ -10,7 +10,7 @@ import UIKit
 
 class SaveCharacterVC: UIViewController,UITextFieldDelegate {
     @IBOutlet var horizontalConstraints: [NSLayoutConstraint]?
-    @IBOutlet var indicator: UIActivityIndicatorView!
+    @IBOutlet var indicator: IndicatorView!
     
     @IBOutlet var Character_Imageview: UIImageView!
     @IBOutlet var name_textfield: UITextField!
@@ -47,18 +47,22 @@ class SaveCharacterVC: UIViewController,UITextFieldDelegate {
         name_textfield.contentVerticalAlignment = .center
         
     }
-    override func viewDidAppear(_ animated: Bool) {
-        
-    }
+
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool // called when 'return' key pressed. return false to ignore.
     {
         name_textfield.resignFirstResponder()
         return true
     }
     func textFieldDidBeginEditing(_ textField: UITextField) {    //delegate method
-        name_textfield.text = ""
+        //name_textfield.text = ""
        // right_arrowImage.isHidden = true
         save_btn.isHidden = true
+    }
+    
+    @IBAction func textFieldDidChangeText(_ sender: UITextField) {
+        character.name = sender.text!
+        save_btn.isHidden = character.name.isEmpty
     }
     
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {  //delegate method
@@ -69,12 +73,14 @@ class SaveCharacterVC: UIViewController,UITextFieldDelegate {
         }
         return true
     }
+    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         guard let text = textField.text else { return true }
         let newLength = text.characters.count + string.characters.count - range.length
         character.name = text
         return newLength <= 10 // Bool
     }
+    
     
     func keyboardWillShow(_ notification: Notification) {
         if ((notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue) != nil {
@@ -121,13 +127,7 @@ class SaveCharacterVC: UIViewController,UITextFieldDelegate {
         func showAlert(message: String, isCharacterSaved: Bool = false) {
             let alertController = UIAlertController(title: message, message: "", preferredStyle: .alert)
             
-            let OKAction = UIAlertAction(title: "OK", style: .default, handler: {
-                alert -> Void in
-                if isCharacterSaved {
-                    self.navigationController?.popViewController(animated: true)
-                }
-                
-            })
+            let OKAction = UIAlertAction(title: "OK", style: .default, handler: nil)
             alertController.addAction(OKAction)
             
             self.present(alertController, animated: true, completion: nil)
@@ -143,23 +143,8 @@ class SaveCharacterVC: UIViewController,UITextFieldDelegate {
        
     }
     
-    
+
     func saveCharacterAPICAll() {
-        
-        func showAlert(message: String) {
-            let alertController = UIAlertController(title: message, message: "", preferredStyle: .alert)
-            
-            let OKAction = UIAlertAction(title: "OK", style: .default, handler: {
-                alert -> Void in
-                    _ = self.navigationController?.popViewController(animated: true)
-                
-            })
-            alertController.addAction(OKAction)
-            
-            self.present(alertController, animated: true, completion: nil)
-            
-        }
-        
         indicator.startAnimating()
 
         let params = ["choices" : character.choices,
@@ -169,29 +154,16 @@ class SaveCharacterVC: UIViewController,UITextFieldDelegate {
         APICall.shared.createNewCharacter_APICall(json: params) { (response, success) in
             self.indicator.stopAnimating()
             if success {
-                showAlert(message: "Character saved successfully.")
+                self.showAlert(message: "Character saved successfully.")
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "NewCharacterAddedNotification"), object: nil, userInfo: ["NewChar" : self.character])
             } else {
-                showAlert(message: "Something went wrong.")
+                self.showAlert(message: "Something went wrong.")
             }
         }
     }
     
 
     func updateCharacterAPICall() {
-        func showAlert(message: String) {
-            let alertController = UIAlertController(title: message, message: "", preferredStyle: .alert)
-            
-            let OKAction = UIAlertAction(title: "OK", style: .default, handler: {
-                alert -> Void in
-                _ = self.navigationController?.popViewController(animated: true)
-                
-            })
-            alertController.addAction(OKAction)
-            
-            self.present(alertController, animated: true, completion: nil)
-            
-        }
-        
         indicator.startAnimating()
         
         let params = ["choices" : character.choices,
@@ -200,15 +172,31 @@ class SaveCharacterVC: UIViewController,UITextFieldDelegate {
                       ] as [String : Any]
         
         APICall.shared.updateCharacter_APICall(params: params, createdDate: character.createdDate) { (json, success) in
+            self.indicator.stopAnimating()
             if success {
-                showAlert(message: "Character updated successfully.")
+                self.showAlert(message: "Character updated successfully.")
             } else {
-                showAlert(message: "Something went wrong.")
+                self.showAlert(message: "Something went wrong.")
             }
 
         }
 
     }
+    
+    func showAlert(message: String) {
+        let alertController = UIAlertController(title: message, message: "", preferredStyle: .alert)
+        
+        let OKAction = UIAlertAction(title: "OK", style: .default, handler: {
+            alert -> Void in
+            _ = self.navigationController?.popToRootViewController(animated: true)
+            
+        })
+        alertController.addAction(OKAction)
+        
+        self.present(alertController, animated: true, completion: nil)
+        
+    }
+
 func getCurrentTimeStampWOMiliseconds(dateToConvert: NSDate) -> String {
     let objDateformat: DateFormatter = DateFormatter()
     objDateformat.dateFormat = "yyyy-MM-dd HH:mm:ss"
