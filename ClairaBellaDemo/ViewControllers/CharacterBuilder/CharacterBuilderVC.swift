@@ -18,7 +18,10 @@ class CharacterBuilderVC: UIViewController {
     @IBOutlet var btnSave: UIButton!
     
     var interfaceMenus = [ChoiceMenu]()
-        
+    
+    // save character before edit start. Used for restore character's original state while user cancel editing.
+    //This variable is only used during character editing.
+    var copyedCharacter: Character!
 
     var optionsList = [CharacterChoice]()
     
@@ -42,7 +45,10 @@ class CharacterBuilderVC: UIViewController {
             character = Character()
             character.choices = charGenerator.defaultChoices
             charGenerator.upateCharacter(choices: character.choices)
+        } else {
+            copyedCharacter = character.copy() as! Character
         }
+        
         CharBuilderAPI.shared.getInterface_json { menus in
             self.interfaceMenus = menus
             DispatchQueue.main.async {
@@ -53,7 +59,6 @@ class CharacterBuilderVC: UIViewController {
 
         if let charHtml = character?.charHtml {
             webView.loadHTMLString(charHtml, baseURL: nil)
-            charGenerator.defaultChoices = character!.choices
             btnSave.isHidden = false
         }
     }
@@ -72,10 +77,6 @@ class CharacterBuilderVC: UIViewController {
     func setCharGeneratorResultBlock() {
         charGenerator.resultBlock = { [weak self] htmlString in
             
-            if !self!.isCharacterEditMode && self?.character == nil {
-                self?.character =   Character()
-                self?.character.choices = self!.charGenerator.defaultChoices
-            }
             self?.character.charHtml = htmlString
             DispatchQueue.main.async {
                 self?.webView.loadHTMLString(htmlString, baseURL: nil)
@@ -84,15 +85,14 @@ class CharacterBuilderVC: UIViewController {
         
     }
     
-    //MARK: TableViewDelegate and DataSource
-    
-    
     func reloadInterfaceMenus() {
         optionsList.removeAll()
         tableView.reloadData()
     }
-    
-    
+}
+
+//MARK:- IBActions
+extension CharacterBuilderVC {
     @IBAction func btnCancel_clicked(_ sender: UIButton) {
         
         
@@ -100,7 +100,10 @@ class CharacterBuilderVC: UIViewController {
         
         
         let callFunction = UIAlertAction(title: "YES", style: .default, handler: {alert in
-            self.navigationController?.popViewController(animated: true)
+            if self.isCharacterEditMode {
+                self.character = self.copyedCharacter
+            }
+            _ = self.navigationController?.popViewController(animated: true)
         } )
         
         let dismiss = UIAlertAction(title: "NO", style: .cancel, handler: nil)
@@ -123,14 +126,16 @@ class CharacterBuilderVC: UIViewController {
                 
             } else {
                 savCharVC.character  = character
-
+                
             }
             savCharVC.isCharacterEditMode = self.isCharacterEditMode
             self.navigationController?.pushViewController(savCharVC, animated: true)
         }
     }
+
 }
 
+//MARK:- TableViewDelegate and DataSource
 extension CharacterBuilderVC : UITableViewDelegate, UITableViewDataSource {
     
     func sectionCount(in choice:CharacterChoice)-> Int {

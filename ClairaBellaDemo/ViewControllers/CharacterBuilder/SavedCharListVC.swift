@@ -262,7 +262,7 @@ extension SavedCharListVC {
 }
 
 
-
+//MARK:- IndicatorView
 class IndicatorView: UIView {
     @IBOutlet var indicator: UIActivityIndicatorView!
     

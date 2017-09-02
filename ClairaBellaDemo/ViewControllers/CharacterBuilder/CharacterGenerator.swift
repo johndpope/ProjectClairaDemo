@@ -8,12 +8,22 @@
 
 import UIKit
 
-class Character {
+class Character: NSCopying {
     var name = ""
     var choices = [String : String]()
     var charHtml: String?
     var createdDate = ""
     var alive = false
+    
+    func copy(with zone: NSZone? = nil) -> Any {
+        let copy = Character()
+        copy.name = self.name
+        copy.choices = self.choices
+        copy.charHtml = self.charHtml
+        copy.createdDate = self.createdDate
+        copy.alive = self.alive
+        return copy
+    }
 }
 
 class CharacterHTMLBuilder {
