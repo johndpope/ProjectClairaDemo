@@ -188,8 +188,7 @@ class SaveCharacterVC: UIViewController,UITextFieldDelegate {
         
         let OKAction = UIAlertAction(title: "OK", style: .default, handler: {
             alert -> Void in
-            _ = self.navigationController?.popToRootViewController(animated: true)
-            
+            _ = self.navigationController?.dismiss(animated: true, completion: nil)
         })
         alertController.addAction(OKAction)
         

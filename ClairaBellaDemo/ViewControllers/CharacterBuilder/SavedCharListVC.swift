@@ -39,7 +39,7 @@ class SavedCharListVC: UIViewController {
         super.viewDidLoad()
         updateConstraints()
         setUI()
-        charGenerator = CharacterHTMLBuilder.defaultBuilder()
+        charGenerator = CharacterHTMLBuilder.shared
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.newCharacterAdded(_:)), name: NSNotification.Name(rawValue: "NewCharacterAddedNotification"), object: nil)
     }
@@ -78,13 +78,13 @@ class SavedCharListVC: UIViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "NewCharVCSegue" {
-            let dest = segue.destination as! CharacterBuilderVC
-            if let char = sender as? Character {
-                dest.character = char
-                dest.isCharacterEditMode = true
-                
+            let dest = segue.destination as! UINavigationController
+            if let buildVC = dest.viewControllers.first as? CharacterBuilderVC {
+                if let char = sender as? Character {
+                    buildVC.character = char
+                    buildVC.isCharacterEditMode = true
+                }
             }
-            dest.charGenerator = charGenerator
 
         } else if segue.identifier == "updateCharSegue" {
             let dest = segue.destination as! SaveCharacterVC

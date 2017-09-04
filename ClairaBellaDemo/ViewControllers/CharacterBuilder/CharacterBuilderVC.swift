@@ -40,6 +40,7 @@ class CharacterBuilderVC: UIViewController {
         webView.scrollView.setZoomScale(1.1, animated: false)
         btnSave.isHidden = true
         
+        charGenerator = CharacterHTMLBuilder.shared
 
         if !isCharacterEditMode {
             character = Character()
@@ -103,7 +104,7 @@ extension CharacterBuilderVC {
             if self.isCharacterEditMode {
                 self.character = self.copyedCharacter
             }
-            _ = self.navigationController?.popViewController(animated: true)
+            _ = self.navigationController?.dismiss(animated: true, completion: nil)
         } )
         
         let dismiss = UIAlertAction(title: "NO", style: .cancel, handler: nil)

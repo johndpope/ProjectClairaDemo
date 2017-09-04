@@ -206,6 +206,7 @@
 		79183D5D1F55100000A00D50 /* CharacterBuilderVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79183D5B1F55100000A00D50 /* CharacterBuilderVC.swift */; };
 		79183D601F55102900A00D50 /* APICalls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79183D5F1F55102900A00D50 /* APICalls.swift */; };
 		79183D631F5514B600A00D50 /* SaveCharacterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79183D621F5514B600A00D50 /* SaveCharacterVC.swift */; };
+		7922C2FD1F5DAAE3007F5D25 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7922C2FC1F5DAAE3007F5D25 /* HomeVC.swift */; };
 		795421631F460DE500DBBBE0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795421621F460DE500DBBBE0 /* AppDelegate.swift */; };
 		795421681F460DE500DBBBE0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 795421661F460DE500DBBBE0 /* Main.storyboard */; };
 		7954216D1F460DE500DBBBE0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7954216B1F460DE500DBBBE0 /* LaunchScreen.storyboard */; };
@@ -414,6 +415,7 @@
 		79183D5B1F55100000A00D50 /* CharacterBuilderVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharacterBuilderVC.swift; sourceTree = "<group>"; };
 		79183D5F1F55102900A00D50 /* APICalls.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APICalls.swift; sourceTree = "<group>"; };
 		79183D621F5514B600A00D50 /* SaveCharacterVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaveCharacterVC.swift; sourceTree = "<group>"; };
+		7922C2FC1F5DAAE3007F5D25 /* HomeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		7954215F1F460DE500DBBBE0 /* ClairaBellaDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ClairaBellaDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		795421621F460DE500DBBBE0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		795421671F460DE500DBBBE0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -684,6 +686,7 @@
 		79183D581F550FFF00A00D50 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				7922C2FB1F5DAAAB007F5D25 /* HomeVC */,
 				79183D591F550FFF00A00D50 /* CharacterBuilder */,
 			);
 			path = ViewControllers;
@@ -716,6 +719,14 @@
 				7954216B1F460DE500DBBBE0 /* LaunchScreen.storyboard */,
 			);
 			name = Storyboards;
+			sourceTree = "<group>";
+		};
+		7922C2FB1F5DAAAB007F5D25 /* HomeVC */ = {
+			isa = PBXGroup;
+			children = (
+				7922C2FC1F5DAAE3007F5D25 /* HomeVC.swift */,
+			);
+			path = HomeVC;
 			sourceTree = "<group>";
 		};
 		795421561F460DE500DBBBE0 = {
@@ -1068,6 +1079,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				79183D5C1F55100000A00D50 /* CharacterGenerator.swift in Sources */,
+				7922C2FD1F5DAAE3007F5D25 /* HomeVC.swift in Sources */,
 				795421631F460DE500DBBBE0 /* AppDelegate.swift in Sources */,
 				79183D601F55102900A00D50 /* APICalls.swift in Sources */,
 				79183D631F5514B600A00D50 /* SaveCharacterVC.swift in Sources */,

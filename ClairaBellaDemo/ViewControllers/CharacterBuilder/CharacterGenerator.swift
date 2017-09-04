@@ -28,6 +28,8 @@ class Character: NSCopying {
 
 class CharacterHTMLBuilder {
     
+    static let shared = CharacterHTMLBuilder()
+    
     var defaultChoices = [String : String]()
     var charHTMLString: String?
     var charName = ""
@@ -40,11 +42,6 @@ class CharacterHTMLBuilder {
     
     var resultBlock: (String)->Void = {_ in}
 
-    class func defaultBuilder()->CharacterHTMLBuilder {
-        let builder = CharacterHTMLBuilder()
-        builder.loadBuildData()
-        return builder
-    }
     
     func upateCharacter(choices: [String : String]) {
         buildCharHTMLWith(choices: choices, block: nil)
@@ -66,7 +63,7 @@ class CharacterHTMLBuilder {
 
     }
     
-    private func loadBuildData() {
+    func loadBuildData() {
         self.getDefaultChoices()
     }
     
