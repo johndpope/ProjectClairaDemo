@@ -207,6 +207,9 @@
 		79183D601F55102900A00D50 /* APICalls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79183D5F1F55102900A00D50 /* APICalls.swift */; };
 		79183D631F5514B600A00D50 /* SaveCharacterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79183D621F5514B600A00D50 /* SaveCharacterVC.swift */; };
 		7922C2FD1F5DAAE3007F5D25 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7922C2FC1F5DAAE3007F5D25 /* HomeVC.swift */; };
+		7922C3001F5DC98A007F5D25 /* CoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7922C2FF1F5DC98A007F5D25 /* CoreDataHandler.swift */; };
+		7922C3031F5DCA91007F5D25 /* ClairaBella.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7922C3011F5DCA91007F5D25 /* ClairaBella.xcdatamodeld */; };
+		7922C3071F5DD3E0007F5D25 /* WalkThrough.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7922C3051F5DD3E0007F5D25 /* WalkThrough.storyboard */; };
 		795421631F460DE500DBBBE0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795421621F460DE500DBBBE0 /* AppDelegate.swift */; };
 		795421681F460DE500DBBBE0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 795421661F460DE500DBBBE0 /* Main.storyboard */; };
 		7954216D1F460DE500DBBBE0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7954216B1F460DE500DBBBE0 /* LaunchScreen.storyboard */; };
@@ -416,6 +419,9 @@
 		79183D5F1F55102900A00D50 /* APICalls.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APICalls.swift; sourceTree = "<group>"; };
 		79183D621F5514B600A00D50 /* SaveCharacterVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaveCharacterVC.swift; sourceTree = "<group>"; };
 		7922C2FC1F5DAAE3007F5D25 /* HomeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
+		7922C2FF1F5DC98A007F5D25 /* CoreDataHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataHandler.swift; sourceTree = "<group>"; };
+		7922C3021F5DCA91007F5D25 /* ClairaBella.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ClairaBella.xcdatamodel; sourceTree = "<group>"; };
+		7922C3061F5DD3E0007F5D25 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/WalkThrough.storyboard; sourceTree = "<group>"; };
 		7954215F1F460DE500DBBBE0 /* ClairaBellaDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ClairaBellaDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		795421621F460DE500DBBBE0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		795421671F460DE500DBBBE0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -717,6 +723,7 @@
 			children = (
 				795421661F460DE500DBBBE0 /* Main.storyboard */,
 				7954216B1F460DE500DBBBE0 /* LaunchScreen.storyboard */,
+				7922C3051F5DD3E0007F5D25 /* WalkThrough.storyboard */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -727,6 +734,23 @@
 				7922C2FC1F5DAAE3007F5D25 /* HomeVC.swift */,
 			);
 			path = HomeVC;
+			sourceTree = "<group>";
+		};
+		7922C2FE1F5DC98A007F5D25 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				7922C2FF1F5DC98A007F5D25 /* CoreDataHandler.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		7922C3041F5DCA9F007F5D25 /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				7954216E1F460DE500DBBBE0 /* Info.plist */,
+				7922C3011F5DCA91007F5D25 /* ClairaBella.xcdatamodeld */,
+			);
+			name = SupportingFiles;
 			sourceTree = "<group>";
 		};
 		795421561F460DE500DBBBE0 = {
@@ -750,13 +774,14 @@
 		795421611F460DE500DBBBE0 /* ClairaBellaDemo */ = {
 			isa = PBXGroup;
 			children = (
+				7922C2FE1F5DC98A007F5D25 /* CoreData */,
 				795421621F460DE500DBBBE0 /* AppDelegate.swift */,
 				79183D581F550FFF00A00D50 /* ViewControllers */,
 				79183BD81F550FF500A00D50 /* Images */,
 				79183B791F550F2800A00D50 /* Assets.xcassets */,
 				79183D5E1F55102900A00D50 /* APICalls */,
 				79183D611F55103800A00D50 /* Storyboards */,
-				7954216E1F460DE500DBBBE0 /* Info.plist */,
+				7922C3041F5DCA9F007F5D25 /* SupportingFiles */,
 				132605D41F4AA632003B6BFC /* result.html */,
 			);
 			path = ClairaBellaDemo;
@@ -834,6 +859,7 @@
 				79183D3C1F550FF600A00D50 /* background_london_linear_1.jpg in Resources */,
 				79183D4F1F550FF600A00D50 /* background_shopping.jpg in Resources */,
 				79183CAB1F550FF600A00D50 /* BP001_BT002_OA030_BV007.svg in Resources */,
+				7922C3071F5DD3E0007F5D25 /* WalkThrough.storyboard in Resources */,
 				79183CCB1F550FF600A00D50 /* BP004_BT002_OA000_BV000.svg in Resources */,
 				79183CC11F550FF600A00D50 /* BP002_BT002_OA030_BV009.svg in Resources */,
 				79183D4D1F550FF600A00D50 /* background_rose.jpg in Resources */,
@@ -1079,12 +1105,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				79183D5C1F55100000A00D50 /* CharacterGenerator.swift in Sources */,
+				7922C3001F5DC98A007F5D25 /* CoreDataHandler.swift in Sources */,
 				7922C2FD1F5DAAE3007F5D25 /* HomeVC.swift in Sources */,
 				795421631F460DE500DBBBE0 /* AppDelegate.swift in Sources */,
 				79183D601F55102900A00D50 /* APICalls.swift in Sources */,
 				79183D631F5514B600A00D50 /* SaveCharacterVC.swift in Sources */,
 				79DAB6A81F571CA00019C37D /* SavedCharListVC.swift in Sources */,
 				1332FBD41F57ECA6003E3217 /* CarouselItemView.swift in Sources */,
+				7922C3031F5DCA91007F5D25 /* ClairaBella.xcdatamodeld in Sources */,
 				79183D5D1F55100000A00D50 /* CharacterBuilderVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1092,6 +1120,14 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		7922C3051F5DD3E0007F5D25 /* WalkThrough.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7922C3061F5DD3E0007F5D25 /* Base */,
+			);
+			name = WalkThrough.storyboard;
+			sourceTree = "<group>";
+		};
 		795421661F460DE500DBBBE0 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1252,6 +1288,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		7922C3011F5DCA91007F5D25 /* ClairaBella.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				7922C3021F5DCA91007F5D25 /* ClairaBella.xcdatamodel */,
+			);
+			currentVersion = 7922C3021F5DCA91007F5D25 /* ClairaBella.xcdatamodel */;
+			path = ClairaBella.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 795421571F460DE500DBBBE0 /* Project object */;
 }
