@@ -9,11 +9,10 @@
 import UIKit
 import iCarousel
 
-class SavedCharListVC: UIViewController {
+class SavedCharListVC: ParentVC {
     @IBOutlet var tableView: UITableView!
     @IBOutlet var carouselView: iCarousel!
     @IBOutlet var emptyCharactersView: UIView!
-    @IBOutlet var horizontalConstraints: [NSLayoutConstraint]?
     @IBOutlet var indicatorView: IndicatorView!
     
     var savedChars = [Character]()
@@ -37,7 +36,6 @@ class SavedCharListVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        updateConstraints()
         setUI()
         charGenerator = CharacterHTMLBuilder.shared
         
@@ -66,15 +64,6 @@ class SavedCharListVC: UIViewController {
         
     }
     
-    func updateConstraints() {
-        if let horizontalConstraints = horizontalConstraints {
-            for constraint in horizontalConstraints {
-                let v1 = constraint.constant
-                let v2 = v1 * widthRatio
-                constraint.constant = v2
-            }
-        }
-    }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "NewCharVCSegue" {

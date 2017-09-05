@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		131C3EE11F5E687E00ECD3A0 /* ParentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 131C3EE01F5E687E00ECD3A0 /* ParentVC.swift */; };
 		132605D51F4AA632003B6BFC /* result.html in Resources */ = {isa = PBXBuildFile; fileRef = 132605D41F4AA632003B6BFC /* result.html */; };
 		1332FBD21F57EC94003E3217 /* CarouselItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1332FBD11F57EC94003E3217 /* CarouselItemView.xib */; };
 		1332FBD41F57ECA6003E3217 /* CarouselItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1332FBD31F57ECA6003E3217 /* CarouselItemView.swift */; };
@@ -217,6 +218,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		131C3EE01F5E687E00ECD3A0 /* ParentVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParentVC.swift; sourceTree = "<group>"; };
 		132605D41F4AA632003B6BFC /* result.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = result.html; sourceTree = "<group>"; };
 		1332FBD11F57EC94003E3217 /* CarouselItemView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CarouselItemView.xib; sourceTree = "<group>"; };
 		1332FBD31F57ECA6003E3217 /* CarouselItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarouselItemView.swift; sourceTree = "<group>"; };
@@ -442,6 +444,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		131C3EDF1F5E685B00ECD3A0 /* ParentVC */ = {
+			isa = PBXGroup;
+			children = (
+				131C3EE01F5E687E00ECD3A0 /* ParentVC.swift */,
+			);
+			path = ParentVC;
+			sourceTree = "<group>";
+		};
 		1332FBD01F57EC86003E3217 /* CarouselView */ = {
 			isa = PBXGroup;
 			children = (
@@ -692,6 +702,7 @@
 		79183D581F550FFF00A00D50 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				131C3EDF1F5E685B00ECD3A0 /* ParentVC */,
 				7922C2FB1F5DAAAB007F5D25 /* HomeVC */,
 				79183D591F550FFF00A00D50 /* CharacterBuilder */,
 			);
@@ -1107,6 +1118,7 @@
 				79183D5C1F55100000A00D50 /* CharacterGenerator.swift in Sources */,
 				7922C3001F5DC98A007F5D25 /* CoreDataHandler.swift in Sources */,
 				7922C2FD1F5DAAE3007F5D25 /* HomeVC.swift in Sources */,
+				131C3EE11F5E687E00ECD3A0 /* ParentVC.swift in Sources */,
 				795421631F460DE500DBBBE0 /* AppDelegate.swift in Sources */,
 				79183D601F55102900A00D50 /* APICalls.swift in Sources */,
 				79183D631F5514B600A00D50 /* SaveCharacterVC.swift in Sources */,

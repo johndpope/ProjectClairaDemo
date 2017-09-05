@@ -8,13 +8,11 @@
 
 import UIKit
 
-let widthRatio = UIScreen.main.bounds.width/375
 
-class CharacterBuilderVC: UIViewController {
+class CharacterBuilderVC: ParentVC {
     
     @IBOutlet var webView: UIWebView!
     @IBOutlet var tableView: UITableView!
-    @IBOutlet var horizontalConstraints: [NSLayoutConstraint]?
     @IBOutlet var btnSave: UIButton!
     
     var interfaceMenus = [ChoiceMenu]()
@@ -36,8 +34,7 @@ class CharacterBuilderVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        updateConstraints()
-        webView.scrollView.setZoomScale(1.1, animated: false)
+        webView.scrollView.setZoomScale(1.05, animated: false)
         btnSave.isHidden = true
         
         charGenerator = CharacterHTMLBuilder.shared
@@ -64,16 +61,6 @@ class CharacterBuilderVC: UIViewController {
         }
     }
     
-    
-    func updateConstraints() {
-        if let horizontalConstraints = horizontalConstraints {
-            for constraint in horizontalConstraints {
-                let v1 = constraint.constant
-                let v2 = v1 * widthRatio
-                constraint.constant = v2
-            }
-        }
-    }
     
     func setCharGeneratorResultBlock() {
         charGenerator.resultBlock = { [weak self] htmlString in

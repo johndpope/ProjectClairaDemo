@@ -8,8 +8,7 @@
 
 import UIKit
 
-class SaveCharacterVC: UIViewController,UITextFieldDelegate {
-    @IBOutlet var horizontalConstraints: [NSLayoutConstraint]?
+class SaveCharacterVC: ParentVC, UITextFieldDelegate {
     @IBOutlet var indicator: IndicatorView!
     
     @IBOutlet var Character_Imageview: UIImageView!
