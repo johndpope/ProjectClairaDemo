@@ -207,6 +207,9 @@
 		79183D5D1F55100000A00D50 /* CharacterBuilderVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79183D5B1F55100000A00D50 /* CharacterBuilderVC.swift */; };
 		79183D601F55102900A00D50 /* APICalls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79183D5F1F55102900A00D50 /* APICalls.swift */; };
 		79183D631F5514B600A00D50 /* SaveCharacterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79183D621F5514B600A00D50 /* SaveCharacterVC.swift */; };
+		792294411F5F09DB004845DE /* SetupKeyBoardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792294401F5F09DB004845DE /* SetupKeyBoardVC.swift */; };
+		792294431F5F0A17004845DE /* EmojiesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792294421F5F0A17004845DE /* EmojiesVC.swift */; };
+		792294461F5F0BDD004845DE /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792294451F5F0BDD004845DE /* Constant.swift */; };
 		7922C2FD1F5DAAE3007F5D25 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7922C2FC1F5DAAE3007F5D25 /* HomeVC.swift */; };
 		7922C3001F5DC98A007F5D25 /* CoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7922C2FF1F5DC98A007F5D25 /* CoreDataHandler.swift */; };
 		7922C3031F5DCA91007F5D25 /* ClairaBella.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7922C3011F5DCA91007F5D25 /* ClairaBella.xcdatamodeld */; };
@@ -420,6 +423,9 @@
 		79183D5B1F55100000A00D50 /* CharacterBuilderVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharacterBuilderVC.swift; sourceTree = "<group>"; };
 		79183D5F1F55102900A00D50 /* APICalls.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APICalls.swift; sourceTree = "<group>"; };
 		79183D621F5514B600A00D50 /* SaveCharacterVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaveCharacterVC.swift; sourceTree = "<group>"; };
+		792294401F5F09DB004845DE /* SetupKeyBoardVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetupKeyBoardVC.swift; sourceTree = "<group>"; };
+		792294421F5F0A17004845DE /* EmojiesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiesVC.swift; sourceTree = "<group>"; };
+		792294451F5F0BDD004845DE /* Constant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		7922C2FC1F5DAAE3007F5D25 /* HomeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		7922C2FF1F5DC98A007F5D25 /* CoreDataHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataHandler.swift; sourceTree = "<group>"; };
 		7922C3021F5DCA91007F5D25 /* ClairaBella.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ClairaBella.xcdatamodel; sourceTree = "<group>"; };
@@ -702,6 +708,7 @@
 		79183D581F550FFF00A00D50 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				7922943F1F5F093D004845DE /* EmojisVC */,
 				131C3EDF1F5E685B00ECD3A0 /* ParentVC */,
 				7922C2FB1F5DAAAB007F5D25 /* HomeVC */,
 				79183D591F550FFF00A00D50 /* CharacterBuilder */,
@@ -737,6 +744,23 @@
 				7922C3051F5DD3E0007F5D25 /* WalkThrough.storyboard */,
 			);
 			name = Storyboards;
+			sourceTree = "<group>";
+		};
+		7922943F1F5F093D004845DE /* EmojisVC */ = {
+			isa = PBXGroup;
+			children = (
+				792294421F5F0A17004845DE /* EmojiesVC.swift */,
+				792294401F5F09DB004845DE /* SetupKeyBoardVC.swift */,
+			);
+			path = EmojisVC;
+			sourceTree = "<group>";
+		};
+		792294441F5F0BA0004845DE /* Others */ = {
+			isa = PBXGroup;
+			children = (
+				792294451F5F0BDD004845DE /* Constant.swift */,
+			);
+			path = Others;
 			sourceTree = "<group>";
 		};
 		7922C2FB1F5DAAAB007F5D25 /* HomeVC */ = {
@@ -792,6 +816,7 @@
 				79183B791F550F2800A00D50 /* Assets.xcassets */,
 				79183D5E1F55102900A00D50 /* APICalls */,
 				79183D611F55103800A00D50 /* Storyboards */,
+				792294441F5F0BA0004845DE /* Others */,
 				7922C3041F5DCA9F007F5D25 /* SupportingFiles */,
 				132605D41F4AA632003B6BFC /* result.html */,
 			);
@@ -1121,11 +1146,14 @@
 				131C3EE11F5E687E00ECD3A0 /* ParentVC.swift in Sources */,
 				795421631F460DE500DBBBE0 /* AppDelegate.swift in Sources */,
 				79183D601F55102900A00D50 /* APICalls.swift in Sources */,
+				792294431F5F0A17004845DE /* EmojiesVC.swift in Sources */,
+				792294461F5F0BDD004845DE /* Constant.swift in Sources */,
 				79183D631F5514B600A00D50 /* SaveCharacterVC.swift in Sources */,
 				79DAB6A81F571CA00019C37D /* SavedCharListVC.swift in Sources */,
 				1332FBD41F57ECA6003E3217 /* CarouselItemView.swift in Sources */,
 				7922C3031F5DCA91007F5D25 /* ClairaBella.xcdatamodeld in Sources */,
 				79183D5D1F55100000A00D50 /* CharacterBuilderVC.swift in Sources */,
+				792294411F5F09DB004845DE /* SetupKeyBoardVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

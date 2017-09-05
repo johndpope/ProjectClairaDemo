@@ -9,11 +9,18 @@
 import UIKit
 
 class HomeVC: ParentVC {
-
+    @IBOutlet var containerView: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUI()
     }
 
+    func setUI() {
+        var fr = containerView.frame
+        fr.size.height = 2250 * widthRatio
+        containerView.frame = fr
+    }
 
 }
 
@@ -24,6 +31,9 @@ extension HomeVC {
         self.present(viewController, animated: true, completion: nil)
     }
 
+    @IBAction func btn_CreateEmojisClicked(_ sender: UIButton) {
+        self.tabBarController?.selectedIndex = 2
+    }
     
     @IBAction func Btn_ShopeCollection(_ sender: UIButton) {
         let url = URL(string: "http://www.toxicfox.co.uk/claireabella")!

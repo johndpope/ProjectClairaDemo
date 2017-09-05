@@ -38,7 +38,8 @@ class SavedCharListVC: ParentVC {
         super.viewDidLoad()
         setUI()
         charGenerator = CharacterHTMLBuilder.shared
-        
+        self.getSavedChars()
+
         NotificationCenter.default.addObserver(self, selector: #selector(self.newCharacterAdded(_:)), name: NSNotification.Name(rawValue: "NewCharacterAddedNotification"), object: nil)
     }
     
