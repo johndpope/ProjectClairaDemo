@@ -172,7 +172,9 @@ class SaveCharacterVC: ParentVC, UITextFieldDelegate {
         
         APICall.shared.updateCharacter_APICall(params: params, createdDate: character.createdDate) { (json, success) in
             self.indicator.stopAnimating()
-            if success {
+            if success {//CharacterUpdateNotification
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "CharacterUpdateNotification"), object: nil, userInfo: ["updatedChar" : self.character])
+
                 self.showAlert(message: "Character updated successfully.")
             } else {
                 self.showAlert(message: "Something went wrong.")

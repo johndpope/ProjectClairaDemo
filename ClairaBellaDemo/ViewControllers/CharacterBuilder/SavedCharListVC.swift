@@ -39,21 +39,18 @@ class SavedCharListVC: ParentVC {
         setUI()
         charGenerator = CharacterHTMLBuilder.shared
         self.getSavedChars()
-
+        carouselView.bounces = false
+       
         NotificationCenter.default.addObserver(self, selector: #selector(self.newCharacterAdded(_:)), name: NSNotification.Name(rawValue: "NewCharacterAddedNotification"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.characterUpdateNotification(_:)), name: NSNotification.Name(rawValue: "CharacterUpdateNotification"), object: nil)
+
     }
     
-    func newCharacterAdded(_ nf: Notification) {
-        if let newChar = nf.userInfo?["NewChar"] as? Character {
-            savedChars.append(newChar)
-            showHideEmptyItemsView()
-        }
-    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setCharGeneratorResultBlock()
-        carouselView.reloadData()
+        //carouselView.reloadData()
     }
 
     func setUI() {
@@ -84,6 +81,20 @@ class SavedCharListVC: ParentVC {
             }
         }
     }
+    
+    //Notificaitons
+    func newCharacterAdded(_ nf: Notification) {
+        if let newChar = nf.userInfo?["NewChar"] as? Character {
+            savedChars.append(newChar)
+            showHideEmptyItemsView()
+            carouselView.insertItem(at: savedChars.count-1, animated: true)
+        }
+    }
+    
+    func characterUpdateNotification(_ nf: Notification) {
+        carouselView.reloadItem(at: carouselView.currentItemIndex, animated: true)
+    }
+
 }
 
 
@@ -202,7 +213,7 @@ extension SavedCharListVC {
                     return char.createdDate == ch.createdDate
                 }) {
                     self.savedChars.remove(at: index)
-                    self.carouselView.reloadData()
+                    self.carouselView.removeItem(at: self.carouselView.currentItemIndex, animated: true)
                     self.showHideEmptyItemsView()
                 }
             }

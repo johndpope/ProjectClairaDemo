@@ -19,7 +19,10 @@ class APICall {
         
     }
     
+    //
     let baseUrl =  "http://34.252.124.216/midnight/system/api"
+    //let baseUrl =  "http://34.252.124.216/midnight/system/api/v1.0.0/"
+
     let assetUrl = "http://34.252.124.216/midnight/system/asset_library"
     
     enum APIName {

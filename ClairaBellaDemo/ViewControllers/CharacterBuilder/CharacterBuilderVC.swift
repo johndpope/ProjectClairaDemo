@@ -15,6 +15,8 @@ class CharacterBuilderVC: ParentVC {
     @IBOutlet var tableView: UITableView!
     @IBOutlet var btnSave: UIButton!
     
+    var completionBlock: (Bool)-> Void = {_ in}
+    
     var interfaceMenus = [ChoiceMenu]()
     
     // save character before edit start. Used for restore character's original state while user cancel editing.

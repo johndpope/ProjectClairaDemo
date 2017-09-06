@@ -20,8 +20,7 @@ class SetupKeyBoardVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func Btn_BackClicked()
-    {
+    @IBAction func Btn_BackClicked() {
         for vc: UIViewController in (navigationController?.viewControllers)! {
             if (vc is EmojiesVC) {
                 navigationController?.popToViewController(vc, animated: true)
@@ -44,6 +43,7 @@ class SetupKeyBoardVC: UIViewController {
     @IBAction func Keyboard_Setting_Action(_ sender: UIButton) {
         
        UIApplication.shared.openURL(URL(string:"App-Prefs:root=General&path=Keyboard")!)
+        
        
     }
 
