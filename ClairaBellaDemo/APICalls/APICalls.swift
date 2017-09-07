@@ -20,11 +20,12 @@ class APICall {
     }
     
     //
-    let baseUrl =  "http://34.252.124.216/midnight/system/api"
-    //let baseUrl =  "http://34.252.124.216/midnight/system/api/v1.0.0/"
+    //let baseUrl =  "http://34.252.124.216/midnight/system/api"
+    let baseUrl =  "http://34.252.124.216/midnight/system/api/v1.0.0/"
 
-    let assetUrl = "http://34.252.124.216/midnight/system/asset_library"
-    
+    //let assetUrl = "http://34.252.124.216/midnight/system/asset_library"
+    let assetUrl = "http://34.252.124.216/midnight/system/asset_library/interface/v1.0/"
+
     enum APIName {
         static var getCharacters = "/character.json"
         static let getPartsMap = "/parts_map.json"

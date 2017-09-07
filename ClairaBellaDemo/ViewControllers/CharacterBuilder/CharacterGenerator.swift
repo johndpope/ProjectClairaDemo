@@ -555,8 +555,10 @@ class ChoiceMenu {
         icon = APICall.shared.assetUrl + "/" + ((json["icon"] as? String) ?? "")
         heading = (json["heading"] as? String) ?? ""
         
-        if let jsChoice = json["choice"] as? [String : Any] {
-            choice = CharacterChoice(jsChoice)
+        if let jsChoices = json["choices"] as? [[String : Any]] {
+            if let jchoice = jsChoices.first {
+                choice = CharacterChoice(jchoice)
+            }
         }
     }
 }
