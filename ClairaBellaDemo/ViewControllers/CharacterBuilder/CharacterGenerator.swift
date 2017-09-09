@@ -464,6 +464,8 @@ class CharBuilderAPI {
                     
                     block(menus)
                 }
+            } else {
+                block([])
             }
         }
     }

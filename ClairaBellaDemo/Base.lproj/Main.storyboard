@@ -104,18 +104,16 @@
                                             <outlet property="lblTitle" destination="jNA-wG-N7l" id="b4T-x7-f0n"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="optionsCell" rowHeight="60" id="fKe-Se-XJO" customClass="OptionsTableViewCell" customModule="ClairaBellaDemo" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="128" width="375" height="60"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="squareOptionsCell" rowHeight="120" id="fKe-Se-XJO" customClass="OptionsTableViewCell" customModule="ClairaBellaDemo" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="128" width="375" height="120"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fKe-Se-XJO" id="p0s-Lc-4S7">
-                                            <frame key="frameInset" width="375" height="60"/>
+                                            <frame key="frameInset" width="375" height="120"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="sgS-Xg-3Ug">
-                                                    <frame key="frameInset" minY="10" width="375" height="50"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="sgS-Xg-3Ug">
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="2" minimumInteritemSpacing="2" id="hWc-V8-68q">
+                                                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="2" minimumInteritemSpacing="2" id="hWc-V8-68q">
                                                         <size key="itemSize" width="50" height="50"/>
                                                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -123,7 +121,7 @@
                                                     </collectionViewFlowLayout>
                                                     <cells>
                                                         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="CPC-EV-4CX" customClass="CollectionViewCell" customModule="ClairaBellaDemo" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="-5" width="60" height="60"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                                 <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
@@ -161,9 +159,83 @@
                                                     </connections>
                                                 </collectionView>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="sgS-Xg-3Ug" secondAttribute="bottom" id="DBI-5I-dgi"/>
+                                                <constraint firstItem="sgS-Xg-3Ug" firstAttribute="leading" secondItem="p0s-Lc-4S7" secondAttribute="leading" id="MpO-9q-dY7"/>
+                                                <constraint firstAttribute="trailing" secondItem="sgS-Xg-3Ug" secondAttribute="trailing" id="kYw-62-48P"/>
+                                                <constraint firstItem="sgS-Xg-3Ug" firstAttribute="top" secondItem="p0s-Lc-4S7" secondAttribute="top" constant="10" id="vdo-F6-0bI"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="collView" destination="sgS-Xg-3Ug" id="TaT-Q4-den"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="circleOptionsCell" rowHeight="50" id="eGb-Y1-FPY" customClass="OptionsTableViewCell" customModule="ClairaBellaDemo" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="248" width="375" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eGb-Y1-FPY" id="gPS-c5-w6b">
+                                            <frame key="frameInset" width="375" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="e0S-Zd-wkx">
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="0WZ-1j-N18">
+                                                        <size key="itemSize" width="50" height="50"/>
+                                                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                    </collectionViewFlowLayout>
+                                                    <cells>
+                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="P4X-rC-pc1" customClass="CollectionViewCell" customModule="ClairaBellaDemo" customModuleProvider="target">
+                                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                                <autoresizingMask key="autoresizingMask"/>
+                                                                <subviews>
+                                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VWn-gx-Zsy"/>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dj2-Mq-WC7">
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                                        <nil key="textColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                </subviews>
+                                                            </view>
+                                                            <color key="backgroundColor" red="0.99272191350000005" green="0.62490624890000002" blue="0.59498092089999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <constraints>
+                                                                <constraint firstItem="VWn-gx-Zsy" firstAttribute="top" secondItem="P4X-rC-pc1" secondAttribute="top" id="3HW-M5-BWS"/>
+                                                                <constraint firstItem="Dj2-Mq-WC7" firstAttribute="centerX" secondItem="P4X-rC-pc1" secondAttribute="centerX" id="6wW-vs-3EH"/>
+                                                                <constraint firstAttribute="bottom" secondItem="VWn-gx-Zsy" secondAttribute="bottom" id="846-kn-241"/>
+                                                                <constraint firstAttribute="trailing" secondItem="VWn-gx-Zsy" secondAttribute="trailing" id="TqU-fE-Sx1"/>
+                                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Dj2-Mq-WC7" secondAttribute="trailing" constant="2" id="VBx-ff-zrV"/>
+                                                                <constraint firstItem="VWn-gx-Zsy" firstAttribute="leading" secondItem="P4X-rC-pc1" secondAttribute="leading" id="b75-Io-vSn"/>
+                                                                <constraint firstItem="Dj2-Mq-WC7" firstAttribute="centerY" secondItem="P4X-rC-pc1" secondAttribute="centerY" id="dfQ-1J-6ua"/>
+                                                                <constraint firstItem="Dj2-Mq-WC7" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="P4X-rC-pc1" secondAttribute="leading" constant="2" id="gWf-pP-igQ"/>
+                                                            </constraints>
+                                                            <size key="customSize" width="50" height="50"/>
+                                                            <connections>
+                                                                <outlet property="imgView" destination="VWn-gx-Zsy" id="bcd-dP-Sxb"/>
+                                                                <outlet property="lblTitle" destination="Dj2-Mq-WC7" id="3mE-Id-puZ"/>
+                                                            </connections>
+                                                        </collectionViewCell>
+                                                    </cells>
+                                                    <connections>
+                                                        <outlet property="dataSource" destination="eGb-Y1-FPY" id="MWU-JR-5NU"/>
+                                                        <outlet property="delegate" destination="eGb-Y1-FPY" id="zXa-TU-UMj"/>
+                                                    </connections>
+                                                </collectionView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstItem="e0S-Zd-wkx" firstAttribute="leading" secondItem="gPS-c5-w6b" secondAttribute="leading" id="GpP-DP-G0E"/>
+                                                <constraint firstAttribute="bottom" secondItem="e0S-Zd-wkx" secondAttribute="bottom" id="Hme-aR-ksy"/>
+                                                <constraint firstItem="e0S-Zd-wkx" firstAttribute="top" secondItem="gPS-c5-w6b" secondAttribute="top" id="PuA-AL-StK"/>
+                                                <constraint firstAttribute="trailing" secondItem="e0S-Zd-wkx" secondAttribute="trailing" id="b2d-j5-xJF"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.92941176469999998" green="0.79911281170000004" blue="0.87066377979999998" alpha="0.93669658690000002" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <connections>
+                                            <outlet property="collView" destination="e0S-Zd-wkx" id="Jge-tk-kDS"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

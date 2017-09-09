@@ -24,6 +24,16 @@ class CharacterBuilderVC: ParentVC {
     var copyedCharacter: Character!
 
     var optionsList = [CharacterChoice]()
+    var selectedMenu: ChoiceMenu? = nil {
+        willSet {
+            //unselect previous selected menu
+            selectedMenu?.selected = false
+        }
+        
+        didSet{
+            selectedMenu?.selected = true
+        }
+    }
     
     var charGenerator: CharacterHTMLBuilder! {
         didSet {
@@ -51,6 +61,8 @@ class CharacterBuilderVC: ParentVC {
         
         CharBuilderAPI.shared.getInterface_json { menus in
             self.interfaceMenus = menus
+            self.selectedMenu = menus.first
+            
             DispatchQueue.main.async {
                 self.tableView.reloadData()
                 self.btnSave.isHidden = false
@@ -128,30 +140,27 @@ extension CharacterBuilderVC {
 //MARK:- TableViewDelegate and DataSource
 extension CharacterBuilderVC : UITableViewDelegate, UITableViewDataSource {
     
-    func sectionCount(in choice:CharacterChoice)-> Int {
-        var subChoice: CharacterChoice?
-        if let selectedOption = choice.options.filter({$0.selected}).first {
-            subChoice = selectedOption.choice
-        }
-        
-        if !choice.options.isEmpty{
-            optionsList.append(choice)
-        }
-        return choice.options.isEmpty ? 0 : 1 + (subChoice == nil ? 0 : sectionCount(in: subChoice!))
-        
-    }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return indexPath.section == 0 ? 100 : 60
+        if indexPath.section == 0 {
+            return 100
+        } else {
+            let choice = selectedMenu!.choices[indexPath.row]
+            return choice.type == .square ? 130 : 50
+        }
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        let mainMenuChoice = interfaceMenus.filter({$0.selected}).first?.choice
-        return 1 + (mainMenuChoice == nil ? 0 : sectionCount(in: mainMenuChoice!))
+        return 1 + (((selectedMenu?.choices.count ?? 0) > 0) ? 1 : 0)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        if section == 0 {
+            return 1
+        } else {
+            return selectedMenu!.choices.count
+        }
+
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -163,9 +172,11 @@ extension CharacterBuilderVC : UITableViewDelegate, UITableViewDataSource {
             return cell
             
         } else {//optionsCell
-            let cell = tableView.dequeueReusableCell(withIdentifier: "optionsCell") as! OptionsTableViewCell
+            let choice = selectedMenu!.choices[indexPath.row]
+            let cellIdentifier = choice.type == .square ? "squareOptionsCell" : "circleOptionsCell"
+            let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as! OptionsTableViewCell
             cell.viewcontroller = self
-            cell.choice = optionsList[indexPath.section-1]
+            cell.choice = choice//optionsList[indexPath.section-1]
             return cell
         }
     }
@@ -182,7 +193,9 @@ extension CharacterBuilderVC : UITableViewDelegate, UITableViewDataSource {
     }
     
     func changeUserSelection() {
-        setSelected(choice: interfaceMenus.filter({$0.selected}).first!.choice)
+        for choice in selectedMenu!.choices {
+            setSelected(choice: choice)
+        }
     }
 }
 
@@ -237,10 +250,10 @@ class MenuTableViewCell: UITableViewCell,  UICollectionViewDataSource, UICollect
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        menus.forEach({$0.selected = false})
+        //menus.forEach({$0.selected = false})
         let menu = menus[indexPath.row]
-        menu.selected = true
         lblTitle.text = menu.heading
+        viewcontroller?.selectedMenu = menu
         viewcontroller?.reloadInterfaceMenus()
         viewcontroller?.changeUserSelection()
     }
