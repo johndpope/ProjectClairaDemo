@@ -14,9 +14,11 @@ class SaveCharacterVC: ParentVC, UITextFieldDelegate {
     @IBOutlet var Character_Imageview: UIImageView!
     @IBOutlet var name_textfield: UITextField!
     @IBOutlet var Character_View: UIView!
+    @IBOutlet var lblNameCharsCount: UILabel!
     
     @IBOutlet weak var save_btn: UIButton!
 
+    let maxCharNameLength = 12
     var isCharacterEditMode = false
     
     //this json object required for saving character.
@@ -26,6 +28,7 @@ class SaveCharacterVC: ParentVC, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        lblNameCharsCount.text = "\(maxCharNameLength)"
         
         if let charHtml = character.charHtml {
             webView.loadHTMLString(charHtml, baseURL: nil)
@@ -59,10 +62,6 @@ class SaveCharacterVC: ParentVC, UITextFieldDelegate {
         save_btn.isHidden = true
     }
     
-    @IBAction func textFieldDidChangeText(_ sender: UITextField) {
-        character.name = sender.text!
-        save_btn.isHidden = character.name.isEmpty
-    }
     
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {  //delegate method
         
@@ -77,7 +76,7 @@ class SaveCharacterVC: ParentVC, UITextFieldDelegate {
         guard let text = textField.text else { return true }
         let newLength = text.characters.count + string.characters.count - range.length
         character.name = text
-        return newLength <= 10 // Bool
+        return newLength <= maxCharNameLength // Bool
     }
     
     
@@ -115,74 +114,6 @@ class SaveCharacterVC: ParentVC, UITextFieldDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func Btn_BackClicked() {
-        if let navController = self.navigationController {
-            navController.popViewController(animated: true)
-        }
-    }
-    
-    @IBAction func BtnSaved_ViewCharacter_Action(_ sender: UIButton) {
-        
-        func showAlert(message: String, isCharacterSaved: Bool = false) {
-            let alertController = UIAlertController(title: message, message: "", preferredStyle: .alert)
-            
-            let OKAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-            alertController.addAction(OKAction)
-            
-            self.present(alertController, animated: true, completion: nil)
-
-        }
-         if  (name_textfield.text?.characters.count)! > 0 {
-            isCharacterEditMode ? self.updateCharacterAPICall() : self.saveCharacterAPICAll()
-            
-         } else {
-            showAlert(message: "Character name is required.")
-
-        }
-       
-    }
-    
-
-    func saveCharacterAPICAll() {
-        indicator.startAnimating()
-
-        let params = ["choices" : character.choices,
-                    "saved_name": character.name,
-                    "source": "ios_app",
-                    "brand": "claireabella"] as [String : Any]
-        APICall.shared.createNewCharacter_APICall(json: params) { (response, success) in
-            self.indicator.stopAnimating()
-            if success {
-                self.showAlert(message: "Character saved successfully.")
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "NewCharacterAddedNotification"), object: nil, userInfo: ["NewChar" : self.character])
-            } else {
-                self.showAlert(message: "Something went wrong.")
-            }
-        }
-    }
-    
-
-    func updateCharacterAPICall() {
-        indicator.startAnimating()
-        
-        let params = ["choices" : character.choices,
-                      "saved_name": character.name,
-                      "default": true,
-                      ] as [String : Any]
-        
-        APICall.shared.updateCharacter_APICall(params: params, createdDate: character.createdDate) { (json, success) in
-            self.indicator.stopAnimating()
-            if success {//CharacterUpdateNotification
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "CharacterUpdateNotification"), object: nil, userInfo: ["updatedChar" : self.character])
-
-                self.showAlert(message: "Character updated successfully.")
-            } else {
-                self.showAlert(message: "Something went wrong.")
-            }
-
-        }
-
-    }
     
     func showAlert(message: String) {
         let alertController = UIAlertController(title: message, message: "", preferredStyle: .alert)
@@ -210,3 +141,89 @@ func getCurrentTimeStampWOMiliseconds(dateToConvert: NSDate) -> String {
 
 }
 
+
+extension SaveCharacterVC {
+    @IBAction func checkBox_btnClicked(_ sender: CheckBox) {
+        sender.checked = !sender.checked
+    }
+    
+    @IBAction func Btn_BackClicked() {
+        if let navController = self.navigationController {
+            navController.popViewController(animated: true)
+        }
+    }
+    
+    @IBAction func BtnSaved_ViewCharacter_Action(_ sender: UIButton) {
+        
+        func showAlert(message: String, isCharacterSaved: Bool = false) {
+            let alertController = UIAlertController(title: message, message: "", preferredStyle: .alert)
+            
+            let OKAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alertController.addAction(OKAction)
+            
+            self.present(alertController, animated: true, completion: nil)
+            
+        }
+        if  (name_textfield.text?.characters.count)! > 0 {
+            isCharacterEditMode ? self.updateCharacterAPICall() : self.saveCharacterAPICAll()
+            
+        } else {
+            showAlert(message: "Character name is required.")
+            
+        }
+    }
+    
+    @IBAction func textFieldDidChangeText(_ sender: UITextField) {
+        character.name = sender.text!
+        save_btn.isHidden = character.name.isEmpty
+        let remainingChars =  maxCharNameLength - character.name.characters.count
+        lblNameCharsCount.text = "\(remainingChars)"
+    }
+
+
+}
+
+extension SaveCharacterVC {
+    
+    func saveCharacterAPICAll() {
+        indicator.startAnimating()
+        
+        let params = ["choices" : character.choices,
+                      "saved_name": character.name,
+                      "source": "ios_app",
+                      "brand": "claireabella"] as [String : Any]
+        APICall.shared.createNewCharacter_APICall(json: params) { (response, success) in
+            self.indicator.stopAnimating()
+            if success {
+                self.showAlert(message: "Character saved successfully.")
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "NewCharacterAddedNotification"), object: nil, userInfo: ["NewChar" : self.character])
+            } else {
+                self.showAlert(message: "Something went wrong.")
+            }
+        }
+    }
+    
+    
+    func updateCharacterAPICall() {
+        indicator.startAnimating()
+        
+        let params = ["choices" : character.choices,
+                      "saved_name": character.name,
+                      "default": true,
+                      ] as [String : Any]
+        
+        APICall.shared.updateCharacter_APICall(params: params, createdDate: character.createdDate) { (json, success) in
+            self.indicator.stopAnimating()
+            if success {//CharacterUpdateNotification
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "CharacterUpdateNotification"), object: nil, userInfo: ["updatedChar" : self.character])
+                
+                self.showAlert(message: "Character updated successfully.")
+            } else {
+                self.showAlert(message: "Something went wrong.")
+            }
+            
+        }
+        
+    }
+
+}

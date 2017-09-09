@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="nYp-PB-Ifh">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
@@ -14,7 +14,7 @@
         <!--LoadingVC-->
         <scene sceneID="5Db-XM-vdw">
             <objects>
-                <viewController id="HYn-W4-oKM" customClass="LoadingVC" customModule="Claireabella" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="HYn-W4-oKM" customClass="LoadingVC" customModule="ClairaBellaDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="MzI-ep-JWC"/>
                         <viewControllerLayoutGuide type="bottom" id="4e8-Eg-nL7"/>
@@ -36,11 +36,11 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="75H-jA-cJc">
-                                        <frame key="frameInset" minX="14.13%" minY="85.61%" width="72.80%" height="4.50%"/>
+                                        <frame key="frameInset" minX="13.87%" minY="85.61%" width="72.80%" height="4.50%"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Loading_Asset1" translatesAutoresizingMaskIntoConstraints="NO" id="uln-3j-MEf">
-                                                <frame key="frameInset" minX="-93.77%" minY="20.00%" width="95.24%" height="60.00%"/>
+                                                <frame key="frameInset" minX="-93.77%" minY="20.00%" width="95.60%" height="60.00%"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                             </imageView>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Loading_Asset" translatesAutoresizingMaskIntoConstraints="NO" id="iJj-18-ZNM">
@@ -52,14 +52,14 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TgS-GX-2og">
-                                        <frame key="frameInset" minX="2.13%" minY="80.51%" width="95.20%" height="3.60%"/>
+                                        <frame key="frameInset" minX="1.87%" minY="80.51%" width="95.20%" height="3.60%"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="15"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="New_Loading_Logo" translatesAutoresizingMaskIntoConstraints="NO" id="qwA-qD-B8I">
-                                        <frame key="frameInset" minX="8.80%" minY="7.20%" width="80.53%" height="13.19%"/>
+                                        <frame key="frameInset" minX="8.80%" minY="7.20%" width="80.27%" height="13.19%"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Ra-Ys-hHO">
@@ -93,7 +93,7 @@
         <!--New UserVC-->
         <scene sceneID="Riu-ge-DSg">
             <objects>
-                <viewController storyboardIdentifier="NewUserVC" id="jsm-ON-zaI" customClass="NewUserVC" customModule="Claireabella" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NewUserVC" id="jsm-ON-zaI" customClass="NewUserVC" customModule="ClairaBellaDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="WsL-gs-jVa"/>
                         <viewControllerLayoutGuide type="bottom" id="DCe-m8-RWz"/>
@@ -107,7 +107,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="New_user" translatesAutoresizingMaskIntoConstraints="NO" id="E2w-x1-Wkc">
-                                        <frame key="frameInset" minX="17.33%" minY="7.80%" width="56.80%" height="32.08%"/>
+                                        <frame key="frameInset" minX="17.07%" minY="7.80%" width="56.80%" height="32.08%"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="New_UserImage_1" translatesAutoresizingMaskIntoConstraints="NO" id="DvB-mx-9rw">
@@ -115,7 +115,7 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TAy-kU-NSS">
-                                        <frame key="frameInset" minX="6.93%" minY="69.42%" width="85.33%" height="8.40%"/>
+                                        <frame key="frameInset" minX="6.67%" minY="69.42%" width="85.33%" height="8.40%"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <state key="normal" backgroundImage="Lets_Start"/>
                                         <connections>
@@ -151,7 +151,7 @@
         <!--LoginVC-->
         <scene sceneID="F3m-LH-79J">
             <objects>
-                <viewController storyboardIdentifier="LoginVC" id="brV-Da-4io" customClass="LoginVC" customModule="Claireabella" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginVC" id="brV-Da-4io" customClass="LoginVC" customModule="ClairaBellaDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="LVw-xx-kja"/>
                         <viewControllerLayoutGuide type="bottom" id="fsr-7C-Hwb"/>
@@ -160,10 +160,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" fixedFrame="YES" image="Base" translatesAutoresizingMaskIntoConstraints="NO" id="isX-3V-PJX">
-                                <frame key="frameInset" width="375" height="667"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" image="Base" translatesAutoresizingMaskIntoConstraints="NO" id="isX-3V-PJX"/>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kTG-d8-m6z">
                                 <frame key="frameInset" minX="131" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -174,6 +171,12 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="fsr-7C-Hwb" firstAttribute="top" secondItem="isX-3V-PJX" secondAttribute="bottom" id="0ZF-fI-GtD"/>
+                            <constraint firstItem="isX-3V-PJX" firstAttribute="leading" secondItem="GAR-VX-C5s" secondAttribute="leading" id="Scn-RP-cyP"/>
+                            <constraint firstAttribute="trailing" secondItem="isX-3V-PJX" secondAttribute="trailing" id="pXI-uY-W5z"/>
+                            <constraint firstItem="isX-3V-PJX" firstAttribute="top" secondItem="GAR-VX-C5s" secondAttribute="top" id="wIj-iO-mUX"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="btn_clicked" destination="kTG-d8-m6z" id="GeX-8s-Olo"/>
@@ -188,7 +191,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="nYp-PB-Ifh" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="bMZ-pw-1ux">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="bMZ-pw-1ux">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -204,7 +207,7 @@
         <!--Sign UpVC-->
         <scene sceneID="fbd-GO-XlI">
             <objects>
-                <viewController storyboardIdentifier="SignUp" useStoryboardIdentifierAsRestorationIdentifier="YES" id="AJQ-6g-LyQ" customClass="SignUpVC" customModule="Claireabella" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignUp" useStoryboardIdentifierAsRestorationIdentifier="YES" id="AJQ-6g-LyQ" customClass="SignUpVC" customModule="ClairaBellaDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="d2p-AC-OIK"/>
                         <viewControllerLayoutGuide type="bottom" id="H4H-c1-Fuc"/>
@@ -214,8 +217,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" fixedFrame="YES" image="Base" translatesAutoresizingMaskIntoConstraints="NO" id="dhM-iO-fli">
-                                <frame key="frameInset" width="375" height="667"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <frame key="frameInset"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5L1-BZ-45O">
                                 <frame key="frameInset" minX="137" width="46" height="30"/>
@@ -249,6 +252,6 @@
         <image name="New_user" width="142" height="162"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="xnQ-NB-zg0"/>
+        <segue reference="IIj-Er-xKI"/>
     </inferredMetricsTieBreakers>
 </document>

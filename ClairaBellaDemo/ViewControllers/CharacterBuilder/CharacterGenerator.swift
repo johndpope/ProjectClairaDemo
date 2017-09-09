@@ -546,7 +546,7 @@ class ChoiceMenu {
     var title = ""
     var icon  = ""
     var heading = ""
-    var choice = CharacterChoice()
+    var choices = [CharacterChoice]()
     
     var selected = false
     
@@ -556,25 +556,32 @@ class ChoiceMenu {
         heading = (json["heading"] as? String) ?? ""
         
         if let jsChoices = json["choices"] as? [[String : Any]] {
-            if let jchoice = jsChoices.first {
-                choice = CharacterChoice(jchoice)
-            }
+            self.choices = jsChoices.map({CharacterChoice($0)})
         }
     }
+}
+
+enum ChoiceType {
+    case square, circle
 }
 
 class CharacterChoice {
     var choiceId = ""
     var options = [ChoiceOption]()
+    var type = ChoiceType.square
     
     convenience init(_ json : [String : Any]) {
         self.init()
         
         choiceId = (json["choice_id"] as? String) ?? ""
         
+        let typeValue = json["thumbnail_type"] as! String
+        
+        self.type = typeValue == "square" ? .square : .circle
+        
         if let jsOptions = json["options"] as? [String : [String : Any]] {
             options = jsOptions.map({ (key, option) -> ChoiceOption in
-                return ChoiceOption(option)
+                return ChoiceOption(option, iconName: key)
             })
         }
     }
@@ -583,11 +590,13 @@ class CharacterChoice {
 class ChoiceOption {
     var name = ""
     var choice = CharacterChoice ()
-    
+    var iconName = ""
     var selected = false
-    convenience init(_ json: [String : Any]) {
+    
+    convenience init(_ json: [String : Any], iconName: String) {
         self.init()
         name = (json["name"] as? String) ?? ""
+        self.iconName = iconName + ".png"
         
         if let jsChoice = json["choice"] as? [String : Any] {
             choice = CharacterChoice(jsChoice)

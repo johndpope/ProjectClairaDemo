@@ -8,7 +8,7 @@
 
 import UIKit
 
-let ScreenSize = UIScreen.main.bounds.size
-
-let SCREEN_WIDTH = ScreenSize.width
-let SCREEN_HEIGHT = ScreenSize.height
+//let ScreenSize = UIScreen.main.bounds.size
+//
+//let SCREEN_WIDTH = ScreenSize.width
+//let SCREEN_HEIGHT = ScreenSize.height

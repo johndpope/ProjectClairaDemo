@@ -1,12 +1,43 @@
 PODS:
+  - Bolts (1.8.4):
+    - Bolts/AppLinks (= 1.8.4)
+    - Bolts/Tasks (= 1.8.4)
+  - Bolts/AppLinks (1.8.4):
+    - Bolts/Tasks
+  - Bolts/Tasks (1.8.4)
+  - FacebookCore (0.2.0):
+    - Bolts (~> 1.8)
+    - FBSDKCoreKit (~> 4.15)
+  - FacebookLogin (0.2.0):
+    - Bolts (~> 1.8)
+    - FacebookCore (~> 0.2)
+    - FBSDKCoreKit (~> 4.15)
+    - FBSDKLoginKit (~> 4.15)
+  - FBSDKCoreKit (4.21.0):
+    - Bolts (~> 1.7)
+  - FBSDKLoginKit (4.21.0):
+    - FBSDKCoreKit
+  - GTProgressBar (0.1.1)
   - iCarousel (1.8.3)
+  - PocketSVG (2.2.1)
 
 DEPENDENCIES:
+  - FacebookCore
+  - FacebookLogin
+  - GTProgressBar
   - iCarousel
+  - PocketSVG
 
 SPEC CHECKSUMS:
+  Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
+  FacebookCore: 2cb3f0fbff218e9d3119cec84bae983b232412de
+  FacebookLogin: c9d606504735780a9e3002465a615512e0a691a5
+  FBSDKCoreKit: 8a372ab194b5c7c26355c1920ef52dbeb44bc222
+  FBSDKLoginKit: a1a5f4b4ac445823a020fbeeaf5f03714a67ff9c
+  GTProgressBar: 6acc42dac77a2a09d325a700766704cb32c0ef29
   iCarousel: d782f635afac190c49bb8ee455882284cff8b85f
+  PocketSVG: 51c4d5cb9ae7623d4494f439f69747394bad5d67
 
-PODFILE CHECKSUM: 07e43eff501921ef8b48d1c36800c2adbc5218d8
+PODFILE CHECKSUM: 4f3011d1a49ff768d091899617862a1ddf4309d9
 
-COCOAPODS: 1.2.0
+COCOAPODS: 1.2.1.beta.1

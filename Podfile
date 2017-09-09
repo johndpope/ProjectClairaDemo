@@ -6,5 +6,9 @@ target 'ClairaBellaDemo' do
   use_frameworks!
 
 pod 'iCarousel'
+pod 'GTProgressBar'
+pod 'PocketSVG'
+pod 'FacebookCore'
+pod 'FacebookLogin'
 
 end

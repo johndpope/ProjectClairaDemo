@@ -166,7 +166,6 @@ extension CharacterBuilderVC : UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: "optionsCell") as! OptionsTableViewCell
             cell.viewcontroller = self
             cell.choice = optionsList[indexPath.section-1]
-            
             return cell
         }
     }
@@ -270,8 +269,8 @@ class OptionsTableViewCell: UITableViewCell,  UICollectionViewDataSource, UIColl
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CollectionViewCell
         let option = choice.options[indexPath.row]
-        //cell.imgView.setImage(url: URL(string: menu.icon)!)
-        cell.lblTitle.text = option.name
+        cell.imgView.image = UIImage(named: option.iconName)
+        cell.lblTitle.text = ""//option.name
         if option.selected {
             cell.imgView.layer.borderColor = UIColor.red.cgColor
             cell.imgView.layer.borderWidth = 2
