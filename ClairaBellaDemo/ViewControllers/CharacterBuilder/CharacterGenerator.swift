@@ -591,7 +591,7 @@ class CharacterChoice {
 
 class ChoiceOption {
     var name = ""
-    var choice = CharacterChoice ()
+    var choices = [CharacterChoice] ()
     var iconName = ""
     var selected = false
     
@@ -600,8 +600,8 @@ class ChoiceOption {
         name = (json["name"] as? String) ?? ""
         self.iconName = iconName + ".png"
         
-        if let jsChoice = json["choice"] as? [String : Any] {
-            choice = CharacterChoice(jsChoice)
+        if let jsChoices = json["choices"] as? [[String : Any]] {
+            self.choices = jsChoices.map({CharacterChoice($0)})
         }
         
     }

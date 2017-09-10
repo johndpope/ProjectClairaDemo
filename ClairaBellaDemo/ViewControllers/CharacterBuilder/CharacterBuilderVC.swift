@@ -23,7 +23,6 @@ class CharacterBuilderVC: ParentVC {
     //This variable is only used during character editing.
     var copyedCharacter: Character!
 
-    var optionsList = [CharacterChoice]()
     var selectedMenu: ChoiceMenu? = nil {
         willSet {
             //unselect previous selected menu
@@ -32,8 +31,20 @@ class CharacterBuilderVC: ParentVC {
         
         didSet{
             selectedMenu?.selected = true
+            colorChoice = nil
+            if let ch = selectedMenu!.choices.filter({$0.type == .circle}).first {
+               colorChoice = ch
+            } else {
+                if let ch = selectedMenu!.choices.filter({$0.type == .square}).first {
+                    if !ch.options.first!.choices.isEmpty {
+                        colorChoice = ch.options.first!.choices.first
+                    }
+                }
+            }
         }
     }
+    
+    var colorChoice: CharacterChoice?
     
     var charGenerator: CharacterHTMLBuilder! {
         didSet {
@@ -62,7 +73,8 @@ class CharacterBuilderVC: ParentVC {
         CharBuilderAPI.shared.getInterface_json { menus in
             self.interfaceMenus = menus
             self.selectedMenu = menus.first
-            
+            let body = menus.filter({$0.title == "Body"}).first!
+                body.choices[1].choiceId = "skin_tone"
             DispatchQueue.main.async {
                 self.tableView.reloadData()
                 self.btnSave.isHidden = false
@@ -88,7 +100,6 @@ class CharacterBuilderVC: ParentVC {
     }
     
     func reloadInterfaceMenus() {
-        optionsList.removeAll()
         tableView.reloadData()
     }
 }
@@ -140,13 +151,21 @@ extension CharacterBuilderVC {
 //MARK:- TableViewDelegate and DataSource
 extension CharacterBuilderVC : UITableViewDelegate, UITableViewDataSource {
     
-    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 {
-            return 100
+            return 70
         } else {
-            let choice = selectedMenu!.choices[indexPath.row]
-            return choice.type == .square ? 130 : 50
+            let choice = indexPath.row == 0 ? selectedMenu!.choices.first! : colorChoice!
+
+            var height: CGFloat
+            
+            if let colorChoice = colorChoice {
+                height = (tableView.frame.height - 70) - 50
+                return choice.type == .square ?   height : 50
+            } else {
+                height = (tableView.frame.height - 70)
+                return choice.type == .square ?   height : 50
+            }
         }
     }
     
@@ -158,7 +177,7 @@ extension CharacterBuilderVC : UITableViewDelegate, UITableViewDataSource {
         if section == 0 {
             return 1
         } else {
-            return selectedMenu!.choices.count
+            return 1 + (colorChoice == nil ? 0 : 1)
         }
 
     }
@@ -172,7 +191,7 @@ extension CharacterBuilderVC : UITableViewDelegate, UITableViewDataSource {
             return cell
             
         } else {//optionsCell
-            let choice = selectedMenu!.choices[indexPath.row]
+            let choice = indexPath.row == 0 ? selectedMenu!.choices.first! : colorChoice!
             let cellIdentifier = choice.type == .square ? "squareOptionsCell" : "circleOptionsCell"
             let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as! OptionsTableViewCell
             cell.viewcontroller = self
@@ -187,8 +206,8 @@ extension CharacterBuilderVC : UITableViewDelegate, UITableViewDataSource {
         
         charGenerator.upateCharacter(choices: character!.choices)
 
-        if !selectedOption.choice.options.isEmpty {
-            setSelected(choice: selectedOption.choice)
+        if !selectedOption.choices.isEmpty {
+            setSelected(choice: selectedOption.choices.first!)
         }
     }
     
@@ -234,19 +253,19 @@ class MenuTableViewCell: UITableViewCell,  UICollectionViewDataSource, UICollect
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CollectionViewCell
         let menu = menus[indexPath.row]
         cell.imgView.setImage(url: URL(string: menu.icon)!)
-        
+        cell.lblTitle.text = menu.title
         if menu.selected {
-            cell.imgView.layer.borderColor = UIColor.red.cgColor
-            cell.imgView.layer.borderWidth = 2
+            cell.backgroundColor = UIColor(colorLiteralRed: 229.0/255.0, green: 17.0/255.0, blue: 152.0/255.0, alpha: 1)
+            //cell.layer.borderWidth = 2
         } else  {
-            cell.imgView.layer.borderColor = UIColor.clear.cgColor
-            cell.imgView.layer.borderWidth = 0
+            cell.backgroundColor = UIColor(colorLiteralRed: 239.0/255.0, green: 153.0/255.0, blue: 220.0/255.0, alpha: 1)
+            //cell.layer.borderWidth = 0
         }
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 60, height: 60)
+        return CGSize(width: 70, height: 70)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -255,7 +274,7 @@ class MenuTableViewCell: UITableViewCell,  UICollectionViewDataSource, UICollect
         lblTitle.text = menu.heading
         viewcontroller?.selectedMenu = menu
         viewcontroller?.reloadInterfaceMenus()
-        viewcontroller?.changeUserSelection()
+        //viewcontroller?.changeUserSelection()
     }
     
     
@@ -284,6 +303,10 @@ class OptionsTableViewCell: UITableViewCell,  UICollectionViewDataSource, UIColl
         let option = choice.options[indexPath.row]
         cell.imgView.image = UIImage(named: option.iconName)
         cell.lblTitle.text = ""//option.name
+        
+        cell.imgView.layer.cornerRadius = choice.type == .circle ? cell.imgView.frame.width/2 : 0
+        cell.imgView.clipsToBounds = true
+        
         if option.selected {
             cell.imgView.layer.borderColor = UIColor.red.cgColor
             cell.imgView.layer.borderWidth = 2
@@ -296,38 +319,26 @@ class OptionsTableViewCell: UITableViewCell,  UICollectionViewDataSource, UIColl
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 50, height: 50)
+        if choice.type == .square {
+            let width = (collView.frame.width - 12)/4
+            return CGSize(width: width, height: width)
+        } else {
+            return CGSize(width: 50, height: 50)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let option = choice.options[indexPath.row]
         choice.options.forEach({$0.selected = false})
         option.selected = true
-        
+        if choice.type == .square && !option.choices.isEmpty {
+            viewcontroller?.colorChoice  = option.choices.first
+        }
         viewcontroller?.reloadInterfaceMenus()
         viewcontroller?.changeUserSelection()
     }
     
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
