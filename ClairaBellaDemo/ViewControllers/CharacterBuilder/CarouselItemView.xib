@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -16,23 +13,28 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8TQ-pv-d18">
-                    <rect key="frame" x="198.5" y="143.5" width="0.0" height="0.0"/>
                     <fontDescription key="fontDescription" type="system" pointSize="28"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <webView opaque="NO" contentMode="scaleToFill" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rEi-gV-XEw">
-                    <rect key="frame" x="-70" y="0.0" width="467" height="287"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </webView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gw2-Zg-sBu">
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </view>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="gw2-Zg-sBu" firstAttribute="centerX" secondItem="rEi-gV-XEw" secondAttribute="centerX" id="1g6-hL-O0d"/>
                 <constraint firstItem="8TQ-pv-d18" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="5A9-0U-xP2"/>
                 <constraint firstItem="rEi-gV-XEw" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="-70" id="6fR-0E-5Hl"/>
                 <constraint firstAttribute="trailing" secondItem="rEi-gV-XEw" secondAttribute="trailing" id="7cD-2D-ovZ"/>
                 <constraint firstItem="rEi-gV-XEw" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="IxE-mg-OuX"/>
+                <constraint firstItem="gw2-Zg-sBu" firstAttribute="height" secondItem="rEi-gV-XEw" secondAttribute="height" id="NDQ-JN-uJe"/>
+                <constraint firstItem="gw2-Zg-sBu" firstAttribute="width" secondItem="rEi-gV-XEw" secondAttribute="width" id="VV3-YS-Ffa"/>
                 <constraint firstItem="8TQ-pv-d18" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="ZGv-Hp-NPE"/>
+                <constraint firstItem="gw2-Zg-sBu" firstAttribute="centerY" secondItem="rEi-gV-XEw" secondAttribute="centerY" id="dyr-fH-lfK"/>
                 <constraint firstAttribute="bottom" secondItem="rEi-gV-XEw" secondAttribute="bottom" id="fw4-aV-pxW"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>

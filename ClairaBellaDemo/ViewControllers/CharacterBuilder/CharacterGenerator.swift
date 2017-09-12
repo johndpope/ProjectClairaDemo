@@ -598,7 +598,7 @@ class ChoiceOption {
     convenience init(_ json: [String : Any], iconName: String) {
         self.init()
         name = (json["name"] as? String) ?? ""
-        self.iconName = iconName + ".png"
+        self.iconName = iconName //+ ".png"
         
         if let jsChoices = json["choices"] as? [[String : Any]] {
             self.choices = jsChoices.map({CharacterChoice($0)})

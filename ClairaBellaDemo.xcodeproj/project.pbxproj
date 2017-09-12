@@ -6913,7 +6913,7 @@
 					7954215E1F460DE500DBBBE0 = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = LCSDGY3TVW;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -9328,6 +9328,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.unitygames.Claireabella;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "7d9e3296-05c1-41e2-9da0-b5710b22c5bf";
+				PROVISIONING_PROFILE_SPECIFIER = Developement_Claireabella;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -9342,6 +9344,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.unitygames.Claireabella;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "2f385b7a-ecdc-4409-b495-351fadc0830f";
+				PROVISIONING_PROFILE_SPECIFIER = Developement_Claireabella;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
