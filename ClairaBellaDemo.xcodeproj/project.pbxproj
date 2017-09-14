@@ -9329,7 +9329,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.unitygames.Claireabella;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "5f7c62e9-2350-4001-a130-bc0f5405fc8e";
+				PROVISIONING_PROFILE = "599a5cab-7030-4b04-8100-472125d9bf39";
 				PROVISIONING_PROFILE_SPECIFIER = Developement_Claireabella;
 				SWIFT_VERSION = 3.0;
 			};
@@ -9346,7 +9346,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.unitygames.Claireabella;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "5f7c62e9-2350-4001-a130-bc0f5405fc8e";
+				PROVISIONING_PROFILE = "599a5cab-7030-4b04-8100-472125d9bf39";
 				PROVISIONING_PROFILE_SPECIFIER = Developement_Claireabella;
 				SWIFT_VERSION = 3.0;
 			};
