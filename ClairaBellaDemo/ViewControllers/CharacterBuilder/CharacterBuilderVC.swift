@@ -286,6 +286,7 @@ class MenuTableViewCell: UITableViewCell,  UICollectionViewDataSource, UICollect
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
         return CGSize(width: 70, height: 70)
     }
     
@@ -305,6 +306,9 @@ class OptionsTableViewCell: UITableViewCell,  UICollectionViewDataSource, UIColl
     @IBOutlet var collView: UICollectionView!
     var choice: CharacterChoice! {
         didSet {
+            if choice.type == .square {
+                collView.contentInset = UIEdgeInsets(top: 4, left: 0, bottom: 4, right: 0)
+            }
             collView.reloadData()
         }
     }
@@ -346,8 +350,10 @@ class OptionsTableViewCell: UITableViewCell,  UICollectionViewDataSource, UIColl
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if choice.type == .square {
-            let width = (collView.frame.width - 12)/4
-            return CGSize(width: width, height: width)
+            let height = (collView.frame.height - 4 - 8)/2
+
+            //let width = (collView.frame.width - 12)/4
+            return CGSize(width: height, height: height)
         } else {
             return CGSize(width: 50, height: 50)
         }
