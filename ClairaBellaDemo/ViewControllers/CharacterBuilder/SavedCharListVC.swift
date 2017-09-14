@@ -159,7 +159,7 @@ extension SavedCharListVC: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 0{
-            return 80
+            return 150
         } else if indexPath.row == 1 {
             return 150
         } else {

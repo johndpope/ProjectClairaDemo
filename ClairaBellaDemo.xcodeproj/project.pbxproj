@@ -6864,12 +6864,12 @@
 				79387AF91F65219600E1B3B8 /* Models */,
 				795421621F460DE500DBBBE0 /* AppDelegate.swift */,
 				7932BBA11F61CF8500A25AAF /* Views */,
+				79183D611F55103800A00D50 /* Storyboards */,
 				7922C2FE1F5DC98A007F5D25 /* CoreData */,
 				79183D581F550FFF00A00D50 /* ViewControllers */,
 				79183BD81F550FF500A00D50 /* Images */,
 				79183B791F550F2800A00D50 /* Assets.xcassets */,
 				79183D5E1F55102900A00D50 /* APICalls */,
-				79183D611F55103800A00D50 /* Storyboards */,
 				792294441F5F0BA0004845DE /* Others */,
 				7922C3041F5DCA9F007F5D25 /* SupportingFiles */,
 				132605D41F4AA632003B6BFC /* result.html */,
@@ -9323,11 +9323,14 @@
 			baseConfigurationReference = 4E3CB6A597CC857291E48488 /* Pods-ClairaBellaDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = LCSDGY3TVW;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = ClairaBellaDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.unitygames.Claireabella;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -9337,11 +9340,14 @@
 			baseConfigurationReference = 521D4AFBB295765553039816 /* Pods-ClairaBellaDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = LCSDGY3TVW;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = ClairaBellaDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.unitygames.Claireabella;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

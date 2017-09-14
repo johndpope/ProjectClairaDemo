@@ -14,7 +14,8 @@ class CharacterBuilderVC: ParentVC {
     @IBOutlet var webView: UIWebView!
     @IBOutlet var tableView: UITableView!
     @IBOutlet var btnSave: UIButton!
-    
+    @IBOutlet var indicator: IndicatorView!
+
     var completionBlock: (Bool)-> Void = {_ in}
     
     var interfaceMenus = [ChoiceMenu]()
@@ -44,7 +45,10 @@ class CharacterBuilderVC: ParentVC {
         }
     }
     
+    //colorChoice used to showing color option at colorGlint view.
     var colorChoice: CharacterChoice?
+    
+    var selectedHairColorOption: ChoiceOption!
     
     var charGenerator: CharacterHTMLBuilder! {
         didSet {
@@ -61,7 +65,7 @@ class CharacterBuilderVC: ParentVC {
         btnSave.isHidden = true
         
         charGenerator = CharacterHTMLBuilder.shared
-
+        
         if !isCharacterEditMode {
             character = Character()
             character.choices = charGenerator.defaultChoices
@@ -70,17 +74,8 @@ class CharacterBuilderVC: ParentVC {
             copyedCharacter = character.copy() as! Character
         }
         
-        CharBuilderAPI.shared.getInterface_json { menus in
-            self.interfaceMenus = menus
-            self.selectedMenu = menus.first
-            let body = menus.filter({$0.title == "Body"}).first!
-                body.choices[1].choiceId = "skin_tone"
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-                self.btnSave.isHidden = false
-            }
-        }
-
+        self.loadInterfaceMenus()
+        
         if let charHtml = character?.charHtml {
             webView.loadHTMLString(charHtml, baseURL: nil)
             btnSave.isHidden = false
@@ -101,6 +96,29 @@ class CharacterBuilderVC: ParentVC {
     
     func reloadInterfaceMenus() {
         tableView.reloadData()
+    }
+    
+    func loadInterfaceMenus() {
+        indicator.startAnimating()
+        CharBuilderAPI.shared.getInterface_json { menus in
+            self.interfaceMenus = menus
+            self.selectedMenu = menus.first
+            
+            let body = menus.filter({$0.title == "Body"}).first!
+            body.choices[1].choiceId = "skin_tone" //api have skin_colour instead of skin_tone thats why need this line.
+            
+            let hair = menus.filter({$0.title == "Hair"}).first!
+            let hairOption = hair.choices[1].options.first
+            hairOption?.selected = true
+            self.selectedHairColorOption = hairOption
+            
+            DispatchQueue.main.async {
+                self.indicator.stopAnimating()
+                self.tableView.reloadData()
+                self.btnSave.isHidden = false
+            }
+        }
+
     }
 }
 
@@ -216,6 +234,8 @@ extension CharacterBuilderVC : UITableViewDelegate, UITableViewDataSource {
             setSelected(choice: choice)
         }
     }
+    
+    
 }
 
 
@@ -252,6 +272,7 @@ class MenuTableViewCell: UITableViewCell,  UICollectionViewDataSource, UICollect
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CollectionViewCell
         let menu = menus[indexPath.row]
+        
         cell.imgView.setImage(url: URL(string: menu.icon)!)
         cell.lblTitle.text = menu.title
         if menu.selected {
@@ -301,7 +322,12 @@ class OptionsTableViewCell: UITableViewCell,  UICollectionViewDataSource, UIColl
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CollectionViewCell
         let option = choice.options[indexPath.row]
-        cell.imgView.image = UIImage(named: option.iconName)
+        
+        var iconName = option.iconName
+        if choice.choiceId == "hair_style" {
+             iconName = option.iconName + viewcontroller!.selectedHairColorOption.iconName
+        }
+        cell.imgView.image = UIImage(named: iconName)
         cell.lblTitle.text = ""//option.name
         
         cell.imgView.layer.cornerRadius = choice.type == .circle ? cell.imgView.frame.width/2 : 0
@@ -334,6 +360,11 @@ class OptionsTableViewCell: UITableViewCell,  UICollectionViewDataSource, UIColl
         if choice.type == .square && !option.choices.isEmpty {
             viewcontroller?.colorChoice  = option.choices.first
         }
+        
+        if choice.type == .circle && choice.choiceId == "hair_colour" {
+            viewcontroller?.selectedHairColorOption = option
+        }
+        
         viewcontroller?.reloadInterfaceMenus()
         viewcontroller?.changeUserSelection()
     }

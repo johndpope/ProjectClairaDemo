@@ -32,7 +32,7 @@ class SaveCharacterVC: ParentVC, UITextFieldDelegate {
         
         if let charHtml = character.charHtml {
             webView.loadHTMLString(charHtml, baseURL: nil)
-            webView.scrollView.setZoomScale(1.1, animated: false)
+            webView.scrollView.setZoomScale(1.05, animated: false)
         }
         
         save_btn.isHidden = !isCharacterEditMode
