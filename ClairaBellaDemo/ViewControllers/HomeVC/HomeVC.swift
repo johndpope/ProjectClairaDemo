@@ -24,6 +24,7 @@ class HomeVC: ParentVC {
 
 }
 
+
 //MARK:- IBActions
 extension HomeVC {
     @IBAction func btn_StartNow(_ sender: UIButton) {

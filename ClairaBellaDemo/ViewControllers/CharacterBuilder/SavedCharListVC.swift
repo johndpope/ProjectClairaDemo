@@ -54,7 +54,8 @@ class SavedCharListVC: ParentVC {
        
         NotificationCenter.default.addObserver(self, selector: #selector(self.newCharacterAdded(_:)), name: NSNotification.Name(rawValue: "NewCharacterAddedNotification"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.characterUpdateNotification(_:)), name: NSNotification.Name(rawValue: "CharacterUpdateNotification"), object: nil)
-
+        
+        showHideEmptyItemsView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -153,16 +154,82 @@ extension SavedCharListVC {
         let char = savedChars[currentCharIndex]
     }
 
-    @IBAction func emojis_btnClicked(_ sender: UIButton) {
+    @IBAction func btn_CreateEmojisClicked(_ sender: UIButton) {
+        self.tabBarController?.selectedIndex = 2
     }
+    
+    @IBAction func Btn_ShopeCollection(_ sender: UIButton) {
+        let url = URL(string: "http://www.toxicfox.co.uk/claireabella")!
+        if #available(iOS 10.0, *) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        } else {
+            UIApplication.shared.openURL(url)
+        }
+    }
+    
+    @IBAction func Btn_ViewAllCollection(_ sender: UIButton) {
+        //        let url = URL(string: "http://www.toxicfox.co.uk/claireabella/claireabella-home/claireabella-apron")!
+        
+        let url = URL(string: "http://www.toxicfox.co.uk/claireabella/")!
+        
+        if #available(iOS 10.0, *) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        } else {
+            UIApplication.shared.openURL(url)
+        }
+    }
+    
+    @IBAction func Btn_BagShoping_Clicked(_ sender: UIButton) {
+        let url = URL(string: "http://www.toxicfox.co.uk/claireabella/claireabella-fashion-bags-simple/claireabella-jute-bags")!
+        if #available(iOS 10.0, *) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        } else {
+            UIApplication.shared.openURL(url)
+        }
+    }
+    
+    
+    @IBAction func Btn_PhoneCase_Clicked(_ sender: UIButton) {
+        let url = URL(string: "http://www.toxicfox.co.uk/claireabella/claireabella-protective-cases/claireabella-protective-phone-cases")!
+        if #available(iOS 10.0, *) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        } else {
+            UIApplication.shared.openURL(url)
+        }
+    }
+    
+    @IBAction func Btn_SuitcaseClicked(_ sender: UIButton) {
+        let url = URL(string: "http://www.toxicfox.co.uk/claireabella/claireabella-suitcases")!
+        if #available(iOS 10.0, *) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        } else {
+            UIApplication.shared.openURL(url)
+        }
+    }
+    
+    
+    
+    @IBAction func Btn_FashionClicked(_ sender: UIButton) {
+        let url = URL(string: "http://www.toxicfox.co.uk/claireabella/claireabella-fashion")!
+        if #available(iOS 10.0, *) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        } else {
+            UIApplication.shared.openURL(url)
+        }
+    }
+    
 
 }
 
+//MARK:- IBActions
+extension HomeVC {
+    
+}
 
 //MARK:- TableView DataSource and Delegate
 extension SavedCharListVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return savedChars.isEmpty ? 0 : 2
+        return savedChars.isEmpty ? 0 : 3
     }
     
     
@@ -171,7 +238,15 @@ extension SavedCharListVC: UITableViewDataSource, UITableViewDelegate {
             let cell = tableView.dequeueReusableCell(withIdentifier: "createCharBtnCell")!
             return cell
             
-        }  else {//personalizedAdsCell
+        } else if indexPath.row == 1 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "bagAdsCell")!
+            return cell
+
+        } else if indexPath.row == 2 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "productsCell")!
+            return cell
+            
+        } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "personalizedAdsCell")!
             return cell
         }
@@ -180,7 +255,11 @@ extension SavedCharListVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 0{
             return 150
-        }  else {
+        }  else if indexPath.row == 1 {
+            return 450 * widthRatio
+        } else if indexPath.row == 2 {
+            return 585 * widthRatio
+        } else {
             return 300 * widthRatio
         }
     }
