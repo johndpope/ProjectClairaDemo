@@ -195,6 +195,11 @@ extension SaveCharacterVC {
         APICall.shared.createNewCharacter_APICall(json: params) { (response, success) in
             self.indicator.stopAnimating()
             if success {
+                print(response)
+                if let json = response as? [String : Any] {
+                    let createdDate = json["success"] as! String
+                    self.character.createdDate = createdDate
+                }
                 self.showAlert(message: "Character saved successfully.")
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "NewCharacterAddedNotification"), object: nil, userInfo: ["NewChar" : self.character])
             } else {

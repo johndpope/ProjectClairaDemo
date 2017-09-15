@@ -177,7 +177,7 @@ extension CharacterBuilderVC : UITableViewDelegate, UITableViewDataSource {
 
             var height: CGFloat
             
-            if let colorChoice = colorChoice {
+            if let _ = colorChoice {
                 height = (tableView.frame.height - 70) - 50
                 return choice.type == .square ?   height : 50
             } else {

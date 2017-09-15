@@ -170,7 +170,7 @@ class CharacterHTMLBuilder {
             }
         }
         
-        let firstPartKey = partsKey.first!
+        guard let firstPartKey = partsKey.first else {return}
         var firstPart: [String : Any] = contextPoseData[firstPartKey]!
         
         

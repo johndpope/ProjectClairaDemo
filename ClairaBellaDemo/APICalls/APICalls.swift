@@ -9,11 +9,16 @@
 import Foundation
 
 
-let currentUserEmail = "testa@gmail.com"
 
 //APICAlls
 class APICall {
     static let shared = APICall()
+    var currentUserEmail: String? {
+        if let user_deatils = UserDefaults.standard.value(forKey: "user_details")as? [String:String] {
+            return user_deatils["email"]
+        }
+        return nil
+    }
     
     private init() {
         
@@ -129,7 +134,9 @@ class APICall {
     
     
     func createNewCharacter_APICall(json: [String : Any], block: @escaping ResponseBlock) {
-        let url = URL(string: "https://yff8t38cs8.execute-api.eu-west-1.amazonaws.com/latest/characters/\(currentUserEmail)")!
+        guard let userEmail = currentUserEmail else {return}
+        
+        let url = URL(string: "https://yff8t38cs8.execute-api.eu-west-1.amazonaws.com/latest/characters/\(userEmail)")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         let data = try? JSONSerialization.data(withJSONObject: json, options: .prettyPrinted)
@@ -154,7 +161,9 @@ class APICall {
 
     
     func getSavedCharaters_APICall(username: String, block: @escaping ResponseBlock) {
-        let urlString = "https://yff8t38cs8.execute-api.eu-west-1.amazonaws.com/latest/characters/\(currentUserEmail)"
+        guard let userEmail = currentUserEmail else {return}
+
+        let urlString = "https://yff8t38cs8.execute-api.eu-west-1.amazonaws.com/latest/characters/\(userEmail)"
         
         let url = URL(string: urlString)!
         URLSession.shared.dataTask(with: url) { (data, response, error) in
@@ -171,7 +180,9 @@ class APICall {
     
     
     func deleteCharacter_APICall(createdDate: String, block: @escaping ResponseBlock) {
-        let urlString = "https://yff8t38cs8.execute-api.eu-west-1.amazonaws.com/latest/characters/\(currentUserEmail)?date_created=\(createdDate)"
+        guard let userEmail = currentUserEmail else {return}
+        
+        let urlString = "https://yff8t38cs8.execute-api.eu-west-1.amazonaws.com/latest/characters/\(userEmail)?date_created=\(createdDate)"
         let url = URL(string: urlString)!
         var request = URLRequest(url: url)
         request.httpMethod = "DELETE"
@@ -194,7 +205,9 @@ class APICall {
     }
     
     func updateCharacter_APICall(params: [String : Any], createdDate: String, block: @escaping ResponseBlock) {
-        let urlString  = "https://yff8t38cs8.execute-api.eu-west-1.amazonaws.com/latest/characters/\(currentUserEmail)?date_created=\(createdDate)"
+        guard let userEmail = currentUserEmail else {return}
+        
+        let urlString  = "https://yff8t38cs8.execute-api.eu-west-1.amazonaws.com/latest/characters/\(userEmail)?date_created=\(createdDate)"
         let url = URL(string: urlString)!
        
         var request = URLRequest(url: url)

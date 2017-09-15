@@ -11,11 +11,22 @@ import iCarousel
 
 class SavedCharListVC: ParentVC {
     @IBOutlet var tableView: UITableView!
+    @IBOutlet var tblHeaderView: UIView!
     @IBOutlet var carouselView: iCarousel!
     @IBOutlet var emptyCharactersView: UIView!
     @IBOutlet var indicatorView: IndicatorView!
+    @IBOutlet var lblCharName: UILabel!
+    @IBOutlet var lblCreatedDate: UILabel!
+    @IBOutlet var checkBox: CheckBox!
+    
+    lazy var dateFormatter : DateFormatter =  {
+        let df = DateFormatter()
+        df.dateFormat = "yyyy, mmm dd"
+        return df
+    }()
     
     var savedChars = [Character]()
+    
     var charGenerator: CharacterHTMLBuilder! {
         didSet {
             setCharGeneratorResultBlock()
@@ -46,7 +57,6 @@ class SavedCharListVC: ParentVC {
 
     }
     
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setCharGeneratorResultBlock()
@@ -60,8 +70,21 @@ class SavedCharListVC: ParentVC {
         carouselView.frame = fr
         carouselView.type = .linear
         
+        var headerviewFrame = tblHeaderView.frame
+        headerviewFrame.size.height *= widthRatio
+        tblHeaderView.frame = headerviewFrame
     }
     
+    //set selected char's info
+    func setCurrentChartInfo() {
+        let char = savedChars[carouselView.currentItemIndex]
+        lblCharName.text = char.name
+        lblCreatedDate.text = char.createdDate
+        
+        if let date = dateFormatter.date(from: char.createdDate, format: "yyyy-mm-ddThh:mm:ss") {
+            
+        }
+    }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "NewCharVCSegue" {
@@ -139,19 +162,16 @@ extension SavedCharListVC {
 //MARK:- TableView DataSource and Delegate
 extension SavedCharListVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return savedChars.isEmpty ? 0 : 3
+        return savedChars.isEmpty ? 0 : 2
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "actionButtonCell")!
-            return cell
-            
-        } else if indexPath.row == 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "createCharBtnCell")!
             return cell
-        } else {//personalizedAdsCell
+            
+        }  else {//personalizedAdsCell
             let cell = tableView.dequeueReusableCell(withIdentifier: "personalizedAdsCell")!
             return cell
         }
@@ -160,9 +180,7 @@ extension SavedCharListVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 0{
             return 150
-        } else if indexPath.row == 1 {
-            return 150
-        } else {
+        }  else {
             return 300 * widthRatio
         }
     }
@@ -200,6 +218,12 @@ extension SavedCharListVC : iCarouselDelegate, iCarouselDataSource {
         return value //
     }
     
+    func carouselCurrentItemIndexDidChange(_ carousel: iCarousel) {
+        print(carousel.currentItemIndex)
+        if carousel.currentItemIndex >= 0 {
+            setCurrentChartInfo()
+        }
+    }
 }
 
 //MARK:- API Calls
@@ -281,5 +305,12 @@ class IndicatorView: UIView {
     func stopAnimating() {
         self.isHidden = true
         indicator.stopAnimating()
+    }
+}
+
+extension DateFormatter {
+    func date(from dateString: String, format: String)-> Date? {
+        self.dateFormat = format
+        return self.date(from: dateString)
     }
 }
