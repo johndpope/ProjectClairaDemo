@@ -14,6 +14,14 @@ class Character: NSCopying {
     var charHtml: String?
     var createdDate = ""
     var alive = false
+   
+    var isMainChar: Bool {
+        if let mainCharDate = UserDefaults.standard.value(forKey: "MainCharacter") as? String {
+            return createdDate == mainCharDate
+        } else {
+            return false
+        }
+    }
     
     func copy(with zone: NSZone? = nil) -> Any {
         let copy = Character()
@@ -24,6 +32,8 @@ class Character: NSCopying {
         copy.alive = self.alive
         return copy
     }
+    
+    static var myCharacters = [Character]()
 }
 
 class CharacterHTMLBuilder {

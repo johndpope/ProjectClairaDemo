@@ -40,8 +40,9 @@ class CheckBox: UIButton {
         }
     }
     
-    override func draw(_ rect: CGRect) {
-        super.draw(rect)
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
         boundaryLayer = CALayer()
         boundaryLayer.frame = CGRect(x: 10, y: 10, width: frame.width/2, height: frame.height/2)
         self.layer.addSublayer(boundaryLayer)

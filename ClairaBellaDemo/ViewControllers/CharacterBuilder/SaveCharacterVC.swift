@@ -15,6 +15,7 @@ class SaveCharacterVC: ParentVC, UITextFieldDelegate {
     @IBOutlet var name_textfield: UITextField!
     @IBOutlet var Character_View: UIView!
     @IBOutlet var lblNameCharsCount: UILabel!
+    @IBOutlet var checkbox: CheckBox!
     
     @IBOutlet weak var save_btn: UIButton!
 
@@ -30,11 +31,21 @@ class SaveCharacterVC: ParentVC, UITextFieldDelegate {
         super.viewDidLoad()
         lblNameCharsCount.text = "\(maxCharNameLength)"
         
+        //checkbox should be checked if user haven't any saved Character.
+        checkbox.checked = Character.myCharacters.isEmpty
+        
+        //user should not be able to unchecked checkbox if this is his/her first character.
+        checkbox.isEnabled = !Character.myCharacters.isEmpty
+        
         if let charHtml = character.charHtml {
             webView.loadHTMLString(charHtml, baseURL: nil)
             webView.scrollView.setZoomScale(1.05, animated: false)
         }
         
+        self.setUI()
+    }
+
+    func setUI() {
         save_btn.isHidden = !isCharacterEditMode
         name_textfield.text = character.name
         
@@ -47,9 +58,8 @@ class SaveCharacterVC: ParentVC, UITextFieldDelegate {
         
         name_textfield.placeholder = "Name Your Character"
         name_textfield.contentVerticalAlignment = .center
-        
+ 
     }
-
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool // called when 'return' key pressed. return false to ignore.
     {
@@ -138,10 +148,9 @@ func getCurrentTimeStampWOMiliseconds(dateToConvert: NSDate) -> String {
     return strTimeStamp
 }
 
-
 }
 
-
+//MARK:- IBActions
 extension SaveCharacterVC {
     @IBAction func checkBox_btnClicked(_ sender: CheckBox) {
         sender.checked = !sender.checked
@@ -183,6 +192,7 @@ extension SaveCharacterVC {
 
 }
 
+//MARK:- API calls
 extension SaveCharacterVC {
     
     func saveCharacterAPICAll() {
@@ -195,10 +205,13 @@ extension SaveCharacterVC {
         APICall.shared.createNewCharacter_APICall(json: params) { (response, success) in
             self.indicator.stopAnimating()
             if success {
-                print(response)
                 if let json = response as? [String : Any] {
                     let createdDate = json["success"] as! String
                     self.character.createdDate = createdDate
+                    
+                    if self.checkbox.checked {
+                        UserDefaults.standard.set(createdDate, forKey: "MainCharacter")
+                    }
                 }
                 self.showAlert(message: "Character saved successfully.")
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "NewCharacterAddedNotification"), object: nil, userInfo: ["NewChar" : self.character])
@@ -220,6 +233,10 @@ extension SaveCharacterVC {
         APICall.shared.updateCharacter_APICall(params: params, createdDate: character.createdDate) { (json, success) in
             self.indicator.stopAnimating()
             if success {//CharacterUpdateNotification
+                if self.checkbox.checked {
+                    UserDefaults.standard.set(self.character.createdDate, forKey: "MainCharacter")
+                }
+
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "CharacterUpdateNotification"), object: nil, userInfo: ["updatedChar" : self.character])
                 
                 self.showAlert(message: "Character updated successfully.")

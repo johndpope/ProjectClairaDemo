@@ -160,7 +160,7 @@ class APICall {
     }
 
     
-    func getSavedCharaters_APICall(username: String, block: @escaping ResponseBlock) {
+    func getSavedCharaters_APICall(block: @escaping ResponseBlock) {
         guard let userEmail = currentUserEmail else {return}
 
         let urlString = "https://yff8t38cs8.execute-api.eu-west-1.amazonaws.com/latest/characters/\(userEmail)"

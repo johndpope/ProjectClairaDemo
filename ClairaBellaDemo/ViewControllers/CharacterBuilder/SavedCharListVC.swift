@@ -29,7 +29,6 @@ class SavedCharListVC: ParentVC {
     
     var charGenerator: CharacterHTMLBuilder! {
         didSet {
-            setCharGeneratorResultBlock()
         }
     }
     
@@ -37,33 +36,22 @@ class SavedCharListVC: ParentVC {
         return carouselView.currentItemIndex
     }
     
-    func setCharGeneratorResultBlock() {
-        charGenerator.resultBlock = { [weak self] htmlString in
-            self?.getSavedChars()
-        }
-        
-    }
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUI()
-        charGenerator = CharacterHTMLBuilder.shared
-        self.getSavedChars()
-        carouselView.bounces = false
-       
-        NotificationCenter.default.addObserver(self, selector: #selector(self.newCharacterAdded(_:)), name: NSNotification.Name(rawValue: "NewCharacterAddedNotification"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.characterUpdateNotification(_:)), name: NSNotification.Name(rawValue: "CharacterUpdateNotification"), object: nil)
+        self.savedChars = Character.myCharacters
+
+        self.setUI()
+        self.setNotificaitonObserver()
+        self.showHideEmptyItemsView()
         
-        showHideEmptyItemsView()
+        charGenerator = CharacterHTMLBuilder.shared
+        carouselView.bounces = false
+        carouselView.reloadData()
+        setCurrentChartInfo()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        setCharGeneratorResultBlock()
-        //carouselView.reloadData()
-    }
-
     func setUI() {
         let carouselViewHeight = 275 * widthRatio
         var fr = carouselView.frame
@@ -76,14 +64,25 @@ class SavedCharListVC: ParentVC {
         tblHeaderView.frame = headerviewFrame
     }
     
+    
+    func setNotificaitonObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(self.newCharacterAdded(_:)), name: NSNotification.Name(rawValue: "NewCharacterAddedNotification"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.characterUpdateNotification(_:)), name: NSNotification.Name(rawValue: "CharacterUpdateNotification"), object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.characterLoadingFinish(_:)), name: NSNotification.Name(rawValue: "CharactersLoadingFinish"), object: nil)
+
+    }
+    
     //set selected char's info
     func setCurrentChartInfo() {
         let char = savedChars[carouselView.currentItemIndex]
         lblCharName.text = char.name
-        lblCreatedDate.text = char.createdDate
-        
-        if let date = dateFormatter.date(from: char.createdDate, format: "yyyy-mm-ddThh:mm:ss") {
-            
+        checkBox.checked = char.isMainChar
+        lblCreatedDate.text = ""
+        if let date = dateFormatter.date(from: char.createdDate, format: "yyyy-MM-dd'T'HH:mm:ss.SSSZ") {
+            print(date)
+            let dateString = dateFormatter.dateString(from: date, to: "MMM d, yyyy h:mm a")
+            lblCreatedDate.text = dateString
         }
     }
 
@@ -110,14 +109,25 @@ class SavedCharListVC: ParentVC {
     func newCharacterAdded(_ nf: Notification) {
         if let newChar = nf.userInfo?["NewChar"] as? Character {
             savedChars.append(newChar)
+            Character.myCharacters.append(newChar)
             showHideEmptyItemsView()
             carouselView.insertItem(at: savedChars.count-1, animated: true)
+            setCurrentChartInfo()
+
         }
     }
     
     func characterUpdateNotification(_ nf: Notification) {
         carouselView.reloadItem(at: carouselView.currentItemIndex, animated: true)
+        setCurrentChartInfo()
     }
+    
+    func characterLoadingFinish(_ nf: Notification) {
+       savedChars = Character.myCharacters
+        carouselView.reloadData()
+        showHideEmptyItemsView()
+    }
+    
 
 }
 
@@ -151,7 +161,7 @@ extension SavedCharListVC {
     }
 
     @IBAction func shareChar_btnClicked(_ sender: UIButton) {
-        let char = savedChars[currentCharIndex]
+        //let char = savedChars[currentCharIndex]
     }
 
     @IBAction func btn_CreateEmojisClicked(_ sender: UIButton) {
@@ -221,10 +231,6 @@ extension SavedCharListVC {
 
 }
 
-//MARK:- IBActions
-extension HomeVC {
-    
-}
 
 //MARK:- TableView DataSource and Delegate
 extension SavedCharListVC: UITableViewDataSource, UITableViewDelegate {
@@ -316,43 +322,10 @@ extension SavedCharListVC {
                     return char.createdDate == ch.createdDate
                 }) {
                     self.savedChars.remove(at: index)
+                    Character.myCharacters.remove(at: index)
                     self.carouselView.removeItem(at: self.carouselView.currentItemIndex, animated: true)
                     self.showHideEmptyItemsView()
                 }
-            }
-        }
-    }
-    
-    func getSavedChars() {
-        self.indicatorView.startAnimating()
-        APICall.shared.getSavedCharaters_APICall(username: "test@test.com") { (response, success) in
-            if success {
-                print(response!)
-                if let jsonArr = response as? [[String : Any]] {
-                    let charters = jsonArr.map({ (json) -> Character in
-                        let choice = json["choices"] as! [String : String]
-                        let character = Character()
-                        character.choices = choice
-                        character.createdDate = json["date_created"] as! String
-                        character.name = json["saved_name"] as! String
-                        if let meta = json["meta"] as? [String : Any] {
-                            character.alive = meta["alive"] as! Bool
-                        }
-                        return character
-                    })
-                    
-                    self.savedChars = charters.filter({$0.alive})
-                    DispatchQueue.main.async {
-                        self.carouselView.reloadData()
-                        self.showHideEmptyItemsView()
-                    }
-                }
-                
-            } else {
-                
-            }
-            DispatchQueue.main.async {
-                self.indicatorView.stopAnimating()
             }
         }
     }
@@ -391,5 +364,10 @@ extension DateFormatter {
     func date(from dateString: String, format: String)-> Date? {
         self.dateFormat = format
         return self.date(from: dateString)
+    }
+    
+    func dateString(from date: Date, to format: String)-> String {
+        self.dateFormat = format
+        return self.string(from: date)
     }
 }
