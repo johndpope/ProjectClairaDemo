@@ -47,7 +47,13 @@ class CheckBox: UIButton {
         boundaryLayer.frame = CGRect(x: 10, y: 10, width: frame.width/2, height: frame.height/2)
         self.layer.addSublayer(boundaryLayer)
         checkedStateChange()
+
     }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        boundaryLayer.frame = CGRect(x: 10, y: 10, width: frame.width/2, height: frame.height/2)
+    }    
     
     func drawUI() {
         boundaryLayer.cornerRadius = cornerRadius

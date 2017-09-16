@@ -25,6 +25,7 @@
 		7922C3031F5DCA91007F5D25 /* ClairaBella.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7922C3011F5DCA91007F5D25 /* ClairaBella.xcdatamodeld */; };
 		7922C3071F5DD3E0007F5D25 /* WalkThrough.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7922C3051F5DD3E0007F5D25 /* WalkThrough.storyboard */; };
 		792738021F63BCCE00C238F0 /* UtilityClasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792738011F63BCCE00C238F0 /* UtilityClasses.swift */; };
+		79292BDB1F6DA05B00015CB3 /* UsersCharacters.plist in Resources */ = {isa = PBXBuildFile; fileRef = 79292BDA1F6DA05A00015CB3 /* UsersCharacters.plist */; };
 		7932B2F81F61A9AD00A25AAF /* BP001_BT001_OA001_BV005.svg in Resources */ = {isa = PBXBuildFile; fileRef = 7932AAB61F61A99700A25AAF /* BP001_BT001_OA001_BV005.svg */; };
 		7932B2F91F61A9AD00A25AAF /* BP001_BT001_OA001_BV006.svg in Resources */ = {isa = PBXBuildFile; fileRef = 7932AAB71F61A99700A25AAF /* BP001_BT001_OA001_BV006.svg */; };
 		7932B2FA1F61A9AD00A25AAF /* BP001_BT001_OA001_BV007.svg in Resources */ = {isa = PBXBuildFile; fileRef = 7932AAB81F61A99700A25AAF /* BP001_BT001_OA001_BV007.svg */; };
@@ -2227,6 +2228,7 @@
 		7922C3021F5DCA91007F5D25 /* ClairaBella.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ClairaBella.xcdatamodel; sourceTree = "<group>"; };
 		7922C3061F5DD3E0007F5D25 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/WalkThrough.storyboard; sourceTree = "<group>"; };
 		792738011F63BCCE00C238F0 /* UtilityClasses.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilityClasses.swift; sourceTree = "<group>"; };
+		79292BDA1F6DA05A00015CB3 /* UsersCharacters.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = UsersCharacters.plist; sourceTree = "<group>"; };
 		7932AAB61F61A99700A25AAF /* BP001_BT001_OA001_BV005.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = BP001_BT001_OA001_BV005.svg; sourceTree = "<group>"; };
 		7932AAB71F61A99700A25AAF /* BP001_BT001_OA001_BV006.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = BP001_BT001_OA001_BV006.svg; sourceTree = "<group>"; };
 		7932AAB81F61A99700A25AAF /* BP001_BT001_OA001_BV007.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = BP001_BT001_OA001_BV007.svg; sourceTree = "<group>"; };
@@ -4552,6 +4554,7 @@
 			children = (
 				7954216E1F460DE500DBBBE0 /* Info.plist */,
 				7922C3011F5DCA91007F5D25 /* ClairaBella.xcdatamodeld */,
+				79292BDA1F6DA05A00015CB3 /* UsersCharacters.plist */,
 			);
 			name = SupportingFiles;
 			sourceTree = "<group>";
@@ -6961,6 +6964,7 @@
 				79387AEF1F6511D800E1B3B8 /* ST012.png in Resources */,
 				7932B48E1F61A9AE00A25AAF /* BP005_BT003_OA042_BV003.svg in Resources */,
 				7932B8C41F61A9AF00A25AAF /* AC041.png in Resources */,
+				79292BDB1F6DA05B00015CB3 /* UsersCharacters.plist in Resources */,
 				7932B3551F61A9AD00A25AAF /* BP001_BT004_OA001_BV008.svg in Resources */,
 				7922C3071F5DD3E0007F5D25 /* WalkThrough.storyboard in Resources */,
 				7932BA371F61A9B000A25AAF /* HWC011.png in Resources */,

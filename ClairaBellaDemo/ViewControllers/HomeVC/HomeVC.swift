@@ -10,6 +10,8 @@ import UIKit
 
 class HomeVC: ParentVC {
     @IBOutlet var containerView: UIView!
+    @IBOutlet var webView: UIWebView!
+    @IBOutlet var webViewContainer: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +22,23 @@ class HomeVC: ParentVC {
         var fr = containerView.frame
         fr.size.height = 2250 * widthRatio
         containerView.frame = fr
+       
+        if Character.myCharacters.isEmpty {
+            webViewContainer.isHidden = true
+        } else {
+            webViewContainer.isHidden = false
+            let mainChar: Character
+            if let char = Character.mainCharacter {
+                mainChar = char
+            } else {
+                mainChar = Character.myCharacters.first!
+            }
+            
+            
+            CharacterHTMLBuilder.shared.buildCharHTMLWith(choices: mainChar.choices, block: { html in
+                self.webView.loadHTMLString(html, baseURL: nil)
+            })
+        }
     }
 
 }

@@ -98,6 +98,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 extension AppDelegate {
     func getCharactersFromServer() {
+        
+        self.loadCharactersFromPlist()
+        
         APICall.shared.getSavedCharaters_APICall() { (response, success) in
             if success {
                 print(response!)
@@ -117,12 +120,58 @@ extension AppDelegate {
                     Character.myCharacters = charters.filter({$0.alive})
                     NotificationCenter.default.post(name: NSNotification.Name(rawValue: "CharactersLoadingFinish"), object: nil)
                     print("CharactersLoadingFinish")
+                    
+                    self.saveCharacterInToLocalFile(json: jsonArr)
                 }
                 
             } else {
                 
             }
         }
+    }
+    
+    func saveCharacterInToLocalFile(json: Any) {
+        let filePath =  NSHomeDirectory()+"/Documents/Characters.plist"
+        let fileManager = FileManager.default
+        
+        if !fileManager.fileExists(atPath: filePath) {
+            if let bundlePath = Bundle.main.path(forResource: "UsersCharacters", ofType: "plist") {
+                do {
+                    try fileManager.copyItem(atPath: bundlePath, toPath: filePath)
+                    
+                } catch {
+                    return
+                }
+            }
+        }
+        
+        let characterDic = NSMutableDictionary(contentsOfFile: filePath)
+        characterDic?["Characters"] = json
+        characterDic?.write(toFile: filePath, atomically: true)
+        
+    }
+    
+    func loadCharactersFromPlist() {
+        let filePath =  NSHomeDirectory()+"/Documents/Characters.plist"
+        
+        if let charactersDic = NSMutableDictionary(contentsOfFile: filePath) {
+            if let charactersArr = charactersDic["Characters"] as? [[String : Any]] {
+                let charters = charactersArr.map({ (json) -> Character in
+                    let choice = json["choices"] as! [String : String]
+                    let character = Character()
+                    character.choices = choice
+                    character.createdDate = json["date_created"] as! String
+                    character.name = json["saved_name"] as! String
+                    if let meta = json["meta"] as? [String : Any] {
+                        character.alive = meta["alive"] as! Bool
+                    }
+                    return character
+                })
+                
+                Character.myCharacters = charters.filter({$0.alive})
+            }
+        }
+
     }
 }
 
