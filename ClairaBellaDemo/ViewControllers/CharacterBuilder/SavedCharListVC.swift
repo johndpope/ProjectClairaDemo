@@ -18,6 +18,7 @@ class SavedCharListVC: ParentVC {
     @IBOutlet var lblCharName: UILabel!
     @IBOutlet var lblCreatedDate: UILabel!
     @IBOutlet var checkBox: CheckBox!
+    @IBOutlet var btnNewChar: UIButton!
     
     lazy var dateFormatter : DateFormatter =  {
         let df = DateFormatter()
@@ -62,6 +63,11 @@ class SavedCharListVC: ParentVC {
         var headerviewFrame = tblHeaderView.frame
         headerviewFrame.size.height *= widthRatio
         tblHeaderView.frame = headerviewFrame
+        
+        btnNewChar.layer.cornerRadius = 3
+        btnNewChar.layer.borderColor = UIColor.white.cgColor
+        btnNewChar.layer.borderWidth = 1
+        btnNewChar.clipsToBounds = true
     }
     
     

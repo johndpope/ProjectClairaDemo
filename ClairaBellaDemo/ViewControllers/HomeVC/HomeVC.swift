@@ -12,6 +12,9 @@ class HomeVC: ParentVC {
     @IBOutlet var containerView: UIView!
     @IBOutlet var webView: UIWebView!
     @IBOutlet var webViewContainer: UIView!
+    @IBOutlet var charCountView: UIView!
+    @IBOutlet var lblCharCount: UILabel!
+    @IBOutlet var createCharsView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,11 +37,21 @@ class HomeVC: ParentVC {
                 mainChar = Character.myCharacters.first!
             }
             
+            lblCharCount.text = "\(Character.myCharacters.count)"
             
             CharacterHTMLBuilder.shared.buildCharHTMLWith(choices: mainChar.choices, block: { html in
                 self.webView.loadHTMLString(html, baseURL: nil)
             })
         }
+        
+        setViews()
+    }
+    
+    func setViews() {
+        createCharsView.layer.borderWidth = 1.5
+        createCharsView.layer.borderColor = UIColor.red.cgColor
+        createCharsView.layer.cornerRadius = 5.0
+        createCharsView.clipsToBounds = true
     }
 
 }
