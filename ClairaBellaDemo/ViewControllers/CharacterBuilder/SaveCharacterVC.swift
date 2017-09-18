@@ -208,6 +208,7 @@ extension SaveCharacterVC {
                 if let json = response as? [String : Any] {
                     let createdDate = json["success"] as! String
                     self.character.createdDate = createdDate
+                    Character.myCharacters.append(self.character)
                     
                     if self.checkbox.checked {
                         UserDefaults.standard.set(createdDate, forKey: "MainCharacter")

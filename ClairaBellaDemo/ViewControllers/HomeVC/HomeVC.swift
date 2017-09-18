@@ -14,22 +14,57 @@ class HomeVC: ParentVC {
     @IBOutlet var webViewContainer: UIView!
     @IBOutlet var charCountView: UIView!
     @IBOutlet var lblCharCount: UILabel!
-    @IBOutlet var createCharsView: UIView!
     
+    @IBOutlet var createCharsView: UIView!
+    @IBOutlet var createChar_titleView1: UIView!//view for character available.
+    @IBOutlet var createChar_titleView2: UIView!//view for no characters.
+    @IBOutlet var lblUserName: UILabel!
+    @IBOutlet var createBtn_bottomSpace: NSLayoutConstraint!
+    @IBOutlet weak var manageCharView: UIView!
+   
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUI()
+        setInitialUI()
     }
 
-    func setUI() {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setViewWithCharacters()
+    }
+    
+    func setInitialUI() {
         var fr = containerView.frame
         fr.size.height = 2250 * widthRatio
         containerView.frame = fr
-       
+        
+        
+        createCharsView.layer.borderWidth = 1.5
+        createCharsView.layer.borderColor = UIColor(colorLiteralRed: 224.0/255.0, green: 16.0/255.0, blue: 157.0/255.0, alpha: 1).cgColor
+        createCharsView.layer.cornerRadius = 5.0
+        createCharsView.clipsToBounds = true
+
+    }
+    
+    func setViewWithCharacters() {
+        createChar_titleView1.isHidden = true
+        createChar_titleView2.isHidden = true
+
+        let user_deatils = UserDefaults.standard.value(forKey: "user_details")as? [String:String]
+        
+        let name = user_deatils!["name"] ?? ""
+        lblUserName.text = name
+
         if Character.myCharacters.isEmpty {
             webViewContainer.isHidden = true
+            createChar_titleView2.isHidden = false
+            createBtn_bottomSpace.constant = 10
+            manageCharView.isHidden = true
+            
         } else {
+            createChar_titleView1.isHidden = false
+            manageCharView.isHidden = false
             webViewContainer.isHidden = false
+            
             let mainChar: Character
             if let char = Character.mainCharacter {
                 mainChar = char
@@ -43,15 +78,6 @@ class HomeVC: ParentVC {
                 self.webView.loadHTMLString(html, baseURL: nil)
             })
         }
-        
-        setViews()
-    }
-    
-    func setViews() {
-        createCharsView.layer.borderWidth = 1.5
-        createCharsView.layer.borderColor = UIColor.red.cgColor
-        createCharsView.layer.cornerRadius = 5.0
-        createCharsView.clipsToBounds = true
     }
 
 }
@@ -59,13 +85,25 @@ class HomeVC: ParentVC {
 
 //MARK:- IBActions
 extension HomeVC {
-    @IBAction func btn_StartNow(_ sender: UIButton) {
+    
+    func goToCreateNewChar() {
         let viewController = self.storyboard?.instantiateViewController(withIdentifier: "CharBuilderNavVC") as! UINavigationController
         self.present(viewController, animated: true, completion: nil)
     }
-
+    @IBAction func btn_StartNow(_ sender: UIButton) {
+        goToCreateNewChar()
+    }
+    
+    @IBAction func btn_manageChar_clicked(_ sender: UIButton) {
+        self.tabBarController?.selectedIndex = 1// My characters tab selected
+    }
+    
     @IBAction func btn_CreateEmojisClicked(_ sender: UIButton) {
-        self.tabBarController?.selectedIndex = 2
+        if Character.myCharacters.isEmpty {
+            goToCreateNewChar()
+        } else {
+            self.tabBarController?.selectedIndex = 2 //Emojis tab selected
+        }
     }
     
     @IBAction func Btn_ShopeCollection(_ sender: UIButton) {

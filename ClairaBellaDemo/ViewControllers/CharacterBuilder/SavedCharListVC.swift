@@ -111,11 +111,10 @@ class SavedCharListVC: ParentVC {
         }
     }
     
-    //Notificaitons
+    //MARK:- Notificaitons
     func newCharacterAdded(_ nf: Notification) {
         if let newChar = nf.userInfo?["NewChar"] as? Character {
             savedChars.append(newChar)
-            Character.myCharacters.append(newChar)
             showHideEmptyItemsView()
             carouselView.insertItem(at: savedChars.count-1, animated: true)
             setCurrentChartInfo()
