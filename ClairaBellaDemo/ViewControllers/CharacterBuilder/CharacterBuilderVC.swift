@@ -61,7 +61,7 @@ class CharacterBuilderVC: ParentVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        webView.scrollView.setZoomScale(1.05, animated: false)
+        //webView.scrollView.setZoomScale(1.05, animated: false)
         btnSave.isHidden = true
         
         charGenerator = CharacterHTMLBuilder.shared

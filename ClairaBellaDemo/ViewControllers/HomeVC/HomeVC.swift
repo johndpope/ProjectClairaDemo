@@ -14,6 +14,7 @@ class HomeVC: ParentVC {
     @IBOutlet var webViewContainer: UIView!
     @IBOutlet var charCountView: UIView!
     @IBOutlet var lblCharCount: UILabel!
+    @IBOutlet var imgCharGroup: UIImageView!
     
     @IBOutlet var createCharsView: UIView!
     @IBOutlet var createChar_titleView1: UIView!//view for character available.
@@ -37,12 +38,6 @@ class HomeVC: ParentVC {
         fr.size.height = 2250 * widthRatio
         containerView.frame = fr
         
-        
-        createCharsView.layer.borderWidth = 1.5
-        createCharsView.layer.borderColor = UIColor(colorLiteralRed: 224.0/255.0, green: 16.0/255.0, blue: 157.0/255.0, alpha: 1).cgColor
-        createCharsView.layer.cornerRadius = 5.0
-        createCharsView.clipsToBounds = true
-
     }
     
     func setViewWithCharacters() {
@@ -57,17 +52,20 @@ class HomeVC: ParentVC {
         if Character.myCharacters.isEmpty {
             webViewContainer.isHidden = true
             createChar_titleView2.isHidden = false
-            createBtn_bottomSpace.constant = 10
+            createBtn_bottomSpace.constant = 15 * widthRatio
             manageCharView.isHidden = true
-            
+            imgCharGroup.isHidden = false
         } else {
+            imgCharGroup.isHidden = true
             createChar_titleView1.isHidden = false
             manageCharView.isHidden = false
             webViewContainer.isHidden = false
+            createBtn_bottomSpace.constant = 40 * widthRatio
             
             let mainChar: Character
             if let char = Character.mainCharacter {
                 mainChar = char
+                
             } else {
                 mainChar = Character.myCharacters.first!
             }
