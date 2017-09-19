@@ -17,7 +17,7 @@ class SavedCharListVC: ParentVC {
     @IBOutlet var indicatorView: IndicatorView!
     @IBOutlet var lblCharName: UILabel!
     @IBOutlet var lblCreatedDate: UILabel!
-    @IBOutlet var checkBox: CheckBox!
+    @IBOutlet var checkBox: UIButton!
     @IBOutlet var btnNewChar: UIButton!
     
     lazy var dateFormatter : DateFormatter =  {
@@ -83,7 +83,7 @@ class SavedCharListVC: ParentVC {
     func setCurrentChartInfo() {
         let char = savedChars[carouselView.currentItemIndex]
         lblCharName.text = char.name
-        checkBox.checked = char.isMainChar
+        checkBox.isSelected = char.isMainChar
         lblCreatedDate.text = ""
         if let date = dateFormatter.date(from: char.createdDate, format: "yyyy-MM-dd'T'HH:mm:ss.SSSZ") {
             print(date)
@@ -265,7 +265,7 @@ extension SavedCharListVC: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 0{
-            return 150
+            return 300 * widthRatio
         }  else if indexPath.row == 1 {
             return 450 * widthRatio
         } else if indexPath.row == 2 {

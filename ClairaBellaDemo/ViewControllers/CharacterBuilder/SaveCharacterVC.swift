@@ -15,7 +15,7 @@ class SaveCharacterVC: ParentVC, UITextFieldDelegate {
     @IBOutlet var name_textfield: UITextField!
     @IBOutlet var Character_View: UIView!
     @IBOutlet var lblNameCharsCount: UILabel!
-    @IBOutlet var checkbox: CheckBox!
+    @IBOutlet var checkbox: UIButton!
     
     @IBOutlet weak var save_btn: UIButton!
 
@@ -32,7 +32,7 @@ class SaveCharacterVC: ParentVC, UITextFieldDelegate {
         lblNameCharsCount.text = "\(maxCharNameLength)"
         
         //checkbox should be checked if user haven't any saved Character.
-        checkbox.checked = Character.myCharacters.isEmpty
+        checkbox.isSelected = Character.myCharacters.isEmpty
         
         //user should not be able to unchecked checkbox if this is his/her first character.
         checkbox.isEnabled = !Character.myCharacters.isEmpty
@@ -152,8 +152,8 @@ func getCurrentTimeStampWOMiliseconds(dateToConvert: NSDate) -> String {
 
 //MARK:- IBActions
 extension SaveCharacterVC {
-    @IBAction func checkBox_btnClicked(_ sender: CheckBox) {
-        sender.checked = !sender.checked
+    @IBAction func checkBox_btnClicked(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
     }
     
     @IBAction func Btn_BackClicked() {
@@ -210,7 +210,7 @@ extension SaveCharacterVC {
                     self.character.createdDate = createdDate
                     Character.myCharacters.append(self.character)
                     
-                    if self.checkbox.checked {
+                    if self.checkbox.isSelected {
                         UserDefaults.standard.set(createdDate, forKey: "MainCharacter")
                     }
                 }
@@ -234,7 +234,7 @@ extension SaveCharacterVC {
         APICall.shared.updateCharacter_APICall(params: params, createdDate: character.createdDate) { (json, success) in
             self.indicator.stopAnimating()
             if success {//CharacterUpdateNotification
-                if self.checkbox.checked {
+                if self.checkbox.isSelected {
                     UserDefaults.standard.set(self.character.createdDate, forKey: "MainCharacter")
                 }
 
