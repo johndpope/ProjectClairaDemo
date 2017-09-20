@@ -376,3 +376,25 @@ extension DateFormatter {
         return self.string(from: date)
     }
 }
+
+//TableCell
+class TableCell: UITableViewCell {
+    @IBOutlet var lblTitle: UILabel!
+    @IBOutlet var horizontalConstraints: [NSLayoutConstraint]?
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        updateConstraint()
+    }
+    
+    func updateConstraint() {
+        if let horizontalConstraints = horizontalConstraints {
+            for constraint in horizontalConstraints {
+                let v1 = constraint.constant
+                let v2 = v1 * widthRatio
+                constraint.constant = v2
+            }
+        }
+    }
+
+}
