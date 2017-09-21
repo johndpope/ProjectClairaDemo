@@ -47,7 +47,27 @@ class CharacterHTMLBuilder {
     var defaultChoices = [String : String]()
     var charHTMLString: String?
     var charName = ""
-    var wantedContext = "CX001"
+    var contextType = ContextType.appPreview
+    
+    enum ContextType {
+        case appPreview, smilingEmoji, blinkingEmoji
+        
+        var key: String {
+            switch self {
+            case .appPreview:
+                return "CX001"
+                
+            case .smilingEmoji:
+                return "CX002"
+                
+            case .smilingEmoji:
+                return "CX003"
+                
+            default:
+                return "CX001"
+            }
+        }
+    }
     
     fileprivate var part_mapJson = [String : [String : Any]]()
     fileprivate var parts = [String : [String : [String : Any]]]()
@@ -65,14 +85,13 @@ class CharacterHTMLBuilder {
         buildCharHTMLWith(choices: self.defaultChoices, block: block)
     }
     
-    func buildCharHTMLWith(choices: [String : String], block: ((String)->Void)? = nil) {
+    func buildCharHTMLWith(choices: [String : String], for contextType: ContextType = .appPreview, block: ((String)->Void)? = nil) {
+        self.contextType = contextType
+        
         if let block = block {
             resultBlock = block
         }
         
-       let queue = DispatchQueue(label: "characterBuilder")
-        queue.async {
-        }
         self.buildStart(with: choices, block: block)
 
     }
@@ -83,7 +102,23 @@ class CharacterHTMLBuilder {
     
     //call this func for regenerating new character as per user's selected choices.
     fileprivate func buildStart(with choices: [String : String], block: ((String)->Void)? = nil) {
-        choices.forEach { (choice, option)  in
+        
+        var userChoices = choices
+        if let layers = contextJson["layers"] as? [String : Any] {
+            if let zeroValue = layers["0"] as? [String : Any] {
+                if let data = zeroValue["data"] as? [String : Any] {
+                    
+                    if let fixedChoices = data["fixed_choice"] as? [String : String] {
+                        
+                        fixedChoices.forEach({userChoices[$0] = $1})
+                    }
+                    
+                }
+            }
+        }
+        
+        
+        userChoices.forEach { (choice, option)  in
             if let partsMapMatch = self.part_mapJson[choice]?[option] as? [String: [String : [String : Any]]] {
                 partsMapMatch.forEach({ (part, mapMatch) in
                     mapMatch.forEach({ (matchKey, matchValueObj) in
@@ -454,7 +489,7 @@ extension CharacterHTMLBuilder {
     
     func getContexts() {
         CharBuilderAPI.shared.get_Context_json { contexts in
-            self.contextJson = contexts[self.wantedContext]!
+            self.contextJson = contexts[self.contextType.key]!
             self.buildStart(with: self.defaultChoices)
         }
     }
