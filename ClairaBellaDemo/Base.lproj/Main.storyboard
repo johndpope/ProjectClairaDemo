@@ -2497,6 +2497,7 @@ for each of your friends?</string>
                         <outlet property="indicator" destination="7OP-7a-DLU" id="nVV-vv-deT"/>
                         <outlet property="webview" destination="062-95-eVi" id="2FA-hh-dYf"/>
                         <outletCollection property="horizontalConstraints" destination="pms-n1-Iq8" collectionClass="NSMutableArray" id="9mz-cq-BuQ"/>
+                        <outletCollection property="horizontalConstraints" destination="cg3-gu-4FU" collectionClass="NSMutableArray" id="Gne-6P-AoT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ehn-oX-IOy" sceneMemberID="firstResponder"/>
