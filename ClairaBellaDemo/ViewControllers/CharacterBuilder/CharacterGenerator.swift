@@ -37,8 +37,8 @@ class Character: NSCopying {
     
     static var mainCharacter: Character? {
         return myCharacters.filter({$0.isMainChar}).first
-    }
-}
+    }}
+
 
 class CharacterHTMLBuilder {
     
@@ -60,11 +60,9 @@ class CharacterHTMLBuilder {
             case .smilingEmoji:
                 return "CX002"
                 
-            case .smilingEmoji:
+            case .blinkingEmoji:
                 return "CX003"
                 
-            default:
-                return "CX001"
             }
         }
     }
