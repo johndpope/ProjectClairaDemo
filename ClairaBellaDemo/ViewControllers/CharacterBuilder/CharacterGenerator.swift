@@ -62,7 +62,6 @@ class CharacterHTMLBuilder {
                 
             case .blinkingEmoji:
                 return "CX003"
-                
             }
         }
     }

@@ -108,6 +108,9 @@ class SavedCharListVC: ParentVC {
                 dest.character = char
                 dest.isCharacterEditMode = true
             }
+        } else if segue.identifier == "ToShareVCSegue" {
+            let shareVC = segue.destination as! ShareCharacterVC
+            shareVC.character = savedChars[carouselView.currentItemIndex]
         }
     }
     
@@ -133,7 +136,6 @@ class SavedCharListVC: ParentVC {
         showHideEmptyItemsView()
     }
     
-
 }
 
 
