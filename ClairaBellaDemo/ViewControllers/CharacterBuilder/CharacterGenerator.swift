@@ -420,7 +420,6 @@ class CharacterHTMLBuilder {
                     htmlBody += "<object id=\"\(bodyPart)\" type=\"image/svg+xml\" name=\"\(bodyPart)\" data=\"file://\(pathWithColorAtt)\" style=\"\(getFileStyle(data: data))\"></object>"
                 }
                 
-                
             }
         }
         
