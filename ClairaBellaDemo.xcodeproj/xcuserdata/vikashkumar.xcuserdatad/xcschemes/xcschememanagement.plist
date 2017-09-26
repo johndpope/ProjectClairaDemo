@@ -9,9 +9,19 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>ClaireaBella.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>10</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>79244E001F7AB63700741D69</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>7954215E1F460DE500DBBBE0</key>
 		<dict>
 			<key>primary</key>

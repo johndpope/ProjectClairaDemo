@@ -25,6 +25,10 @@
 		7922C3001F5DC98A007F5D25 /* CoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7922C2FF1F5DC98A007F5D25 /* CoreDataHandler.swift */; };
 		7922C3031F5DCA91007F5D25 /* ClairaBella.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7922C3011F5DCA91007F5D25 /* ClairaBella.xcdatamodeld */; };
 		7922C3071F5DD3E0007F5D25 /* WalkThrough.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7922C3051F5DD3E0007F5D25 /* WalkThrough.storyboard */; };
+		79244E041F7AB63700741D69 /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79244E031F7AB63700741D69 /* KeyboardViewController.swift */; };
+		79244E081F7AB63700741D69 /* ClaireaBella.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 79244E011F7AB63700741D69 /* ClaireaBella.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		79244E0E1F7ABBD600741D69 /* KeyboardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79244E0D1F7ABBD600741D69 /* KeyboardView.xib */; };
+		79244E101F7ABBF400741D69 /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79244E0F1F7ABBF400741D69 /* KeyboardView.swift */; };
 		792738021F63BCCE00C238F0 /* UtilityClasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792738011F63BCCE00C238F0 /* UtilityClasses.swift */; };
 		79292BDB1F6DA05B00015CB3 /* UsersCharacters.plist in Resources */ = {isa = PBXBuildFile; fileRef = 79292BDA1F6DA05A00015CB3 /* UsersCharacters.plist */; };
 		7932B2F81F61A9AD00A25AAF /* BP001_BT001_OA001_BV005.svg in Resources */ = {isa = PBXBuildFile; fileRef = 7932AAB61F61A99700A25AAF /* BP001_BT001_OA001_BV005.svg */; };
@@ -2208,6 +2212,30 @@
 		79DAB6A81F571CA00019C37D /* SavedCharListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DAB6A71F571CA00019C37D /* SavedCharListVC.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		79244E061F7AB63700741D69 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 795421571F460DE500DBBBE0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 79244E001F7AB63700741D69;
+			remoteInfo = ClaireaBella;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		79244E0C1F7AB63700741D69 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				79244E081F7AB63700741D69 /* ClaireaBella.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		131C3EE01F5E687E00ECD3A0 /* ParentVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParentVC.swift; sourceTree = "<group>"; };
 		132605D41F4AA632003B6BFC /* result.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = result.html; sourceTree = "<group>"; };
@@ -2229,6 +2257,11 @@
 		7922C2FF1F5DC98A007F5D25 /* CoreDataHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataHandler.swift; sourceTree = "<group>"; };
 		7922C3021F5DCA91007F5D25 /* ClairaBella.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ClairaBella.xcdatamodel; sourceTree = "<group>"; };
 		7922C3061F5DD3E0007F5D25 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/WalkThrough.storyboard; sourceTree = "<group>"; };
+		79244E011F7AB63700741D69 /* ClaireaBella.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ClaireaBella.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		79244E031F7AB63700741D69 /* KeyboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardViewController.swift; sourceTree = "<group>"; };
+		79244E051F7AB63700741D69 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		79244E0D1F7ABBD600741D69 /* KeyboardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KeyboardView.xib; sourceTree = "<group>"; };
+		79244E0F1F7ABBF400741D69 /* KeyboardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardView.swift; sourceTree = "<group>"; };
 		792738011F63BCCE00C238F0 /* UtilityClasses.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilityClasses.swift; sourceTree = "<group>"; };
 		79292BDA1F6DA05A00015CB3 /* UsersCharacters.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = UsersCharacters.plist; sourceTree = "<group>"; };
 		7932AAB61F61A99700A25AAF /* BP001_BT001_OA001_BV005.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = BP001_BT001_OA001_BV005.svg; sourceTree = "<group>"; };
@@ -4415,6 +4448,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		79244DFE1F7AB63700741D69 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7954215C1F460DE500DBBBE0 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -4568,6 +4608,17 @@
 				79292BDA1F6DA05A00015CB3 /* UsersCharacters.plist */,
 			);
 			name = SupportingFiles;
+			sourceTree = "<group>";
+		};
+		79244E021F7AB63700741D69 /* ClaireaBella */ = {
+			isa = PBXGroup;
+			children = (
+				79244E031F7AB63700741D69 /* KeyboardViewController.swift */,
+				79244E051F7AB63700741D69 /* Info.plist */,
+				79244E0D1F7ABBD600741D69 /* KeyboardView.xib */,
+				79244E0F1F7ABBF400741D69 /* KeyboardView.swift */,
+			);
+			path = ClaireaBella;
 			sourceTree = "<group>";
 		};
 		7932AAB51F61A99700A25AAF /* character */ = {
@@ -6858,6 +6909,7 @@
 			isa = PBXGroup;
 			children = (
 				795421611F460DE500DBBBE0 /* ClairaBellaDemo */,
+				79244E021F7AB63700741D69 /* ClaireaBella */,
 				795421601F460DE500DBBBE0 /* Products */,
 				76CC09AFF2D9B378E5CD6C9C /* Pods */,
 				658F767CA63C4438E5BD6B3F /* Frameworks */,
@@ -6868,6 +6920,7 @@
 			isa = PBXGroup;
 			children = (
 				7954215F1F460DE500DBBBE0 /* ClairaBellaDemo.app */,
+				79244E011F7AB63700741D69 /* ClaireaBella.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -6894,6 +6947,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		79244E001F7AB63700741D69 /* ClaireaBella */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 79244E0B1F7AB63700741D69 /* Build configuration list for PBXNativeTarget "ClaireaBella" */;
+			buildPhases = (
+				79244DFD1F7AB63700741D69 /* Sources */,
+				79244DFE1F7AB63700741D69 /* Frameworks */,
+				79244DFF1F7AB63700741D69 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ClaireaBella;
+			productName = ClaireaBella;
+			productReference = 79244E011F7AB63700741D69 /* ClaireaBella.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		7954215E1F460DE500DBBBE0 /* ClairaBellaDemo */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 795421711F460DE500DBBBE0 /* Build configuration list for PBXNativeTarget "ClairaBellaDemo" */;
@@ -6904,10 +6974,12 @@
 				7954215D1F460DE500DBBBE0 /* Resources */,
 				E3D380639F058B03213650C4 /* [CP] Embed Pods Frameworks */,
 				E93FCDFE0A36DA8089701B1C /* [CP] Copy Pods Resources */,
+				79244E0C1F7AB63700741D69 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				79244E071F7AB63700741D69 /* PBXTargetDependency */,
 			);
 			name = ClairaBellaDemo;
 			productName = ClairaBellaDemo;
@@ -6924,6 +6996,11 @@
 				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Vikash Kumar";
 				TargetAttributes = {
+					79244E001F7AB63700741D69 = {
+						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = LCSDGY3TVW;
+						ProvisioningStyle = Automatic;
+					};
 					7954215E1F460DE500DBBBE0 = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = LCSDGY3TVW;
@@ -6945,11 +7022,20 @@
 			projectRoot = "";
 			targets = (
 				7954215E1F460DE500DBBBE0 /* ClairaBellaDemo */,
+				79244E001F7AB63700741D69 /* ClaireaBella */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		79244DFF1F7AB63700741D69 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				79244E0E1F7ABBD600741D69 /* KeyboardView.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7954215D1F460DE500DBBBE0 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -9166,6 +9252,15 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		79244DFD1F7AB63700741D69 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				79244E041F7AB63700741D69 /* KeyboardViewController.swift in Sources */,
+				79244E101F7ABBF400741D69 /* KeyboardView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7954215B1F460DE500DBBBE0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -9215,6 +9310,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		79244E071F7AB63700741D69 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 79244E001F7AB63700741D69 /* ClaireaBella */;
+			targetProxy = 79244E061F7AB63700741D69 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		7922C3051F5DD3E0007F5D25 /* WalkThrough.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -9243,6 +9346,32 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		79244E091F7AB63700741D69 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = LCSDGY3TVW;
+				INFOPLIST_FILE = ClaireaBella/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.unitygames.Claireabella.ClaireaBella;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		79244E0A1F7AB63700741D69 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = LCSDGY3TVW;
+				INFOPLIST_FILE = ClaireaBella/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.unitygames.Claireabella.ClaireaBella;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
 		7954216F1F460DE500DBBBE0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -9338,6 +9467,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4E3CB6A597CC857291E48488 /* Pods-ClairaBellaDemo.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = LCSDGY3TVW;
@@ -9355,6 +9485,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 521D4AFBB295765553039816 /* Pods-ClairaBellaDemo.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = LCSDGY3TVW;
@@ -9371,6 +9502,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		79244E0B1F7AB63700741D69 /* Build configuration list for PBXNativeTarget "ClaireaBella" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				79244E091F7AB63700741D69 /* Debug */,
+				79244E0A1F7AB63700741D69 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		7954215A1F460DE500DBBBE0 /* Build configuration list for PBXProject "ClairaBellaDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

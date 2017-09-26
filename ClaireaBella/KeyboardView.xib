@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="KeyboardView" customModule="ClaireaBella" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="cX5-ZH-j2g">
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="m40-qZ-QIX">
+                        <size key="itemSize" width="50" height="50"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                    <connections>
+                        <outlet property="dataSource" destination="iN0-l3-epB" id="HjB-El-nrk"/>
+                        <outlet property="delegate" destination="iN0-l3-epB" id="0eM-g9-4Tg"/>
+                    </connections>
+                </collectionView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FLp-nI-lBG">
+                    <color key="backgroundColor" red="0.9191206797" green="0.77108664520000003" blue="0.9112190362" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="Bcz-Tv-geH"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="0.87843137250000003" green="0.062745098040000002" blue="0.61568627450000002" alpha="0.93669658690000002" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="cX5-ZH-j2g" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="40" id="SzE-ud-2Sn"/>
+                <constraint firstAttribute="trailing" secondItem="FLp-nI-lBG" secondAttribute="trailing" id="Z6I-Uf-4Bb"/>
+                <constraint firstAttribute="bottom" secondItem="cX5-ZH-j2g" secondAttribute="bottom" id="e8h-ob-Z7t"/>
+                <constraint firstItem="FLp-nI-lBG" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="lwX-mp-sLf"/>
+                <constraint firstAttribute="trailing" secondItem="cX5-ZH-j2g" secondAttribute="trailing" id="omI-Vk-M89"/>
+                <constraint firstItem="cX5-ZH-j2g" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="pPg-Pv-PaH"/>
+                <constraint firstItem="FLp-nI-lBG" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="pyh-MQ-7BE"/>
+            </constraints>
+            <connections>
+                <outlet property="collView" destination="cX5-ZH-j2g" id="Juv-5c-rhz"/>
+            </connections>
+            <point key="canvasLocation" x="26.5" y="52.5"/>
+        </view>
+    </objects>
+</document>
