@@ -147,7 +147,6 @@ class CharacterHTMLBuilder {
                 fileWidth = (fileMeta as! [String : Any])["width"] as! String
                 fileHeight = (fileMeta as! [String : Any])["height"] as! String
                 fileJoints = (fileMeta as! [String : Any])["joints"] as! [String : [String : String]]
-                print(fileJoints)
             }
             
             svgDataDic[bodyPart] = ["body_part" : bodyPart,
