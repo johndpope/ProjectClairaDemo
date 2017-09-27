@@ -6,15 +6,15 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="KeyboardViewController" customModule="ClaireaBella" customModuleProvider="target"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="KeyboardView" customModule="ClaireaBella" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="cX5-ZH-j2g">
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="m40-qZ-QIX">
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="5" id="m40-qZ-QIX">
                         <size key="itemSize" width="50" height="50"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -26,26 +26,77 @@
                     </connections>
                 </collectionView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FLp-nI-lBG">
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dBI-WC-Iid">
+                            <constraints>
+                                <constraint firstAttribute="width" constant="53" id="81A-g9-CAD"/>
+                            </constraints>
+                            <state key="normal" image="Computer-Hardware-Keyboard-icon"/>
+                        </button>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nZq-Gb-cVG">
+                            <subviews>
+                                <webView opaque="NO" contentMode="scaleToFill" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="22Y-Zp-Up3">
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </webView>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BuO-k1-hTW">
+                                    <state key="normal" image="tempChart1"/>
+                                    <connections>
+                                        <action selector="changeChar_btnClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="OUQ-eg-PFV"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="bottom" secondItem="22Y-Zp-Up3" secondAttribute="bottom" id="Iij-bH-qhY"/>
+                                <constraint firstItem="22Y-Zp-Up3" firstAttribute="top" secondItem="nZq-Gb-cVG" secondAttribute="top" id="Rk4-El-dhS"/>
+                                <constraint firstAttribute="width" constant="84" id="Tcg-Jt-PGS"/>
+                                <constraint firstAttribute="trailing" secondItem="22Y-Zp-Up3" secondAttribute="trailing" id="WMu-mb-s02"/>
+                                <constraint firstItem="BuO-k1-hTW" firstAttribute="centerX" secondItem="nZq-Gb-cVG" secondAttribute="centerX" id="gWC-3x-Nm0"/>
+                                <constraint firstItem="BuO-k1-hTW" firstAttribute="centerY" secondItem="nZq-Gb-cVG" secondAttribute="centerY" id="oe3-gb-kst"/>
+                                <constraint firstItem="22Y-Zp-Up3" firstAttribute="leading" secondItem="nZq-Gb-cVG" secondAttribute="leading" id="x9i-le-2X8"/>
+                            </constraints>
+                        </view>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cQc-lf-keF">
+                            <state key="normal" title="Change"/>
+                        </button>
+                    </subviews>
                     <color key="backgroundColor" red="0.9191206797" green="0.77108664520000003" blue="0.9112190362" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="40" id="Bcz-Tv-geH"/>
+                        <constraint firstItem="dBI-WC-Iid" firstAttribute="leading" secondItem="FLp-nI-lBG" secondAttribute="leading" constant="5" id="6bi-Y7-7pj"/>
+                        <constraint firstItem="cQc-lf-keF" firstAttribute="centerY" secondItem="22Y-Zp-Up3" secondAttribute="centerY" id="9HW-tp-Ncq"/>
+                        <constraint firstItem="nZq-Gb-cVG" firstAttribute="leading" secondItem="dBI-WC-Iid" secondAttribute="trailing" constant="1" id="9cT-bQ-qFO"/>
+                        <constraint firstAttribute="height" constant="60" id="Bcz-Tv-geH"/>
+                        <constraint firstItem="dBI-WC-Iid" firstAttribute="top" secondItem="FLp-nI-lBG" secondAttribute="top" constant="5" id="Lfn-gy-Vl5"/>
+                        <constraint firstAttribute="bottom" secondItem="dBI-WC-Iid" secondAttribute="bottom" constant="5" id="WK4-ql-as7"/>
+                        <constraint firstItem="nZq-Gb-cVG" firstAttribute="top" secondItem="FLp-nI-lBG" secondAttribute="top" id="g98-4N-OPK"/>
+                        <constraint firstItem="cQc-lf-keF" firstAttribute="leading" secondItem="22Y-Zp-Up3" secondAttribute="trailing" constant="5" id="qk2-Rj-3tA"/>
+                        <constraint firstAttribute="bottom" secondItem="nZq-Gb-cVG" secondAttribute="bottom" id="s0f-I1-Man"/>
                     </constraints>
                 </view>
+                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="SyY-vz-zsc"/>
             </subviews>
             <color key="backgroundColor" red="0.87843137250000003" green="0.062745098040000002" blue="0.61568627450000002" alpha="0.93669658690000002" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="cX5-ZH-j2g" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="40" id="SzE-ud-2Sn"/>
+                <constraint firstItem="cX5-ZH-j2g" firstAttribute="top" secondItem="FLp-nI-lBG" secondAttribute="bottom" id="96O-zY-bcH"/>
                 <constraint firstAttribute="trailing" secondItem="FLp-nI-lBG" secondAttribute="trailing" id="Z6I-Uf-4Bb"/>
                 <constraint firstAttribute="bottom" secondItem="cX5-ZH-j2g" secondAttribute="bottom" id="e8h-ob-Z7t"/>
+                <constraint firstItem="SyY-vz-zsc" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="lsX-lb-UgL"/>
                 <constraint firstItem="FLp-nI-lBG" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="lwX-mp-sLf"/>
                 <constraint firstAttribute="trailing" secondItem="cX5-ZH-j2g" secondAttribute="trailing" id="omI-Vk-M89"/>
                 <constraint firstItem="cX5-ZH-j2g" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="pPg-Pv-PaH"/>
                 <constraint firstItem="FLp-nI-lBG" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="pyh-MQ-7BE"/>
+                <constraint firstItem="SyY-vz-zsc" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="zh0-65-01x"/>
             </constraints>
             <connections>
+                <outlet property="btnKeyboard" destination="dBI-WC-Iid" id="gyt-ba-e5g"/>
                 <outlet property="collView" destination="cX5-ZH-j2g" id="Juv-5c-rhz"/>
+                <outlet property="indicator" destination="SyY-vz-zsc" id="kFX-nN-Jen"/>
             </connections>
-            <point key="canvasLocation" x="26.5" y="52.5"/>
+            <point key="canvasLocation" x="17.5" y="42.5"/>
         </view>
     </objects>
+    <resources>
+        <image name="Computer-Hardware-Keyboard-icon" width="37" height="24"/>
+        <image name="tempChart1" width="51" height="51"/>
+    </resources>
 </document>

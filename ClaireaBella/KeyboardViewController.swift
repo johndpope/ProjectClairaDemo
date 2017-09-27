@@ -9,8 +9,9 @@
 import UIKit
 
 class KeyboardViewController: UIInputViewController {
-
+    
     @IBOutlet var nextKeyboardButton: UIButton!
+    @IBOutlet var keyboardView: KeyboardView!
     
     override func updateViewConstraints() {
         super.updateViewConstraints()
@@ -20,7 +21,18 @@ class KeyboardViewController: UIInputViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        KeyboardView.add(in: self.view)
+        keyboardView = KeyboardView.add(in: self.view)
+        keyboardView.indicator.startAnimating()
+        CharacterHTMLBuilder.shared.loadBuildData()
+        
+        CharacterHTMLBuilder.shared.defaultCharHTML { (html) in
+            print("..............keyboard finish loading..................")
+            self.keyboardView.indicator.stopAnimating()
+        }
+        getCharacters()
+        
+        keyboardView.btnKeyboard.addTarget(self, action: #selector(handleInputModeList(from:with:)), for: .allTouchEvents)
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -36,6 +48,7 @@ class KeyboardViewController: UIInputViewController {
         self.view.addConstraint(heightConstraint)
 
     }
+    
     override func textWillChange(_ textInput: UITextInput?) {
         // The app is about to change the document's contents. Perform any preparation here.
     }
@@ -53,6 +66,38 @@ class KeyboardViewController: UIInputViewController {
 //        self.nextKeyboardButton.setTitleColor(textColor, for: [])
     }
 
+    
+    func getCharacters() {
+        APICall.shared.getSavedCharaters_APICall() { (response, success) in
+            if success {
+                print(response!)
+                if let jsonArr = response as? [[String : Any]] {
+                    let charters = jsonArr.map({ (json) -> Character in
+                        let choice = json["choices"] as! [String : String]
+                        let character = Character()
+                        character.choices = choice
+                        character.createdDate = json["date_created"] as! String
+                        character.name = json["saved_name"] as! String
+                        if let meta = json["meta"] as? [String : Any] {
+                            character.alive = meta["alive"] as! Bool
+                        }
+                        return character
+                    })
+                    
+                    Character.myCharacters = charters.filter({$0.alive})
+                    DispatchQueue.main.async {
+                        self.keyboardView.characters = Character.myCharacters
+                    }
+                    //self.saveCharacterInToLocalFile(json: jsonArr)
+                }
+                
+            } else {
+                
+            }
+        }
+
+    }
+    
 }
 
 
