@@ -47,7 +47,7 @@ class CharacterHTMLBuilder {
     var defaultChoices = [String : String]()
     var charHTMLString: String?
     var charName = ""
-    var contextType = ContextType.appPreview
+    var contextType = ContextType.smilingEmoji
     
     enum ContextType {
         case appPreview, smilingEmoji, blinkingEmoji
@@ -70,7 +70,8 @@ class CharacterHTMLBuilder {
     fileprivate var parts = [String : [String : [String : Any]]]()
     fileprivate var partsMeta = [String : Any]()
     fileprivate var contextJson = [String : Any]()
-    
+    fileprivate var currentContext = [String : Any]()
+
     var resultBlock: (String)->Void = {_ in}
 
     
@@ -99,9 +100,10 @@ class CharacterHTMLBuilder {
     
     //call this func for regenerating new character as per user's selected choices.
     fileprivate func buildStart(with choices: [String : String], block: ((String)->Void)? = nil) {
-        
+        guard let context = contextJson[contextType.key] as? [String : Any] else {return}
+        currentContext = context
         var userChoices = choices
-        if let layers = contextJson["layers"] as? [String : Any] {
+        if let layers = currentContext["layers"] as? [String : Any] {
             if let zeroValue = layers["0"] as? [String : Any] {
                 if let data = zeroValue["data"] as? [String : Any] {
                     
@@ -166,13 +168,13 @@ class CharacterHTMLBuilder {
         var contextPositionY = ""
         
         //getting context width and height
-        if let metaData = contextJson["meta_data"] as? [String : String] {
+        if let metaData = currentContext["meta_data"] as? [String : String] {
             contextWidth = metaData["width"] ?? "0"
             contextHeight = metaData["height"] ?? "0"
         }
         
         //getting part_locations and context position
-        if let layers = contextJson["layers"] as? [String : Any] {
+        if let layers = currentContext["layers"] as? [String : Any] {
             if let zeroValue = layers["0"] as? [String : Any] {
                 if let data = zeroValue["data"] as? [String : Any] {
                     
@@ -484,7 +486,7 @@ extension CharacterHTMLBuilder {
     
     func getContexts() {
         CharBuilderAPI.shared.get_Context_json { contexts in
-            self.contextJson = contexts[self.contextType.key]!
+            self.contextJson = contexts
             self.buildStart(with: self.defaultChoices)
         }
     }

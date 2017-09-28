@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="HelveticaNeue.ttc">
+            <string>HelveticaNeue</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="KeyboardViewController" customModule="ClaireaBella" customModuleProvider="target"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -13,8 +21,9 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="cX5-ZH-j2g">
+                    <rect key="frame" x="0.0" y="60" width="375" height="607"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="5" id="m40-qZ-QIX">
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="m40-qZ-QIX">
                         <size key="itemSize" width="50" height="50"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -26,19 +35,24 @@
                     </connections>
                 </collectionView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FLp-nI-lBG">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dBI-WC-Iid">
+                            <rect key="frame" x="5" y="5" width="53" height="50"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="53" id="81A-g9-CAD"/>
                             </constraints>
                             <state key="normal" image="Computer-Hardware-Keyboard-icon"/>
                         </button>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nZq-Gb-cVG">
+                            <rect key="frame" x="59" y="0.0" width="84" height="60"/>
                             <subviews>
                                 <webView opaque="NO" contentMode="scaleToFill" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="22Y-Zp-Up3">
+                                    <rect key="frame" x="0.0" y="0.0" width="84" height="60"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </webView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BuO-k1-hTW">
+                                    <rect key="frame" x="16.5" y="4.5" width="51" height="51"/>
                                     <state key="normal" image="tempChart1"/>
                                     <connections>
                                         <action selector="changeChar_btnClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="OUQ-eg-PFV"/>
@@ -57,7 +71,11 @@
                             </constraints>
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cQc-lf-keF">
-                            <state key="normal" title="Change"/>
+                            <rect key="frame" x="135" y="14.5" width="56" height="31"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                            <state key="normal" title="Change">
+                                <color key="titleColor" red="0.16820226463011512" green="0.16820226463011512" blue="0.16820226463011512" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
                         </button>
                     </subviews>
                     <color key="backgroundColor" red="0.9191206797" green="0.77108664520000003" blue="0.9112190362" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -69,11 +87,13 @@
                         <constraint firstItem="dBI-WC-Iid" firstAttribute="top" secondItem="FLp-nI-lBG" secondAttribute="top" constant="5" id="Lfn-gy-Vl5"/>
                         <constraint firstAttribute="bottom" secondItem="dBI-WC-Iid" secondAttribute="bottom" constant="5" id="WK4-ql-as7"/>
                         <constraint firstItem="nZq-Gb-cVG" firstAttribute="top" secondItem="FLp-nI-lBG" secondAttribute="top" id="g98-4N-OPK"/>
-                        <constraint firstItem="cQc-lf-keF" firstAttribute="leading" secondItem="22Y-Zp-Up3" secondAttribute="trailing" constant="5" id="qk2-Rj-3tA"/>
+                        <constraint firstItem="cQc-lf-keF" firstAttribute="leading" secondItem="22Y-Zp-Up3" secondAttribute="trailing" constant="-8" id="qk2-Rj-3tA"/>
                         <constraint firstAttribute="bottom" secondItem="nZq-Gb-cVG" secondAttribute="bottom" id="s0f-I1-Man"/>
                     </constraints>
                 </view>
-                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="SyY-vz-zsc"/>
+                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="SyY-vz-zsc">
+                    <rect key="frame" x="169" y="315" width="37" height="37"/>
+                </activityIndicatorView>
             </subviews>
             <color key="backgroundColor" red="0.87843137250000003" green="0.062745098040000002" blue="0.61568627450000002" alpha="0.93669658690000002" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>

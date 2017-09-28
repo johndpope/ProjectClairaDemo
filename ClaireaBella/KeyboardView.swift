@@ -34,7 +34,11 @@ class KeyboardView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         let nib = UINib(nibName: "EmojiCell", bundle: Bundle(for: KeyboardView.self))
+        let nib2 = UINib(nibName: "CharacterCell", bundle: Bundle(for: KeyboardView.self))
+
         collView.register(nib, forCellWithReuseIdentifier: "emojiCell")
+        collView.register(nib2, forCellWithReuseIdentifier: "charCell")
+
     }
    
     class func add(in view: UIView)-> KeyboardView {
@@ -50,11 +54,6 @@ class KeyboardView: UIView {
     @IBAction func changeChar_btnClicked(_ sender: UIButton) {
         showCharters = !showCharters
         collView.reloadData()
-        
-        let pasteBoard = UIPasteboard.general
-        let image = UIImage(named: "tempChart1")
-        let imagedata = UIImagePNGRepresentation(image!)
-        pasteBoard.setData(imagedata!, forPasteboardType: UIPasteboardTypeListImage.object(at: 0) as! String)
     }
 }
 
@@ -70,7 +69,7 @@ extension KeyboardView: UICollectionViewDataSource, UICollectionViewDelegateFlow
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         if showCharters { //cell for display characters
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "emojiCell", for: indexPath) as! EmojiCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "charCell", for: indexPath) as! EmojiCell
             if indexPath.row == 0 {
                 cell.imgView.image = UIImage(named: "AddChars")
                 cell.webView.isHidden = true
@@ -78,7 +77,7 @@ extension KeyboardView: UICollectionViewDataSource, UICollectionViewDelegateFlow
             } else {
                 cell.imgView.image = nil
                 cell.webView.isHidden = false
-                
+                cell.webView.scrollView.zoomScale = 0.5
                 let char = characters[indexPath.row - 1]
                 charGenerator.buildCharHTMLWith(choices: char.choices, for: CharacterHTMLBuilder.ContextType.appPreview) { (html) in
                     cell.webView.loadHTMLString(html, baseURL: nil)
@@ -90,6 +89,7 @@ extension KeyboardView: UICollectionViewDataSource, UICollectionViewDelegateFlow
         } else { //cell for display emojies
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "emojiCell", for: indexPath) as! EmojiCell
             let emojiType = emojiesTypes[indexPath.item]
+            cell.webView.scrollView.zoomScale = 1.5
             charGenerator.buildCharHTMLWith(choices: selectedCharacter!.choices, for: emojiType) { (html) in
                 cell.webView.loadHTMLString(html, baseURL: nil)
             }
@@ -99,10 +99,29 @@ extension KeyboardView: UICollectionViewDataSource, UICollectionViewDelegateFlow
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let height = showCharters ? 100 : 60
-        return CGSize(width: height, height: height)
+        let height = showCharters ? 100 : 70
+        return CGSize(width: height, height: showCharters ? (height + 30) : height)
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if showCharters {
+            if indexPath.row == 0 {
+                
+            } else {
+                selectedCharacter = characters[indexPath.row - 1]
+                showCharters = !showCharters
+                collView.reloadData()
+            }
+        } else {
+            if let cell = collectionView.cellForItem(at: indexPath) {
+               let image = UIImage.imageWithView(view: cell)
+                let pasteBoard = UIPasteboard.general
+                let imagedata = UIImagePNGRepresentation(image)
+                pasteBoard.setData(imagedata!, forPasteboardType: UIPasteboardTypeListImage.object(at: 0) as! String)
+
+            }
+        }
+    }
     
     func openApp() {
         var instagramHooks = "instagram://user?username=your_username"
@@ -116,3 +135,15 @@ class EmojiCell: UICollectionViewCell {
     @IBOutlet var imgView: UIImageView!
     
 }
+
+extension UIImage {
+    class func imageWithView(view: UIView) -> UIImage {
+        //let drawSize = CGSize(width: view.bounds.size.width * 2 , height: view.bounds.size.height * 2)
+        UIGraphicsBeginImageContextWithOptions(view.bounds.size, view.isOpaque, 1.0)
+        view.drawHierarchy(in: view.bounds, afterScreenUpdates: true)
+        let img = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return img!
+    }
+}
+

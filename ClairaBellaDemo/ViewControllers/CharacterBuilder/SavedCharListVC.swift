@@ -81,14 +81,17 @@ class SavedCharListVC: ParentVC {
     
     //set selected char's info
     func setCurrentChartInfo() {
-        let char = savedChars[carouselView.currentItemIndex]
-        lblCharName.text = char.name
-        checkBox.isSelected = char.isMainChar
-        lblCreatedDate.text = ""
-        if let date = dateFormatter.date(from: char.createdDate, format: "yyyy-MM-dd'T'HH:mm:ss.SSSZ") {
-            print(date)
-            let dateString = dateFormatter.dateString(from: date, to: "MMM d, yyyy h:mm a")
-            lblCreatedDate.text = dateString
+        let itemIndex = carouselView.currentItemIndex
+        if itemIndex >= 0 && itemIndex < savedChars.count {
+            let char = savedChars[carouselView.currentItemIndex]
+            lblCharName.text = char.name
+            checkBox.isSelected = char.isMainChar
+            lblCreatedDate.text = ""
+            if let date = dateFormatter.date(from: char.createdDate, format: "yyyy-MM-dd'T'HH:mm:ss.SSSZ") {
+                print(date)
+                let dateString = dateFormatter.dateString(from: date, to: "MMM d, yyyy h:mm a")
+                lblCreatedDate.text = dateString
+            }
         }
     }
 

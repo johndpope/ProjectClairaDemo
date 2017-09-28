@@ -21,6 +21,11 @@ class KeyboardViewController: UIInputViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
         keyboardView = KeyboardView.add(in: self.view)
         keyboardView.indicator.startAnimating()
         CharacterHTMLBuilder.shared.loadBuildData()
@@ -29,14 +34,7 @@ class KeyboardViewController: UIInputViewController {
             print("..............keyboard finish loading..................")
             self.keyboardView.indicator.stopAnimating()
         }
-        getCharacters()
-        
-        keyboardView.btnKeyboard.addTarget(self, action: #selector(handleInputModeList(from:with:)), for: .allTouchEvents)
 
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
         let expandedHeight:CGFloat = 270
         let heightConstraint = NSLayoutConstraint(item:self.view,
                                                   attribute: .height,
@@ -46,6 +44,8 @@ class KeyboardViewController: UIInputViewController {
                                                   multiplier: 0.0,
                                                   constant: expandedHeight)
         self.view.addConstraint(heightConstraint)
+        keyboardView.btnKeyboard.addTarget(self, action: #selector(handleInputModeList(from:with:)), for: .allTouchEvents)
+        getCharacters()
 
     }
     
