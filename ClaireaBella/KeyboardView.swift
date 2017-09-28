@@ -140,7 +140,7 @@ extension UIImage {
     class func imageWithView(view: UIView) -> UIImage {
         //let drawSize = CGSize(width: view.bounds.size.width * 2 , height: view.bounds.size.height * 2)
         UIGraphicsBeginImageContextWithOptions(view.bounds.size, view.isOpaque, 1.0)
-        view.drawHierarchy(in: view.bounds, afterScreenUpdates: true)
+        view.layer.render(in: UIGraphicsGetCurrentContext()!)
         let img = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return img!
