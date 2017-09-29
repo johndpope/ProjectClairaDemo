@@ -2360,8 +2360,8 @@ for each of your friends?</string>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="eEv-NT-HZg" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Account" image="ICON_Account" id="33s-en-IA2"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="OsM-Q3-QCx">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="OsM-Q3-QCx">
+                        <rect key="frame" x="0.0" y="20" width="375" height="48"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
