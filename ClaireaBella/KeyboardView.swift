@@ -12,6 +12,7 @@ class KeyboardView: UIView {
     @IBOutlet var collView: UICollectionView!
     @IBOutlet var btnKeyboard: UIButton!
     @IBOutlet var indicator: UIActivityIndicatorView!
+    @IBOutlet var messageViewTop: NSLayoutConstraint!
     
     var charGenerator = CharacterHTMLBuilder.shared
     
@@ -73,7 +74,7 @@ extension KeyboardView: UICollectionViewDataSource, UICollectionViewDelegateFlow
             if indexPath.row == 0 {
                 cell.imgView.image = UIImage(named: "AddChars")
                 cell.webView.isHidden = true
-                
+                cell.backgroundColor = UIColor.white
             } else {
                 cell.imgView.image = nil
                 cell.webView.isHidden = false
@@ -82,6 +83,10 @@ extension KeyboardView: UICollectionViewDataSource, UICollectionViewDelegateFlow
                 charGenerator.buildCharHTMLWith(choices: char.choices, for: CharacterHTMLBuilder.ContextType.appPreview) { (html) in
                     cell.webView.loadHTMLString(html, baseURL: nil)
                 }
+                
+                cell.layer.cornerRadius = cell.frame.height/2
+                cell.clipsToBounds = true
+                cell.backgroundColor = UIColor(colorLiteralRed: 230.0/255, green: 44.0/255.0, blue: 152.0/255.0, alpha: 1)
             }
             
             return cell
@@ -100,7 +105,7 @@ extension KeyboardView: UICollectionViewDataSource, UICollectionViewDelegateFlow
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let height = showCharters ? 100 : 70
-        return CGSize(width: height, height: showCharters ? (height + 30) : height)
+        return CGSize(width: height, height: showCharters ? (height) : height)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -118,7 +123,18 @@ extension KeyboardView: UICollectionViewDataSource, UICollectionViewDelegateFlow
                 let pasteBoard = UIPasteboard.general
                 let imagedata = UIImagePNGRepresentation(image)
                 pasteBoard.setData(imagedata!, forPasteboardType: UIPasteboardTypeListImage.object(at: 0) as! String)
-
+                
+                UIView.animate(withDuration: 0.3, animations: { 
+                    self.messageViewTop.constant = 0
+                    self.layoutIfNeeded()
+                    }, completion: { (finish) in
+                        UIView.animate(withDuration: 0.3, delay: 2, options: [.curveEaseInOut], animations: { 
+                            self.messageViewTop.constant = -50
+                            self.layoutIfNeeded()
+                            }, completion: { (finish) in
+                                
+                        })
+                })
             }
         }
     }
