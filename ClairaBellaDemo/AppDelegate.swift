@@ -47,7 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     //Facebook Delegate Methods
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-        return true//FBSDKApplicationDelegate.sharedInstance().application(app, open: url, options: options)
+        return FBSDKApplicationDelegate.sharedInstance().application(app, open: url, options: options)
     }
 
     
