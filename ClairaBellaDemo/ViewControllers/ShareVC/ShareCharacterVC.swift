@@ -81,3 +81,9 @@ extension ShareCharacterVC: UICollectionViewDataSource, UICollectionViewDelegate
     }
     
 }
+
+extension ShareCharacterVC {
+    @IBAction func share_btnClicekd(_ sender:UIButton) {
+        
+    }
+}

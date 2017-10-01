@@ -67,6 +67,9 @@
                             <state key="normal" title="Change">
                                 <color key="titleColor" red="0.16820226463011512" green="0.16820226463011512" blue="0.16820226463011512" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
+                            <connections>
+                                <action selector="changeChar_btnClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="ZdZ-Ku-Y10"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" red="0.9191206797" green="0.77108664520000003" blue="0.9112190362" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
