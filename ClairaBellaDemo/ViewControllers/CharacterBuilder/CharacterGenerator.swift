@@ -40,6 +40,7 @@ class Character: NSCopying {
     }
     
     //var characterBackground: CharBackground?
+    //
 }
 
 
