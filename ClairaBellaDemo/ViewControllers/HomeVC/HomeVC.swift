@@ -75,6 +75,10 @@ class HomeVC: ParentVC {
             CharacterHTMLBuilder.shared.buildCharHTMLWith(choices: mainChar.choices, block: { html in
                 self.webView.loadHTMLString(html, baseURL: nil)
             })
+            
+//            CharacterHTMLBuilder.shared.buildCharHTMLWith(choices: mainChar.choices, for: .blinkingEmoji, block: { (html) in
+//                self.webView.loadHTMLString(html, baseURL: nil)
+//            })
         }
     }
 

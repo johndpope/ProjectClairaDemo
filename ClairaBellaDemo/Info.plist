@@ -26,6 +26,16 @@
 				<string>fb104387963500939</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>com.claireabella.claireabellaApp</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>claireabellaApp</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1.3</string>
