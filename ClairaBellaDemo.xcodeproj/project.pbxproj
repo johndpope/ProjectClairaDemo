@@ -1419,7 +1419,6 @@
 		79183D5D1F55100000A00D50 /* CharacterBuilderVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79183D5B1F55100000A00D50 /* CharacterBuilderVC.swift */; };
 		79183D601F55102900A00D50 /* APICalls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79183D5F1F55102900A00D50 /* APICalls.swift */; };
 		79183D631F5514B600A00D50 /* SaveCharacterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79183D621F5514B600A00D50 /* SaveCharacterVC.swift */; };
-		791993721F7429A10007E23C /* ShareCharacterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791993711F7429A10007E23C /* ShareCharacterVC.swift */; };
 		792294411F5F09DB004845DE /* SetupKeyBoardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792294401F5F09DB004845DE /* SetupKeyBoardVC.swift */; };
 		792294431F5F0A17004845DE /* EmojiesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792294421F5F0A17004845DE /* EmojiesVC.swift */; };
 		792294461F5F0BDD004845DE /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792294451F5F0BDD004845DE /* Constant.swift */; };
@@ -3616,6 +3615,7 @@
 		795421681F460DE500DBBBE0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 795421661F460DE500DBBBE0 /* Main.storyboard */; };
 		7954216D1F460DE500DBBBE0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7954216B1F460DE500DBBBE0 /* LaunchScreen.storyboard */; };
 		79DAB6A81F571CA00019C37D /* SavedCharListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DAB6A71F571CA00019C37D /* SavedCharListVC.swift */; };
+		79E2E4661F82B12B00B68524 /* ShareCharacterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791993711F7429A10007E23C /* ShareCharacterVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -12086,7 +12086,6 @@
 			files = (
 				7932BB9E1F61C8DF00A25AAF /* NewUserVC.swift in Sources */,
 				792738021F63BCCE00C238F0 /* UtilityClasses.swift in Sources */,
-				791993721F7429A10007E23C /* ShareCharacterVC.swift in Sources */,
 				79183D5C1F55100000A00D50 /* CharacterGenerator.swift in Sources */,
 				7932BB9A1F61C8CB00A25AAF /* LoadingVC.swift in Sources */,
 				7932BBC61F61D1C700A25AAF /* NewUser.swift in Sources */,
@@ -12095,6 +12094,7 @@
 				7922C2FD1F5DAAE3007F5D25 /* HomeVC.swift in Sources */,
 				131C3EE11F5E687E00ECD3A0 /* ParentVC.swift in Sources */,
 				795421631F460DE500DBBBE0 /* AppDelegate.swift in Sources */,
+				79E2E4661F82B12B00B68524 /* ShareCharacterVC.swift in Sources */,
 				79153ED81F80A69B00E43DC4 /* ShareCharacterView.swift in Sources */,
 				7932BBA01F61C8DF00A25AAF /* SignUpVC.swift in Sources */,
 				79183D601F55102900A00D50 /* APICalls.swift in Sources */,

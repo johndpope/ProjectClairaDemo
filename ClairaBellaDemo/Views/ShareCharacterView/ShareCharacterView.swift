@@ -9,15 +9,21 @@
 import UIKit
 
 class ShareCharacterView: UIView {
+    @IBOutlet var webView: UIWebView!
 
-
-    class func show(in view: View) {
+    var character: Character! {
+        didSet {
+            webView.loadHTMLString(character.charHtml!, baseURL: nil)
+        }
+    }
+    class func show(in view: UIView, character: Character) {
         let views = Bundle.main.loadNibNamed("ShareCharacterView", owner: nil, options: nil) as! [UIView]
         let scView = views.first as! ShareCharacterView
         let scviewFrame = CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT)
         scView.frame = scviewFrame
-        view.addSubView(scView)
-        return scView
+        view.addSubview(scView)
+        scView.showAnimation()
+        scView.character = character
     }
     
     private func showAnimation() {
@@ -37,11 +43,8 @@ class ShareCharacterView: UIView {
     }
     
     @IBAction func close_btnClicked(_ sender: UIButton) {
-        
+        hideWithAnimation()
     }
 
-    @IBAction func close_btnClicked(_ sender: UIButton) {
-        
-    }
 
 }

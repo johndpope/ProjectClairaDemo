@@ -22,7 +22,12 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SNl-h0-1hZ">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vTh-YS-pCX">
+                    <connections>
+                        <action selector="close_btnClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="pIh-Fb-mUR"/>
+                    </connections>
+                </button>
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SNl-h0-1hZ">
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background1.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="8LB-8V-Wqz"/>
                         <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="shareBrandLogo" translatesAutoresizingMaskIntoConstraints="NO" id="II2-7L-cgY">
@@ -30,18 +35,32 @@
                                 <constraint firstAttribute="width" secondItem="II2-7L-cgY" secondAttribute="height" multiplier="17:4" id="cFf-tf-5qA"/>
                             </constraints>
                         </imageView>
+                        <webView opaque="NO" contentMode="scaleToFill" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JpR-UT-yaS">
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="JpR-UT-yaS" secondAttribute="height" multiplier="50:39" id="D1f-Fx-GYQ"/>
+                                <constraint firstAttribute="width" constant="250" id="Gay-Ak-Amu"/>
+                            </constraints>
+                        </webView>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="II2-7L-cgY" secondAttribute="bottom" constant="3" id="4NQ-g2-QTE"/>
                         <constraint firstAttribute="trailing" secondItem="II2-7L-cgY" secondAttribute="trailing" constant="3" id="E35-u9-1mS"/>
                         <constraint firstItem="8LB-8V-Wqz" firstAttribute="top" secondItem="SNl-h0-1hZ" secondAttribute="top" constant="3" id="S3f-GP-F3y"/>
+                        <constraint firstItem="JpR-UT-yaS" firstAttribute="centerX" secondItem="SNl-h0-1hZ" secondAttribute="centerX" id="U4F-vJ-fak"/>
                         <constraint firstAttribute="trailing" secondItem="8LB-8V-Wqz" secondAttribute="trailing" constant="3" id="b4T-7O-d8f"/>
                         <constraint firstItem="8LB-8V-Wqz" firstAttribute="leading" secondItem="SNl-h0-1hZ" secondAttribute="leading" constant="3" id="ogu-F5-ltu"/>
                         <constraint firstAttribute="width" secondItem="SNl-h0-1hZ" secondAttribute="height" multiplier="165:89" id="qNK-4F-mhb"/>
                         <constraint firstAttribute="bottom" secondItem="8LB-8V-Wqz" secondAttribute="bottom" constant="3" id="rgU-Vp-XXK"/>
                         <constraint firstItem="II2-7L-cgY" firstAttribute="width" secondItem="8LB-8V-Wqz" secondAttribute="width" multiplier="0.3" id="ukd-Vz-YNm"/>
+                        <constraint firstItem="JpR-UT-yaS" firstAttribute="top" secondItem="SNl-h0-1hZ" secondAttribute="top" constant="-5" id="x45-3i-FW7"/>
                     </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="3"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uYe-c3-mGO">
                     <subviews>
@@ -49,7 +68,7 @@
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="If5-8Q-4oP">
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DOq-xg-mBc">
+                                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DOq-xg-mBc">
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="DOq-xg-mBc" secondAttribute="height" multiplier="1:1" id="hd3-t3-HV0"/>
                                                 <constraint firstAttribute="width" constant="50" id="uQb-Bx-MwH"/>
@@ -67,7 +86,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
-                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstItem="DOq-xg-mBc" firstAttribute="top" secondItem="If5-8Q-4oP" secondAttribute="top" constant="8" id="6BI-Wk-frg"/>
                                         <constraint firstItem="w3B-VB-RlD" firstAttribute="top" secondItem="DOq-xg-mBc" secondAttribute="bottom" constant="1" id="Fy9-9c-5k7"/>
@@ -77,7 +96,7 @@
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zo6-M3-zGe">
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Ng-bw-MFb">
+                                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Ng-bw-MFb">
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="50" id="7q1-vy-abK"/>
                                                 <constraint firstAttribute="width" secondItem="9Ng-bw-MFb" secondAttribute="height" multiplier="1:1" id="oDQ-DY-XFc"/>
@@ -95,7 +114,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
-                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstItem="uOk-Ly-9vq" firstAttribute="top" secondItem="9Ng-bw-MFb" secondAttribute="bottom" constant="1" id="LqJ-LS-N4t"/>
                                         <constraint firstItem="9Ng-bw-MFb" firstAttribute="centerX" secondItem="Zo6-M3-zGe" secondAttribute="centerX" id="kTK-Nr-adC"/>
@@ -105,7 +124,7 @@
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UYl-8d-rAc">
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J9J-ur-bJY">
+                                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J9J-ur-bJY">
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="J9J-ur-bJY" secondAttribute="height" multiplier="1:1" id="POI-Qx-CE8"/>
                                                 <constraint firstAttribute="width" constant="50" id="Zpd-37-Ntn"/>
@@ -123,7 +142,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
-                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstItem="Gjq-uR-VLf" firstAttribute="top" secondItem="J9J-ur-bJY" secondAttribute="bottom" constant="1" id="4sP-sR-PZw"/>
                                         <constraint firstItem="Gjq-uR-VLf" firstAttribute="centerX" secondItem="J9J-ur-bJY" secondAttribute="centerX" id="Hh0-sY-8uJ"/>
@@ -151,7 +170,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
-                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstItem="beX-ld-iOc" firstAttribute="centerX" secondItem="RhH-Ky-NDe" secondAttribute="centerX" id="0pe-AQ-vCf"/>
                                         <constraint firstItem="lQf-0V-x66" firstAttribute="centerX" secondItem="beX-ld-iOc" secondAttribute="centerX" id="76o-7M-Qqi"/>
@@ -182,7 +201,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
-                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstItem="of8-1w-ziP" firstAttribute="top" secondItem="62I-hv-RCb" secondAttribute="bottom" constant="2" id="8KZ-hT-f62"/>
                                         <constraint firstItem="62I-hv-RCb" firstAttribute="centerX" secondItem="ZM3-cW-BOW" secondAttribute="centerX" id="Ilm-Rf-PMh"/>
@@ -193,7 +212,7 @@
                             </subviews>
                         </stackView>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="TJQ-LC-eZB" firstAttribute="leading" secondItem="uYe-c3-mGO" secondAttribute="leading" id="6Uq-am-8kd"/>
                         <constraint firstAttribute="bottom" secondItem="TJQ-LC-eZB" secondAttribute="bottom" id="Qg7-dG-70e"/>
@@ -210,16 +229,23 @@
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
-            <color key="backgroundColor" white="0.0" alpha="0.90416309931506844" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" white="0.0" alpha="0.75254173801369861" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="uYe-c3-mGO" firstAttribute="top" secondItem="SNl-h0-1hZ" secondAttribute="bottom" constant="53" id="7kx-s5-2ca"/>
+                <constraint firstAttribute="bottom" secondItem="vTh-YS-pCX" secondAttribute="bottom" id="BVH-me-bus"/>
                 <constraint firstItem="uYe-c3-mGO" firstAttribute="trailing" secondItem="SNl-h0-1hZ" secondAttribute="trailing" id="DF9-cY-90D"/>
+                <constraint firstItem="vTh-YS-pCX" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Emr-MT-KjN"/>
+                <constraint firstAttribute="trailing" secondItem="vTh-YS-pCX" secondAttribute="trailing" id="MHa-db-Md4"/>
                 <constraint firstItem="SNl-h0-1hZ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="60" id="UHe-qW-T1L"/>
                 <constraint firstItem="uYe-c3-mGO" firstAttribute="leading" secondItem="SNl-h0-1hZ" secondAttribute="leading" id="XtV-ug-Dc4"/>
+                <constraint firstItem="vTh-YS-pCX" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="kvc-HS-01H"/>
                 <constraint firstItem="uYe-c3-mGO" firstAttribute="centerX" secondItem="SNl-h0-1hZ" secondAttribute="centerX" id="qi0-dx-BH9"/>
                 <constraint firstItem="SNl-h0-1hZ" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.9" id="rtK-Gp-lux"/>
                 <constraint firstItem="SNl-h0-1hZ" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="xjn-9o-4cq"/>
             </constraints>
+            <connections>
+                <outlet property="webView" destination="JpR-UT-yaS" id="h4h-gJ-uSH"/>
+            </connections>
             <point key="canvasLocation" x="33.5" y="59.5"/>
         </view>
     </objects>

@@ -16,10 +16,6 @@ class ShareCharacterVC: ParentVC {
     
     var character: Character!
     
-    struct CharBackground {
-        var icon = ""
-        var image = ""
-    }
     var backgrounds = [CharBackground]()
     
     override func viewDidLoad() {
@@ -84,6 +80,12 @@ extension ShareCharacterVC: UICollectionViewDataSource, UICollectionViewDelegate
 
 extension ShareCharacterVC {
     @IBAction func share_btnClicekd(_ sender:UIButton) {
-        
+         ShareCharacterView.show(in: self.view, character: character)
     }
 }
+
+struct CharBackground {
+    var icon = ""
+    var image = ""
+}
+

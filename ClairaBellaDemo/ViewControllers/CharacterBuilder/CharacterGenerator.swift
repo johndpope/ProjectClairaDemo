@@ -37,7 +37,10 @@ class Character: NSCopying {
     
     static var mainCharacter: Character? {
         return myCharacters.filter({$0.isMainChar}).first
-    }}
+    }
+    
+    //var characterBackground: CharBackground?
+}
 
 
 class CharacterHTMLBuilder {
