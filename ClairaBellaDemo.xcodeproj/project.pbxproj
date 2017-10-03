@@ -1430,6 +1430,7 @@
 		79244E081F7AB63700741D69 /* ClaireaBella.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 79244E011F7AB63700741D69 /* ClaireaBella.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		79244E0E1F7ABBD600741D69 /* KeyboardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79244E0D1F7ABBD600741D69 /* KeyboardView.xib */; };
 		79244E101F7ABBF400741D69 /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79244E0F1F7ABBF400741D69 /* KeyboardView.swift */; };
+		792713271F84193D00C7B7DB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 792713251F84193D00C7B7DB /* Main.storyboard */; };
 		792738021F63BCCE00C238F0 /* UtilityClasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792738011F63BCCE00C238F0 /* UtilityClasses.swift */; };
 		79292BDB1F6DA05B00015CB3 /* UsersCharacters.plist in Resources */ = {isa = PBXBuildFile; fileRef = 79292BDA1F6DA05A00015CB3 /* UsersCharacters.plist */; };
 		792E1A251F7C056400A7F4C5 /* CharacterGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79183D5A1F550FFF00A00D50 /* CharacterGenerator.swift */; };
@@ -3612,7 +3613,6 @@
 		79387AF81F6511D800E1B3B8 /* ST021.png in Resources */ = {isa = PBXBuildFile; fileRef = 79387AE31F6511D800E1B3B8 /* ST021.png */; };
 		79387AFB1F6521D300E1B3B8 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79387AFA1F6521D300E1B3B8 /* User.swift */; };
 		795421631F460DE500DBBBE0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795421621F460DE500DBBBE0 /* AppDelegate.swift */; };
-		795421681F460DE500DBBBE0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 795421661F460DE500DBBBE0 /* Main.storyboard */; };
 		7954216D1F460DE500DBBBE0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7954216B1F460DE500DBBBE0 /* LaunchScreen.storyboard */; };
 		79DAB6A81F571CA00019C37D /* SavedCharListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DAB6A71F571CA00019C37D /* SavedCharListVC.swift */; };
 		79E2E4661F82B12B00B68524 /* ShareCharacterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791993711F7429A10007E23C /* ShareCharacterVC.swift */; };
@@ -3671,6 +3671,7 @@
 		79244E051F7AB63700741D69 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		79244E0D1F7ABBD600741D69 /* KeyboardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KeyboardView.xib; sourceTree = "<group>"; };
 		79244E0F1F7ABBF400741D69 /* KeyboardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardView.swift; sourceTree = "<group>"; };
+		792713261F84193D00C7B7DB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		792738011F63BCCE00C238F0 /* UtilityClasses.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilityClasses.swift; sourceTree = "<group>"; };
 		79292BDA1F6DA05A00015CB3 /* UsersCharacters.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = UsersCharacters.plist; sourceTree = "<group>"; };
 		792E1A271F7C081600A7F4C5 /* EmojiCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmojiCell.xib; sourceTree = "<group>"; };
@@ -5851,7 +5852,6 @@
 		79387AFA1F6521D300E1B3B8 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		7954215F1F460DE500DBBBE0 /* ClairaBellaDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ClairaBellaDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		795421621F460DE500DBBBE0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		795421671F460DE500DBBBE0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7954216C1F460DE500DBBBE0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7954216E1F460DE500DBBBE0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		79DAB6A71F571CA00019C37D /* SavedCharListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedCharListVC.swift; sourceTree = "<group>"; };
@@ -5967,7 +5967,7 @@
 		79183D611F55103800A00D50 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				795421661F460DE500DBBBE0 /* Main.storyboard */,
+				792713251F84193D00C7B7DB /* Main.storyboard */,
 				7954216B1F460DE500DBBBE0 /* LaunchScreen.storyboard */,
 				7922C3051F5DD3E0007F5D25 /* WalkThrough.storyboard */,
 			);
@@ -10372,6 +10372,7 @@
 				7932B5141F61A9AE00A25AAF /* BP006_BT002_OA010_BV001.svg in Resources */,
 				7932B5741F61A9AE00A25AAF /* BP006_BT003_OA023_BV001.svg in Resources */,
 				7932B4871F61A9AD00A25AAF /* BP005_BT003_OA032_BV004.svg in Resources */,
+				792713271F84193D00C7B7DB /* Main.storyboard in Resources */,
 				7932BA681F61A9B000A25AAF /* LH004.png in Resources */,
 				7932B4201F61A9AD00A25AAF /* BP005_BT001_OA004_BV001.svg in Resources */,
 				7932B96F1F61A9B000A25AAF /* eye_wear_icon.png in Resources */,
@@ -11679,7 +11680,6 @@
 				7932B32C1F61A9AD00A25AAF /* BP001_BT002_OA029_BV007.svg in Resources */,
 				7932B6A51F61A9AE00A25AAF /* BP011_BT002_OA008_BV000.svg in Resources */,
 				7932B71E1F61A9AF00A25AAF /* BP015_BT001_OA017_BV002.svg in Resources */,
-				795421681F460DE500DBBBE0 /* Main.storyboard in Resources */,
 				7932B4C61F61A9AE00A25AAF /* BP006_BT001_OA010_BV003.svg in Resources */,
 				7932B4461F61A9AD00A25AAF /* BP005_BT002_OA002_BV003.svg in Resources */,
 				7932B9FB1F61A9B000A25AAF /* HS012HC006.png in Resources */,
@@ -12147,10 +12147,10 @@
 			name = WalkThrough.storyboard;
 			sourceTree = "<group>";
 		};
-		795421661F460DE500DBBBE0 /* Main.storyboard */ = {
+		792713251F84193D00C7B7DB /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				795421671F460DE500DBBBE0 /* Base */,
+				792713261F84193D00C7B7DB /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
