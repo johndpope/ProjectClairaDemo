@@ -8,13 +8,20 @@
 
 import UIKit
 
+
+struct CharBackground {
+    var icon = ""
+    var image = ""
+}
+
 class Character: NSCopying {
     var name = ""
     var choices = [String : String]()
     var charHtml: String?
     var createdDate = ""
     var alive = false
-   
+    var characterBackground: CharBackground?
+
     var isMainChar: Bool {
         if let mainCharDate = UserDefaults.standard.value(forKey: "MainCharacter") as? String {
             return createdDate == mainCharDate
@@ -39,7 +46,6 @@ class Character: NSCopying {
         return myCharacters.filter({$0.isMainChar}).first
     }
     
-    //var characterBackground: CharBackground?
     //
 }
 

@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class ShareCharacterVC: ParentVC {
     @IBOutlet var webview: UIWebView!
     @IBOutlet var collView: UICollectionView!
@@ -74,18 +75,28 @@ extension ShareCharacterVC: UICollectionViewDataSource, UICollectionViewDelegate
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let back = self.backgrounds[indexPath.row]
         backImageView.image = UIImage(named: back.image)
+        character.characterBackground = back
     }
     
 }
 
 extension ShareCharacterVC {
     @IBAction func share_btnClicekd(_ sender:UIButton) {
-         ShareCharacterView.show(in: self.view, character: character)
+        ShareCharacterView.show(in: self.view, character: character) { (action, image) in
+            switch action {
+            case .facebook:
+                print("facebook")
+            case .twitter:
+                print("twitter")
+            case .mail:
+                print("mail")
+            case .save:
+                print("save")
+            case .more:
+                print("more")
+            }
+        }
     }
 }
 
-struct CharBackground {
-    var icon = ""
-    var image = ""
-}
 
