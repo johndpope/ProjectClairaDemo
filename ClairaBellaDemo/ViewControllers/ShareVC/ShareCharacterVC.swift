@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import Social
 
 class ShareCharacterVC: ParentVC {
     @IBOutlet var webview: UIWebView!
@@ -85,9 +85,10 @@ extension ShareCharacterVC {
         ShareCharacterView.show(in: self.view, character: character) { (action, image) in
             switch action {
             case .facebook:
-                print("facebook")
+                self.shareOnFacebook(image)
             case .twitter:
                 print("twitter")
+                self.shareOnTwitter(image)
             case .mail:
                 print("mail")
             case .save:
@@ -97,6 +98,44 @@ extension ShareCharacterVC {
             }
         }
     }
+    
+    
+    func shareOnFacebook(_ image: UIImage) {
+        if SLComposeViewController.isAvailable(forServiceType: SLServiceTypeFacebook) {
+            let vc = SLComposeViewController(forServiceType:SLServiceTypeFacebook)!
+            vc.add(image)
+            //        vc.add(URL(string: "http://www.example.com/"))
+            //        vc.setInitialText("Initial text here.")
+
+            self.present(vc, animated: true, completion: nil)
+        } else {
+            showAlert(message: "Please go to settings > Facebook and add your facebook account. ")
+        }
+    }
+
+    
+    func shareOnTwitter(_ image: UIImage) {
+        if SLComposeViewController.isAvailable(forServiceType: SLServiceTypeTwitter) {
+            let vc = SLComposeViewController(forServiceType:SLServiceTypeTwitter)!
+            vc.add(image)
+            //        vc.add(URL(string: "http://www.example.com/"))
+            //        vc.setInitialText("Initial text here.")
+            
+            self.present(vc, animated: true, completion: nil)
+        } else {
+            showAlert(message: "Please go to settings > Twitter and add your twitter account. ")
+        }
+    }
+
 }
 
 
+
+extension UIViewController {
+    func showAlert(message: String) {
+        let alert = UIAlertController(title: "Claireabella", message: message, preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alert.addAction(action)
+        self.present(alert, animated: true, completion: nil)
+    }
+}
