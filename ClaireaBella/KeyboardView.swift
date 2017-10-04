@@ -21,15 +21,21 @@ class KeyboardView: UIView {
             selectedCharacter = characters.first
         }
     }
+    var emojiTypes = [String]()
     
     var selectedCharacter: Character? {
         didSet {
+            if selectedCharacter!.emojis.isEmpty {
+                for type in emojiTypes {
+                    let emoji = Emoji()
+                    emoji.key = type
+                    selectedCharacter?.emojis.append(emoji)
+                }
+            }
             collView.reloadData()
         }
     }
-    
-    var emojiesTypes = [CharacterHTMLBuilder.ContextType.smilingEmoji, CharacterHTMLBuilder.ContextType.blinkingEmoji]
-    
+        
     var showCharters = false
     
     override func awakeFromNib() {
@@ -64,7 +70,7 @@ extension KeyboardView: UICollectionViewDataSource, UICollectionViewDelegateFlow
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return showCharters ? (characters.count + 1) : ( selectedCharacter == nil ? 0 : emojiesTypes.count)
+        return showCharters ? (characters.count + 1) : ( selectedCharacter == nil ? 0 : selectedCharacter!.emojis.count)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -80,7 +86,7 @@ extension KeyboardView: UICollectionViewDataSource, UICollectionViewDelegateFlow
                 cell.webView.isHidden = false
                 cell.webView.scrollView.zoomScale = 0.5
                 let char = characters[indexPath.row - 1]
-                charGenerator.buildCharHTMLWith(choices: char.choices, for: CharacterHTMLBuilder.ContextType.appPreview) { (html) in
+                charGenerator.buildCharHTMLWith(for: .character, choices: char.choices) { (html) in
                     cell.webView.loadHTMLString(html, baseURL: nil)
                 }
                 
@@ -93,10 +99,16 @@ extension KeyboardView: UICollectionViewDataSource, UICollectionViewDelegateFlow
 
         } else { //cell for display emojies
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "emojiCell", for: indexPath) as! EmojiCell
-            let emojiType = emojiesTypes[indexPath.item]
-            cell.webView.scrollView.zoomScale = 1.5
-            charGenerator.buildCharHTMLWith(choices: selectedCharacter!.choices, for: emojiType) { (html) in
-                cell.webView.loadHTMLString(html, baseURL: nil)
+            let emoji = selectedCharacter!.emojis[indexPath.item]
+            cell.webView.scrollView.zoomScale = 2.0
+            if emoji.html.isEmpty {
+                charGenerator.buildCharHTMLWith(for: .emoji, choices: selectedCharacter!.choices, for: emoji.key) { (html) in
+                    cell.webView.loadHTMLString(html, baseURL: nil)
+                    emoji.html = html
+                }
+
+            } else {
+                cell.webView.loadHTMLString(emoji.html, baseURL: nil)
             }
             
             return cell
@@ -104,7 +116,7 @@ extension KeyboardView: UICollectionViewDataSource, UICollectionViewDelegateFlow
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let height = showCharters ? 100 : 70
+        let height = showCharters ? 100 : 100
         return CGSize(width: height, height: showCharters ? (height) : height)
     }
     
@@ -140,6 +152,7 @@ extension KeyboardView: UICollectionViewDataSource, UICollectionViewDelegateFlow
     }
     
     func openApp() {
+        
         var instagramHooks = "instagram://user?username=your_username"
         var instagramUrl = URL(string: instagramHooks)
     }

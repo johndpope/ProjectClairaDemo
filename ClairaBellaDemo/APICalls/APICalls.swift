@@ -37,6 +37,8 @@ class APICall {
         static let getParts = "/parts.json"
         static let getPartMeta = "/parts_meta.json"
         static let getContexts = "/contexts.json"
+        static let getEmojisContexts = "/emojis.json"
+
         static let getInterfaces = "/interface.json"
     }
     
@@ -115,8 +117,22 @@ class APICall {
             
             block(nil, false)
             }.resume()
-        
     }
+    
+    func emojis_context_APICall(block: @escaping ResponseBlock) {
+        let urlString = baseUrl + APIName.getEmojisContexts
+        let url = URL(string: urlString)!
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+            if let data = data {
+                if let json = try? JSONSerialization.jsonObject(with: data, options: [.mutableContainers]) {
+                    return block(json, true)
+                }
+            }
+            
+            block(nil, false)
+            }.resume()
+    }
+
     
     func interface_APICall(block: @escaping ResponseBlock) {
         let urlString = baseUrl + APIName.getInterfaces

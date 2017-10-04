@@ -45,7 +45,8 @@ class KeyboardViewController: UIInputViewController {
                                                   constant: expandedHeight)
         self.view.addConstraint(heightConstraint)
         keyboardView.btnKeyboard.addTarget(self, action: #selector(handleInputModeList(from:with:)), for: .allTouchEvents)
-        getCharacters()
+        //getCharacters()
+        getEmojisContexts()
 
     }
     
@@ -88,7 +89,6 @@ class KeyboardViewController: UIInputViewController {
                     DispatchQueue.main.async {
                         self.keyboardView.characters = Character.myCharacters
                     }
-                    //self.saveCharacterInToLocalFile(json: jsonArr)
                 }
                 
             } else {
@@ -97,8 +97,25 @@ class KeyboardViewController: UIInputViewController {
         }
 
     }
+   
     
+    func getEmojisContexts() {
+        APICall.shared.emojis_context_APICall { (response, success) in
+            if success {
+                if let json = response as? [String : Any] {
+                    let emojisTypes = json.map({$0.key})
+                    print(emojisTypes)
+                    self.keyboardView.emojiTypes = emojisTypes
+                    self.getCharacters()
+                }
+            } else {
+                
+            }
+        }
+    }
 }
+
+
 
 
 // Perform custom UI setup here

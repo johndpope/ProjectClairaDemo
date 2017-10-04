@@ -14,6 +14,11 @@ struct CharBackground {
     var image = ""
 }
 
+class Emoji {
+    var html: String = ""
+    var key: String = ""
+}
+
 class Character: NSCopying {
     var name = ""
     var choices = [String : String]()
@@ -22,6 +27,10 @@ class Character: NSCopying {
     var alive = false
     var characterBackground: CharBackground?
 
+    static let characterContext = "CX001"
+
+    var emojis = [Emoji]()
+    
     var isMainChar: Bool {
         if let mainCharDate = UserDefaults.standard.value(forKey: "MainCharacter") as? String {
             return createdDate == mainCharDate
@@ -57,23 +66,10 @@ class CharacterHTMLBuilder {
     var defaultChoices = [String : String]()
     var charHTMLString: String?
     var charName = ""
-    var contextType = ContextType.smilingEmoji
-    
-    enum ContextType {
-        case appPreview, smilingEmoji, blinkingEmoji
-        
-        var key: String {
-            switch self {
-            case .appPreview:
-                return "CX001"
-                
-            case .smilingEmoji:
-                return "CX002"
-                
-            case .blinkingEmoji:
-                return "CX003"
-            }
-        }
+    var contextKey = "CX001"
+   
+    enum CharacterType {
+        case character, emoji
     }
     
     fileprivate var part_mapJson = [String : [String : Any]]()
@@ -81,7 +77,8 @@ class CharacterHTMLBuilder {
     fileprivate var partsMeta = [String : Any]()
     fileprivate var contextJson = [String : Any]()
     fileprivate var currentContext = [String : Any]()
-
+    fileprivate var emojisContextJson = [String : Any]()
+    
     var resultBlock: (String)->Void = {_ in}
 
     
@@ -93,14 +90,14 @@ class CharacterHTMLBuilder {
         buildCharHTMLWith(choices: self.defaultChoices, block: block)
     }
     
-    func buildCharHTMLWith(choices: [String : String], for contextType: ContextType = .appPreview, block: ((String)->Void)? = nil) {
-        self.contextType = contextType
+    func buildCharHTMLWith(for type:CharacterType = .character, choices: [String : String], for contextKey: String = Character.characterContext, block: ((String)->Void)? = nil) {
+        self.contextKey = contextKey
         
         if let block = block {
             resultBlock = block
         }
         
-        self.buildStart(with: choices, block: block)
+        self.buildStart(for: type, choices: choices, block: block)
 
     }
     
@@ -109,8 +106,10 @@ class CharacterHTMLBuilder {
     }
     
     //call this func for regenerating new character as per user's selected choices.
-    fileprivate func buildStart(with choices: [String : String], block: ((String)->Void)? = nil) {
-        guard let context = contextJson[contextType.key] as? [String : Any] else {return}
+    fileprivate func buildStart(for type:CharacterType,  choices: [String : String], block: ((String)->Void)? = nil) {
+        let cntxtJson = type == .character ? contextJson : emojisContextJson
+        guard let context = cntxtJson[contextKey] as? [String : Any] else {return}
+        
         currentContext = context
         var userChoices = choices
         if let layers = currentContext["layers"] as? [String : Any] {
@@ -158,7 +157,7 @@ class CharacterHTMLBuilder {
             if let fileMeta = self.partsMeta[fileName + ".svg"] {
                 fileWidth = (fileMeta as! [String : Any])["width"] as! String
                 fileHeight = (fileMeta as! [String : Any])["height"] as! String
-                fileJoints = (fileMeta as! [String : Any])["joints"] as! [String : [String : String]]
+                fileJoints = ((fileMeta as! [String : Any])["joints"] as? [String : [String : String]]) ?? [:]
             }
             
             svgDataDic[bodyPart] = ["body_part" : bodyPart,
@@ -497,7 +496,14 @@ extension CharacterHTMLBuilder {
     func getContexts() {
         CharBuilderAPI.shared.get_Context_json { contexts in
             self.contextJson = contexts
-            self.buildStart(with: self.defaultChoices)
+            self.buildStart(for: .character, choices: self.defaultChoices)
+            self.getEmojisContexts()
+        }
+    }
+
+    func getEmojisContexts() {
+        CharBuilderAPI.shared.get_emojisContext_json { contexts in
+            self.emojisContextJson = contexts
         }
     }
 
@@ -594,7 +600,19 @@ class CharBuilderAPI {
         }
     }
     
-    
+    func get_emojisContext_json(block: @escaping ([String : [String : Any]])->Void) {
+        APICall.shared.emojis_context_APICall { (json, isSuccess) in
+            if isSuccess {
+                if let json = json as? [String : [String : Any]] {
+                    block(json)
+                }
+            } else {
+                //
+            }
+            
+        }
+    }
+
 }
 
 

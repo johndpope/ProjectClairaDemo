@@ -22,20 +22,20 @@
                         <rect key="frame" x="3" y="3" width="151" height="145"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </imageView>
-                    <webView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZCX-fT-l7c">
-                        <rect key="frame" x="-150" y="0.0" width="307" height="151"/>
+                    <webView opaque="NO" contentMode="scaleToFill" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZCX-fT-l7c">
+                        <rect key="frame" x="-200" y="0.0" width="357" height="151"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </webView>
                 </subviews>
             </view>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="ZCX-fT-l7c" secondAttribute="trailing" id="83j-U8-3vc"/>
                 <constraint firstAttribute="bottom" secondItem="Rxw-QI-dJy" secondAttribute="bottom" constant="3" id="DLF-da-Ggh"/>
                 <constraint firstItem="Rxw-QI-dJy" firstAttribute="top" secondItem="IXx-W9-FTm" secondAttribute="top" constant="3" id="NgE-cc-k1D"/>
                 <constraint firstItem="ZCX-fT-l7c" firstAttribute="top" secondItem="IXx-W9-FTm" secondAttribute="top" id="PQr-CS-CFE"/>
                 <constraint firstAttribute="trailing" secondItem="Rxw-QI-dJy" secondAttribute="trailing" constant="3" id="dIT-I3-jch"/>
-                <constraint firstItem="ZCX-fT-l7c" firstAttribute="leading" secondItem="IXx-W9-FTm" secondAttribute="leading" constant="-150" id="eaE-JQ-9FG"/>
+                <constraint firstItem="ZCX-fT-l7c" firstAttribute="leading" secondItem="IXx-W9-FTm" secondAttribute="leading" constant="-200" id="eaE-JQ-9FG"/>
                 <constraint firstAttribute="bottom" secondItem="ZCX-fT-l7c" secondAttribute="bottom" id="ufh-en-73J"/>
                 <constraint firstItem="Rxw-QI-dJy" firstAttribute="leading" secondItem="IXx-W9-FTm" secondAttribute="leading" constant="3" id="zok-Wv-diK"/>
             </constraints>
