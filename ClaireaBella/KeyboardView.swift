@@ -40,6 +40,8 @@ class KeyboardView: UIView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+//        collView.dataSource = nil
+//        collView.delegate = nil
         let nib = UINib(nibName: "EmojiCell", bundle: Bundle(for: KeyboardView.self))
         let nib2 = UINib(nibName: "CharacterCell", bundle: Bundle(for: KeyboardView.self))
 
