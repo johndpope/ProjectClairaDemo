@@ -150,8 +150,8 @@ class APICall {
     
     
     func createNewCharacter_APICall(json: [String : Any], block: @escaping ResponseBlock) {
-        //guard let userEmail = currentUserEmail else {return}
-        let userEmail = "test@test.com"
+        guard let userEmail = currentUserEmail else {return}
+        //let userEmail = "test@test.com"
 
         let url = URL(string: "https://yff8t38cs8.execute-api.eu-west-1.amazonaws.com/latest/characters/\(userEmail)")!
         var request = URLRequest(url: url)
@@ -178,8 +178,7 @@ class APICall {
 
     
     func getSavedCharaters_APICall(block: @escaping ResponseBlock) {
-        //guard let userEmail = currentUserEmail else {return}
-        let userEmail = "test@test.com"
+        guard let userEmail = currentUserEmail else {return}
         let urlString = "https://yff8t38cs8.execute-api.eu-west-1.amazonaws.com/latest/characters/\(userEmail)"
         
         let url = URL(string: urlString)!
@@ -197,8 +196,8 @@ class APICall {
     
     
     func deleteCharacter_APICall(createdDate: String, block: @escaping ResponseBlock) {
-        //guard let userEmail = currentUserEmail else {return}
-        let userEmail = "test@test.com"
+        guard let userEmail = currentUserEmail else {return}
+        //let userEmail = "test@test.com"
 
         let urlString = "https://yff8t38cs8.execute-api.eu-west-1.amazonaws.com/latest/characters/\(userEmail)?date_created=\(createdDate)"
         let url = URL(string: urlString)!
@@ -223,8 +222,8 @@ class APICall {
     }
     
     func updateCharacter_APICall(params: [String : Any], createdDate: String, block: @escaping ResponseBlock) {
-        //guard let userEmail = currentUserEmail else {return}
-        let userEmail = "test@test.com"
+        guard let userEmail = currentUserEmail else {return}
+        //let userEmail = "test@test.com"
 
         let urlString  = "https://yff8t38cs8.execute-api.eu-west-1.amazonaws.com/latest/characters/\(userEmail)?date_created=\(createdDate)"
         let url = URL(string: urlString)!

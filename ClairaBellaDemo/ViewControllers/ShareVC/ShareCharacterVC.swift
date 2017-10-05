@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import Social
 
 class ShareCharacterVC: ParentVC {
     @IBOutlet var webview: UIWebView!
@@ -85,18 +85,77 @@ extension ShareCharacterVC {
         ShareCharacterView.show(in: self.view, character: character) { (action, image) in
             switch action {
             case .facebook:
-                print("facebook")
+                self.shareOnFacebook(image)
             case .twitter:
                 print("twitter")
+                self.shareOnTwitter(image)
             case .mail:
                 print("mail")
             case .save:
-                print("save")
+                self.saveToPhots(image)
             case .more:
                 print("more")
             }
         }
     }
+    
+    
+    func shareOnFacebook(_ image: UIImage) {
+        if SLComposeViewController.isAvailable(forServiceType: SLServiceTypeFacebook) {
+            let vc = SLComposeViewController(forServiceType:SLServiceTypeFacebook)!
+            vc.add(image)
+            //        vc.add(URL(string: "http://www.example.com/"))
+            //        vc.setInitialText("Initial text here.")
+
+            self.present(vc, animated: true, completion: nil)
+        } else {
+            showAlert(message: "Please go to settings > Facebook and add your facebook account. ")
+        }
+    }
+
+    
+    func shareOnTwitter(_ image: UIImage) {
+        if SLComposeViewController.isAvailable(forServiceType: SLServiceTypeTwitter) {
+            let vc = SLComposeViewController(forServiceType:SLServiceTypeTwitter)!
+            vc.add(image)
+            //        vc.add(URL(string: "http://www.example.com/"))
+            //        vc.setInitialText("Initial text here.")
+            
+            self.present(vc, animated: true, completion: nil)
+        } else {
+            showAlert(message: "Please go to settings > Twitter and add your twitter account. ")
+        }
+    }
+
+    func saveToPhots(_ image: UIImage) {
+        UIImageWriteToSavedPhotosAlbum(image, self, #selector(self.image(_:didFinishSavingWithError:contextInfo:)), nil)
+    }
+    
+    func imageDidSaveToPhotoAlbum() {
+        print("save done")
+    }
+    
+    @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
+        if let error = error {
+            // we got back an error!
+            let ac = UIAlertController(title: "Save error", message: error.localizedDescription, preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default))
+            present(ac, animated: true)
+        } else {
+            let ac = UIAlertController(title: "Saved!", message: "Your altered image has been saved to your photos.", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default))
+            present(ac, animated: true)
+        }
+    }
 }
 
 
+
+extension UIViewController {
+    func showAlert(message: String) {
+        let alert = UIAlertController(title: "Claireabella", message: message, preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alert.addAction(action)
+        self.present(alert, animated: true, completion: nil)
+    }
+}

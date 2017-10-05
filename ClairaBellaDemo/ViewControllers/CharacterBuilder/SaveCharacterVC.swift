@@ -125,7 +125,7 @@ class SaveCharacterVC: ParentVC, UITextFieldDelegate {
     }
     
     
-    func showAlert(message: String) {
+    func showAlertMessage(message: String) {
         let alertController = UIAlertController(title: message, message: "", preferredStyle: .alert)
         
         let OKAction = UIAlertAction(title: "OK", style: .default, handler: {
@@ -214,10 +214,10 @@ extension SaveCharacterVC {
                         UserDefaults.standard.set(createdDate, forKey: "MainCharacter")
                     }
                 }
-                self.showAlert(message: "Character saved successfully.")
+                self.showAlertMessage(message: "Character saved successfully.")
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "NewCharacterAddedNotification"), object: nil, userInfo: ["NewChar" : self.character])
             } else {
-                self.showAlert(message: "Something went wrong.")
+                self.showAlertMessage(message: "Something went wrong.")
             }
         }
     }
@@ -240,9 +240,9 @@ extension SaveCharacterVC {
 
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "CharacterUpdateNotification"), object: nil, userInfo: ["updatedChar" : self.character])
                 
-                self.showAlert(message: "Character updated successfully.")
+                self.showAlertMessage(message: "Character updated successfully.")
             } else {
-                self.showAlert(message: "Something went wrong.")
+                self.showAlertMessage(message: "Something went wrong.")
             }
             
         }

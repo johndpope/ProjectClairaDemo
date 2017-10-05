@@ -100,7 +100,6 @@ extension KeyboardView: UICollectionViewDataSource, UICollectionViewDelegateFlow
         } else { //cell for display emojies
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "emojiCell", for: indexPath) as! EmojiCell
             let emoji = selectedCharacter!.emojis[indexPath.item]
-            cell.webView.scrollView.zoomScale = 2.0
             if emoji.html.isEmpty {
                 charGenerator.buildCharHTMLWith(for: .emoji, choices: selectedCharacter!.choices, for: emoji.key) { (html) in
                     cell.webView.loadHTMLString(html, baseURL: nil)
@@ -116,7 +115,7 @@ extension KeyboardView: UICollectionViewDataSource, UICollectionViewDelegateFlow
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let height = showCharters ? 100 : 100
+        let height = showCharters ? 100 : ((collectionView.frame.width-8)/5)
         return CGSize(width: height, height: showCharters ? (height) : height)
     }
     
@@ -125,9 +124,8 @@ extension KeyboardView: UICollectionViewDataSource, UICollectionViewDelegateFlow
             if indexPath.row == 0 {
                 
             } else {
-                selectedCharacter = characters[indexPath.row - 1]
                 showCharters = !showCharters
-                collView.reloadData()
+                selectedCharacter = characters[indexPath.row - 1]
             }
         } else {
             if let cell = collectionView.cellForItem(at: indexPath) {
@@ -152,9 +150,8 @@ extension KeyboardView: UICollectionViewDataSource, UICollectionViewDelegateFlow
     }
     
     func openApp() {
-        
-        var instagramHooks = "instagram://user?username=your_username"
-        var instagramUrl = URL(string: instagramHooks)
+        let instagramHooks = "instagram://user?username=your_username"
+        _ = URL(string: instagramHooks)
     }
 }
 
@@ -163,6 +160,10 @@ class EmojiCell: UICollectionViewCell {
     @IBOutlet var webView: UIWebView!
     @IBOutlet var imgView: UIImageView!
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        webView.scrollView.setZoomScale(2.0, animated: false)
+    }
 }
 
 extension UIImage {
