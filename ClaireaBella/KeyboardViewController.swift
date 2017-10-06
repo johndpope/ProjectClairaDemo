@@ -27,6 +27,17 @@ class KeyboardViewController: UIInputViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+                let expandedHeight:CGFloat = 216
+                let heightConstraint = NSLayoutConstraint(item:self.view,
+                                                          attribute: .height,
+                                                          relatedBy: .equal,
+                                                          toItem: nil,
+                                                          attribute: .notAnAttribute,
+                                                          multiplier: 0.0,
+                                                          constant: expandedHeight)
+                self.view.addConstraint(heightConstraint)
+
+        keyboardView = KeyboardView.add(in: self.view)
 //        keyboardView.translatesAutoresizingMaskIntoConstraints = false
 //        keyboardView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 0).isActive = true
 //        keyboardView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: 0).isActive = true

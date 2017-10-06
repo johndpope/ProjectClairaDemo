@@ -40,8 +40,6 @@
 			<key>RequestsOpenAccess</key>
 			<true/>
 		</dict>
-		<key>NSExtensionMainStoryboard</key>
-		<string>Keyboard</string>
 		<key>NSExtensionPointIdentifier</key>
 		<string>com.apple.keyboard-service</string>
 		<key>NSExtensionPrincipalClass</key>

@@ -16,6 +16,6 @@ class EmojiCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        webView.scrollView.setZoomScale(2.0, animated: false)
+        //webView.scrollView.setZoomScale(2.0, animated: false)
     }
 }
