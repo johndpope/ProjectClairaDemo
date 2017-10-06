@@ -9,6 +9,8 @@
 import UIKit
 import iCarousel
 
+var characterForEmoji: Character?
+
 class SavedCharListVC: ParentVC {
     @IBOutlet var tableView: UITableView!
     @IBOutlet var tblHeaderView: UIView!
@@ -175,6 +177,7 @@ extension SavedCharListVC {
     }
 
     @IBAction func btn_CreateEmojisClicked(_ sender: UIButton) {
+        characterForEmoji = savedChars[carouselView.currentItemIndex]
         self.tabBarController?.selectedIndex = 2
     }
     

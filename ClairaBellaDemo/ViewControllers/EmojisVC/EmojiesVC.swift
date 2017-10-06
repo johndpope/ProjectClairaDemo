@@ -15,16 +15,16 @@ class EmojiesVC: ParentVC {
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var emoji_uiimage: UIImageView!
     
-    var character: Character!
+    var character: Character?
     var charGenerator = CharacterHTMLBuilder.shared
 
     var emojisContextKeys = [String]() {
         didSet {
-            character.emojis.removeAll()
+            character?.emojis.removeAll()
             for type in emojisContextKeys {
                 let emoji = Emoji()
                 emoji.key = type
-                character.emojis.append(emoji)
+                character?.emojis.append(emoji)
             }
 
             tableView.reloadData()
@@ -40,6 +40,11 @@ class EmojiesVC: ParentVC {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         getEmojisContexts()
+       
+        if let char = characterForEmoji {
+            character = char
+            characterForEmoji = nil
+        }
 
         if character == nil {
             if !Character.myCharacters.isEmpty {
@@ -60,6 +65,11 @@ class EmojiesVC: ParentVC {
 
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        characterForEmoji = nil
+        character = nil
+    }
 
     @IBAction func Btn_HomeAct(_ sender: UIBarButtonItem) {
         tabBarController?.selectedIndex = 0
@@ -105,7 +115,7 @@ extension EmojiesVC: UITableViewDataSource, UITableViewDelegate {
         if indexPath.row == 0 {
             return 186
         } else {
-            return 500
+            return SCREEN_HEIGHT - 186 - 64 - 49
         }
         
     }
@@ -117,15 +127,15 @@ extension EmojiesVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLay
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return   character.emojis.count
+        return   character?.emojis.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "emojiCell", for: indexPath) as! EmojiCell
-            let emoji = character.emojis[indexPath.item]
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "emojiCell", for: indexPath) as! EmojiItemCell
+            let emoji = character!.emojis[indexPath.item]
             if emoji.html.isEmpty {
-                charGenerator.buildCharHTMLWith(for: .emoji, choices: character.choices, for: emoji.key) { (html) in
+                charGenerator.buildCharHTMLWith(for: .emoji, choices: character!.choices, for: emoji.key) { (html) in
                     cell.webView.loadHTMLString(html, baseURL: nil)
                     emoji.html = html
                 }
@@ -133,13 +143,13 @@ extension EmojiesVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLay
             } else {
                 cell.webView.loadHTMLString(emoji.html, baseURL: nil)
             }
-            
+            //cell.backgroundColor = UIColor.black
             return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let height = (collectionView.frame.width-8)/5
-        return CGSize(width: height, height: height)
+        let width = (collectionView.frame.width-8)/4
+        return CGSize(width: width, height: width)
     }
 
 }
@@ -164,4 +174,15 @@ extension EmojiesVC {
 
 class EmojiTableViewCell: UITableViewCell {
     @IBOutlet var collectionview: UICollectionView!
+}
+
+
+class EmojiItemCell: UICollectionViewCell {
+    @IBOutlet var webView: UIWebView!
+    @IBOutlet var imgView: UIImageView!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        //webView.scrollView.setZoomScale(2.0, animated: false)
+    }
 }

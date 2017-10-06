@@ -62,16 +62,6 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
         fblogInBtn.setBackgroundImage(UIImage(named :"Btn_Facebook_SignUP"), for: .normal)
         scrollView.addSubview(fblogInBtn)
         
-//        let lineView = UIView(frame: CGRect(x:SCREEN_WIDTH*0.10,y:fblogInBtn.frame.origin.y+fblogInBtn.frame.size.height+20,width:SCREEN_WIDTH*0.80,height:1.5))
-//        lineView.backgroundColor = UIColor.white
-//        scrollView.addSubview(lineView)
-//        
-//        let or = UIButton(type: UIButtonType.custom) as UIButton
-//        or.frame = CGRect(x:SCREEN_WIDTH*0.50-20, y:fblogInBtn.frame.origin.y+fblogInBtn.frame.size.height+10, width: 40, height: 20)
-//        or.setTitle(" Or", for: .normal)
-//        or.titleLabel?.font = UIFont.systemFont(ofSize: 14)
-//        or.backgroundColor = PINK_LIGHT
-//        scrollView.addSubview(or)
         let or = UIButton(type: UIButtonType.custom) as UIButton
         or.frame = CGRect(x:SCREEN_WIDTH*0.10, y:fblogInBtn.frame.origin.y+fblogInBtn.frame.size.height+15, width: SCREEN_WIDTH*0.80, height: 20)
         or.setTitle("Or Sign Up With Email", for: .normal)
@@ -201,7 +191,30 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
     
     func signUpBtnClick(_ sender: UIButton)
     {
+        let email = emailTextField.text!
+        let firstname = nameTextField.text!
+        let lastName = lastNameTextField.text!
         
+        if email.isEmpty {return}
+        if firstname.isEmpty {return}
+        if lastName.isEmpty {return}
+        
+        let progressHUD = ProgressView(text: "Please Wait")
+        self.view.addSubview(progressHUD)
+        progressHUD.show()
+        
+        let params = ["first_name" : firstname,  "Last_name" : lastName]
+        APICall.shared.signupUser_APICall(email: email, params: params) { (response,success) in
+            if success {
+                let result = ["first_name" : firstname,  "last_name" : lastName, "email": email]
+                UserDefaults.standard.setValue(result, forKey: "user_details")
+                UserDefaults.standard.synchronize()
+                self.btn_pressed.sendActions(for: .touchUpInside)
+            } else {
+                
+            }
+            progressHUD.hide()
+        }
     }
     
     @IBAction func Btn_Facebook_Login(_ sender: UIButton) {

@@ -125,7 +125,10 @@ class APICall {
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             if let data = data {
                 if let json = try? JSONSerialization.jsonObject(with: data, options: [.mutableContainers]) {
-                    return block(json, true)
+                    DispatchQueue.main.async {
+                        block(json, true)
+                    }
+                    return
                 }
             }
             
@@ -150,8 +153,8 @@ class APICall {
     
     
     func createNewCharacter_APICall(json: [String : Any], block: @escaping ResponseBlock) {
-        guard let userEmail = currentUserEmail else {return}
-        //let userEmail = "test@test.com"
+        //guard let userEmail = currentUserEmail else {return}
+        let userEmail = "test@test.com"
 
         let url = URL(string: "https://yff8t38cs8.execute-api.eu-west-1.amazonaws.com/latest/characters/\(userEmail)")!
         var request = URLRequest(url: url)
@@ -253,5 +256,33 @@ class APICall {
         
     }
 
+    
+    func signupUser_APICall(email: String, params: [String : Any], block: @escaping ResponseBlock) {
+        
+        let urlString  = "https://yff8t38cs8.execute-api.eu-west-1.amazonaws.com/latest/users/\(email)"
+        let url = URL(string: urlString)!
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        let data = try? JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
+        request.httpBody = data
+        
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let data = data {
+                if let json = try? JSONSerialization.jsonObject(with: data, options: [.mutableContainers]) {
+                    DispatchQueue.main.async {
+                        block(json, true)
+                    }
+                    return
+                }
+            }
+            
+            DispatchQueue.main.async {
+                block(nil, false)
+            }
+            
+            }.resume()
+        
+    }
     
 }

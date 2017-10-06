@@ -21,36 +21,26 @@ class KeyboardViewController: UIInputViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.inputView?.backgroundColor = UIColor.red
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-                let expandedHeight:CGFloat = 216
-                let heightConstraint = NSLayoutConstraint(item:self.view,
-                                                          attribute: .height,
-                                                          relatedBy: .equal,
-                                                          toItem: nil,
-                                                          attribute: .notAnAttribute,
-                                                          multiplier: 0.0,
-                                                          constant: expandedHeight)
-                self.view.addConstraint(heightConstraint)
-
-        keyboardView = KeyboardView.add(in: self.view)
-        keyboardView.translatesAutoresizingMaskIntoConstraints = false
-        keyboardView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 0).isActive = true
-        keyboardView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: 0).isActive = true
-        keyboardView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0).isActive = true
-        keyboardView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
-//
-        keyboardView.indicator.startAnimating()
+//        keyboardView.translatesAutoresizingMaskIntoConstraints = false
+//        keyboardView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 0).isActive = true
+//        keyboardView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: 0).isActive = true
+//        keyboardView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0).isActive = true
+//        keyboardView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
+////
+//        keyboardView.indicator.startAnimating()
         CharacterHTMLBuilder.shared.loadBuildData()
-        
-        //CharacterHTMLBuilder.shared.defaultCharHTML { (html) in
-          //  print("..............keyboard finish loading..................")
-            //self.keyboardView.indicator.stopAnimating()
-       // }
-
+//        
+//        //CharacterHTMLBuilder.shared.defaultCharHTML { (html) in
+//          //  print("..............keyboard finish loading..................")
+//            //self.keyboardView.indicator.stopAnimating()
+//       // }
+//
         keyboardView.btnKeyboard.addTarget(self, action: #selector(handleInputModeList(from:with:)), for: .allTouchEvents)
         getEmojisContexts()
 
@@ -79,6 +69,7 @@ class KeyboardViewController: UIInputViewController {
             if success {
                 print(response!)
                 if let jsonArr = response as? [[String : Any]] {
+                    print(jsonArr)
                     let charters = jsonArr.map({ (json) -> Character in
                         let choice = json["choices"] as! [String : String]
                         let character = Character()

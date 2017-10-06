@@ -26,13 +26,17 @@ class KeyboardView: UIView {
     var selectedCharacter: Character? {
         didSet {
             if selectedCharacter!.emojis.isEmpty {
+                selectedCharacter?.emojis.removeAll()
                 for type in emojiTypes {
                     let emoji = Emoji()
                     emoji.key = type
                     selectedCharacter?.emojis.append(emoji)
                 }
             }
-            collView.reloadData()
+            print("selected character name : \(selectedCharacter!.name)")
+            DispatchQueue.main.async {
+                self.collView.reloadData()
+            }
         }
     }
         
@@ -86,7 +90,6 @@ extension KeyboardView: UICollectionViewDataSource, UICollectionViewDelegateFlow
             } else {
                 cell.imgView.image = nil
                 cell.webView.isHidden = false
-                cell.webView.scrollView.zoomScale = 0.5
                 let char = characters[indexPath.row - 1]
                 charGenerator.buildCharHTMLWith(for: .character, choices: char.choices) { (html) in
                     cell.webView.loadHTMLString(html, baseURL: nil)
@@ -100,55 +103,55 @@ extension KeyboardView: UICollectionViewDataSource, UICollectionViewDelegateFlow
             return cell
 
         } else { //cell for display emojies
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "emojiCell", for: indexPath) as! EmojiCell
-            let emoji = selectedCharacter!.emojis[indexPath.item]
-            if emoji.html.isEmpty {
-                charGenerator.buildCharHTMLWith(for: .emoji, choices: selectedCharacter!.choices, for: emoji.key) { (html) in
-                    cell.webView.loadHTMLString(html, baseURL: nil)
-                    emoji.html = html
-                }
-
-            } else {
-                cell.webView.loadHTMLString(emoji.html, baseURL: nil)
-            }
-            
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "charCell", for: indexPath) as! EmojiCell
+            //let emoji = selectedCharacter!.emojis[indexPath.item]
+//            if emoji.html.isEmpty {
+//                charGenerator.buildCharHTMLWith(for: .emoji, choices: selectedCharacter!.choices, for: emoji.key) { (html) in
+//                    cell.webView.loadHTMLString(html, baseURL: nil)
+//                    emoji.html = html
+//                }
+//
+//            } else {
+//                cell.webView.loadHTMLString(emoji.html, baseURL: nil)
+//            }
+            cell.backgroundColor = UIColor.black
             return cell
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let height = showCharters ? 100 : ((collectionView.frame.width-8)/5)
-        return CGSize(width: height, height: showCharters ? (height) : height)
+        let width = showCharters ? 100 : ((collectionView.frame.width-8)/5)
+        return CGSize(width: width, height:  width)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if showCharters {
-            if indexPath.row == 0 {
-                
-            } else {
-                showCharters = !showCharters
-                selectedCharacter = characters[indexPath.row - 1]
-            }
-        } else {
-            if let cell = collectionView.cellForItem(at: indexPath) {
-               let image = UIImage.imageWithView(view: cell)
-                let pasteBoard = UIPasteboard.general
-                let imagedata = UIImagePNGRepresentation(image)
-                pasteBoard.setData(imagedata!, forPasteboardType: UIPasteboardTypeListImage.object(at: 0) as! String)
-                
-                UIView.animate(withDuration: 0.3, animations: { 
-                    self.messageViewTop.constant = 0
-                    self.layoutIfNeeded()
-                    }, completion: { (finish) in
-                        UIView.animate(withDuration: 0.3, delay: 2, options: [.curveEaseInOut], animations: { 
-                            self.messageViewTop.constant = -50
-                            self.layoutIfNeeded()
-                            }, completion: { (finish) in
-                                
-                        })
-                })
-            }
-        }
+//        if showCharters {
+//            if indexPath.row == 0 {
+//
+//            } else {
+//                showCharters = !showCharters
+//                selectedCharacter = characters[indexPath.row - 1]
+//            }
+//        } else {
+//            if let cell = collectionView.cellForItem(at: indexPath) {
+//               let image = UIImage.imageWithView(view: cell)
+//                let pasteBoard = UIPasteboard.general
+//                let imagedata = UIImagePNGRepresentation(image)
+//                pasteBoard.setData(imagedata!, forPasteboardType: UIPasteboardTypeListImage.object(at: 0) as! String)
+//
+//                UIView.animate(withDuration: 0.3, animations: {
+//                    self.messageViewTop.constant = 0
+//                    self.layoutIfNeeded()
+//                    }, completion: { (finish) in
+//                        UIView.animate(withDuration: 0.3, delay: 2, options: [.curveEaseInOut], animations: {
+//                            self.messageViewTop.constant = -50
+//                            self.layoutIfNeeded()
+//                            }, completion: { (finish) in
+//
+//                        })
+//                })
+//            }
+//        }
     }
     
     func openApp() {

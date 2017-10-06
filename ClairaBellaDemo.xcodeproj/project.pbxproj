@@ -11,6 +11,7 @@
 		132605D51F4AA632003B6BFC /* result.html in Resources */ = {isa = PBXBuildFile; fileRef = 132605D41F4AA632003B6BFC /* result.html */; };
 		1332FBD21F57EC94003E3217 /* CarouselItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1332FBD11F57EC94003E3217 /* CarouselItemView.xib */; };
 		1332FBD41F57ECA6003E3217 /* CarouselItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1332FBD31F57ECA6003E3217 /* CarouselItemView.swift */; };
+		13A104C81F87904600F40FCD /* Keyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13A104C71F87904600F40FCD /* Keyboard.storyboard */; };
 		13E1D9451F7CD3D0006907B1 /* CharacterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13E1D9431F7CCCFA006907B1 /* CharacterCell.xib */; };
 		67A1F6B28B7089DC15FA837D /* Pods_ClairaBellaDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35A99DE8EB24D02764ED70FD /* Pods_ClairaBellaDemo.framework */; };
 		79153ED61F80A68400E43DC4 /* ShareCharacterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79153ED51F80A68400E43DC4 /* ShareCharacterView.xib */; };
@@ -2250,6 +2251,7 @@
 		132605D41F4AA632003B6BFC /* result.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = result.html; sourceTree = "<group>"; };
 		1332FBD11F57EC94003E3217 /* CarouselItemView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CarouselItemView.xib; sourceTree = "<group>"; };
 		1332FBD31F57ECA6003E3217 /* CarouselItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarouselItemView.swift; sourceTree = "<group>"; };
+		13A104C71F87904600F40FCD /* Keyboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Keyboard.storyboard; sourceTree = "<group>"; };
 		13E1D9431F7CCCFA006907B1 /* CharacterCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CharacterCell.xib; sourceTree = "<group>"; };
 		35A99DE8EB24D02764ED70FD /* Pods_ClairaBellaDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ClairaBellaDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E3CB6A597CC857291E48488 /* Pods-ClairaBellaDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ClairaBellaDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ClairaBellaDemo/Pods-ClairaBellaDemo.debug.xcconfig"; sourceTree = "<group>"; };
@@ -4642,6 +4644,7 @@
 				13E1D9431F7CCCFA006907B1 /* CharacterCell.xib */,
 				792E1A271F7C081600A7F4C5 /* EmojiCell.xib */,
 				79185AD91F86A1D50035B92F /* KeyboardCell.swift */,
+				13A104C71F87904600F40FCD /* Keyboard.storyboard */,
 			);
 			path = ClaireaBella;
 			sourceTree = "<group>";
@@ -7053,6 +7056,7 @@
 			files = (
 				792E1A281F7C081600A7F4C5 /* EmojiCell.xib in Resources */,
 				13E1D9451F7CD3D0006907B1 /* CharacterCell.xib in Resources */,
+				13A104C81F87904600F40FCD /* Keyboard.storyboard in Resources */,
 				792E1A291F7C1AA900A7F4C5 /* Assets.xcassets in Resources */,
 				79244E0E1F7ABBD600741D69 /* KeyboardView.xib in Resources */,
 			);

@@ -50,9 +50,6 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         fblogInBtn.setBackgroundImage(UIImage(named :"Btn_FAcebook_SignIN"), for: .normal)
         scrollView.addSubview(fblogInBtn)
         
-//        let lineView = UIView(frame: CGRect(x:SCREEN_WIDTH*0.10,y:fblogInBtn.frame.origin.y+fblogInBtn.frame.size.height+20,width:SCREEN_WIDTH*0.80,height:1.5))
-//        lineView.backgroundColor = UIColor.white
-//        scrollView.addSubview(lineView)
         
         let or = UIButton(type: UIButtonType.custom) as UIButton
         or.frame = CGRect(x:SCREEN_WIDTH*0.10, y:fblogInBtn.frame.origin.y+fblogInBtn.frame.size.height+20, width: SCREEN_WIDTH*0.80, height: 20)
@@ -77,31 +74,10 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         emailTextField.background = UIImage(named:"Button_Back")
         scrollView.addSubview(emailTextField)
         
-//        passwordTextField = UITextField(frame: CGRect(x:SCREEN_WIDTH*0.05, y:emailTextField.frame.origin.y+emailTextField.frame.size.height+10, width:SCREEN_WIDTH*0.90, height:50))
-//        //passwordTextField.placeholder = "Password"
-//        passwordTextField.attributedPlaceholder = NSAttributedString(string: "Password",
-//                                                                  attributes: [NSForegroundColorAttributeName: UIColor.black])
-//        passwordTextField.textColor = UIColor.black
-//        passwordTextField.textAlignment = .center
-//        passwordTextField.autocapitalizationType = .none
-//        passwordTextField.autocorrectionType = .no
-//        passwordTextField.keyboardType = .default
-//        passwordTextField.returnKeyType = .default
-//        passwordTextField.contentVerticalAlignment = .center
-//        passwordTextField.delegate = self
-//        passwordTextField.leftViewMode = .always
-//        passwordTextField.isSecureTextEntry = true
-//        //passwordTextField.backgroundColor = UIColor.white
-//        passwordTextField.background = UIImage(named:"Button_Back")
-//        scrollView.addSubview(passwordTextField)
         
         let logInBtn = UIButton(type: UIButtonType.custom) as UIButton
         logInBtn.frame = CGRect(x:SCREEN_WIDTH*0.05, y:emailTextField.frame.origin.y+emailTextField.frame.size.height+10, width: SCREEN_WIDTH*0.90, height: 50)
         logInBtn.addTarget(self, action: #selector(self.loginBtnClick(_:)), for: UIControlEvents.touchUpInside)
-        //logInBtn.backgroundColor = PINK
-        //logInBtn.setTitle("Sign In", for: .normal)
-        //logInBtn.titleLabel?.font = UIFont(name: FONT_LIGHT , size: 18)
-        //logInBtn.layer.cornerRadius = 5.0
         logInBtn.setBackgroundImage(UIImage(named :"main_signin"), for: .normal)
         scrollView.addSubview(logInBtn)//main_signin
         
@@ -129,32 +105,6 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         registerBtn.layer.borderColor = UIColor.white.cgColor
         scrollView.addSubview(registerBtn)
         
-//        let line1 = UIButton(type: UIButtonType.custom) as UIButton
-//        line1.frame = CGRect(x:SCREEN_WIDTH*0.10, y:registerBtn.frame.origin.y+registerBtn.frame.size.height+30, width: SCREEN_WIDTH*0.80, height: 20)
-//        line1.setTitle("  Save your unique characters.", for: .normal)
-//        line1.setImage(UIImage(named:"select"), for: .normal)
-//        line1.contentHorizontalAlignment = .left
-//        line1.titleLabel?.font = UIFont.systemFont(ofSize: 14)
-//        line1.isUserInteractionEnabled = false
-//        scrollView.addSubview(line1)
-//        
-//        let line2 = UIButton(type: UIButtonType.custom) as UIButton
-//        line2.frame = CGRect(x:SCREEN_WIDTH*0.10, y:line1.frame.origin.y+line1.frame.size.height+3, width: SCREEN_WIDTH*0.80, height: 20)
-//        line2.setTitle("  Create personalised emoji’s", for: .normal)
-//        line2.setImage(UIImage(named:"select"), for: .normal)
-//        line2.contentHorizontalAlignment = .left
-//        line2.titleLabel?.font = UIFont.systemFont(ofSize: 14)
-//        line2.isUserInteractionEnabled = false
-//        scrollView.addSubview(line2)
-//        
-//        let line3 = UIButton(type: UIButtonType.custom) as UIButton
-//        line3.frame = CGRect(x:SCREEN_WIDTH*0.10, y:line2.frame.origin.y+line2.frame.size.height+3, width: SCREEN_WIDTH*0.80, height: 20)
-//        line3.setTitle("  Share your characters across social.", for: .normal)
-//        line3.setImage(UIImage(named:"select"), for: .normal)
-//        line3.contentHorizontalAlignment = .left
-//        line3.titleLabel?.font = UIFont.systemFont(ofSize: 14)
-//        line3.isUserInteractionEnabled = false
-//        scrollView.addSubview(line3)
         
         let imgBottom = UIImageView()
         imgBottom.frame = CGRect(x: 0, y: registerBtn.frame.origin.y+registerBtn.frame.size.height+30, width: SCREEN_WIDTH, height: 150)
@@ -166,13 +116,11 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         scrollView.contentSize = CGSize(width: SCREEN_WIDTH, height:imgBottom.frame.origin.y + imgBottom.frame.size.height + 15)
     }
     
-    func loginBtnClick(_ sender: UIButton)
-    {
+    func loginBtnClick(_ sender: UIButton) {
         
     }
     
-    func signUpBtnClick(_ sendr: UIButton)
-    {
+    func signUpBtnClick(_ sendr: UIButton) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "SignUp") as! SignUpVC
         self.navigationController?.pushViewController(vc, animated: true)
     }
