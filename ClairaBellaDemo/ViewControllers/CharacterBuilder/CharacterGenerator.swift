@@ -80,7 +80,7 @@ class CharacterHTMLBuilder {
     fileprivate var emojisContextJson = [String : Any]()
     
     var resultBlock: (String)->Void = {_ in}
-
+    var deviceScaleFactor = 0.75
     
     func upateCharacter(choices: [String : String]) {
         buildCharHTMLWith(choices: choices, block: nil)
@@ -237,7 +237,7 @@ class CharacterHTMLBuilder {
         let fp_scale = firstPart["scale"] as! String
         let w = Double(fp_width)!
         let h = Double(fp_height)!
-        let s = Double(fp_scale)!
+        let s = Double(fp_scale)! * deviceScaleFactor
         
         let centralShift  = getCentralObjectCoords(coord: specifiedCood, width: w * s , height: h * s)
         
@@ -253,7 +253,7 @@ class CharacterHTMLBuilder {
             let w = parentData["width"] as! String
             let h = parentData["height"] as! String
             let s = parentData["scale"] as! String
-            let parent_scale = Double(s)!
+            let parent_scale = Double(s)! * deviceScaleFactor
             let parent_width = Double(w)! * parent_scale
             let parent_height = Double(h)! * parent_scale
             parentDt["width"] = "\(parent_width)"
@@ -286,7 +286,7 @@ class CharacterHTMLBuilder {
                         let globalJointCoords = self.getJointGlobal(objGlobal: para1, jointInternal: para2, angle: paf)
                         
                         let cs = contextPoseData[childName]!["scale"] as! String
-                        let childScale = Double(cs)!
+                        let childScale = Double(cs)! * deviceScaleFactor
                         
                         
                         var jointX = "0"

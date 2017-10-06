@@ -113,7 +113,7 @@ extension EmojiesVC: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 0 {
-            return 186
+            return 186 * widthRatio
         } else {
             return SCREEN_HEIGHT - 186 - 64 - 49
         }
