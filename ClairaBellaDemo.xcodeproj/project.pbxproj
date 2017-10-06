@@ -20,6 +20,8 @@
 		79183D5D1F55100000A00D50 /* CharacterBuilderVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79183D5B1F55100000A00D50 /* CharacterBuilderVC.swift */; };
 		79183D601F55102900A00D50 /* APICalls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79183D5F1F55102900A00D50 /* APICalls.swift */; };
 		79183D631F5514B600A00D50 /* SaveCharacterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79183D621F5514B600A00D50 /* SaveCharacterVC.swift */; };
+		79185ADA1F86A1D50035B92F /* KeyboardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79185AD91F86A1D50035B92F /* KeyboardCell.swift */; };
+		79185ADB1F86A1ED0035B92F /* KeyboardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79185AD91F86A1D50035B92F /* KeyboardCell.swift */; };
 		792294411F5F09DB004845DE /* SetupKeyBoardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792294401F5F09DB004845DE /* SetupKeyBoardVC.swift */; };
 		792294431F5F0A17004845DE /* EmojiesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792294421F5F0A17004845DE /* EmojiesVC.swift */; };
 		792294461F5F0BDD004845DE /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792294451F5F0BDD004845DE /* Constant.swift */; };
@@ -2259,6 +2261,7 @@
 		79183D5B1F55100000A00D50 /* CharacterBuilderVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharacterBuilderVC.swift; sourceTree = "<group>"; };
 		79183D5F1F55102900A00D50 /* APICalls.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APICalls.swift; sourceTree = "<group>"; };
 		79183D621F5514B600A00D50 /* SaveCharacterVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaveCharacterVC.swift; sourceTree = "<group>"; };
+		79185AD91F86A1D50035B92F /* KeyboardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardCell.swift; sourceTree = "<group>"; };
 		791993711F7429A10007E23C /* ShareCharacterVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareCharacterVC.swift; sourceTree = "<group>"; };
 		792294401F5F09DB004845DE /* SetupKeyBoardVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetupKeyBoardVC.swift; sourceTree = "<group>"; };
 		792294421F5F0A17004845DE /* EmojiesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiesVC.swift; sourceTree = "<group>"; };
@@ -4638,6 +4641,7 @@
 				79244E0F1F7ABBF400741D69 /* KeyboardView.swift */,
 				13E1D9431F7CCCFA006907B1 /* CharacterCell.xib */,
 				792E1A271F7C081600A7F4C5 /* EmojiCell.xib */,
+				79185AD91F86A1D50035B92F /* KeyboardCell.swift */,
 			);
 			path = ClaireaBella;
 			sourceTree = "<group>";
@@ -9277,6 +9281,7 @@
 			files = (
 				792E1A251F7C056400A7F4C5 /* CharacterGenerator.swift in Sources */,
 				79244E041F7AB63700741D69 /* KeyboardViewController.swift in Sources */,
+				79185ADA1F86A1D50035B92F /* KeyboardCell.swift in Sources */,
 				792E1A261F7C056B00A7F4C5 /* APICalls.swift in Sources */,
 				79244E101F7ABBF400741D69 /* KeyboardView.swift in Sources */,
 			);
@@ -9288,6 +9293,7 @@
 			files = (
 				7932BB9E1F61C8DF00A25AAF /* NewUserVC.swift in Sources */,
 				792738021F63BCCE00C238F0 /* UtilityClasses.swift in Sources */,
+				79185ADB1F86A1ED0035B92F /* KeyboardCell.swift in Sources */,
 				79183D5C1F55100000A00D50 /* CharacterGenerator.swift in Sources */,
 				7932BB9A1F61C8CB00A25AAF /* LoadingVC.swift in Sources */,
 				7932BBC61F61D1C700A25AAF /* NewUser.swift in Sources */,

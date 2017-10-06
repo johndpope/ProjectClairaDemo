@@ -158,15 +158,7 @@ extension KeyboardView: UICollectionViewDataSource, UICollectionViewDelegateFlow
 }
 
 
-class EmojiCell: UICollectionViewCell {
-    @IBOutlet var webView: UIWebView!
-    @IBOutlet var imgView: UIImageView!
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        webView.scrollView.setZoomScale(2.0, animated: false)
-    }
-}
+
 
 extension UIImage {
     class func imageWithView(view: UIView) -> UIImage {
