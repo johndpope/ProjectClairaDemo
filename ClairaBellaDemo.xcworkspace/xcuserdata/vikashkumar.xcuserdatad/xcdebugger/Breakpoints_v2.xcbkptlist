@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ClairaBellaDemo/ViewControllers/CharacterBuilder/SaveCharacterVC.swift"
-            timestampString = "528841049.163461"
+            filePath = "ClairaBellaDemo/ViewControllers/LoginSignupVCs/SignUpVC.swift"
+            timestampString = "529011585.876971"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "200"
-            endingLineNumber = "200"
-            landmarkName = "saveCharacterAPICAll()"
+            startingLineNumber = "208"
+            endingLineNumber = "208"
+            landmarkName = "signUpBtnClick(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,13 +25,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ClairaBellaDemo/ViewControllers/CharacterBuilder/SaveCharacterVC.swift"
-            timestampString = "528841117.472063"
+            filePath = "ClairaBellaDemo/APICalls/APICalls.swift"
+            timestampString = "529011910.447763"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "208"
-            endingLineNumber = "208"
-            landmarkName = "saveCharacterAPICAll()"
+            startingLineNumber = "157"
+            endingLineNumber = "157"
+            landmarkName = "createNewCharacter_APICall(json:block:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
