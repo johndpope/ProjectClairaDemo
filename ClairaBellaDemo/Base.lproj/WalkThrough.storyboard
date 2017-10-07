@@ -246,7 +246,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Base" width="248" height="86"/>
+        <image name="Base" width="320" height="572"/>
         <image name="Character" width="160" height="294"/>
         <image name="Lets_Start" width="269" height="48"/>
         <image name="Loading_Asset" width="229" height="17"/>

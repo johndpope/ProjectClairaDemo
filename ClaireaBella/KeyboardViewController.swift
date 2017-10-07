@@ -27,7 +27,7 @@ class KeyboardViewController: UIInputViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-                let expandedHeight:CGFloat = 256
+                let expandedHeight:CGFloat = 216
                 let heightConstraint = NSLayoutConstraint(item:self.view,
                                                           attribute: .height,
                                                           relatedBy: .equal,
@@ -56,7 +56,10 @@ class KeyboardViewController: UIInputViewController {
         getEmojisContexts()
 
     }
-    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        print("Memory warning getting")
+    }
     override func textWillChange(_ textInput: UITextInput?) {
         // The app is about to change the document's contents. Perform any preparation here.
     }
