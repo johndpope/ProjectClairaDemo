@@ -81,6 +81,11 @@ extension ShareCharacterVC: UICollectionViewDataSource, UICollectionViewDelegate
 }
 
 extension ShareCharacterVC {
+    
+    @IBAction func back_btnClicked(_ sender: UIButton) {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
     @IBAction func share_btnClicekd(_ sender:UIButton) {
         ShareCharacterView.show(in: self.view, character: character) { (action, image) in
             switch action {
