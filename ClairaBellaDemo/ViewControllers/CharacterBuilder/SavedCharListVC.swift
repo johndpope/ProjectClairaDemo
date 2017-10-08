@@ -151,20 +151,20 @@ extension SavedCharListVC {
     }
 
     @IBAction func deleteChar_btnClicked(_ sender: UIButton) {
+        
+        
         let char = savedChars[currentCharIndex]
-        
-        func showAlert() {
-            let alert = UIAlertController(title: "", message: "Are you sure you want to delete this character ?", preferredStyle: .alert)
-            let yesAction = UIAlertAction(title: "Yes", style: .default) { (action) in
+        let alert = CharacterAlertView.show(in: self.view, for: char)
+        alert.title = "Are you sure you want to delete this character?"
+        alert.message = ""
+        alert.actionBlock = {btnIndex in
+            if btnIndex == 1 {
                 self.deleteCharacter(char: char)
+            } else {
+                
             }
-            let noAction = UIAlertAction(title: "No", style: .cancel, handler: nil)
-            alert.addAction(noAction)
-            alert.addAction(yesAction)
-            self.present(alert, animated: true, completion: nil)
         }
-        
-        showAlert()
+
     }
     
     @IBAction func editChar_btnClicked(_ sender: UIButton) {

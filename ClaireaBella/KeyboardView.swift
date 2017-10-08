@@ -107,16 +107,16 @@ extension KeyboardView: UICollectionViewDataSource, UICollectionViewDelegateFlow
             let emoji = selectedCharacter!.emojis[indexPath.item]
             cell.webView.loadRequest(URLRequest(url: URL(string: "about:blank")!))
 
-            if emoji.html.isEmpty {
+            if emoji.charHtml!.isEmpty {
                 charGenerator.buildCharHTMLWith(for: .emoji, choices: selectedCharacter!.choices, for: emoji.key) {[weak cell, weak emoji] (html) in
                     
                     //cell?.webView.loadHTMLString(html, baseURL: nil)
-                    emoji?.html = html
+                    emoji?.charHtml = html
                 }
 
             } else {
 
-                cell.webView.loadHTMLString(emoji.html, baseURL: nil)
+                cell.webView.loadHTMLString(emoji.charHtml!, baseURL: nil)
             }
             cell.backgroundColor = .black
             return cell
