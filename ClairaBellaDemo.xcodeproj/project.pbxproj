@@ -9397,14 +9397,14 @@
 		79244E091F7AB63700741D69 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = LCSDGY3TVW;
 				INFOPLIST_FILE = ClaireaBella/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.unitygames.Claireabella.ClaireaBella;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "508bf080-adba-4659-b894-4d91e15087a9";
-				PROVISIONING_PROFILE_SPECIFIER = claireabellakeyboardProfile;
+				PROVISIONING_PROFILE = "51542b83-c7b8-41c8-813d-245d1578c510";
+				PROVISIONING_PROFILE_SPECIFIER = Claireabella_keyboard_production;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
 			};
@@ -9413,14 +9413,14 @@
 		79244E0A1F7AB63700741D69 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = LCSDGY3TVW;
 				INFOPLIST_FILE = ClaireaBella/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.unitygames.Claireabella.ClaireaBella;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "508bf080-adba-4659-b894-4d91e15087a9";
-				PROVISIONING_PROFILE_SPECIFIER = claireabellakeyboardProfile;
+				PROVISIONING_PROFILE = "51542b83-c7b8-41c8-813d-245d1578c510";
+				PROVISIONING_PROFILE_SPECIFIER = Claireabella_keyboard_production;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
 			};
@@ -9523,14 +9523,14 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = LCSDGY3TVW;
 				INFOPLIST_FILE = ClairaBellaDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.unitygames.Claireabella;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "599a5cab-7030-4b04-8100-472125d9bf39";
-				PROVISIONING_PROFILE_SPECIFIER = Developement_Claireabella;
+				PROVISIONING_PROFILE = "04fbf099-8260-465d-a0be-6628b215d566";
+				PROVISIONING_PROFILE_SPECIFIER = Claireabella_Production;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -9541,14 +9541,14 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = LCSDGY3TVW;
 				INFOPLIST_FILE = ClairaBellaDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.unitygames.Claireabella;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "599a5cab-7030-4b04-8100-472125d9bf39";
-				PROVISIONING_PROFILE_SPECIFIER = Developement_Claireabella;
+				PROVISIONING_PROFILE = "04fbf099-8260-465d-a0be-6628b215d566";
+				PROVISIONING_PROFILE_SPECIFIER = Claireabella_Production;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
