@@ -38,7 +38,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1.6</string>
+	<string>1.10</string>
 	<key>FacebookAppID</key>
 	<string>104387963500939</string>
 	<key>FacebookDisplayName</key>
@@ -57,6 +57,8 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>accessing you device photos for saving characters or emojis.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>This app requires access to the photo library.</string>
 	<key>UILaunchStoryboardName</key>
