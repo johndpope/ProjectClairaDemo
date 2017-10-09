@@ -83,7 +83,7 @@ extension ShareCharacterVC: UICollectionViewDataSource, UICollectionViewDelegate
 extension ShareCharacterVC {
     
     @IBAction func back_btnClicked(_ sender: UIButton) {
-        self.navigationController?.popViewController(animated: true)
+        _ = self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func share_btnClicekd(_ sender:UIButton) {
@@ -100,8 +100,11 @@ extension ShareCharacterVC {
                 self.saveToPhots(image)
             case .more:
                 print("more")
+                self.moreShare(image: image)
             }
         }
+        
+    
     }
     
     
@@ -152,6 +155,12 @@ extension ShareCharacterVC {
             present(ac, animated: true)
         }
     }
+    
+    func moreShare(image: UIImage)  {
+        let activityVC = UIActivityViewController(activityItems: [image], applicationActivities: nil)
+        self.present(activityVC, animated: true, completion: nil)
+    }
+    
 }
 
 

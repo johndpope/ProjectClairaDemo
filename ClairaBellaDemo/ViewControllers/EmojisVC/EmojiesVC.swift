@@ -114,10 +114,11 @@ extension EmojiesVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let bannerCellHeight = 186 * widthRatio
         if indexPath.row == 0 {
-            return 186 * widthRatio
+            return bannerCellHeight
         } else {
-            return SCREEN_HEIGHT - 186 - 64 - 49
+            return SCREEN_HEIGHT - bannerCellHeight - 64 - 49
         }
         
     }
@@ -171,6 +172,7 @@ extension EmojiesVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLay
                 self.saveToPhots(image)
             case .more:
                 print("more")
+                self.moreShare(image: image)
             }
         }
 
@@ -224,6 +226,11 @@ extension EmojiesVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLay
             ac.addAction(UIAlertAction(title: "OK", style: .default))
             present(ac, animated: true)
         }
+    }
+    
+    func moreShare(image: UIImage)  {
+        let activityVC = UIActivityViewController(activityItems: [image], applicationActivities: nil)
+        self.present(activityVC, animated: true, completion: nil)
     }
 }
 

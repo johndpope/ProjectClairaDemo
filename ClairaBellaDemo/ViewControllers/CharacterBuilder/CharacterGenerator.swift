@@ -234,7 +234,6 @@ class CharacterHTMLBuilder {
         guard let firstPartKey = partsKey.first else {return}
         var firstPart: [String : Any] = contextPoseData[firstPartKey]!
         
-        //let deviceScale = 0.6
         
         let specifiedCood = ["x" : contextPositionX, "y" : contextPositionY]
         let fp_width = firstPart["width"] as! String

@@ -293,6 +293,7 @@ class MenuTableViewCell: UITableViewCell,  UICollectionViewDataSource, UICollect
         lblTitle.text = menu.heading
         viewcontroller?.selectedMenu = menu
         viewcontroller?.reloadInterfaceMenus()
+        collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
         //viewcontroller?.changeUserSelection()
     }
     
@@ -347,7 +348,7 @@ class OptionsTableViewCell: UITableViewCell,  UICollectionViewDataSource, UIColl
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if choice.type == .square {
-            let height = (collView.frame.height - 4 - 8)/2
+            let height = (collView.frame.width - 4 - 8)/4
 
             //let width = (collView.frame.width - 12)/4
             return CGSize(width: height, height: height)
