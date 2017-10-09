@@ -126,24 +126,21 @@ class CharacterBuilderVC: ParentVC {
 extension CharacterBuilderVC {
     @IBAction func btnCancel_clicked(_ sender: UIButton) {
         
+        let alert = CharacterAlertView.show(in: self.view, for: character)
+        alert.title = "Exit Character Builder"
+        alert.message = "Do you want to save your character?"
         
-        let otherAlert = UIAlertController(title: "Exit Character Builder", message: "Exit & discard unsaved changes? ", preferredStyle: UIAlertControllerStyle.alert)
-        
-        
-        let callFunction = UIAlertAction(title: "YES", style: .default, handler: {alert in
-            if self.isCharacterEditMode {
-                self.character = self.copyedCharacter
+        alert.actionBlock = {btnIndex in
+            if btnIndex == 1 {
+            } else {
+                if self.isCharacterEditMode {
+                    self.character = self.copyedCharacter
+                }
+                _ = self.navigationController?.dismiss(animated: true, completion: nil)
+
             }
-            _ = self.navigationController?.dismiss(animated: true, completion: nil)
-        } )
-        
-        let dismiss = UIAlertAction(title: "NO", style: .cancel, handler: nil)
-        
-        // relate actions to controllers
-        otherAlert.addAction(callFunction)
-        otherAlert.addAction(dismiss)
-        
-        present(otherAlert, animated: true, completion: nil)
+        }
+
     }
     
     

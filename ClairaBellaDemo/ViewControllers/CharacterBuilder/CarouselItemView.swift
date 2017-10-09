@@ -24,21 +24,21 @@ class CarouselItemView: UIView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        webViewLeadingSpace.constant = -70 * widthRatio
+        //webViewLeadingSpace.constant = -70 * widthRatio
         
-        var zoomFac:CGFloat = 1.1
-        switch UIScreen.main.bounds.width {
-        case 320:
-            zoomFac = 1.1
-        case 375:
-            zoomFac = 1.3
-        case 414:
-            zoomFac = 1.3
-        default:
-            zoomFac = 1.1
-        }
-        
-        webView.scrollView.setZoomScale(zoomFac, animated: false)
+//        var zoomFac:CGFloat = 1.1
+//        switch UIScreen.main.bounds.width {
+//        case 320:
+//            zoomFac = 1.1
+//        case 375:
+//            zoomFac = 1.3
+//        case 414:
+//            zoomFac = 1.3
+//        default:
+//            zoomFac = 1.1
+//        }
+//        
+//        webView.scrollView.setZoomScale(zoomFac, animated: false)
         webView.scrollView.isScrollEnabled = false
     }
     

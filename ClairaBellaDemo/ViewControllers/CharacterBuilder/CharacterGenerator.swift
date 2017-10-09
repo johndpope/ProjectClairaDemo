@@ -14,12 +14,17 @@ struct CharBackground {
     var image = ""
 }
 
-class Emoji {
-    var html: String = ""
+protocol CharacterType {
+    var charHtml: String? {get set}
+}
+
+class Emoji: CharacterType {
+    var charHtml: String?
     var key: String = ""
 }
 
-class Character: NSCopying {
+class Character: NSCopying, CharacterType {
+
     var name = ""
     var choices = [String : String]()
     var charHtml: String?
@@ -80,7 +85,7 @@ class CharacterHTMLBuilder {
     fileprivate var emojisContextJson = [String : Any]()
     
     var resultBlock: (String)->Void = {_ in}
-    var deviceScaleFactor = 0.75
+    var deviceScaleFactor = 0.8
     
     func upateCharacter(choices: [String : String]) {
         buildCharHTMLWith(choices: choices, block: nil)

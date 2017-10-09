@@ -13,10 +13,15 @@ class ShareCharacterView: UIView {
     @IBOutlet var webView: UIWebView!
     @IBOutlet var backgroundImage: UIImageView!
     
-    var character: Character! {
+    var character: CharacterType! {
         didSet {
             webView.loadHTMLString(character.charHtml!, baseURL: nil)
-            backgroundImage.image = UIImage(named: (character.characterBackground?.image)!)
+            
+            if character is Character {
+                let ch = character as! Character
+                backgroundImage.image = UIImage(named: (ch.characterBackground?.image)!)
+
+            }
         }
     }
     
@@ -68,10 +73,10 @@ class ShareCharacterView: UIView {
 
 //Class functions
 extension ShareCharacterView {
-    class func show(in view: UIView, character: Character, actionBlock: ((ShareOptions, UIImage)->Void)? = nil) {
+    class func show(in view: UIView, character: CharacterType, actionBlock: ((ShareOptions, UIImage)->Void)? = nil) {
         let views = Bundle.main.loadNibNamed("ShareCharacterView", owner: nil, options: nil) as! [UIView]
        
-        let scView = views.first as! ShareCharacterView
+        let scView = ((character is Character ) ? views.first : views[1]) as! ShareCharacterView
         let scviewFrame = CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT)
         scView.frame = scviewFrame
         view.addSubview(scView)

@@ -9,7 +9,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clipsSubviews="YES" contentMode="scaleToFill" id="iN0-l3-epB" customClass="CarouselItemView" customModule="ClairaBellaDemo" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="397" height="287"/>
+            <rect key="frame" x="0.0" y="0.0" width="350" height="320"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8TQ-pv-d18">
@@ -17,32 +17,26 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <webView opaque="NO" contentMode="scaleToFill" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rEi-gV-XEw">
+                <webView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rEi-gV-XEw">
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="320" id="rdD-G7-d0a"/>
+                        <constraint firstAttribute="width" constant="350" id="urc-n7-3jJ"/>
+                    </constraints>
                 </webView>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gw2-Zg-sBu">
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                </view>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="gw2-Zg-sBu" firstAttribute="centerX" secondItem="rEi-gV-XEw" secondAttribute="centerX" id="1g6-hL-O0d"/>
                 <constraint firstItem="8TQ-pv-d18" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="5A9-0U-xP2"/>
-                <constraint firstItem="rEi-gV-XEw" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="-70" id="6fR-0E-5Hl"/>
-                <constraint firstAttribute="trailing" secondItem="rEi-gV-XEw" secondAttribute="trailing" id="7cD-2D-ovZ"/>
-                <constraint firstItem="rEi-gV-XEw" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="IxE-mg-OuX"/>
-                <constraint firstItem="gw2-Zg-sBu" firstAttribute="height" secondItem="rEi-gV-XEw" secondAttribute="height" id="NDQ-JN-uJe"/>
-                <constraint firstItem="gw2-Zg-sBu" firstAttribute="width" secondItem="rEi-gV-XEw" secondAttribute="width" id="VV3-YS-Ffa"/>
+                <constraint firstItem="rEi-gV-XEw" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" constant="-8" id="No2-Zj-mxp"/>
                 <constraint firstItem="8TQ-pv-d18" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="ZGv-Hp-NPE"/>
-                <constraint firstItem="gw2-Zg-sBu" firstAttribute="centerY" secondItem="rEi-gV-XEw" secondAttribute="centerY" id="dyr-fH-lfK"/>
-                <constraint firstAttribute="bottom" secondItem="rEi-gV-XEw" secondAttribute="bottom" id="fw4-aV-pxW"/>
+                <constraint firstItem="rEi-gV-XEw" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="gVc-HO-DOh"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="lblTitle" destination="8TQ-pv-d18" id="wVT-OD-4rY"/>
                 <outlet property="webView" destination="rEi-gV-XEw" id="Rnx-lG-AOV"/>
-                <outlet property="webViewLeadingSpace" destination="6fR-0E-5Hl" id="Igw-sa-32k"/>
             </connections>
             <point key="canvasLocation" x="-203.5" y="-88.5"/>
         </view>

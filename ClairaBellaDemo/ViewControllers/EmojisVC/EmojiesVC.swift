@@ -24,6 +24,7 @@ class EmojiesVC: ParentVC {
             for type in emojisContextKeys {
                 let emoji = Emoji()
                 emoji.key = type
+                emoji.charHtml = ""
                 character?.emojis.append(emoji)
             }
 
@@ -134,14 +135,14 @@ extension EmojiesVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLay
         
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "emojiCell", for: indexPath) as! EmojiItemCell
             let emoji = character!.emojis[indexPath.item]
-            if emoji.html.isEmpty {
+            if emoji.charHtml!.isEmpty {
                 charGenerator.buildCharHTMLWith(for: .emoji, choices: character!.choices, for: emoji.key) { (html) in
                     cell.webView.loadHTMLString(html, baseURL: nil)
-                    emoji.html = html
+                    emoji.charHtml = html
                 }
                 
             } else {
-                cell.webView.loadHTMLString(emoji.html, baseURL: nil)
+                cell.webView.loadHTMLString(emoji.charHtml!, baseURL: nil)
             }
             //cell.backgroundColor = UIColor.black
             return cell
@@ -152,6 +153,26 @@ extension EmojiesVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLay
         return CGSize(width: width, height: width)
     }
 
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let emoji = character!.emojis[indexPath.item]
+        
+        ShareCharacterView.show(in: self.view, character: emoji) { (action, image) in
+//            switch action {
+//            case .facebook:
+//                self.shareOnFacebook(image)
+//            case .twitter:
+//                print("twitter")
+//                self.shareOnTwitter(image)
+//            case .mail:
+//                print("mail")
+//            case .save:
+//                self.saveToPhots(image)
+//            case .more:
+//                print("more")
+//            }
+        }
+
+    }
 }
 
 extension EmojiesVC {
