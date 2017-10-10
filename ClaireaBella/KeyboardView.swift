@@ -143,15 +143,17 @@ extension KeyboardView: UICollectionViewDataSource, UICollectionViewDelegateFlow
                 let imagedata = UIImagePNGRepresentation(image)
                 pasteBoard.setData(imagedata!, forPasteboardType: UIPasteboardTypeListImage.object(at: 0) as! String)
 
+                self.messageViewTop.constant = -50
+                self.layoutIfNeeded()
+
                 UIView.animate(withDuration: 0.3, animations: {
                     self.messageViewTop.constant = 0
-                    self.layoutIfNeeded()
+                        self.layoutIfNeeded()
                     }, completion: { (finish) in
-                        UIView.animate(withDuration: 0.3, delay: 2, options: [.curveEaseInOut], animations: {
+                        UIView.animate(withDuration: 0.3, delay: 1, options: [.curveEaseInOut], animations: {
                             self.messageViewTop.constant = -50
                             self.layoutIfNeeded()
                             }, completion: { (finish) in
-
                         })
                 })
             }

@@ -66,7 +66,7 @@
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                     <connections>
-                                        <action selector="close_btnClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="YI3-a0-Y1B"/>
+                                        <action selector="NO_btnClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="3SN-2u-gVj"/>
                                     </connections>
                                 </button>
                             </subviews>
@@ -97,11 +97,23 @@
                         <constraint firstItem="HdN-b4-AFl" firstAttribute="leading" secondItem="WEg-ld-HO3" secondAttribute="leading" id="y6N-Le-86I"/>
                     </constraints>
                 </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hA6-b2-hEF">
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="4ep-02-D4k"/>
+                        <constraint firstAttribute="width" constant="44" id="KuK-OE-vmP"/>
+                    </constraints>
+                    <state key="normal" image="CloseBtn"/>
+                    <connections>
+                        <action selector="close_btnClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="IoZ-ts-9U9"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.7970355308219178" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="WEg-ld-HO3" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="Dow-EJ-MCQ"/>
+                <constraint firstItem="hA6-b2-hEF" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="40" id="f4k-Kp-3St"/>
                 <constraint firstItem="WEg-ld-HO3" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="gfg-3k-gwY"/>
+                <constraint firstAttribute="trailing" secondItem="hA6-b2-hEF" secondAttribute="trailing" constant="20" id="vng-Jw-h93"/>
             </constraints>
             <connections>
                 <outlet property="lblMessage" destination="C7r-Bp-mf6" id="7MI-dw-V8X"/>
@@ -112,6 +124,7 @@
         </view>
     </objects>
     <resources>
+        <image name="CloseBtn" width="44" height="44"/>
         <image name="alertBackground" width="271" height="339"/>
     </resources>
 </document>

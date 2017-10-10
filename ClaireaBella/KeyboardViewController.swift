@@ -21,7 +21,7 @@ class KeyboardViewController: UIInputViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.inputView?.backgroundColor = UIColor.red
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -38,24 +38,12 @@ class KeyboardViewController: UIInputViewController {
                 self.view.addConstraint(heightConstraint)
 
         keyboardView = KeyboardView.add(in: self.view)
-//        keyboardView.translatesAutoresizingMaskIntoConstraints = false
-//        keyboardView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 0).isActive = true
-//        keyboardView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: 0).isActive = true
-//        keyboardView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0).isActive = true
-//        keyboardView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
-////
-//        keyboardView.indicator.startAnimating()
         CharacterHTMLBuilder.shared.loadBuildData()
-//        
-//        //CharacterHTMLBuilder.shared.defaultCharHTML { (html) in
-//          //  print("..............keyboard finish loading..................")
-//            //self.keyboardView.indicator.stopAnimating()
-//       // }
-//
         keyboardView.btnKeyboard.addTarget(self, action: #selector(handleInputModeList(from:with:)), for: .allTouchEvents)
         getEmojisContexts()
 
     }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         print("Memory warning getting")
@@ -77,6 +65,9 @@ class KeyboardViewController: UIInputViewController {
 //        self.nextKeyboardButton.setTitleColor(textColor, for: [])
     }
 
+    @IBAction func returnKeyAction(_ sender: UIButton) {
+        self.inputView?.endEditing(true)
+    }
     
     func getCharacters() {
         APICall.shared.getSavedCharaters_APICall() { (response, success) in
@@ -105,12 +96,17 @@ class KeyboardViewController: UIInputViewController {
             } else {
                 
             }
+            DispatchQueue.main.async {
+            self.keyboardView.indicator.stopAnimating()
+            }
         }
 
     }
    
     
     func getEmojisContexts() {
+        keyboardView.indicator.startAnimating()
+
         APICall.shared.emojis_context_APICall { (response, success) in
             if success {
                 if let json = response as? [String : Any] {
@@ -120,7 +116,9 @@ class KeyboardViewController: UIInputViewController {
                     self.getCharacters()
                 }
             } else {
-                
+                DispatchQueue.main.async {
+                    self.keyboardView.indicator.stopAnimating()
+                }
             }
         }
     }

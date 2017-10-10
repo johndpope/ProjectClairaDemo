@@ -35,10 +35,13 @@ class CharacterBuilderVC: ParentVC {
             colorChoice = nil
             if let ch = selectedMenu!.choices.filter({$0.type == .circle}).first {
                colorChoice = ch
+                self.reloadInterfaceMenus()
             } else {
                 if let ch = selectedMenu!.choices.filter({$0.type == .square}).first {
                     if !ch.options.first!.choices.isEmpty {
                         colorChoice = ch.options.first!.choices.first
+                        self.reloadInterfaceMenus()
+
                     }
                 }
             }
@@ -47,7 +50,6 @@ class CharacterBuilderVC: ParentVC {
     
     //colorChoice used to showing color option at colorGlint view.
     var colorChoice: CharacterChoice?
-    
     var selectedHairColorOption: ChoiceOption!
     
     var charGenerator: CharacterHTMLBuilder! {
@@ -107,11 +109,25 @@ class CharacterBuilderVC: ParentVC {
             let body = menus.filter({$0.title == "Body"}).first!
             body.choices[1].choiceId = "skin_tone" //api have skin_colour instead of skin_tone thats why need this line.
             
-            let hair = menus.filter({$0.title == "Hair"}).first!
-            let hairOption = hair.choices[1].options.first
-            hairOption?.selected = true
-            self.selectedHairColorOption = hairOption
             
+            for item in menus {
+                for choice in item.choices {
+                    if let characterChoiceValue = self.character.choices[choice.choiceId] {
+                        for option in choice.options {
+                            if option.name == characterChoiceValue {
+                                option.selected = true
+                            }
+                        }
+                    }
+                }
+            }
+            
+            
+            let hair = menus.filter({$0.title == "Hair"}).first!
+            let hairOption = hair.choices[1].options.filter({$0.selected}).first
+            //hairOption?.selected = true
+            self.selectedHairColorOption = hairOption
+
             DispatchQueue.main.async {
                 self.indicator.stopAnimating()
                 self.tableView.reloadData()

@@ -67,7 +67,6 @@ class CharacterAlertView: UIView {
     
     //IBActions
     @IBAction func close_btnClicked(_ sender: UIButton) {
-        actionBlock?(2)
         hideWithAnimation()
     }
     
@@ -75,6 +74,11 @@ class CharacterAlertView: UIView {
         actionBlock?(1)
         hideWithAnimation()
 
+    }
+    
+    @IBAction func NO_btnClicked(_ sender: UIButton) {
+        actionBlock?(2)
+        hideWithAnimation()
     }
     
 }

@@ -91,13 +91,9 @@ class SaveCharacterVC: ParentVC, UITextFieldDelegate {
     
     
     func keyboardWillShow(_ notification: Notification) {
-        if ((notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue) != nil {
-            let userInfo = notification.userInfo!
-            let keyboardSize: CGSize = (userInfo[UIKeyboardFrameBeginUserInfoKey]! as AnyObject).cgRectValue.size
-                UIView.animate(withDuration: 0.1, animations: { () -> Void in
-                    self.view.frame.origin.y -= keyboardSize.height - 100
-                })
-        }
+        UIView.animate(withDuration: 0.1, animations: { () -> Void in
+            self.view.frame.origin.y = -150
+        })
     }
     
     func keyboardWillHide(_ notification: Notification) {
