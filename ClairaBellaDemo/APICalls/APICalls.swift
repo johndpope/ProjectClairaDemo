@@ -9,12 +9,12 @@
 import Foundation
 
 
-
+let appGroupName = "group.claireabella.com"
 //APICAlls
 class APICall {
     static let shared = APICall()
     var currentUserEmail: String? {
-        if let user_deatils = UserDefaults.standard.value(forKey: "user_details")as? [String:String] {
+        if let user_deatils = UserDefaults(suiteName: appGroupName)!.value(forKey: "user_details")as? [String:String] {
             return user_deatils["email"]
         }
         return nil
@@ -29,7 +29,7 @@ class APICall {
     let baseUrl =  "http://34.252.124.216/midnight/system/api/v1.0.0/"
 
     //let assetUrl = "http://34.252.124.216/midnight/system/asset_library"
-    let assetUrl = "http://34.252.124.216/midnight/system/asset_library/interface/v1.0"
+    let assetUrl = "http://34.252.124.216/midnight/system/asset_library/interface/v1.0/"
 
     enum APIName {
         static var getCharacters = "/character.json"

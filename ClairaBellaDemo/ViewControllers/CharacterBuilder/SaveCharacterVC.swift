@@ -35,10 +35,10 @@ class SaveCharacterVC: ParentVC, UITextFieldDelegate {
         checkbox.isSelected = Character.myCharacters.isEmpty
         
         //user should not be able to unchecked checkbox if this is his/her first character.
-        checkbox.isEnabled = !Character.myCharacters.isEmpty
+        //checkbox.isEnabled = !Character.myCharacters.isEmpty
         
-        if let charHtml = character.charHtml {
-            webView.loadHTMLString(charHtml, baseURL: nil)
+        if !character.charHtml.isEmpty {
+            webView.loadHTMLString(character.charHtml, baseURL: nil)
             webView.scrollView.setZoomScale(1.05, animated: false)
         }
         

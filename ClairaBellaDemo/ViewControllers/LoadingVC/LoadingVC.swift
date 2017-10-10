@@ -399,7 +399,7 @@ class LoadingVC: UIViewController {
     
     func navigate()
     {
-        let details = UserDefaults.standard.object(forKey: "user_details")
+        let details = UserDefaults(suiteName: appGroupName)!.object(forKey: "user_details")
         
         if details == nil
         {

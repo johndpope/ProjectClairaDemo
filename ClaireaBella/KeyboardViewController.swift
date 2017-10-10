@@ -27,7 +27,7 @@ class KeyboardViewController: UIInputViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-                let expandedHeight:CGFloat = 216
+                let expandedHeight:CGFloat = 260
                 let heightConstraint = NSLayoutConstraint(item:self.view,
                                                           attribute: .height,
                                                           relatedBy: .equal,

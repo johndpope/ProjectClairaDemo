@@ -137,14 +137,14 @@ extension EmojiesVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLay
         
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "emojiCell", for: indexPath) as! EmojiItemCell
             let emoji = character!.emojis[indexPath.item]
-            if emoji.charHtml!.isEmpty {
+            if emoji.charHtml.isEmpty {
                 charGenerator.buildCharHTMLWith(for: .emoji, choices: character!.choices, for: emoji.key) { (html) in
                     cell.webView.loadHTMLString(html, baseURL: nil)
                     emoji.charHtml = html
                 }
                 
             } else {
-                cell.webView.loadHTMLString(emoji.charHtml!, baseURL: nil)
+                cell.webView.loadHTMLString(emoji.charHtml, baseURL: nil)
             }
             //cell.backgroundColor = UIColor.black
             return cell

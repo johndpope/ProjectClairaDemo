@@ -15,7 +15,7 @@ class ShareCharacterView: UIView {
     
     var character: CharacterType! {
         didSet {
-            webView.loadHTMLString(character.charHtml!, baseURL: nil)
+            webView.loadHTMLString(character.charHtml, baseURL: nil)
             
             if character is Character {
                 let ch = character as! Character

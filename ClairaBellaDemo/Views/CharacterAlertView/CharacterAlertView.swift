@@ -41,7 +41,7 @@ class CharacterAlertView: UIView {
         alert.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0).isActive = true
         
         alert.showWithAnimation()
-        alert.webView.loadHTMLString(character.charHtml!, baseURL: nil)
+        alert.webView.loadHTMLString(character.charHtml, baseURL: nil)
         return alert
     }
     

@@ -300,8 +300,8 @@ extension SavedCharListVC : iCarouselDelegate, iCarouselDataSource {
         }
         
         let char = savedChars[index]
-        if let html = char.charHtml {
-            itemView.htmlString = html
+        if  !char.charHtml.isEmpty {
+            itemView.htmlString = char.charHtml
         } else {
             charGenerator.buildCharHTMLWith(choices: char.choices, block: { html in
                 itemView.htmlString = html

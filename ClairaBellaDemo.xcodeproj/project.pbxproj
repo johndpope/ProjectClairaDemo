@@ -2253,6 +2253,8 @@
 		132605D41F4AA632003B6BFC /* result.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = result.html; sourceTree = "<group>"; };
 		1332FBD11F57EC94003E3217 /* CarouselItemView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CarouselItemView.xib; sourceTree = "<group>"; };
 		1332FBD31F57ECA6003E3217 /* CarouselItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarouselItemView.swift; sourceTree = "<group>"; };
+		137A78BA1F8CF580001CBAA9 /* ClairaBellaDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ClairaBellaDemo.entitlements; sourceTree = "<group>"; };
+		137A78BB1F8CF5B3001CBAA9 /* ClaireaBella.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ClaireaBella.entitlements; sourceTree = "<group>"; };
 		13A104C71F87904600F40FCD /* Keyboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Keyboard.storyboard; sourceTree = "<group>"; };
 		13E1D9431F7CCCFA006907B1 /* CharacterCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CharacterCell.xib; sourceTree = "<group>"; };
 		35A99DE8EB24D02764ED70FD /* Pods_ClairaBellaDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ClairaBellaDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -4650,6 +4652,7 @@
 		79244E021F7AB63700741D69 /* ClaireaBella */ = {
 			isa = PBXGroup;
 			children = (
+				137A78BB1F8CF5B3001CBAA9 /* ClaireaBella.entitlements */,
 				79244E031F7AB63700741D69 /* KeyboardViewController.swift */,
 				79244E051F7AB63700741D69 /* Info.plist */,
 				79244E0D1F7ABBD600741D69 /* KeyboardView.xib */,
@@ -6964,6 +6967,7 @@
 		795421611F460DE500DBBBE0 /* ClairaBellaDemo */ = {
 			isa = PBXGroup;
 			children = (
+				137A78BA1F8CF580001CBAA9 /* ClairaBellaDemo.entitlements */,
 				79387AF91F65219600E1B3B8 /* Models */,
 				795421621F460DE500DBBBE0 /* AppDelegate.swift */,
 				7932BBA11F61CF8500A25AAF /* Views */,
@@ -7036,11 +7040,21 @@
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = LCSDGY3TVW;
 						ProvisioningStyle = Manual;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					7954215E1F460DE500DBBBE0 = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = LCSDGY3TVW;
 						ProvisioningStyle = Manual;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -9397,14 +9411,15 @@
 		79244E091F7AB63700741D69 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_ENTITLEMENTS = ClaireaBella/ClaireaBella.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = LCSDGY3TVW;
 				INFOPLIST_FILE = ClaireaBella/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.unitygames.Claireabella.ClaireaBella;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "51542b83-c7b8-41c8-813d-245d1578c510";
-				PROVISIONING_PROFILE_SPECIFIER = Claireabella_keyboard_production;
+				PROVISIONING_PROFILE = "508bf080-adba-4659-b894-4d91e15087a9";
+				PROVISIONING_PROFILE_SPECIFIER = claireabellakeyboardProfile;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
 			};
@@ -9413,14 +9428,15 @@
 		79244E0A1F7AB63700741D69 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_ENTITLEMENTS = ClaireaBella/ClaireaBella.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = LCSDGY3TVW;
 				INFOPLIST_FILE = ClaireaBella/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.unitygames.Claireabella.ClaireaBella;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "51542b83-c7b8-41c8-813d-245d1578c510";
-				PROVISIONING_PROFILE_SPECIFIER = Claireabella_keyboard_production;
+				PROVISIONING_PROFILE = "508bf080-adba-4659-b894-4d91e15087a9";
+				PROVISIONING_PROFILE_SPECIFIER = claireabellakeyboardProfile;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
 			};
@@ -9523,14 +9539,15 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_ENTITLEMENTS = ClairaBellaDemo/ClairaBellaDemo.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = LCSDGY3TVW;
 				INFOPLIST_FILE = ClairaBellaDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.unitygames.Claireabella;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "04fbf099-8260-465d-a0be-6628b215d566";
-				PROVISIONING_PROFILE_SPECIFIER = Claireabella_Production;
+				PROVISIONING_PROFILE = "64b30aa1-027e-4f25-b4e4-c5655e2b5eb4";
+				PROVISIONING_PROFILE_SPECIFIER = Developement_Claireabella;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -9541,14 +9558,15 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_ENTITLEMENTS = ClairaBellaDemo/ClairaBellaDemo.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = LCSDGY3TVW;
 				INFOPLIST_FILE = ClairaBellaDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.unitygames.Claireabella;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "04fbf099-8260-465d-a0be-6628b215d566";
-				PROVISIONING_PROFILE_SPECIFIER = Claireabella_Production;
+				PROVISIONING_PROFILE = "64b30aa1-027e-4f25-b4e4-c5655e2b5eb4";
+				PROVISIONING_PROFILE_SPECIFIER = Developement_Claireabella;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
