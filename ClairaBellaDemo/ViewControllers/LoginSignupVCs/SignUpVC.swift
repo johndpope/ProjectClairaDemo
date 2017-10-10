@@ -207,8 +207,9 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
         APICall.shared.signupUser_APICall(email: email, params: params) { (response,success) in
             if success {
                 let result = ["first_name" : firstname,  "last_name" : lastName, "email": email]
-                UserDefaults.standard.setValue(result, forKey: "user_details")
-                UserDefaults.standard.synchronize()
+                UserDefaults(suiteName: appGroupName)!.setValue(result, forKey: "user_details")
+                //UserDefaults.standard.setValue(result, forKey: "user_details")
+                //UserDefaults.standard.synchronize()
                 self.btn_pressed.sendActions(for: .touchUpInside)
             } else {
                 
@@ -257,7 +258,8 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
                         
                         let facebookProfileUrl = "http://graph.facebook.com/\(fbId)/picture?type=large"
                         print("facebookProfileUrl: \(facebookProfileUrl)")
-                        UserDefaults.standard.setValue(result, forKey: "user_details")
+                       
+                        UserDefaults(suiteName: appGroupName)!.setValue(result, forKey: "user_details")
                         UserDefaults.standard.setValue(facebookProfileUrl, forKey: "user_photoUrl")
                         print("\(UserDefaults.standard.value(forKey: "user_details")!)")
                         UserDefaults.standard.synchronize()

@@ -145,7 +145,7 @@ extension CharacterBuilderVC {
     
     
     @IBAction func saveCharacter_btnClicked(_ sender: UIButton) {
-        guard let _ = character.charHtml else {
+        guard !character.charHtml.isEmpty else {
             return
         }
         if let  savCharVC = self.storyboard?.instantiateViewController(withIdentifier: "SaveCharacterVC") as? SaveCharacterVC {
@@ -329,7 +329,9 @@ class OptionsTableViewCell: UITableViewCell,  UICollectionViewDataSource, UIColl
         if choice.choiceId == "hair_style" {
              iconName = option.iconName + viewcontroller!.selectedHairColorOption.iconName
         }
-        cell.imgView.image = UIImage(named: iconName)
+        let iconUrl = APICall.shared.assetUrl + iconName + ".png"
+        //cell.imgView.image = UIImage(named: iconName)
+        cell.imgView.setImage(url: URL(string : iconUrl)!)
         cell.lblTitle.text = ""//option.name
         
         cell.imgView.layer.cornerRadius = choice.type == .circle ? cell.imgView.frame.width/2 : 0
@@ -371,14 +373,13 @@ class OptionsTableViewCell: UITableViewCell,  UICollectionViewDataSource, UIColl
         
         viewcontroller?.reloadInterfaceMenus()
         viewcontroller?.changeUserSelection()
+        
+        if choice.type == .circle {
+            collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+        }
     }
     
 }
-
-
-
-
-
 
 
 extension UIImageView {

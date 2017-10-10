@@ -44,7 +44,7 @@ class HomeVC: ParentVC {
         createChar_titleView1.isHidden = true
         createChar_titleView2.isHidden = true
 
-        let user_deatils = UserDefaults.standard.value(forKey: "user_details")as? [String:String]
+        let user_deatils = UserDefaults(suiteName: appGroupName)!.value(forKey: "user_details")as? [String:String]
         
         let name = user_deatils!["name"] ?? ""
         lblUserName.text = name

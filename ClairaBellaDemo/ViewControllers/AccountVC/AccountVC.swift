@@ -22,17 +22,19 @@ class AccountVC: UIViewController {
     @IBOutlet var Lbl_Name: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-        let user_deatils = UserDefaults.standard.value(forKey: "user_details")as? [String:String]
+        let user_deatils = UserDefaults(suiteName: appGroupName)!.value(forKey: "user_details")as? [String:String]
         
-        let email: String = user_deatils!["email"]!
-        let name: String = user_deatils!["name"]!
+        let email: String = user_deatils!["email"] ?? ""
+        let fname: String = user_deatils!["first_name"] ?? ""
+        let lname: String = user_deatils!["last_name"] ?? ""
+        let name = fname + " " + lname
         //profile_Image.layer.borderWidth = 1
         profile_Image.layer.masksToBounds = false
         //profile_Image.layer.borderColor = UIColor.black.cgColor
         profile_Image.layer.cornerRadius = profile_Image.frame.height/2
        // profile_Image.clipsToBounds = true
         
-        let profile_image = UserDefaults.standard.value(forKey: "user_photoUrl")!
+        let profile_image = UserDefaults.standard.value(forKey: "user_photoUrl") ?? ""
         let url = NSURL(string:profile_image as! String)
         data = NSData(contentsOf:url! as URL)
         if data != nil {

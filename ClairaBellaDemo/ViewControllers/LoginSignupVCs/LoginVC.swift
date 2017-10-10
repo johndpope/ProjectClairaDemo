@@ -165,9 +165,10 @@ class LoginVC: UIViewController, UITextFieldDelegate {
                         
                         let facebookProfileUrl = "http://graph.facebook.com/\(fbId)/picture?type=large"
                         print("facebookProfileUrl: \(facebookProfileUrl)")
-                        UserDefaults.standard.setValue(result, forKey: "user_details")
+                      
+                        UserDefaults(suiteName: appGroupName)!.setValue(result, forKey: "user_details")
                         UserDefaults.standard.setValue(facebookProfileUrl, forKey: "user_photoUrl")
-                        print("\(UserDefaults.standard.value(forKey: "user_details")!)")
+//                        print("\(UserDefaults.standard.value(forKey: "user_details")!)")
                         UserDefaults.standard.synchronize()
                         
 //                        if let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeVC") as? HomeVC {

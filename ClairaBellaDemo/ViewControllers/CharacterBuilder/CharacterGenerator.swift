@@ -15,11 +15,11 @@ struct CharBackground {
 }
 
 protocol CharacterType {
-    var charHtml: String? {get set}
+    var charHtml: String {get set}
 }
 
 class Emoji: CharacterType {
-    var charHtml: String?
+    var charHtml = ""
     var key: String = ""
 }
 
@@ -27,7 +27,7 @@ class Character: NSCopying, CharacterType {
 
     var name = ""
     var choices = [String : String]()
-    var charHtml: String?
+    var charHtml: String = ""
     var createdDate = ""
     var alive = false
     var characterBackground: CharBackground?
