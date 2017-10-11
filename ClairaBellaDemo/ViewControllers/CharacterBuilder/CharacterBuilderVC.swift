@@ -97,7 +97,9 @@ class CharacterBuilderVC: ParentVC {
     }
     
     func reloadInterfaceMenus() {
-        tableView.reloadData()
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
     
     func loadInterfaceMenus() {

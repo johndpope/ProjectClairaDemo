@@ -35,8 +35,8 @@ class EmojiesVC: ParentVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.dataSource = nil
-        tableView.delegate = nil
+        //tableView.dataSource = nil
+        //tableView.delegate = nil
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -98,7 +98,7 @@ class EmojiesVC: ParentVC {
 
 extension EmojiesVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return  1 + (character == nil ? 0 : 1)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -167,7 +167,7 @@ extension EmojiesVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLay
                 print("twitter")
                 self.shareOnTwitter(image)
             case .mail:
-                print("mail")
+                print("mail") 
             case .save:
                 self.saveToPhots(image)
             case .more:

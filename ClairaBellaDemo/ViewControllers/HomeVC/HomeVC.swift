@@ -26,6 +26,7 @@ class HomeVC: ParentVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         setInitialUI()
+        NotificationCenter.default.addObserver(self, selector: #selector(self.setViewWithCharacters), name: NSNotification.Name(rawValue: "CharactersLoadingFinish"), object: nil)
     }
 
     override func viewWillAppear(_ animated: Bool) {

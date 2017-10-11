@@ -119,24 +119,6 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
 
         scrollView.addSubview(lastNameTextField)
         
-//        passwordTextField = UITextField(frame: CGRect(x:SCREEN_WIDTH*0.05, y:lastNameTextField.frame.origin.y+lastNameTextField.frame.size.height+10, width:SCREEN_WIDTH*0.90, height:50))
-//        //passwordTextField.placeholder = "Password"
-//        passwordTextField.attributedPlaceholder = NSAttributedString(string: "Password",
-//                                                                     attributes: [NSForegroundColorAttributeName: UIColor.black])
-//        passwordTextField.textColor = UIColor.black
-//        passwordTextField.textAlignment = .center
-//        passwordTextField.autocapitalizationType = .none
-//        passwordTextField.autocorrectionType = .no
-//        passwordTextField.keyboardType = .default
-//        passwordTextField.returnKeyType = .default
-//        passwordTextField.contentVerticalAlignment = .center
-//        passwordTextField.delegate = self
-//        passwordTextField.leftViewMode = .always
-//        passwordTextField.isSecureTextEntry = true
-//       // passwordTextField.backgroundColor = UIColor.white
-//        passwordTextField.background = UIImage(named:"Button_Back")
-//        scrollView.addSubview(passwordTextField)
-        
         let registerBtn = UIButton(type: UIButtonType.custom) as UIButton
         registerBtn.frame = CGRect(x:SCREEN_WIDTH*0.05, y:lastNameTextField.frame.origin.y+lastNameTextField.frame.size.height+25, width: SCREEN_WIDTH*0.90, height: 50)
         registerBtn.addTarget(self, action: #selector(self.signUpBtnClick(_:)), for: UIControlEvents.touchUpInside)
@@ -146,32 +128,6 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
         registerBtn.layer.cornerRadius = 5.0
         scrollView.addSubview(registerBtn)
         
-//        let line1 = UIButton(type: UIButtonType.custom) as UIButton
-//        line1.frame = CGRect(x:SCREEN_WIDTH*0.07, y:registerBtn.frame.origin.y+registerBtn.frame.size.height+20, width: SCREEN_WIDTH*0.80, height: 20)
-//        line1.setTitle("  Save your unique characters.", for: .normal)
-//        line1.setImage(UIImage(named:"select"), for: .normal)
-//        line1.contentHorizontalAlignment = .left
-//        line1.isUserInteractionEnabled = false
-//        line1.titleLabel?.font = UIFont.systemFont(ofSize: 14)
-//        scrollView.addSubview(line1)
-//        
-//        let line2 = UIButton(type: UIButtonType.custom) as UIButton
-//        line2.frame = CGRect(x:SCREEN_WIDTH*0.07, y:line1.frame.origin.y+line1.frame.size.height+3, width: SCREEN_WIDTH*0.80, height: 20)
-//        line2.setTitle("  Create personalised emoji’s", for: .normal)
-//        line2.setImage(UIImage(named:"select"), for: .normal)
-//        line2.contentHorizontalAlignment = .left
-//        line2.isUserInteractionEnabled = false
-//        line2.titleLabel?.font = UIFont.systemFont(ofSize: 14)
-//        scrollView.addSubview(line2)
-//        
-//        let line3 = UIButton(type: UIButtonType.custom) as UIButton
-//        line3.frame = CGRect(x:SCREEN_WIDTH*0.07, y:line2.frame.origin.y+line2.frame.size.height+3, width: SCREEN_WIDTH*0.80, height: 20)
-//        line3.setTitle("  Share your characters across social.", for: .normal)
-//        line3.setImage(UIImage(named:"select"), for: .normal)
-//        line3.contentHorizontalAlignment = .left
-//        line3.titleLabel?.font = UIFont.systemFont(ofSize: 14)
-//        line3.isUserInteractionEnabled = false
-//        scrollView.addSubview(line3)
         
         let imgBottom = UIImageView()
         imgBottom.frame = CGRect(x: 0, y: registerBtn.frame.origin.y+registerBtn.frame.size.height+35, width: SCREEN_WIDTH, height: 150)
@@ -182,6 +138,10 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
         scrollView.addSubview(imgBottom)
         
         scrollView.contentSize = CGSize(width: SCREEN_WIDTH, height:imgBottom.frame.origin.y + imgBottom.frame.size.height + 8)
+    }
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        return textField.resignFirstResponder()
     }
 
     func backClick(_ sender: UIButton)
@@ -211,6 +171,7 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
                 //UserDefaults.standard.setValue(result, forKey: "user_details")
                 //UserDefaults.standard.synchronize()
                 self.btn_pressed.sendActions(for: .touchUpInside)
+                appDelegate.getCharactersFromServer()
             } else {
                 
             }
@@ -263,13 +224,8 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
                         UserDefaults.standard.setValue(facebookProfileUrl, forKey: "user_photoUrl")
                         print("\(UserDefaults.standard.value(forKey: "user_details")!)")
                         UserDefaults.standard.synchronize()
-                        
-//                        if let viewController = UIStoryboard(name: "Storyboard", bundle: nil).instantiateViewController(withIdentifier: "NewUserVC") as? NewUserVC {
-//                            progressHUD.hide()
-//                            if let navigator = self.navigationController {
-//                                navigator.pushViewController(viewController, animated: true)
-//                            }
-//                        }
+                        appDelegate.getCharactersFromServer()
+
                          self.btn_pressed.sendActions(for: .touchUpInside)
                         
                     }

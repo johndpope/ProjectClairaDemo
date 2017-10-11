@@ -116,9 +116,14 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         scrollView.contentSize = CGSize(width: SCREEN_WIDTH, height:imgBottom.frame.origin.y + imgBottom.frame.size.height + 15)
     }
     
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        return textField.resignFirstResponder()
+    }
     func loginBtnClick(_ sender: UIButton) {
         
     }
+    
     
     func signUpBtnClick(_ sendr: UIButton) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "SignUp") as! SignUpVC
@@ -171,12 +176,7 @@ class LoginVC: UIViewController, UITextFieldDelegate {
 //                        print("\(UserDefaults.standard.value(forKey: "user_details")!)")
                         UserDefaults.standard.synchronize()
                         
-//                        if let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeVC") as? HomeVC {
-//                        progressHUD.hide()
-//                            if let navigator = self.navigationController {
-//                                navigator.pushViewController(viewController, animated: false)
-//                            }
-//                        }
+                        appDelegate.getCharactersFromServer()
                         self.btn_clicked.sendActions(for: .touchUpInside)
                         
                     }
