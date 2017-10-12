@@ -85,7 +85,7 @@ class CharacterHTMLBuilder {
     fileprivate var emojisContextJson = [String : Any]()
     
     var resultBlock: (String)->Void = {_ in}
-    var deviceScaleFactor = 0.78
+    var deviceScaleFactor = 0.8
     
     func upateCharacter(choices: [String : String]) {
         buildCharHTMLWith(choices: choices, block: nil)
@@ -97,7 +97,7 @@ class CharacterHTMLBuilder {
     
     func buildCharHTMLWith(for type:CharacterType = .character, choices: [String : String], for contextKey: String = Character.characterContext, block: ((String)->Void)? = nil) {
         self.contextKey = contextKey
-        
+        deviceScaleFactor = type == .character ? 0.85 : 0.60
         if let block = block {
             resultBlock = block
         }
@@ -215,7 +215,11 @@ class CharacterHTMLBuilder {
         sortedLocations.forEach { (dic) in
             for (key, value) in dic {
                 partLocs[key] = value
-                partsKey.append(key)
+                if !partsKey.contains(key) {
+                    partsKey.append(key)
+
+                }
+
             }
         }
         
@@ -262,6 +266,8 @@ class CharacterHTMLBuilder {
             let parent_height = Double(h)! * parent_scale
 
             parentDt["height"] = "\(parent_height)"
+            parentDt["width"] = "\(parent_width)"
+
             contextPoseData[parentName] = parentDt
             
             if let joints = parentData["joints"] as? [String : [String : String]] {

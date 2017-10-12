@@ -112,6 +112,7 @@ extension EmojiesVC: UITableViewDataSource, UITableViewDelegate {
         }
     }
     
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let bannerCellHeight = 186 * widthRatio
         if indexPath.row == 0 {
@@ -132,19 +133,28 @@ extension EmojiesVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLay
         return   character?.emojis.count ?? 0
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "emojiCell", for: indexPath) as! EmojiItemCell
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if let cl = cell as? EmojiItemCell {
             let emoji = character!.emojis[indexPath.item]
+            cl.webView.loadHTMLString("", baseURL: nil)
+
             if emoji.charHtml.isEmpty {
                 charGenerator.buildCharHTMLWith(for: .emoji, choices: character!.choices, for: emoji.key) { (html) in
-                    cell.webView.loadHTMLString(html, baseURL: nil)
+                    cl.webView.loadHTMLString(html, baseURL: nil)
                     emoji.charHtml = html
                 }
                 
             } else {
-                cell.webView.loadHTMLString(emoji.charHtml, baseURL: nil)
+                cl.webView.loadHTMLString(emoji.charHtml, baseURL: nil)
             }
+        }
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "emojiCell", for: indexPath) as! EmojiItemCell
+            let emoji = character!.emojis[indexPath.item]
             //cell.backgroundColor = UIColor.black
             return cell
     }
