@@ -37,7 +37,7 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         self.view.addSubview(scrollView)
         
         let imgLogo = UIImageView()
-        imgLogo.frame = CGRect(x: 0, y: (SCREEN_HEIGHT)*0.010, width: SCREEN_WIDTH, height: IS_IPHONE_6_G ? 325 : 250)
+        imgLogo.frame = CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: IS_IPHONE_6_G ? 325 : 250)
         
         imgLogo.contentMode = .scaleAspectFit
         imgLogo.image = UIImage(named: "Wellcome_Logo")
@@ -45,7 +45,7 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         scrollView.addSubview(imgLogo)
         
         let fblogInBtn = UIButton(type: UIButtonType.custom) as UIButton
-        fblogInBtn.frame = CGRect(x:SCREEN_WIDTH*0.05, y:imgLogo.frame.origin.y+imgLogo.frame.size.height-74, width: SCREEN_WIDTH*0.90, height: 65)
+        fblogInBtn.frame = CGRect(x:SCREEN_WIDTH*0.05, y:imgLogo.frame.origin.y+imgLogo.frame.size.height - 50, width: SCREEN_WIDTH*0.90, height:  54 )
         fblogInBtn.addTarget(self, action: #selector(self.Btn_Facebook_Login(_:)), for: UIControlEvents.touchUpInside)
         fblogInBtn.setBackgroundImage(UIImage(named :"Btn_FAcebook_SignIN"), for: .normal)
         scrollView.addSubview(fblogInBtn)

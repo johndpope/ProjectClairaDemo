@@ -57,7 +57,7 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
         scrollView.addSubview(lineHeaderView)
         
         let fblogInBtn = UIButton(type: UIButtonType.custom) as UIButton
-        fblogInBtn.frame = CGRect(x:SCREEN_WIDTH*0.05, y:SCREEN_HEIGHT*0.13, width: SCREEN_WIDTH*0.90, height: 65)
+        fblogInBtn.frame = CGRect(x:SCREEN_WIDTH*0.05, y:SCREEN_HEIGHT*0.13, width: SCREEN_WIDTH*0.90, height: 54)
         fblogInBtn.addTarget(self, action: #selector(self.Btn_Facebook_Login(_:)), for: UIControlEvents.touchUpInside)
         fblogInBtn.setBackgroundImage(UIImage(named :"Btn_Facebook_SignUP"), for: .normal)
         scrollView.addSubview(fblogInBtn)

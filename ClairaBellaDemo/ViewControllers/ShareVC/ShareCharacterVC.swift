@@ -82,6 +82,9 @@ extension ShareCharacterVC: UICollectionViewDataSource, UICollectionViewDelegate
 
 extension ShareCharacterVC {
     
+    @IBAction func changeChar_btnClicked(_ sender: UIButton) {
+        self.tabBarController?.selectedIndex = 1
+    }
     @IBAction func back_btnClicked(_ sender: UIButton) {
         _ = self.navigationController?.popViewController(animated: true)
     }
