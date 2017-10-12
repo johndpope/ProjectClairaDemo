@@ -35,7 +35,7 @@ class SaveCharacterVC: ParentVC, UITextFieldDelegate {
         checkbox.isSelected = Character.myCharacters.isEmpty
         
         //user should not be able to unchecked checkbox if this is his/her first character.
-        //checkbox.isEnabled = !Character.myCharacters.isEmpty
+        checkbox.isUserInteractionEnabled = !Character.myCharacters.isEmpty
         
         if !character.charHtml.isEmpty {
             webView.loadHTMLString(character.charHtml, baseURL: nil)

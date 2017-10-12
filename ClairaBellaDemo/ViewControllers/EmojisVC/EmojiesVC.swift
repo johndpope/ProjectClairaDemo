@@ -35,8 +35,8 @@ class EmojiesVC: ParentVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.dataSource = nil
-        tableView.delegate = nil
+        //tableView.dataSource = nil
+        //tableView.delegate = nil
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -82,10 +82,9 @@ class EmojiesVC: ParentVC {
 
     }
     
-    @IBAction func Create_CharacterAction(_ sender: UIButton) {
+    @IBAction func change_CharacterAction(_ sender: UIButton) {
         tabBarController?.selectedIndex = 1
     }
-    
     
     @IBAction func Btn_ShareEmojiAction(_ sender: UIButton) {
         let VC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ShareVC")
@@ -98,7 +97,7 @@ class EmojiesVC: ParentVC {
 
 extension EmojiesVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return  1 + (character == nil ? 0 : 1)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -150,6 +149,7 @@ extension EmojiesVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLay
             return cell
     }
     
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = (collectionView.frame.width-8)/4
         return CGSize(width: width, height: width)
@@ -158,6 +158,12 @@ extension EmojiesVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLay
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let emoji = character!.emojis[indexPath.item]
         
+            charGenerator.buildCharHTMLWith(for: .emoji, choices: character!.choices, for: emoji.key) { (html) in
+                //  cell.webView.loadHTMLString(html, baseURL: nil)
+                emoji.charHtml = html
+            }
+            
+      
         ShareCharacterView.show(in: self.view, character: emoji) { (action, image) in
            
             switch action {
@@ -167,7 +173,7 @@ extension EmojiesVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLay
                 print("twitter")
                 self.shareOnTwitter(image)
             case .mail:
-                print("mail")
+                print("mail") 
             case .save:
                 self.saveToPhots(image)
             case .more:

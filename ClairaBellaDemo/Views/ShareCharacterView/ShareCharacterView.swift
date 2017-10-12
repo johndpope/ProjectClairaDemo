@@ -15,6 +15,7 @@ class ShareCharacterView: UIView {
     
     var character: CharacterType! {
         didSet {
+            
             webView.loadHTMLString(character.charHtml, baseURL: nil)
             
             if character is Character {
@@ -85,6 +86,8 @@ extension ShareCharacterView {
         
         scView.character = character
         scView.actionBlock = actionBlock
+        
+        
     }
 
 }

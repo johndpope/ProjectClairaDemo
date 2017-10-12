@@ -85,7 +85,7 @@ class CharacterHTMLBuilder {
     fileprivate var emojisContextJson = [String : Any]()
     
     var resultBlock: (String)->Void = {_ in}
-    var deviceScaleFactor = 0.8
+    var deviceScaleFactor = 0.78
     
     func upateCharacter(choices: [String : String]) {
         buildCharHTMLWith(choices: choices, block: nil)
@@ -260,7 +260,7 @@ class CharacterHTMLBuilder {
             let parent_scale = Double(s)! * deviceScaleFactor
             let parent_width = Double(w)! * parent_scale
             let parent_height = Double(h)! * parent_scale
-            parentDt["width"] = "\(parent_width)"
+
             parentDt["height"] = "\(parent_height)"
             contextPoseData[parentName] = parentDt
             

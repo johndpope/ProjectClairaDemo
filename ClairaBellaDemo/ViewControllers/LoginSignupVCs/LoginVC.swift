@@ -37,7 +37,7 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         self.view.addSubview(scrollView)
         
         let imgLogo = UIImageView()
-        imgLogo.frame = CGRect(x: 0, y: (SCREEN_HEIGHT)*0.010, width: SCREEN_WIDTH, height: IS_IPHONE_6_G ? 325 : 250)
+        imgLogo.frame = CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: IS_IPHONE_6_G ? 325 : 250)
         
         imgLogo.contentMode = .scaleAspectFit
         imgLogo.image = UIImage(named: "Wellcome_Logo")
@@ -45,7 +45,7 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         scrollView.addSubview(imgLogo)
         
         let fblogInBtn = UIButton(type: UIButtonType.custom) as UIButton
-        fblogInBtn.frame = CGRect(x:SCREEN_WIDTH*0.05, y:imgLogo.frame.origin.y+imgLogo.frame.size.height-74, width: SCREEN_WIDTH*0.90, height: 65)
+        fblogInBtn.frame = CGRect(x:SCREEN_WIDTH*0.05, y:imgLogo.frame.origin.y+imgLogo.frame.size.height - 50, width: SCREEN_WIDTH*0.90, height:  54 )
         fblogInBtn.addTarget(self, action: #selector(self.Btn_Facebook_Login(_:)), for: UIControlEvents.touchUpInside)
         fblogInBtn.setBackgroundImage(UIImage(named :"Btn_FAcebook_SignIN"), for: .normal)
         scrollView.addSubview(fblogInBtn)
@@ -116,9 +116,14 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         scrollView.contentSize = CGSize(width: SCREEN_WIDTH, height:imgBottom.frame.origin.y + imgBottom.frame.size.height + 15)
     }
     
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        return textField.resignFirstResponder()
+    }
     func loginBtnClick(_ sender: UIButton) {
         
     }
+    
     
     func signUpBtnClick(_ sendr: UIButton) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "SignUp") as! SignUpVC
@@ -171,12 +176,7 @@ class LoginVC: UIViewController, UITextFieldDelegate {
 //                        print("\(UserDefaults.standard.value(forKey: "user_details")!)")
                         UserDefaults.standard.synchronize()
                         
-//                        if let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeVC") as? HomeVC {
-//                        progressHUD.hide()
-//                            if let navigator = self.navigationController {
-//                                navigator.pushViewController(viewController, animated: false)
-//                            }
-//                        }
+                        appDelegate.getCharactersFromServer()
                         self.btn_clicked.sendActions(for: .touchUpInside)
                         
                     }

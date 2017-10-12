@@ -124,7 +124,7 @@ class AccountVC: UIViewController {
         datePickerContainer.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 240)//CGRectMake(0.0, self.view.frame.height/2, 320.0, 300.0)
         datePickerContainer.backgroundColor = UIColor.white
         
-        var pickerSize : CGSize = datePicker.sizeThatFits(.zero)//datePicker.sizeThatFits(CGSizeZero)
+        let pickerSize : CGSize = datePicker.sizeThatFits(.zero)//datePicker.sizeThatFits(CGSizeZero)
         datePicker.frame = CGRect(x: 0, y: 20, width:pickerSize.width, height: 460)
         datePicker.setDate(NSDate() as Date, animated: true)
         datePicker.maximumDate = NSDate() as Date
@@ -132,7 +132,7 @@ class AccountVC: UIViewController {
         datePicker.addTarget(self, action: Selector("dateChangedInDate:"), for: UIControlEvents.valueChanged)
         datePickerContainer.addSubview(datePicker)
         
-        var doneButton = UIButton()
+        let doneButton = UIButton()
         doneButton.setTitle("Done", for: UIControlState.normal)
         doneButton.setTitleColor(UIColor.blue, for: UIControlState.normal)
         doneButton.addTarget(self, action: Selector("dismissPicker:"), for: UIControlEvents.touchUpInside)

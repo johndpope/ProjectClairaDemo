@@ -26,6 +26,7 @@ class HomeVC: ParentVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         setInitialUI()
+        NotificationCenter.default.addObserver(self, selector: #selector(self.setViewWithCharacters), name: NSNotification.Name(rawValue: "CharactersLoadingFinish"), object: nil)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -46,7 +47,9 @@ class HomeVC: ParentVC {
 
         let user_deatils = UserDefaults(suiteName: appGroupName)!.value(forKey: "user_details")as? [String:String]
         
-        let name = user_deatils!["name"] ?? ""
+        let fname: String = user_deatils!["first_name"] ?? ""
+        let lname: String = user_deatils!["last_name"] ?? ""
+        let name = fname + " " + lname
         lblUserName.text = name
 
         if Character.myCharacters.isEmpty {
@@ -76,9 +79,6 @@ class HomeVC: ParentVC {
                 self.webView.loadHTMLString(html, baseURL: nil)
             })
             
-//            CharacterHTMLBuilder.shared.buildCharHTMLWith(choices: mainChar.choices, for: .blinkingEmoji, block: { (html) in
-//                self.webView.loadHTMLString(html, baseURL: nil)
-//            })
         }
     }
 
