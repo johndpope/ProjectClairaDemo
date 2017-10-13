@@ -16,35 +16,45 @@ class EmojiesVC: ParentVC {
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var emoji_uiimage: UIImageView!
     
-    var character: Character?
+    var isNewChar = false
+    var character: Character? {
+        willSet (newChar) {
+            isNewChar = true
+            if character?.createdDate == newChar?.createdDate {
+                isNewChar = false
+            }
+        }
+    }
+    
     var charGenerator = CharacterHTMLBuilder.shared
 
     var emojisContextKeys = [String]() {
         didSet {
-            character?.emojis.removeAll()
-            for type in emojisContextKeys {
-                let emoji = Emoji()
-                emoji.key = type
-                emoji.charHtml = ""
-                character?.emojis.append(emoji)
-            }
-
-            tableView.reloadData()
+            self.characterDidChange()
         }
+    }
+    
+    let emojiItemHeight: CGFloat = 100
+   
+    var emojisCellHeight: CGFloat {
+        let rem = emojisContextKeys.count % 4
+        let rowCount = (emojisContextKeys.count / 4) + (rem > 0 ? 1 : 0)
+        
+        let cellHeight = emojiItemHeight * CGFloat(rowCount )
+        return cellHeight +  CGFloat(rowCount * 2)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //tableView.dataSource = nil
-        //tableView.delegate = nil
+        getEmojisContexts()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        getEmojisContexts()
        
         if let char = characterForEmoji {
             character = char
+            characterDidChange()
             characterForEmoji = nil
         }
 
@@ -54,23 +64,37 @@ class EmojiesVC: ParentVC {
                     character = defaultChar
                 } else {
                     character = Character.myCharacters.first!
-                    
                 }
-                tableView.dataSource = self
-                tableView.delegate = self
-
             }
-        } else {
-            tableView.dataSource = self
-            tableView.delegate = self
         }
-
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         characterForEmoji = nil
-        character = nil
+        //character = nil
+    }
+    
+    func characterDidChange() {
+        if self.isNewChar {
+            character?.emojis.removeAll()
+            tableView.reloadData()
+            
+            DispatchQueue.global().async {
+                for type in self.emojisContextKeys {
+                    let emoji = Emoji()
+                    emoji.key = type
+                    emoji.charHtml = ""
+                    self.character?.emojis.append(emoji)
+                }
+                
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            }
+            
+        }
+        
     }
 
     @IBAction func Btn_HomeAct(_ sender: UIBarButtonItem) {
@@ -97,7 +121,7 @@ class EmojiesVC: ParentVC {
 
 extension EmojiesVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return  1 + (character == nil ? 0 : 1)
+        return  1 + ((character?.emojis.count ?? 0) > 0  ? 1 : 0)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -118,7 +142,7 @@ extension EmojiesVC: UITableViewDataSource, UITableViewDelegate {
         if indexPath.row == 0 {
             return bannerCellHeight
         } else {
-            return SCREEN_HEIGHT - bannerCellHeight - 64 - 49
+            return emojisCellHeight//SCREEN_HEIGHT - bannerCellHeight - 64 - 49
         }
         
     }
@@ -154,15 +178,13 @@ extension EmojiesVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLay
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "emojiCell", for: indexPath) as! EmojiItemCell
-            let emoji = character!.emojis[indexPath.item]
-            //cell.backgroundColor = UIColor.black
             return cell
     }
     
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = (collectionView.frame.width-8)/4
-        return CGSize(width: width, height: width)
+        return CGSize(width: width, height: emojiItemHeight)
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
