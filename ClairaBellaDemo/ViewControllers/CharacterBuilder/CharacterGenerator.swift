@@ -97,7 +97,7 @@ class CharacterHTMLBuilder {
     
     func buildCharHTMLWith(for type:CharacterType = .character, choices: [String : String], for contextKey: String = Character.characterContext, block: ((String)->Void)? = nil) {
         self.contextKey = contextKey
-        deviceScaleFactor = type == .character ? 0.85 : 0.60
+        deviceScaleFactor = type == .character ? 0.85 : 0.65
         if let block = block {
             resultBlock = block
         }
