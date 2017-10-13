@@ -34,11 +34,12 @@ class EmojiesVC: ParentVC {
         }
     }
     
+    let numberOfEmojisInRow = 4
     let emojiItemHeight: CGFloat = 100
    
     var emojisCellHeight: CGFloat {
-        let rem = emojisContextKeys.count % 4
-        let rowCount = (emojisContextKeys.count / 4) + (rem > 0 ? 1 : 0)
+        let rem = emojisContextKeys.count % numberOfEmojisInRow
+        let rowCount = (emojisContextKeys.count / numberOfEmojisInRow) + (rem > 0 ? 1 : 0)
         
         let cellHeight = emojiItemHeight * CGFloat(rowCount )
         return cellHeight +  CGFloat(rowCount * 2)
@@ -55,16 +56,18 @@ class EmojiesVC: ParentVC {
         if let char = characterForEmoji {
             character = char
             characterDidChange()
-            characterForEmoji = nil
-        }
 
-        if character == nil {
+            characterForEmoji = nil
+        } else  {
             if !Character.myCharacters.isEmpty {
                 if let defaultChar = Character.mainCharacter {
                     character = defaultChar
+
                 } else {
                     character = Character.myCharacters.first!
                 }
+                characterDidChange()
+
             }
         }
     }
@@ -178,12 +181,13 @@ extension EmojiesVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLay
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "emojiCell", for: indexPath) as! EmojiItemCell
+            cell.imgView.isHidden = !isNewChar
             return cell
     }
     
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = (collectionView.frame.width-8)/4
+        let width = (collectionView.frame.width-6)/CGFloat(numberOfEmojisInRow)
         return CGSize(width: width, height: emojiItemHeight)
     }
 
@@ -277,8 +281,9 @@ extension EmojiesVC {
         APICall.shared.emojis_context_APICall { (response, success) in
             if success {
                 if let json = response as? [String : Any] {
-                    let emojisTypes = json.map({$0.key})
+                    let emojisTypes = json.map({$0.key}).sorted(by: >)
                     print(emojisTypes)
+                    
                     self.emojisContextKeys = emojisTypes
                 }
             } else {
@@ -295,12 +300,20 @@ class EmojiTableViewCell: UITableViewCell {
 }
 
 
-class EmojiItemCell: UICollectionViewCell {
+class EmojiItemCell: UICollectionViewCell, UIWebViewDelegate {
     @IBOutlet var webView: UIWebView!
     @IBOutlet var imgView: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        //webView.scrollView.setZoomScale(2.0, animated: false)
+        webView.delegate = self
+    }
+    
+    func webViewDidStartLoad(_ webView: UIWebView) {
+        imgView.isHidden = false
+    }
+    
+    func webViewDidFinishLoad(_ webView: UIWebView) {
+        imgView.isHidden = true
     }
 }

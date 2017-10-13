@@ -20,7 +20,9 @@ class ShareCharacterView: UIView {
             
             if character is Character {
                 let ch = character as! Character
-                backgroundImage.image = UIImage(named: (ch.characterBackground?.image)!)
+                if let backImageName = ch.characterBackground?.image {
+                    backgroundImage.image = UIImage(named: backImageName)
+                }
 
             }
         }
