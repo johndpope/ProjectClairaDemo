@@ -13,8 +13,98 @@ import Social
 class EmojiesVC: ParentVC {
 
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var containerView: UIView!
-    @IBOutlet weak var emoji_uiimage: UIImageView!
+    @IBOutlet weak var emojiView: UIView!
+    @IBOutlet weak var webView: UIWebView!
+    
+    func generateEmojisImages() {
+        
+        if let char = character {
+            let emojiCount = char.emojis.count
+            var currntIndex = -1
+           
+            func fileExistAt(path: String)->Bool {
+                let filemanager = FileManager.default
+            
+               return filemanager.fileExists(atPath: path)
+            }
+            
+            func save(image: UIImage, emoji: Emoji, savePath: String) {
+              let filemanager = FileManager.default
+                
+                let url = filemanager.containerURL(forSecurityApplicationGroupIdentifier: appGroupName)!.appendingPathComponent(char.name + char.createdDate)
+
+                let direcotryPath = url.path
+                if !filemanager.fileExists(atPath: direcotryPath) {
+                    do {
+                        try filemanager.createDirectory(atPath: direcotryPath, withIntermediateDirectories: true, attributes: nil)
+                    } catch {
+                        //
+                    }
+                }
+                do {
+                    try UIImageJPEGRepresentation(image, 1.0)!.write(to: URL(fileURLWithPath: savePath))
+                } catch {
+                    //
+                }
+
+            }
+            
+            func loadNextEmoji() {
+                currntIndex += 1
+                if currntIndex < emojiCount {
+                    let emoji = char.emojis[currntIndex]
+                    let filemanager = FileManager.default
+                    let url = filemanager.containerURL(forSecurityApplicationGroupIdentifier: appGroupName)!.appendingPathComponent(char.name + "/" + emoji.key)
+
+                    if fileExistAt(path: url.path) {
+                        loadNextEmoji()
+                    } else {
+                        load(emoji: emoji, completion: { (image) in
+                            print(image)
+                            save(image: image, emoji: emoji, savePath: url.path)
+                            loadNextEmoji()
+                        })
+                    }
+                }
+            }
+            
+            loadNextEmoji()
+        }
+    }
+    
+    func load(emoji: Emoji, completion: @escaping (UIImage)->Void) {
+       
+        func startGenerateImage() {
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
+                let image =  self.generateEmojiImage()
+                completion(image)
+            }
+        }
+
+        if emoji.charHtml.isEmpty {
+            charGenerator.buildCharHTMLWith(for: .emoji, choices: character!.choices, for: emoji.key) { (html) in
+                self.webView.loadHTMLString(html, baseURL: nil)
+                startGenerateImage()
+            }
+        } else {
+            DispatchQueue.main.async{
+                self.webView.loadHTMLString(emoji.charHtml, baseURL: nil)
+                startGenerateImage()
+            }
+        }
+        
+    }
+    
+    func generateEmojiImage()->UIImage {
+        let renderer = UIGraphicsImageRenderer(size: self.emojiView.bounds.size)
+        let image = renderer.image { ctx in
+            self.emojiView.drawHierarchy(in: emojiView.bounds, afterScreenUpdates: true)
+        }
+        return image
+    }
+
+    
+    
     
     var isNewChar = false
     var character: Character? {
@@ -23,6 +113,8 @@ class EmojiesVC: ParentVC {
             if character?.createdDate == newChar?.createdDate {
                 isNewChar = false
             }
+            
+            generateEmojisImages()
         }
     }
     
@@ -193,12 +285,6 @@ extension EmojiesVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLay
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let emoji = character!.emojis[indexPath.item]
-        
-            charGenerator.buildCharHTMLWith(for: .emoji, choices: character!.choices, for: emoji.key) { (html) in
-                //  cell.webView.loadHTMLString(html, baseURL: nil)
-                emoji.charHtml = html
-            }
-            
       
         ShareCharacterView.show(in: self.view, character: emoji) { (action, image) in
            

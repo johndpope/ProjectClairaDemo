@@ -89,7 +89,6 @@ extension ShareCharacterView {
         scView.character = character
         scView.actionBlock = actionBlock
         
-        
     }
 
 }
