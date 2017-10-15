@@ -110,8 +110,9 @@ class KeyboardViewController: UIInputViewController {
         APICall.shared.emojis_context_APICall { (response, success) in
             if success {
                 if let json = response as? [String : Any] {
-                    let emojisTypes = json.map({$0.key})
+                    let emojisTypes = json.map({$0.key}).sorted(by: >)
                     print(emojisTypes)
+                   
                     self.keyboardView.emojiTypes = emojisTypes
                     self.getCharacters()
                 }
