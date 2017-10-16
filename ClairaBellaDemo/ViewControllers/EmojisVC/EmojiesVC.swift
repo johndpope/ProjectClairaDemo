@@ -14,7 +14,9 @@ class EmojiesVC: ParentVC {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var emojiToImageGeneratorView: EmojiImageGeneratorView!
+    @IBOutlet weak var loadingHudView: UIView!
     
+    var filemanager = FileManager.default
     var isNewChar = false
     var character: Character? {
         willSet (newChar) {
@@ -93,18 +95,33 @@ class EmojiesVC: ParentVC {
                 
 
                 DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                    if let char = self.character {
-                        self.emojiToImageGeneratorView.character = char
-                    }
-
+                    self.startGenerateEmojiImages()
                 }
             }
             
-
-            
         }
-        
+    }
+    
+    //MARK: start generate Emojis
+    func startGenerateEmojiImages() {
+        if let char = self.character {
+            self.emojiToImageGeneratorView.character = char
+            let progressHUD = ProgressView(text: "Saving Emojis")
+            self.emojiToImageGeneratorView.didStartBlock = {
+                self.loadingHudView.addSubview(progressHUD)
+                self.loadingHudView.isHidden = false
+                progressHUD.show()
+                self.view.isUserInteractionEnabled = false
+            }
+            self.emojiToImageGeneratorView.completionBlock = {
+                DispatchQueue.main.async(execute: {
+                    self.tableView.reloadData()
+                    self.loadingHudView.isHidden = true
+                    self.view.isUserInteractionEnabled = true
+                })
+            }
+        }
+
     }
 
     @IBAction func Btn_HomeAct(_ sender: UIBarButtonItem) {
@@ -171,17 +188,26 @@ extension EmojiesVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLay
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if let cl = cell as? EmojiItemCell {
             let emoji = character!.emojis[indexPath.item]
-            cl.webView.loadHTMLString("", baseURL: nil)
 
-            if emoji.charHtml.isEmpty {
-                charGenerator.buildCharHTMLWith(for: .emoji, choices: character!.choices, for: emoji.key) { (html) in
-                    cl.webView.loadHTMLString(html, baseURL: nil)
-                    emoji.charHtml = html
-                }
+            let url = filemanager.containerURL(forSecurityApplicationGroupIdentifier: appGroupName)!.appendingPathComponent(character!.createdDate + "/" + emoji.key)
+            
+            do  {
+                let data = try Data(contentsOf: url)
+                let image = UIImage(data: data)
+                cl.imgView.image = image
+            } catch {
                 
-            } else {
-                cl.webView.loadHTMLString(emoji.charHtml, baseURL: nil)
             }
+
+//            if emoji.charHtml.isEmpty {
+//                charGenerator.buildCharHTMLWith(for: .emoji, choices: character!.choices, for: emoji.key) { (html) in
+//                    cl.webView.loadHTMLString(html, baseURL: nil)
+//                    emoji.charHtml = html
+//                }
+//                
+//            } else {
+//                cl.webView.loadHTMLString(emoji.charHtml, baseURL: nil)
+//            }
         }
     }
 
@@ -307,7 +333,7 @@ class EmojiItemCell: UICollectionViewCell, UIWebViewDelegate {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        webView.delegate = self
+        //webView.delegate = self
     }
     
     func webViewDidStartLoad(_ webView: UIWebView) {

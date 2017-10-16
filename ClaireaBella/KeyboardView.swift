@@ -84,21 +84,32 @@ extension KeyboardView: UICollectionViewDataSource, UICollectionViewDelegateFlow
         
         if showCharters { //cell for display characters
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "charCell", for: indexPath) as! EmojiCell
+            cell.backgroundColor = UIColor.white
             if indexPath.row == 0 {
                 cell.imgView.image = UIImage(named: "AddChars")
                 cell.webView.isHidden = true
-                cell.backgroundColor = UIColor.white
+                //cell.backgroundColor = UIColor.white
             } else {
                 cell.imgView.image = nil
                 cell.webView.isHidden = false
                 let char = characters[indexPath.row - 1]
-                charGenerator.buildCharHTMLWith(for: .character, choices: char.choices) { (html) in
-                    cell.webView.loadHTMLString(html, baseURL: nil)
+                let url = filemanager.containerURL(forSecurityApplicationGroupIdentifier: appGroupName)!.appendingPathComponent(char.createdDate + "/" + char.createdDate)
+
+                do  {
+                    let data = try Data(contentsOf: url)
+                    let image = UIImage(data: data)
+                    cell.imgView.image = image
+                } catch {
+                    
                 }
+
+//                charGenerator.buildCharHTMLWith(for: .character, choices: char.choices) { (html) in
+//                    cell.webView.loadHTMLString(html, baseURL: nil)
+//                }
                 
                 cell.layer.cornerRadius = cell.frame.height/2
                 cell.clipsToBounds = true
-                cell.backgroundColor = UIColor(colorLiteralRed: 230.0/255, green: 44.0/255.0, blue: 152.0/255.0, alpha: 1)
+                //cell.backgroundColor = UIColor(colorLiteralRed: 230.0/255, green: 44.0/255.0, blue: 152.0/255.0, alpha: 1)
             }
             
             return cell
@@ -147,26 +158,34 @@ extension KeyboardView: UICollectionViewDataSource, UICollectionViewDelegateFlow
                 selectedCharacter = characters[indexPath.row - 1]
             }
         } else {
-            if let cell = collectionView.cellForItem(at: indexPath) {
-               let image = UIImage.imageWithView(view: cell)
+            let emoji = selectedCharacter!.emojis[indexPath.item]
+            let url = filemanager.containerURL(forSecurityApplicationGroupIdentifier: appGroupName)!.appendingPathComponent(selectedCharacter!.createdDate + "/" + emoji.key)
+            
+            do  {
+                let data = try Data(contentsOf: url)
+                let image = UIImage(data: data)
                 let pasteBoard = UIPasteboard.general
-                let imagedata = UIImagePNGRepresentation(image)
+                let imagedata = UIImagePNGRepresentation(image!)
                 pasteBoard.setData(imagedata!, forPasteboardType: UIPasteboardTypeListImage.object(at: 0) as! String)
-
-                self.messageViewTop.constant = -50
-                self.layoutIfNeeded()
-
-                UIView.animate(withDuration: 0.3, animations: {
-                    self.messageViewTop.constant = 0
-                        self.layoutIfNeeded()
-                    }, completion: { (finish) in
-                        UIView.animate(withDuration: 0.3, delay: 1, options: [.curveEaseInOut], animations: {
-                            self.messageViewTop.constant = -50
-                            self.layoutIfNeeded()
-                            }, completion: { (finish) in
-                        })
-                })
+                
+            } catch {
+                
             }
+            
+            
+            self.messageViewTop.constant = -50
+            self.layoutIfNeeded()
+            
+            UIView.animate(withDuration: 0.3, animations: {
+                self.messageViewTop.constant = 0
+                self.layoutIfNeeded()
+            }, completion: { (finish) in
+                UIView.animate(withDuration: 0.3, delay: 1, options: [.curveEaseInOut], animations: {
+                    self.messageViewTop.constant = -50
+                    self.layoutIfNeeded()
+                }, completion: { (finish) in
+                })
+            })
         }
     }
     

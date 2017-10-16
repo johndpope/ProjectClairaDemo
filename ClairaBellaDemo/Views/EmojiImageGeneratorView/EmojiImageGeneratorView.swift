@@ -26,6 +26,9 @@ class EmojiImageGeneratorView : UIView, UIWebViewDelegate {
     let filemanager = FileManager.default
     var currentEmoji: Emoji!
     
+    var completionBlock: (()->())?
+    var didStartBlock: (()->())?
+    
     var emojiSavePath: String {
         let url = filemanager.containerURL(forSecurityApplicationGroupIdentifier: appGroupName)!.appendingPathComponent((character.createdDate) + "/" + currentEmoji.key)
         return url.path
@@ -42,6 +45,7 @@ class EmojiImageGeneratorView : UIView, UIWebViewDelegate {
         let emojiCount = character.emojis.count
         print(currntIndex)
         if currntIndex < emojiCount {
+            didStartBlock?()
             currentEmoji = character.emojis[currntIndex]
             
             let url = filemanager.containerURL(forSecurityApplicationGroupIdentifier: appGroupName)!.appendingPathComponent((character.createdDate) + "/" + currentEmoji.key)
@@ -60,6 +64,10 @@ class EmojiImageGeneratorView : UIView, UIWebViewDelegate {
                     }
                 }
             }
+        }
+        
+        if currntIndex >= (emojiCount-1) {
+            completionBlock?()
         }
     }
 
