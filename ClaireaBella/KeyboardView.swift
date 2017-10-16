@@ -14,6 +14,7 @@ class KeyboardView: UIView {
     @IBOutlet var indicator: UIActivityIndicatorView!
     @IBOutlet var messageViewTop: NSLayoutConstraint!
     
+    var filemanager = FileManager.default
     var charGenerator = CharacterHTMLBuilder.shared
     
     var characters = [Character]() {
@@ -106,18 +107,27 @@ extension KeyboardView: UICollectionViewDataSource, UICollectionViewDelegateFlow
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "emojiCell", for: indexPath) as! EmojiCell
             let emoji = selectedCharacter!.emojis[indexPath.item]
             cell.webView.loadRequest(URLRequest(url: URL(string: "about:blank")!))
-
-            if emoji.charHtml.isEmpty {
-                charGenerator.buildCharHTMLWith(for: .emoji, choices: selectedCharacter!.choices, for: emoji.key) {[weak cell, weak emoji] (html) in
-                    
-                    cell?.webView.loadHTMLString(html, baseURL: nil)
-                    emoji?.charHtml = html
-                }
-
-            } else {
-
-                cell.webView.loadHTMLString(emoji.charHtml, baseURL: nil)
+            
+            let url = filemanager.containerURL(forSecurityApplicationGroupIdentifier: appGroupName)!.appendingPathComponent(selectedCharacter!.createdDate + "/" + emoji.key)
+            
+            do  {
+                let data = try Data(contentsOf: url)
+                let image = UIImage(data: data)
+                cell.imgView.image = image
+            } catch {
+                
             }
+//            if emoji.charHtml.isEmpty {
+//                charGenerator.buildCharHTMLWith(for: .emoji, choices: selectedCharacter!.choices, for: emoji.key) {[weak cell, weak emoji] (html) in
+//                    
+//                    cell?.webView.loadHTMLString(html, baseURL: nil)
+//                    emoji?.charHtml = html
+//                }
+//
+//            } else {
+//
+//                cell.webView.loadHTMLString(emoji.charHtml, baseURL: nil)
+//            }
             //cell.backgroundColor = .black
             return cell
         }
