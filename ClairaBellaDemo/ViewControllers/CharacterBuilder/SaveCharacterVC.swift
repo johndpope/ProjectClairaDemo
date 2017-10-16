@@ -210,6 +210,8 @@ extension SaveCharacterVC {
                         UserDefaults.standard.set(createdDate, forKey: "MainCharacter")
                     }
                 }
+                self.generateEmojiImage()
+
                 self.showAlertMessage(message: "Character saved successfully.")
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "NewCharacterAddedNotification"), object: nil, userInfo: ["NewChar" : self.character])
             } else {
@@ -235,7 +237,7 @@ extension SaveCharacterVC {
                 }
 
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "CharacterUpdateNotification"), object: nil, userInfo: ["updatedChar" : self.character])
-                
+                self.generateEmojiImage()
                 self.showAlertMessage(message: "Character updated successfully.")
             } else {
                 self.showAlertMessage(message: "Something went wrong.")
@@ -244,5 +246,33 @@ extension SaveCharacterVC {
         }
         
     }
+
+    
+    func generateEmojiImage() {
+        let renderer = UIGraphicsImageRenderer(size: Character_View.bounds.size)
+        let image = renderer.image { ctx in
+            Character_View.drawHierarchy(in: Character_View.bounds, afterScreenUpdates: true)
+        }
+       let filemanager = FileManager.default
+        let directoryURl = filemanager.containerURL(forSecurityApplicationGroupIdentifier: appGroupName)!.appendingPathComponent( self.character.createdDate)
+
+        let direcotryPath = directoryURl.path
+        let filePath = direcotryPath + "/" + self.character.createdDate
+        if !filemanager.fileExists(atPath: direcotryPath) {
+            do {
+                try filemanager.createDirectory(atPath: direcotryPath, withIntermediateDirectories: true, attributes: nil)
+            } catch {
+                //
+            }
+        }
+        do {
+            try UIImageJPEGRepresentation(image, 1.0)!.write(to: URL(fileURLWithPath: filePath))
+            
+        } catch {
+            //
+        }
+
+    }
+    
 
 }

@@ -9434,7 +9434,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.unitygames.Claireabella.ClaireaBella;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "859ea01f-2ebb-401b-92dc-f119f68bc839";
+				PROVISIONING_PROFILE = "52d2c52c-af48-4208-9509-9fb694d70295";
 				PROVISIONING_PROFILE_SPECIFIER = Claireabella_keyboard_production;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
