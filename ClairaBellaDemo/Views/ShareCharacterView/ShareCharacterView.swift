@@ -12,6 +12,7 @@ class ShareCharacterView: UIView {
     @IBOutlet var cardView: UIView!
     @IBOutlet var webView: UIWebView!
     @IBOutlet var backgroundImage: UIImageView!
+    @IBOutlet var webviewWidth: NSLayoutConstraint!
     
     var character: CharacterType! {
         didSet {
@@ -33,6 +34,10 @@ class ShareCharacterView: UIView {
     }
     
     var actionBlock: ((ShareOptions, UIImage)-> Void)?
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
     
     //Private funcs
     fileprivate func showAnimation() {
