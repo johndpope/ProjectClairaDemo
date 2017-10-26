@@ -18,6 +18,7 @@ class EmojiesVC: ParentVC {
     
     var filemanager = FileManager.default
     var isNewChar = false
+   
     var character: Character? {
         willSet (newChar) {
             isNewChar = true
@@ -30,6 +31,7 @@ class EmojiesVC: ParentVC {
     
     var charGenerator = CharacterHTMLBuilder.shared
 
+    //Names of the keys getting from Emoji context api.
     var emojisContextKeys = [String]() {
         didSet {
             self.characterDidChange()
@@ -102,7 +104,7 @@ class EmojiesVC: ParentVC {
         }
     }
     
-    //MARK: start generate Emojis
+    //MARK: Convert emoji web to image
     func startGenerateEmojiImages() {
         if let char = self.character {
             self.emojiToImageGeneratorView.character = char
@@ -124,13 +126,18 @@ class EmojiesVC: ParentVC {
 
     }
 
+}
+
+
+//MARK:- IBActions
+extension EmojiesVC {
     @IBAction func Btn_HomeAct(_ sender: UIBarButtonItem) {
         tabBarController?.selectedIndex = 0
     }
-   
+    
     @IBAction func Btn_SetupNowAction(_ sender: UIButton) {
-       self.performSegue(withIdentifier: "KeyBoardSegue", sender: nil)
-
+        self.performSegue(withIdentifier: "KeyBoardSegue", sender: nil)
+        
     }
     
     @IBAction func change_CharacterAction(_ sender: UIButton) {
@@ -146,6 +153,7 @@ class EmojiesVC: ParentVC {
     
 }
 
+//MARK:- TableView DataSource and Delgate
 extension EmojiesVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return  1 + ((character?.emojis.count ?? 0) > 0  ? 1 : 0)
@@ -199,15 +207,6 @@ extension EmojiesVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLay
                 
             }
 
-//            if emoji.charHtml.isEmpty {
-//                charGenerator.buildCharHTMLWith(for: .emoji, choices: character!.choices, for: emoji.key) { (html) in
-//                    cl.webView.loadHTMLString(html, baseURL: nil)
-//                    emoji.charHtml = html
-//                }
-//                
-//            } else {
-//                cl.webView.loadHTMLString(emoji.charHtml, baseURL: nil)
-//            }
         }
     }
 
@@ -249,6 +248,11 @@ extension EmojiesVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLay
     
     
     
+}
+
+
+//MARK:- Share option methods
+extension EmojiesVC {
     func shareOnFacebook(_ image: UIImage) {
         if SLComposeViewController.isAvailable(forServiceType: SLServiceTypeFacebook) {
             let vc = SLComposeViewController(forServiceType:SLServiceTypeFacebook)!
@@ -301,8 +305,11 @@ extension EmojiesVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLay
         let activityVC = UIActivityViewController(activityItems: [image], applicationActivities: nil)
         self.present(activityVC, animated: true, completion: nil)
     }
+
 }
 
+
+//MARK:- API calls
 extension EmojiesVC {
     func getEmojisContexts() {
         APICall.shared.emojis_context_APICall { (response, success) in
@@ -322,6 +329,7 @@ extension EmojiesVC {
 }
 
 
+//MARK:- Emojis Cells
 class EmojiTableViewCell: UITableViewCell {
     @IBOutlet var collectionview: UICollectionView!
 }

@@ -95,14 +95,12 @@ extension ShareCharacterVC {
             case .facebook:
                 self.shareOnFacebook(image)
             case .twitter:
-                print("twitter")
                 self.shareOnTwitter(image)
             case .mail:
                 print("mail")
             case .save:
                 self.saveToPhots(image)
             case .more:
-                print("more")
                 self.moreShare(image: image)
             }
         }
