@@ -34,14 +34,22 @@ class CharacterBuilderVC: ParentVC {
             selectedMenu?.selected = true
             colorChoice = nil
             if let ch = selectedMenu!.choices.filter({$0.type == .circle}).first {
-               colorChoice = ch
-                self.reloadInterfaceMenus()
-            } else {
+                colorChoice = ch
+                //self.reloadInterfaceMenus()
+            }
+            else {
                 if let ch = selectedMenu!.choices.filter({$0.type == .square}).first {
                     if !ch.options.first!.choices.isEmpty {
-                        colorChoice = ch.options.first!.choices.first
-                        self.reloadInterfaceMenus()
-
+                        let selectedOptions = ch.options.filter({$0.selected})
+                        
+                        colorChoice = selectedOptions.isEmpty ? ch.options.first!.choices.first : selectedOptions.first?.choices.first
+                       
+                        //select a color if already not selected.
+                        if let _ = colorChoice?.options.filter({$0.selected}).first {
+                            
+                        } else {
+                            colorChoice?.options.first?.selected = true
+                        }
                     }
                 }
             }
@@ -49,7 +57,13 @@ class CharacterBuilderVC: ParentVC {
     }
     
     //colorChoice used to showing color option at colorGlint view.
-    var colorChoice: CharacterChoice?
+    var colorChoice: CharacterChoice? {
+        didSet {
+
+        }
+    }
+    
+    ///This variable is used to generate icon name for hair style with selected color.
     var selectedHairColorOption: ChoiceOption!
     
     var charGenerator: CharacterHTMLBuilder! {
@@ -63,7 +77,6 @@ class CharacterBuilderVC: ParentVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //webView.scrollView.setZoomScale(1.05, animated: false)
         btnSave.isHidden = true
         
         charGenerator = CharacterHTMLBuilder.shared
@@ -228,7 +241,7 @@ extension CharacterBuilderVC : UITableViewDelegate, UITableViewDataSource {
             let cellIdentifier = choice.type == .square ? "squareOptionsCell" : "circleOptionsCell"
             let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as! OptionsTableViewCell
             cell.viewcontroller = self
-            cell.choice = choice//optionsList[indexPath.section-1]
+            cell.choice = choice
             return cell
         }
     }
@@ -242,12 +255,25 @@ extension CharacterBuilderVC : UITableViewDelegate, UITableViewDataSource {
         if !selectedOption.choices.isEmpty {
             setSelected(choice: selectedOption.choices.first!)
         }
+        
     }
     
     func changeUserSelection() {
+        
+        if let colorChoice = colorChoice {
+            let selectedColor = colorChoice.options.filter({$0.selected}).first
+            if let color = selectedColor {
+                color.selected = true
+            } else if let color = colorChoice.options.first {
+                color.selected = true
+                //character.choices[colorChoice.choiceId] = color.name
+            }
+        }
+
         for choice in selectedMenu!.choices {
             setSelected(choice: choice)
         }
+        
     }
     
     
@@ -370,7 +396,6 @@ class OptionsTableViewCell: UITableViewCell,  UICollectionViewDataSource, UIColl
         if choice.type == .square {
             let height = (collView.frame.width - 4 - 8)/4
 
-            //let width = (collView.frame.width - 12)/4
             return CGSize(width: height, height: height)
         } else {
             return CGSize(width: 50, height: 50)
@@ -381,9 +406,13 @@ class OptionsTableViewCell: UITableViewCell,  UICollectionViewDataSource, UIColl
         let option = choice.options[indexPath.row]
         choice.options.forEach({$0.selected = false})
         option.selected = true
+        
         if choice.type == .square && !option.choices.isEmpty {
             viewcontroller?.colorChoice  = option.choices.first
         }
+        
+        /*if user has select color for hair style, selectedHairColorOption should be change
+        for generating hair style images for selected color.*/
         
         if choice.type == .circle && choice.choiceId == "hair_colour" {
             viewcontroller?.selectedHairColorOption = option

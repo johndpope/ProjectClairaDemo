@@ -4584,8 +4584,8 @@
 				1332FBD01F57EC86003E3217 /* CarouselView */,
 				79DAB6A71F571CA00019C37D /* SavedCharListVC.swift */,
 				79183D621F5514B600A00D50 /* SaveCharacterVC.swift */,
-				79183D5A1F550FFF00A00D50 /* CharacterGenerator.swift */,
 				79183D5B1F55100000A00D50 /* CharacterBuilderVC.swift */,
+				79183D5A1F550FFF00A00D50 /* CharacterGenerator.swift */,
 			);
 			path = CharacterBuilder;
 			sourceTree = "<group>";

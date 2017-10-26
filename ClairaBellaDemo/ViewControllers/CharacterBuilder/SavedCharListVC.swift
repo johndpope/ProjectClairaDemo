@@ -126,7 +126,6 @@ class SavedCharListVC: ParentVC {
             showHideEmptyItemsView()
             carouselView.insertItem(at: savedChars.count-1, animated: true)
             setCurrentChartInfo()
-
         }
     }
     

@@ -437,14 +437,14 @@ class CharacterHTMLBuilder {
                 let attributes = data["param"] as! String
                 let fileUrl = "http://34.252.124.216/midnight/system/asset_library/character/\(fileName).svg?" + attributes
 
-//                htmlBody += "<object id=\"\(bodyPart)\" type=\"image/svg+xml\" name=\"\(bodyPart)\" data=\"\(fileUrl)\" style=\"\(getFileStyle(data: data))\"></object>"
+                htmlBody += "<object id=\"\(bodyPart)\" type=\"image/svg+xml\" name=\"\(bodyPart)\" data=\"\(fileUrl)\" style=\"\(getFileStyle(data: data))\"></object>"
 
                 
-                if let filePath = Bundle.main.path(forResource: fileName, ofType: "svg") {
-                    let pathWithColorAtt = filePath + "?" + attributes
-                    
-                    htmlBody += "<object id=\"\(bodyPart)\" type=\"image/svg+xml\" name=\"\(bodyPart)\" data=\"file://\(pathWithColorAtt)\" style=\"\(getFileStyle(data: data))\"></object>"
-                }
+//                if let filePath = Bundle.main.path(forResource: fileName, ofType: "svg") {
+//                    let pathWithColorAtt = filePath + "?" + attributes
+//                    
+//                    htmlBody += "<object id=\"\(bodyPart)\" type=\"image/svg+xml\" name=\"\(bodyPart)\" data=\"file://\(pathWithColorAtt)\" style=\"\(getFileStyle(data: data))\"></object>"
+//                }
                 
             }
         }
