@@ -92,6 +92,7 @@ class EmojiesVC: ParentVC {
                     let emoji = Emoji()
                     emoji.key = type
                     emoji.charHtml = ""
+                    emoji.characterCreatedDate = self.character?.createdDate ?? ""
                     self.character?.emojis.append(emoji)
                 }
                 
@@ -109,17 +110,19 @@ class EmojiesVC: ParentVC {
         if let char = self.character {
             self.emojiToImageGeneratorView.character = char
             let progressHUD = ProgressView(text: "Saving Emojis")
+            
             self.emojiToImageGeneratorView.didStartBlock = {
                 self.loadingHudView.addSubview(progressHUD)
                 self.loadingHudView.isHidden = false
                 progressHUD.show()
-                self.view.isUserInteractionEnabled = false
+                self.tabBarController?.view.isUserInteractionEnabled = false
             }
+            
             self.emojiToImageGeneratorView.completionBlock = {
                 DispatchQueue.main.async(execute: {
                     self.tableView.reloadData()
                     self.loadingHudView.isHidden = true
-                    self.view.isUserInteractionEnabled = true
+                    self.tabBarController?.view.isUserInteractionEnabled = true
                 })
             }
         }

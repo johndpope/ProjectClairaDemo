@@ -214,6 +214,8 @@ extension SaveCharacterVC {
 
                 self.showAlertMessage(message: "Character saved successfully.")
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "NewCharacterAddedNotification"), object: nil, userInfo: ["NewChar" : self.character])
+               
+                
             } else {
                 self.showAlertMessage(message: "Something went wrong.")
             }
@@ -239,6 +241,8 @@ extension SaveCharacterVC {
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "CharacterUpdateNotification"), object: nil, userInfo: ["updatedChar" : self.character])
                 self.generateEmojiImage()
                 self.showAlertMessage(message: "Character updated successfully.")
+                
+
             } else {
                 self.showAlertMessage(message: "Something went wrong.")
             }

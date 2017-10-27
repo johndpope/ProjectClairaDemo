@@ -27,6 +27,9 @@ class HomeVC: ParentVC {
         super.viewDidLoad()
         setInitialUI()
         NotificationCenter.default.addObserver(self, selector: #selector(self.setViewWithCharacters), name: NSNotification.Name(rawValue: "CharactersLoadingFinish"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.newCharacterAdded(_:)), name: NSNotification.Name(rawValue: "NewCharacterAddedNotification"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.characterUpdateNotification(_:)), name: NSNotification.Name(rawValue: "CharacterUpdateNotification"), object: nil)
+
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -40,6 +43,9 @@ class HomeVC: ParentVC {
         containerView.frame = fr
         
     }
+    
+    
+    //MARK:- Notification handler methods
     
     func setViewWithCharacters() {
         createChar_titleView1.isHidden = true
@@ -82,6 +88,21 @@ class HomeVC: ParentVC {
         }
     }
 
+    func newCharacterAdded(_ nf: Notification) {
+        //Navigate to emoji screen for genereate emoji for newly created character.
+        if let newChar = nf.userInfo?["NewChar"] as? Character {
+            characterForEmoji = newChar
+            self.tabBarController?.selectedIndex = 2
+        }
+    }
+    
+    func characterUpdateNotification(_ nf: Notification) {
+        //Navigate to emoji screen for genereate emoji for updated character.
+        if let char = nf.userInfo?["updatedChar"] as? Character {
+            characterForEmoji = char
+            self.tabBarController?.selectedIndex = 2
+        }
+    }
 }
 
 
