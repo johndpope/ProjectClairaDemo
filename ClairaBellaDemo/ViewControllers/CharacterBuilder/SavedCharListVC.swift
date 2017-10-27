@@ -337,6 +337,7 @@ extension SavedCharListVC {
                     Character.myCharacters.remove(at: index)
                     self.carouselView.removeItem(at: self.carouselView.currentItemIndex, animated: true)
                     self.showHideEmptyItemsView()
+                    deleteCharacterEmojisFromLocal(char: char)
                 }
             }
         }

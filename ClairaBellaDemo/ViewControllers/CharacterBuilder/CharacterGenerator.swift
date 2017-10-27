@@ -636,7 +636,9 @@ class CharBuilderAPI {
 
 class ChoiceMenu {
     var title = ""
-    var icon  = ""
+    var iconName = ""
+    var icon: UIImage?
+    
     var heading = ""
     var choices = [CharacterChoice]()
     
@@ -644,7 +646,9 @@ class ChoiceMenu {
     
     init(_ json: [String : Any]) {
         title = (json["title"] as? String) ?? ""
-        icon = APICall.shared.assetUrl + "/" + ((json["icon"] as? String) ?? "")
+//        iconName = APICall.shared.assetUrl + "/" + ((json["icon"] as? String) ?? "")
+        iconName = (json["icon"] as? String) ?? ""
+
         heading = (json["heading"] as? String) ?? ""
         
         if let jsChoices = json["choices"] as? [[String : Any]] {
@@ -684,6 +688,8 @@ class ChoiceOption {
     var choices = [CharacterChoice] ()
     var iconName = ""
     var selected = false
+    
+    var icon: UIImage?
     
     convenience init(_ json: [String : Any], iconName: String) {
         self.init()

@@ -210,7 +210,7 @@ extension SaveCharacterVC {
                         UserDefaults.standard.set(createdDate, forKey: "MainCharacter")
                     }
                 }
-                self.generateEmojiImage()
+                self.generateCharacterImage()
 
                 self.showAlertMessage(message: "Character saved successfully.")
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "NewCharacterAddedNotification"), object: nil, userInfo: ["NewChar" : self.character])
@@ -237,9 +237,11 @@ extension SaveCharacterVC {
                 if self.checkbox.isSelected {
                     UserDefaults.standard.set(self.character.createdDate, forKey: "MainCharacter")
                 }
+                
+                deleteCharacterEmojisFromLocal(char: self.character)
 
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "CharacterUpdateNotification"), object: nil, userInfo: ["updatedChar" : self.character])
-                self.generateEmojiImage()
+                self.generateCharacterImage()
                 self.showAlertMessage(message: "Character updated successfully.")
                 
 
@@ -252,7 +254,7 @@ extension SaveCharacterVC {
     }
 
     
-    func generateEmojiImage() {
+    func generateCharacterImage() {
         let renderer = UIGraphicsImageRenderer(size: Character_View.bounds.size)
         let image = renderer.image { ctx in
             Character_View.drawHierarchy(in: Character_View.bounds, afterScreenUpdates: true)
@@ -280,3 +282,21 @@ extension SaveCharacterVC {
     
 
 }
+
+
+//Delete saved character's emoji images from local folder.
+func deleteCharacterEmojisFromLocal(char: Character) {
+    let manager = FileManager.default
+    let directoryURl = manager.containerURL(forSecurityApplicationGroupIdentifier: appGroupName)!.appendingPathComponent( char.createdDate)
+    
+    let direcotryPath = directoryURl.path
+    
+    if manager.fileExists(atPath: direcotryPath) {
+        do {
+            try manager.removeItem(atPath: direcotryPath)
+        } catch let error {
+            print("Deleting directory Error: \(error.localizedDescription)")
+        }
+    }
+}
+

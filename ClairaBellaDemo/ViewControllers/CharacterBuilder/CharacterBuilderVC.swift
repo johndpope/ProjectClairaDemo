@@ -313,8 +313,22 @@ class MenuTableViewCell: UITableViewCell,  UICollectionViewDataSource, UICollect
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CollectionViewCell
         let menu = menus[indexPath.row]
+        cell.imgView.image = UIImage(named: menu.iconName)
         
-        cell.imgView.setImage(url: URL(string: menu.icon)!)
+        if let image = menu.icon {
+            cell.imgView.image = image
+        } else {
+            DispatchQueue.global(qos: .userInitiated).async {
+                let image = UIImage(named: menu.iconName)
+                menu.icon = image
+                
+                DispatchQueue.main.async {
+                    cell.imgView.image = image
+                }
+            }
+        }
+
+        //cell.imgView.setImage(url: URL(string: menu.icon)!)
         cell.lblTitle.text = menu.title
         if menu.selected {
             cell.backgroundColor = UIColor(colorLiteralRed: 229.0/255.0, green: 17.0/255.0, blue: 152.0/255.0, alpha: 1)
@@ -371,11 +385,26 @@ class OptionsTableViewCell: UITableViewCell,  UICollectionViewDataSource, UIColl
         
         var iconName = option.iconName
         if choice.choiceId == "hair_style" {
+            option.icon = nil
              iconName = option.iconName + viewcontroller!.selectedHairColorOption.iconName
         }
-        let iconUrl = APICall.shared.assetUrl + iconName + ".png"
-        //cell.imgView.image = UIImage(named: iconName)
-        cell.imgView.setImage(url: URL(string : iconUrl)!)
+        
+        //let iconUrl = APICall.shared.assetUrl + iconName + ".png"
+        
+        cell.imgView.image = nil
+        if let image = option.icon {
+            cell.imgView.image = image
+        } else {
+            DispatchQueue.global(qos: .userInitiated).async {
+                let image = UIImage(named: iconName)
+                option.icon = image
+               
+                DispatchQueue.main.async {
+                    cell.imgView.image = image
+                }
+            }
+        }
+        //cell.imgView.setImage(url: URL(string : iconUrl)!)
         cell.lblTitle.text = ""//option.name
         
         cell.imgView.layer.cornerRadius = choice.type == .circle ? cell.imgView.frame.width/2 : 0
@@ -481,3 +510,4 @@ class ImageCache {
     }
     
 }
+
