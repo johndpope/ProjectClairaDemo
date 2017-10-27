@@ -559,7 +559,7 @@
                 <constraint firstItem="VMN-YE-SG4" firstAttribute="centerX" secondItem="0fA-Td-cVR" secondAttribute="centerX" id="zEb-72-C04"/>
             </constraints>
             <connections>
-                <outlet property="backgroundImage" destination="9Ki-kE-FMW" id="yst-DT-tqK"/>
+                <outlet property="backgroundImage" destination="suk-wu-ux7" id="J35-zu-xcv"/>
                 <outlet property="cardView" destination="0fA-Td-cVR" id="ie5-5Q-gbg"/>
             </connections>
             <point key="canvasLocation" x="33.5" y="59.5"/>

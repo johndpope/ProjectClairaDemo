@@ -92,6 +92,7 @@ class EmojiesVC: ParentVC {
                     let emoji = Emoji()
                     emoji.key = type
                     emoji.charHtml = ""
+                    emoji.characterCreatedDate = self.character?.createdDate ?? ""
                     self.character?.emojis.append(emoji)
                 }
                 

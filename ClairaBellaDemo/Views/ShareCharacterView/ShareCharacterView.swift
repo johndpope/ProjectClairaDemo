@@ -16,13 +16,26 @@ class ShareCharacterView: UIView {
     
     var character: CharacterType! {
         didSet {
-            
-            webView.loadHTMLString(character.charHtml, baseURL: nil)
+        
             
             if character is Character {
                 let ch = character as! Character
+                webView.loadHTMLString(ch.charHtml, baseURL: nil)
                 if let backImageName = ch.characterBackground?.image {
                     backgroundImage.image = UIImage(named: backImageName)
+                }
+
+            } else if character is Emoji {
+                let emoji = character as! Emoji
+                let filemanager = FileManager.default
+                let url = filemanager.containerURL(forSecurityApplicationGroupIdentifier: appGroupName)!.appendingPathComponent(emoji.characterCreatedDate + "/" + emoji.key)
+                
+                do  {
+                    let data = try Data(contentsOf: url)
+                    let image = UIImage(data: data)
+                    backgroundImage.image = image
+                } catch {
+                    
                 }
 
             }

@@ -21,6 +21,7 @@ protocol CharacterType {
 class Emoji: CharacterType {
     var charHtml = ""
     var key: String = ""
+    var characterCreatedDate = ""
 }
 
 class Character: NSCopying, CharacterType {
