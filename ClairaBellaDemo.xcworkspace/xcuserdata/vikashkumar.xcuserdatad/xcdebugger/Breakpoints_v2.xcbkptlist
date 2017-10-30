@@ -86,11 +86,11 @@
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "ClaireaBella.APICall.(emojis_context_APICall (block : (Swift.Optional&lt;Any&gt;, Swift.Bool) -&gt; ()) -&gt; ()).(closure #1)"
-                  moduleName = "ClaireaBella"
+                  symbolName = "ClairaBellaDemo.APICall.(emojis_context_APICall (block : (Swift.Optional&lt;Any&gt;, Swift.Bool) -&gt; ()) -&gt; ()).(closure #1)"
+                  moduleName = "ClairaBellaDemo"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/vikashkumar/Desktop/Projects/ClairaBella/SourceCode/ProjectClairaDemo/ClairaBellaDemo/APICalls/APICalls.swift"
-                  timestampString = "531040187.689452"
+                  timestampString = "531078212.110042"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "128"
@@ -101,11 +101,11 @@
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "ClaireaBella.APICall.(emojis_context_APICall (block : (Swift.Optional&lt;Any&gt;, Swift.Bool) -&gt; ()) -&gt; ()).(closure #1)"
-                  moduleName = "ClaireaBella"
+                  symbolName = "ClairaBellaDemo.APICall.(emojis_context_APICall (block : (Swift.Optional&lt;Any&gt;, Swift.Bool) -&gt; ()) -&gt; ()).(closure #1)"
+                  moduleName = "ClairaBellaDemo"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/vikashkumar/Desktop/Projects/ClairaBella/SourceCode/ProjectClairaDemo/ClairaBellaDemo/APICalls/APICalls.swift"
-                  timestampString = "531040187.691786"
+                  timestampString = "531078212.113349"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "128"
@@ -122,13 +122,29 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ClairaBellaDemo/ViewControllers/EmojisVC/EmojiesVC.swift"
-            timestampString = "531039997.271579"
+            timestampString = "531080010.560294"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "340"
-            endingLineNumber = "340"
+            startingLineNumber = "341"
+            endingLineNumber = "341"
             landmarkName = "getEmojisContexts()"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ClairaBellaDemo/ViewControllers/EmojisVC/EmojiesVC.swift"
+            timestampString = "531072241.528546"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "24"
+            endingLineNumber = "24"
+            landmarkName = "EmojiesVC"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

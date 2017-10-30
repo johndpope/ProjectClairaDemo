@@ -239,7 +239,8 @@ extension SaveCharacterVC {
                 }
                 
                 deleteCharacterEmojisFromLocal(char: self.character)
-
+                self.character.editMode = true //used for generating emojis
+                
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "CharacterUpdateNotification"), object: nil, userInfo: ["updatedChar" : self.character])
                 self.generateCharacterImage()
                 self.showAlertMessage(message: "Character updated successfully.")

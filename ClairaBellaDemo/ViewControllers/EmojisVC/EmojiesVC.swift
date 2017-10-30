@@ -18,11 +18,11 @@ class EmojiesVC: ParentVC {
     
     var filemanager = FileManager.default
     var isNewChar = false
-   
+    
     var character: Character? {
         willSet (newChar) {
             isNewChar = true
-            if character?.createdDate == newChar?.createdDate {
+            if (character?.createdDate == newChar?.createdDate && (newChar!.editMode == false)) {
                 isNewChar = false
             }
         }
@@ -118,7 +118,7 @@ class EmojiesVC: ParentVC {
                 self?.loadingHudView.isHidden = false
                 
                 progressHUD.show()
-                self?.tabBarController?.view.isUserInteractionEnabled = false
+                self?.tabBarController?.tabBar.isUserInteractionEnabled = false
                 self?.emojis.removeAll()
 
             }
@@ -144,7 +144,8 @@ class EmojiesVC: ParentVC {
                         weakSelf.emojis = weakSelf.character!.emojis
                         weakSelf.tableView.reloadData()
                         weakSelf.loadingHudView.isHidden = true
-                        weakSelf.tabBarController?.view.isUserInteractionEnabled = true
+                        weakSelf.tabBarController?.tabBar.isUserInteractionEnabled = true
+                        self?.character?.editMode = false
                     }
                 })
             }

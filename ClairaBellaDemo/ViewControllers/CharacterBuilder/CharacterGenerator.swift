@@ -32,11 +32,13 @@ class Character: NSCopying, CharacterType {
     var createdDate = ""
     var alive = false
     var characterBackground: CharBackground?
-
+    
+    var editMode = false//used for creating emojis after user update the character.
+    
     static let characterContext = "CX001"
 
     var emojis = [Emoji]()
-    
+
     var isMainChar: Bool {
         if let mainCharDate = UserDefaults.standard.value(forKey: "MainCharacter") as? String {
             return createdDate == mainCharDate
