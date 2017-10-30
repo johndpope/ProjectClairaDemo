@@ -28,6 +28,7 @@ class EmojiImageGeneratorView : UIView, UIWebViewDelegate {
     
     var completionBlock: (()->())?
     var didStartBlock: (()->())?
+    var didImageCapturedForEmojiBlock: ((Emoji)->())?
     
     var emojiSavePath: String {
         let url = filemanager.containerURL(forSecurityApplicationGroupIdentifier: appGroupName)!.appendingPathComponent((character.createdDate) + "/" + currentEmoji.key)
@@ -45,7 +46,9 @@ class EmojiImageGeneratorView : UIView, UIWebViewDelegate {
         let emojiCount = character.emojis.count
         print(currntIndex)
         if currntIndex < emojiCount {
-            didStartBlock?()
+            if currntIndex == 0 {
+                didStartBlock?()
+            }
             currentEmoji = character.emojis[currntIndex]
             
             let url = filemanager.containerURL(forSecurityApplicationGroupIdentifier: appGroupName)!.appendingPathComponent((character.createdDate) + "/" + currentEmoji.key)
@@ -88,7 +91,7 @@ class EmojiImageGeneratorView : UIView, UIWebViewDelegate {
             }
             do {
                 try UIImageJPEGRepresentation(image, 1.0)!.write(to: URL(fileURLWithPath: savePath))
-
+                self.didImageCapturedForEmojiBlock?(emoji)
             } catch {
                 //
             }

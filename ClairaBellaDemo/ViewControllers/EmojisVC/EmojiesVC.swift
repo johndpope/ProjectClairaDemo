@@ -38,6 +38,8 @@ class EmojiesVC: ParentVC {
         }
     }
     
+    var emojis = [Emoji]()
+    
     let numberOfEmojisInRow = 4
     let emojiItemHeight: CGFloat = 100
    
@@ -111,18 +113,39 @@ class EmojiesVC: ParentVC {
             self.emojiToImageGeneratorView.character = char
             let progressHUD = ProgressView(text: "Saving Emojis")
             
-            self.emojiToImageGeneratorView.didStartBlock = {
-                self.loadingHudView.addSubview(progressHUD)
-                self.loadingHudView.isHidden = false
+            self.emojiToImageGeneratorView.didStartBlock = {[weak self] in
+                self?.loadingHudView.addSubview(progressHUD)
+                self?.loadingHudView.isHidden = false
+                
                 progressHUD.show()
-                self.tabBarController?.view.isUserInteractionEnabled = false
+                self?.tabBarController?.view.isUserInteractionEnabled = false
+                self?.emojis.removeAll()
+
             }
             
-            self.emojiToImageGeneratorView.completionBlock = {
+            self.emojiToImageGeneratorView.didImageCapturedForEmojiBlock = {[weak self] emoji in
+                if let weakSelf = self {
+                    weakSelf.emojis.append(emoji)
+                    let index = weakSelf.emojis.count-1
+                    let indexPath = IndexPath(item: index, section: 0)
+                    
+                    if let cell = self?.tableView.cellForRow(at: IndexPath(row:1, section:0)) as? EmojiTableViewCell {
+                        cell.collectionview.insertItems(at: [indexPath])
+                        //cell.collectionview.scrollToItem(at: indexPath, at: .centeredVertically, animated: true)
+                    } else {
+                        self?.tableView.reloadData()
+                    }
+                }
+            }
+            
+            self.emojiToImageGeneratorView.completionBlock = { [weak self] in
                 DispatchQueue.main.async(execute: {
-                    self.tableView.reloadData()
-                    self.loadingHudView.isHidden = true
-                    self.tabBarController?.view.isUserInteractionEnabled = true
+                    if let weakSelf = self {
+                        weakSelf.emojis = weakSelf.character!.emojis
+                        weakSelf.tableView.reloadData()
+                        weakSelf.loadingHudView.isHidden = true
+                        weakSelf.tabBarController?.view.isUserInteractionEnabled = true
+                    }
                 })
             }
         }
@@ -192,13 +215,13 @@ extension EmojiesVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLay
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return   character?.emojis.count ?? 0
+        return   emojis.count
     }
     
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if let cl = cell as? EmojiItemCell {
-            let emoji = character!.emojis[indexPath.item]
+            let emoji = emojis[indexPath.item]
 
             let url = filemanager.containerURL(forSecurityApplicationGroupIdentifier: appGroupName)!.appendingPathComponent(character!.createdDate + "/" + emoji.key)
             
@@ -227,7 +250,7 @@ extension EmojiesVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLay
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let emoji = character!.emojis[indexPath.item]
+        let emoji = emojis[indexPath.item]
       
         ShareCharacterView.show(in: self.view, character: emoji) { (action, image) in
            
@@ -248,8 +271,6 @@ extension EmojiesVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLay
         }
 
     }
-    
-    
     
 }
 

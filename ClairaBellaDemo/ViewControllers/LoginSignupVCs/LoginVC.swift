@@ -162,9 +162,7 @@ class LoginVC: UIViewController, UITextFieldDelegate {
                     print("Result: \(result)")
                     
                     // Handle vars
-                    if let result = result as? [String:String],
-                        let email: String = result["email"],
-                        let fbId: String = result["id"] {
+                    if let result = result as? [String:Any], let email = result["email"] as? String, let fbId = result["id"] as? String {
                         print("Email: \(email)")
                         print("fbID: \(fbId)")
                         
