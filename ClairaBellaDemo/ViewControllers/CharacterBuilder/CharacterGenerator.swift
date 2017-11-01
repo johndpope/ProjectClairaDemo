@@ -102,7 +102,7 @@ class CharacterHTMLBuilder {
     
     func buildCharHTMLWith(for type:CharacterType = .character, choices: [String : String], for contextKey: String = Character.characterContext, block: ((String)->Void)? = nil) {
         self.contextKey = contextKey
-        deviceScaleFactor = type == .character ? 0.85 : 1.30
+        deviceScaleFactor = type == .character ? 0.85 : 0.65
        
         if let block = block {
             resultBlock = block
@@ -244,7 +244,7 @@ class CharacterHTMLBuilder {
         guard let firstPartKey = partsKey.first else {return}
         var firstPart: [String : Any] = contextPoseData[firstPartKey]!
         
-        let postionFactor:Double = characterType == .character ? 1 : 2
+        let postionFactor:Double = characterType == .character ? 1 : 1
         
         let cntxPositionX = Double(contextPositionX)! * postionFactor
         let cntxPostionY = Double(contextPositionY)! * postionFactor

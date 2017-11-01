@@ -117,7 +117,6 @@ extension KeyboardView: UICollectionViewDataSource, UICollectionViewDelegateFlow
         } else { //cell for display emojies
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "emojiCell", for: indexPath) as! EmojiCell
             let emoji = selectedCharacter!.emojis[indexPath.item]
-            cell.webView.loadRequest(URLRequest(url: URL(string: "about:blank")!))
             
             let url = filemanager.containerURL(forSecurityApplicationGroupIdentifier: appGroupName)!.appendingPathComponent(selectedCharacter!.createdDate + "/" + emoji.key)
             
