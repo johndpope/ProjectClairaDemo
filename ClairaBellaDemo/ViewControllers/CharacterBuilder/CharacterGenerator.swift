@@ -102,7 +102,8 @@ class CharacterHTMLBuilder {
     
     func buildCharHTMLWith(for type:CharacterType = .character, choices: [String : String], for contextKey: String = Character.characterContext, block: ((String)->Void)? = nil) {
         self.contextKey = contextKey
-        deviceScaleFactor = type == .character ? 0.85 : 1.80
+        deviceScaleFactor = type == .character ? 0.85 : 1.30
+       
         if let block = block {
             resultBlock = block
         }
@@ -243,8 +244,10 @@ class CharacterHTMLBuilder {
         guard let firstPartKey = partsKey.first else {return}
         var firstPart: [String : Any] = contextPoseData[firstPartKey]!
         
-        let cntxPositionX = Double(contextPositionX)! * deviceScaleFactor
-        let cntxPostionY = Double(contextPositionY)! * deviceScaleFactor
+        let postionFactor:Double = characterType == .character ? 1 : 2
+        
+        let cntxPositionX = Double(contextPositionX)! * postionFactor
+        let cntxPostionY = Double(contextPositionY)! * postionFactor
         
         let specifiedCood = ["x" : "\(cntxPositionX)", "y" : "\(cntxPostionY)"]
         let fp_width = firstPart["width"] as! String
@@ -333,8 +336,17 @@ class CharacterHTMLBuilder {
         }
         
         //Generate html with contextPoseData.
-        let sizeScale = characterType == .character ? 1.0 : (deviceScaleFactor + 0.7)
-        generateHTLM(for: contextPoseData, contextSize: CGSize(width: Double(contextWidth)! * deviceScaleFactor, height: Double(contextHeight)! * sizeScale ), block: block)
+        let contextSize: CGSize
+        if characterType == .character {
+            contextSize = CGSize(width: Double(contextWidth)!, height: Double(contextHeight)!  )
+        } else {
+            let cnWidth = Double(contextWidth)! * deviceScaleFactor
+            let cnHeight = Double(contextHeight)! * deviceScaleFactor
+
+            contextSize = CGSize(width: 200, height: 200 )
+        }
+        
+        generateHTLM(for: contextPoseData, contextSize: contextSize, block: block)
         
     }
     
