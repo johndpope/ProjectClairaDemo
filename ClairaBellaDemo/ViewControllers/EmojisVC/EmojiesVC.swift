@@ -40,8 +40,10 @@ class EmojiesVC: ParentVC {
     
     var emojis = [Emoji]()
     
-    let numberOfEmojisInRow = 4
-    let emojiItemHeight: CGFloat = 100
+    let numberOfEmojisInRow = 3
+    var emojiItemHeight: CGFloat {
+     return (SCREEN_WIDTH-6)/CGFloat(numberOfEmojisInRow)
+    }
    
     var emojisCellHeight: CGFloat {
         let rem = emojisContextKeys.count % numberOfEmojisInRow
@@ -247,7 +249,7 @@ extension EmojiesVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLay
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = (collectionView.frame.width-6)/CGFloat(numberOfEmojisInRow)
-        return CGSize(width: width, height: emojiItemHeight)
+        return CGSize(width: width, height: width)
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

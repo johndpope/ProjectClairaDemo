@@ -90,7 +90,9 @@ class EmojiImageGeneratorView : UIView, UIWebViewDelegate {
                 }
             }
             do {
-                try UIImageJPEGRepresentation(image, 1.0)!.write(to: URL(fileURLWithPath: savePath))
+                if let img = image {
+                    try UIImageJPEGRepresentation(img, 1.0)!.write(to: URL(fileURLWithPath: savePath))
+                }
                 self.didImageCapturedForEmojiBlock?(emoji)
             } catch {
                 //
@@ -103,12 +105,16 @@ class EmojiImageGeneratorView : UIView, UIWebViewDelegate {
     
 
     
-    func generateEmojiImage()->UIImage {
-        let renderer = UIGraphicsImageRenderer(size: self.bounds.size)
-        let image = renderer.image { ctx in
-            self.drawHierarchy(in: self.bounds, afterScreenUpdates: true)
+    func generateEmojiImage()->UIImage? {
+        
+        UIGraphicsBeginImageContextWithOptions(self.bounds.size, self.isOpaque, 2.0)
+        if let context = UIGraphicsGetCurrentContext() {
+            self.layer.render(in: context)
+            let image = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            return image
         }
-        return image
+        return nil
     }
     
 

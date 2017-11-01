@@ -80,6 +80,8 @@ class CharacterHTMLBuilder {
         case character, emoji
     }
     
+    var characterType = CharacterType.character
+    
     fileprivate var part_mapJson = [String : [String : Any]]()
     fileprivate var parts = [String : [String : [String : Any]]]()
     fileprivate var partsMeta = [String : Any]()
@@ -100,7 +102,7 @@ class CharacterHTMLBuilder {
     
     func buildCharHTMLWith(for type:CharacterType = .character, choices: [String : String], for contextKey: String = Character.characterContext, block: ((String)->Void)? = nil) {
         self.contextKey = contextKey
-        deviceScaleFactor = type == .character ? 0.85 : 0.60
+        deviceScaleFactor = type == .character ? 0.85 : 1.80
         if let block = block {
             resultBlock = block
         }
@@ -117,7 +119,7 @@ class CharacterHTMLBuilder {
     fileprivate func buildStart(for type:CharacterType,  choices: [String : String], block: ((String)->Void)? = nil) {
         let cntxtJson = type == .character ? contextJson : emojisContextJson
         guard let context = cntxtJson[contextKey] as? [String : Any] else {return}
-        
+        characterType = type
         currentContext = context
         var userChoices = choices
         if let layers = currentContext["layers"] as? [String : Any] {
@@ -181,8 +183,8 @@ class CharacterHTMLBuilder {
         var contextWidth = "0"
         var contextHeight = "0"
         var contextPoseData = [String : [String : Any]]()
-        var contextPositionX = ""
-        var contextPositionY = ""
+        var contextPositionX = ""//-
+        var contextPositionY = ""//-
         
         //getting context width and height
         if let metaData = currentContext["meta_data"] as? [String : String] {
@@ -241,14 +243,16 @@ class CharacterHTMLBuilder {
         guard let firstPartKey = partsKey.first else {return}
         var firstPart: [String : Any] = contextPoseData[firstPartKey]!
         
+        let cntxPositionX = Double(contextPositionX)! * deviceScaleFactor
+        let cntxPostionY = Double(contextPositionY)! * deviceScaleFactor
         
-        let specifiedCood = ["x" : contextPositionX, "y" : contextPositionY]
+        let specifiedCood = ["x" : "\(cntxPositionX)", "y" : "\(cntxPostionY)"]
         let fp_width = firstPart["width"] as! String
         let fp_height = firstPart["height"] as! String
         let fp_scale = firstPart["scale"] as! String
-        let w = Double(fp_width)!
-        let h = Double(fp_height)!
-        let s = Double(fp_scale)! * deviceScaleFactor
+        let w = Double(fp_width)! * deviceScaleFactor
+        let h = Double(fp_height)! * deviceScaleFactor
+        let s = Double(fp_scale)!
         
         let centralShift  = getCentralObjectCoords(coord: specifiedCood, width: w * s , height: h * s)
         
@@ -293,7 +297,7 @@ class CharacterHTMLBuilder {
                         let ijxf = Double(ijX)!
                         let ijyf = Double(ijY)!
                         
-                        let para1 = ["x" : pxf, "y" : pyf]
+                        let para1 = ["x" : pxf, "y" : pyf]//--------
                         let para2 = ["x" : ijxf * parent_scale, "y" : ijyf * parent_scale]
                         
                         let globalJointCoords = self.getJointGlobal(objGlobal: para1, jointInternal: para2, angle: paf)
@@ -329,7 +333,8 @@ class CharacterHTMLBuilder {
         }
         
         //Generate html with contextPoseData.
-        generateHTLM(for: contextPoseData, contextSize: CGSize(width: Double(contextWidth)!, height: Double(contextHeight)!), block: block)
+        let sizeScale = characterType == .character ? 1.0 : (deviceScaleFactor + 0.7)
+        generateHTLM(for: contextPoseData, contextSize: CGSize(width: Double(contextWidth)! * deviceScaleFactor, height: Double(contextHeight)! * sizeScale ), block: block)
         
     }
     
