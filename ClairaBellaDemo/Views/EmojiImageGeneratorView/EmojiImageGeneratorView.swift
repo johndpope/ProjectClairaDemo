@@ -28,6 +28,7 @@ class EmojiImageGeneratorView : UIView, UIWebViewDelegate {
     
     var completionBlock: (()->())?
     var didStartBlock: (()->())?
+    var didImageCapturedForEmojiBlock: ((Emoji)->())?
     
     var emojiSavePath: String {
         let url = filemanager.containerURL(forSecurityApplicationGroupIdentifier: appGroupName)!.appendingPathComponent((character.createdDate) + "/" + currentEmoji.key)
@@ -45,7 +46,9 @@ class EmojiImageGeneratorView : UIView, UIWebViewDelegate {
         let emojiCount = character.emojis.count
         print(currntIndex)
         if currntIndex < emojiCount {
-            didStartBlock?()
+            if currntIndex == 0 {
+                didStartBlock?()
+            }
             currentEmoji = character.emojis[currntIndex]
             
             let url = filemanager.containerURL(forSecurityApplicationGroupIdentifier: appGroupName)!.appendingPathComponent((character.createdDate) + "/" + currentEmoji.key)
@@ -87,8 +90,10 @@ class EmojiImageGeneratorView : UIView, UIWebViewDelegate {
                 }
             }
             do {
-                try UIImageJPEGRepresentation(image, 1.0)!.write(to: URL(fileURLWithPath: savePath))
-
+                if let img = image {
+                    try UIImageJPEGRepresentation(img, 1.0)!.write(to: URL(fileURLWithPath: savePath))
+                }
+                self.didImageCapturedForEmojiBlock?(emoji)
             } catch {
                 //
             }
@@ -100,12 +105,16 @@ class EmojiImageGeneratorView : UIView, UIWebViewDelegate {
     
 
     
-    func generateEmojiImage()->UIImage {
-        let renderer = UIGraphicsImageRenderer(size: self.bounds.size)
-        let image = renderer.image { ctx in
-            self.drawHierarchy(in: self.bounds, afterScreenUpdates: true)
+    func generateEmojiImage()->UIImage? {
+        
+        UIGraphicsBeginImageContextWithOptions(self.bounds.size, self.isOpaque, 2.0)
+        if let context = UIGraphicsGetCurrentContext() {
+            self.layer.render(in: context)
+            let image = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            return image
         }
-        return image
+        return nil
     }
     
 
@@ -117,6 +126,7 @@ class EmojiImageGeneratorView : UIView, UIWebViewDelegate {
     func webViewDidFinishLoad(_ webView: UIWebView) {
         if !webView.isLoading {
             print("loading finish \(currntIndex)")
+            //webView.scrollView.contentInset = UIEdgeInsets(top: 25, left: 0, bottom: -25, right: 0)
             save(emoji: currentEmoji, savePath: emojiSavePath)
         }
     }

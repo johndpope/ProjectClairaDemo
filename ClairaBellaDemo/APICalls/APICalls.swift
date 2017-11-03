@@ -26,20 +26,22 @@ class APICall {
     
     //
     //let baseUrl =  "http://34.252.124.216/midnight/system/api"
-    let baseUrl =  "http://34.252.124.216/midnight/system/api/v1.0.0/"
+    let baseUrl =  "http://builder.midnightplatform.net/midnight/system/api/"
 
     //let assetUrl = "http://34.252.124.216/midnight/system/asset_library"
-    let assetUrl = "http://34.252.124.216/midnight/system/asset_library/interface/v1.0/"
+    let assetUrl = "http://builder.midnightplatform.net/midnight/system/asset_library/interface/v1.0/"
 
     enum APIName {
-        static var getCharacters = "/character.json"
-        static let getPartsMap = "/parts_map.json"
-        static let getParts = "/parts.json"
-        static let getPartMeta = "/parts_meta.json"
-        static let getContexts = "/contexts.json"
-        static let getEmojisContexts = "/emojis.json"
+        static var apiVersion = "v1.0.0"
 
-        static let getInterfaces = "/interface.json"
+        static var getCharacters    = apiVersion + "/character.json"
+        static let getPartsMap      = apiVersion + "/parts_map.json"
+        static let getParts         = apiVersion + "/parts.json"
+        static let getPartMeta      = apiVersion + "/parts_meta.json"
+        static let getContexts      = apiVersion + "/contexts.json"
+        static let getEmojisContexts = apiVersion + "/emojis.json"
+
+        static let getInterfaces = apiVersion + "/interface.json"
     }
     
     typealias ResponseBlock = (Any?, Bool)-> Void

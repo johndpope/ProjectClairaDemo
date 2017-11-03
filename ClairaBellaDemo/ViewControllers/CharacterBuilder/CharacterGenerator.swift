@@ -32,11 +32,13 @@ class Character: NSCopying, CharacterType {
     var createdDate = ""
     var alive = false
     var characterBackground: CharBackground?
-
+    
+    var editMode = false//used for creating emojis after user update the character.
+    
     static let characterContext = "CX001"
 
     var emojis = [Emoji]()
-    
+
     var isMainChar: Bool {
         if let mainCharDate = UserDefaults.standard.value(forKey: "MainCharacter") as? String {
             return createdDate == mainCharDate
@@ -78,6 +80,8 @@ class CharacterHTMLBuilder {
         case character, emoji
     }
     
+    var characterType = CharacterType.character
+    
     fileprivate var part_mapJson = [String : [String : Any]]()
     fileprivate var parts = [String : [String : [String : Any]]]()
     fileprivate var partsMeta = [String : Any]()
@@ -98,7 +102,8 @@ class CharacterHTMLBuilder {
     
     func buildCharHTMLWith(for type:CharacterType = .character, choices: [String : String], for contextKey: String = Character.characterContext, block: ((String)->Void)? = nil) {
         self.contextKey = contextKey
-        deviceScaleFactor = type == .character ? 0.85 : 0.60
+        deviceScaleFactor = type == .character ? 0.85 : 0.65
+       
         if let block = block {
             resultBlock = block
         }
@@ -115,7 +120,7 @@ class CharacterHTMLBuilder {
     fileprivate func buildStart(for type:CharacterType,  choices: [String : String], block: ((String)->Void)? = nil) {
         let cntxtJson = type == .character ? contextJson : emojisContextJson
         guard let context = cntxtJson[contextKey] as? [String : Any] else {return}
-        
+        characterType = type
         currentContext = context
         var userChoices = choices
         if let layers = currentContext["layers"] as? [String : Any] {
@@ -179,8 +184,8 @@ class CharacterHTMLBuilder {
         var contextWidth = "0"
         var contextHeight = "0"
         var contextPoseData = [String : [String : Any]]()
-        var contextPositionX = ""
-        var contextPositionY = ""
+        var contextPositionX = ""//-
+        var contextPositionY = ""//-
         
         //getting context width and height
         if let metaData = currentContext["meta_data"] as? [String : String] {
@@ -239,14 +244,18 @@ class CharacterHTMLBuilder {
         guard let firstPartKey = partsKey.first else {return}
         var firstPart: [String : Any] = contextPoseData[firstPartKey]!
         
+        let postionFactor:Double = characterType == .character ? 1 : 1
         
-        let specifiedCood = ["x" : contextPositionX, "y" : contextPositionY]
+        let cntxPositionX = Double(contextPositionX)! * postionFactor
+        let cntxPostionY = Double(contextPositionY)! * postionFactor
+        
+        let specifiedCood = ["x" : "\(cntxPositionX)", "y" : "\(cntxPostionY)"]
         let fp_width = firstPart["width"] as! String
         let fp_height = firstPart["height"] as! String
         let fp_scale = firstPart["scale"] as! String
-        let w = Double(fp_width)!
-        let h = Double(fp_height)!
-        let s = Double(fp_scale)! * deviceScaleFactor
+        let w = Double(fp_width)! * deviceScaleFactor
+        let h = Double(fp_height)! * deviceScaleFactor
+        let s = Double(fp_scale)!
         
         let centralShift  = getCentralObjectCoords(coord: specifiedCood, width: w * s , height: h * s)
         
@@ -291,7 +300,7 @@ class CharacterHTMLBuilder {
                         let ijxf = Double(ijX)!
                         let ijyf = Double(ijY)!
                         
-                        let para1 = ["x" : pxf, "y" : pyf]
+                        let para1 = ["x" : pxf, "y" : pyf]//--------
                         let para2 = ["x" : ijxf * parent_scale, "y" : ijyf * parent_scale]
                         
                         let globalJointCoords = self.getJointGlobal(objGlobal: para1, jointInternal: para2, angle: paf)
@@ -327,7 +336,17 @@ class CharacterHTMLBuilder {
         }
         
         //Generate html with contextPoseData.
-        generateHTLM(for: contextPoseData, contextSize: CGSize(width: Double(contextWidth)!, height: Double(contextHeight)!), block: block)
+        let contextSize: CGSize
+        if characterType == .character {
+            contextSize = CGSize(width: Double(contextWidth)!, height: Double(contextHeight)!  )
+        } else {
+            let cnWidth = Double(contextWidth)! * deviceScaleFactor
+            let cnHeight = Double(contextHeight)! * deviceScaleFactor
+
+            contextSize = CGSize(width: 200, height: 200 )
+        }
+        
+        generateHTLM(for: contextPoseData, contextSize: contextSize, block: block)
         
     }
     
@@ -636,7 +655,9 @@ class CharBuilderAPI {
 
 class ChoiceMenu {
     var title = ""
-    var icon  = ""
+    var iconName = ""
+    var icon: UIImage?
+    
     var heading = ""
     var choices = [CharacterChoice]()
     
@@ -644,7 +665,9 @@ class ChoiceMenu {
     
     init(_ json: [String : Any]) {
         title = (json["title"] as? String) ?? ""
-        icon = APICall.shared.assetUrl + "/" + ((json["icon"] as? String) ?? "")
+//        iconName = APICall.shared.assetUrl + "/" + ((json["icon"] as? String) ?? "")
+        iconName = (json["icon"] as? String) ?? ""
+
         heading = (json["heading"] as? String) ?? ""
         
         if let jsChoices = json["choices"] as? [[String : Any]] {
@@ -684,6 +707,8 @@ class ChoiceOption {
     var choices = [CharacterChoice] ()
     var iconName = ""
     var selected = false
+    
+    var icon: UIImage?
     
     convenience init(_ json: [String : Any], iconName: String) {
         self.init()

@@ -117,7 +117,6 @@ extension KeyboardView: UICollectionViewDataSource, UICollectionViewDelegateFlow
         } else { //cell for display emojies
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "emojiCell", for: indexPath) as! EmojiCell
             let emoji = selectedCharacter!.emojis[indexPath.item]
-            cell.webView.loadRequest(URLRequest(url: URL(string: "about:blank")!))
             
             let url = filemanager.containerURL(forSecurityApplicationGroupIdentifier: appGroupName)!.appendingPathComponent(selectedCharacter!.createdDate + "/" + emoji.key)
             
@@ -145,7 +144,7 @@ extension KeyboardView: UICollectionViewDataSource, UICollectionViewDelegateFlow
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = showCharters ? 100 : ((collectionView.frame.width-8)/4)
+        let width = showCharters ? 100 : ((collectionView.frame.width)/3)
         return CGSize(width: width, height:  width)
     }
     

@@ -12628,7 +12628,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.unitygames.Claireabella.ClaireaBella;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "660fd5c2-52b9-4fc4-b12b-28c586174608";
+				PROVISIONING_PROFILE = "cb3c19c9-8236-4fb6-a2c3-41db43df8327";
 				PROVISIONING_PROFILE_SPECIFIER = claireabellakeyboardProfile;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
@@ -12645,7 +12645,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.unitygames.Claireabella.ClaireaBella;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "660fd5c2-52b9-4fc4-b12b-28c586174608";
+				PROVISIONING_PROFILE = "cb3c19c9-8236-4fb6-a2c3-41db43df8327";
 				PROVISIONING_PROFILE_SPECIFIER = claireabellakeyboardProfile;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
@@ -12756,7 +12756,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.unitygames.Claireabella;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "e9cff22d-cf0d-4f15-a25c-2fb54da8419b";
+				PROVISIONING_PROFILE = "c80d2cd8-9c0a-4e3c-bf84-d4fac2e245d6";
 				PROVISIONING_PROFILE_SPECIFIER = Developement_Claireabella;
 				SWIFT_VERSION = 3.0;
 			};
@@ -12775,7 +12775,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.unitygames.Claireabella;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "e9cff22d-cf0d-4f15-a25c-2fb54da8419b";
+				PROVISIONING_PROFILE = "c80d2cd8-9c0a-4e3c-bf84-d4fac2e245d6";
 				PROVISIONING_PROFILE_SPECIFIER = Developement_Claireabella;
 				SWIFT_VERSION = 3.0;
 			};
