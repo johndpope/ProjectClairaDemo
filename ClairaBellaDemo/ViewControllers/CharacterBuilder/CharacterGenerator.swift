@@ -340,9 +340,6 @@ class CharacterHTMLBuilder {
         if characterType == .character {
             contextSize = CGSize(width: Double(contextWidth)!, height: Double(contextHeight)!  )
         } else {
-            let cnWidth = Double(contextWidth)! * deviceScaleFactor
-            let cnHeight = Double(contextHeight)! * deviceScaleFactor
-
             contextSize = CGSize(width: 200, height: 200 )
         }
         
