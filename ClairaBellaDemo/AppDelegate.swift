@@ -119,9 +119,6 @@ extension AppDelegate {
                     })
                     
                     Character.myCharacters = charters.filter({$0.alive})
-                    DispatchQueue.main.async {
-                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "CharactersLoadingFinish"), object: nil)
-                    }
                     print("CharactersLoadingFinish")
                     
                     self.saveCharacterInToLocalFile(json: jsonArr)
@@ -130,6 +127,10 @@ extension AppDelegate {
             } else {
                 
             }
+            DispatchQueue.main.async {
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "CharactersLoadingFinish"), object: nil)
+            }
+
         }
     }
     

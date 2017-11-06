@@ -12,16 +12,16 @@ import FBSDKLoginKit
 
 class SignUpVC: UIViewController, UITextFieldDelegate {
 
-    var nameTextField: UITextField!
-    var emailTextField: UITextField!
-    var passwordTextField: UITextField!
-    var lastNameTextField: UITextField!
+    @IBOutlet var nameTextField: UITextField!
+    @IBOutlet var emailTextField: UITextField!
+    @IBOutlet var passwordTextField: UITextField!
+    @IBOutlet var lastNameTextField: UITextField!
     
     @IBOutlet var btn_pressed: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.createLayout()
+        //self.createLayout()
         
         // Do any additional setup after loading the view.
     }
@@ -56,21 +56,21 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
         lineHeaderView.backgroundColor = UIColor.white
         scrollView.addSubview(lineHeaderView)
         
-        let fblogInBtn = UIButton(type: UIButtonType.custom) as UIButton
-        fblogInBtn.frame = CGRect(x:SCREEN_WIDTH*0.05, y:SCREEN_HEIGHT*0.13, width: SCREEN_WIDTH*0.90, height: 54)
-        fblogInBtn.addTarget(self, action: #selector(self.Btn_Facebook_Login(_:)), for: UIControlEvents.touchUpInside)
-        fblogInBtn.setBackgroundImage(UIImage(named :"Btn_Facebook_SignUP"), for: .normal)
-        scrollView.addSubview(fblogInBtn)
+//        let fblogInBtn = UIButton(type: UIButtonType.custom) as UIButton
+//        fblogInBtn.frame = CGRect(x:SCREEN_WIDTH*0.05, y:SCREEN_HEIGHT*0.13, width: SCREEN_WIDTH*0.90, height: 54)
+//        fblogInBtn.addTarget(self, action: #selector(self.Btn_Facebook_Login(_:)), for: UIControlEvents.touchUpInside)
+//        fblogInBtn.setBackgroundImage(UIImage(named :"Btn_Facebook_SignUP"), for: .normal)
+//        scrollView.addSubview(fblogInBtn)
+//        
+//        let or = UIButton(type: UIButtonType.custom) as UIButton
+//        or.frame = CGRect(x:SCREEN_WIDTH*0.10, y:fblogInBtn.frame.origin.y+fblogInBtn.frame.size.height+15, width: SCREEN_WIDTH*0.80, height: 20)
+//        or.setTitle("Or Sign Up With Email", for: .normal)
+//        or.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+//        or.titleLabel?.font = UIFont(name: FONT_BOLD , size: 16)
+//        or.backgroundColor = PINK_LIGHT
+//        scrollView.addSubview(or)
         
-        let or = UIButton(type: UIButtonType.custom) as UIButton
-        or.frame = CGRect(x:SCREEN_WIDTH*0.10, y:fblogInBtn.frame.origin.y+fblogInBtn.frame.size.height+15, width: SCREEN_WIDTH*0.80, height: 20)
-        or.setTitle("Or Sign Up With Email", for: .normal)
-        or.titleLabel?.font = UIFont.systemFont(ofSize: 14)
-        or.titleLabel?.font = UIFont(name: FONT_BOLD , size: 16)
-        or.backgroundColor = PINK_LIGHT
-        scrollView.addSubview(or)
-        
-        emailTextField = UITextField(frame: CGRect(x:SCREEN_WIDTH*0.05, y:or.frame.origin.y+or.frame.size.height+20, width:SCREEN_WIDTH*0.90, height:50))
+        emailTextField = UITextField(frame: CGRect(x:SCREEN_WIDTH*0.05, y:SCREEN_HEIGHT*0.13, width:SCREEN_WIDTH*0.90, height:50))
         //emailTextField.placeholder = "Email Address"
         emailTextField.attributedPlaceholder = NSAttributedString(string: "Email Address",
                                                                      attributes: [NSForegroundColorAttributeName: UIColor.black])
@@ -144,12 +144,12 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
         return textField.resignFirstResponder()
     }
 
-    func backClick(_ sender: UIButton)
+    @IBAction func backClick(_ sender: UIButton)
     {
         _ = self.navigationController?.popViewController(animated: true)
     }
     
-    func signUpBtnClick(_ sender: UIButton)
+    @IBAction func signUpBtnClick(_ sender: UIButton)
     {
         let email = emailTextField.text!
         let firstname = nameTextField.text!

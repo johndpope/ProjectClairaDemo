@@ -22,16 +22,22 @@ class HomeVC: ParentVC {
     @IBOutlet var lblUserName: UILabel!
     @IBOutlet var createBtn_bottomSpace: NSLayoutConstraint!
     @IBOutlet weak var manageCharView: UIView!
-   
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setInitialUI()
-        NotificationCenter.default.addObserver(self, selector: #selector(self.setViewWithCharacters), name: NSNotification.Name(rawValue: "CharactersLoadingFinish"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.charactersLoadignFinish), name: NSNotification.Name(rawValue: "CharactersLoadingFinish"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.newCharacterAdded(_:)), name: NSNotification.Name(rawValue: "NewCharacterAddedNotification"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.characterUpdateNotification(_:)), name: NSNotification.Name(rawValue: "CharacterUpdateNotification"), object: nil)
-
+        
+        if Character.loadingFinish {
+            if Character.myCharacters.isEmpty {
+                self.goToCreateNewChar()
+            }
+        }
+        
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setViewWithCharacters()
@@ -41,29 +47,36 @@ class HomeVC: ParentVC {
         var fr = containerView.frame
         fr.size.height = 2250 * widthRatio
         containerView.frame = fr
-        
     }
     
     
     //MARK:- Notification handler methods
     
+    func charactersLoadignFinish() {
+        if Character.myCharacters.isEmpty {
+            self.goToCreateNewChar()
+        }
+        setViewWithCharacters()
+    }
+    
     func setViewWithCharacters() {
         createChar_titleView1.isHidden = true
         createChar_titleView2.isHidden = true
-
+        
         let user_deatils = UserDefaults(suiteName: appGroupName)!.value(forKey: "user_details")as? [String:String]
         
         let fname: String = user_deatils!["first_name"] ?? ""
         let lname: String = user_deatils!["last_name"] ?? ""
         let name = fname + " " + lname
         lblUserName.text = name
-
+        
         if Character.myCharacters.isEmpty {
             webViewContainer.isHidden = true
             createChar_titleView2.isHidden = false
             createBtn_bottomSpace.constant = 15 * widthRatio
             manageCharView.isHidden = true
             imgCharGroup.isHidden = false
+            
         } else {
             imgCharGroup.isHidden = true
             createChar_titleView1.isHidden = false
@@ -86,8 +99,9 @@ class HomeVC: ParentVC {
             })
             
         }
+        
     }
-
+    
     func newCharacterAdded(_ nf: Notification) {
         //Navigate to emoji screen for genereate emoji for newly created character.
         if let newChar = nf.userInfo?["NewChar"] as? Character {
@@ -121,7 +135,7 @@ extension HomeVC {
         self.tabBarController?.selectedIndex = 1// My characters tab selected
     }
     
-    @IBAction func btn_CreateEmojisClicked(_ sender: UIButton) {
+    @IBAction func btn_CreateEmojisClicked(_ sender: UIButton?) {
         if Character.myCharacters.isEmpty {
             goToCreateNewChar()
         } else {
@@ -137,7 +151,7 @@ extension HomeVC {
             UIApplication.shared.openURL(url)
         }
     }
-
+    
     @IBAction func Btn_ViewAllCollection(_ sender: UIButton) {
         //        let url = URL(string: "http://www.toxicfox.co.uk/claireabella/claireabella-home/claireabella-apron")!
         
@@ -149,7 +163,7 @@ extension HomeVC {
             UIApplication.shared.openURL(url)
         }
     }
-
+    
     @IBAction func Btn_BagShoping_Clicked(_ sender: UIButton) {
         let url = URL(string: "http://www.toxicfox.co.uk/claireabella/claireabella-fashion-bags-simple/claireabella-jute-bags")!
         if #available(iOS 10.0, *) {
@@ -188,5 +202,5 @@ extension HomeVC {
             UIApplication.shared.openURL(url)
         }
     }
-
+    
 }

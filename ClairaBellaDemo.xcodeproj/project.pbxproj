@@ -3654,7 +3654,6 @@
 		7922C2FD1F5DAAE3007F5D25 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7922C2FC1F5DAAE3007F5D25 /* HomeVC.swift */; };
 		7922C3001F5DC98A007F5D25 /* CoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7922C2FF1F5DC98A007F5D25 /* CoreDataHandler.swift */; };
 		7922C3031F5DCA91007F5D25 /* ClairaBella.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7922C3011F5DCA91007F5D25 /* ClairaBella.xcdatamodeld */; };
-		7922C3071F5DD3E0007F5D25 /* WalkThrough.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7922C3051F5DD3E0007F5D25 /* WalkThrough.storyboard */; };
 		79244E041F7AB63700741D69 /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79244E031F7AB63700741D69 /* KeyboardViewController.swift */; };
 		79244E081F7AB63700741D69 /* ClaireaBella.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 79244E011F7AB63700741D69 /* ClaireaBella.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		79244E0E1F7ABBD600741D69 /* KeyboardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79244E0D1F7ABBD600741D69 /* KeyboardView.xib */; };
@@ -3662,6 +3661,9 @@
 		792713271F84193D00C7B7DB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 792713251F84193D00C7B7DB /* Main.storyboard */; };
 		792738021F63BCCE00C238F0 /* UtilityClasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792738011F63BCCE00C238F0 /* UtilityClasses.swift */; };
 		79292BDB1F6DA05B00015CB3 /* UsersCharacters.plist in Resources */ = {isa = PBXBuildFile; fileRef = 79292BDA1F6DA05A00015CB3 /* UsersCharacters.plist */; };
+		7929835C1FAF996A008813D2 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7929835A1FAF996A008813D2 /* LoginVC.swift */; };
+		7929835D1FAF996A008813D2 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7929835B1FAF996A008813D2 /* SignUpVC.swift */; };
+		792983601FAF9993008813D2 /* WalkThrough.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7929835E1FAF9993008813D2 /* WalkThrough.storyboard */; };
 		792E1A251F7C056400A7F4C5 /* CharacterGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79183D5A1F550FFF00A00D50 /* CharacterGenerator.swift */; };
 		792E1A261F7C056B00A7F4C5 /* APICalls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79183D5F1F55102900A00D50 /* APICalls.swift */; };
 		792E1A281F7C081600A7F4C5 /* EmojiCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 792E1A271F7C081600A7F4C5 /* EmojiCell.xib */; };
@@ -3715,8 +3717,6 @@
 		7932BB961F61BBD200A25AAF /* AccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7932BB951F61BBD200A25AAF /* AccountVC.swift */; };
 		7932BB9A1F61C8CB00A25AAF /* LoadingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7932BB991F61C8CB00A25AAF /* LoadingVC.swift */; };
 		7932BB9E1F61C8DF00A25AAF /* NewUserVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7932BB9B1F61C8DF00A25AAF /* NewUserVC.swift */; };
-		7932BB9F1F61C8DF00A25AAF /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7932BB9C1F61C8DF00A25AAF /* LoginVC.swift */; };
-		7932BBA01F61C8DF00A25AAF /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7932BB9D1F61C8DF00A25AAF /* SignUpVC.swift */; };
 		7932BBB51F61D06600A25AAF /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7932BBB41F61D06600A25AAF /* Global.swift */; };
 		7932BBC11F61D1C700A25AAF /* LogoImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7932BBB91F61D1C700A25AAF /* LogoImage.swift */; };
 		7932BBC21F61D1C700A25AAF /* Head_image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7932BBBA1F61D1C700A25AAF /* Head_image.swift */; };
@@ -5965,7 +5965,6 @@
 		7922C2FC1F5DAAE3007F5D25 /* HomeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		7922C2FF1F5DC98A007F5D25 /* CoreDataHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataHandler.swift; sourceTree = "<group>"; };
 		7922C3021F5DCA91007F5D25 /* ClairaBella.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ClairaBella.xcdatamodel; sourceTree = "<group>"; };
-		7922C3061F5DD3E0007F5D25 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/WalkThrough.storyboard; sourceTree = "<group>"; };
 		79244E011F7AB63700741D69 /* ClaireaBella.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ClaireaBella.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		79244E031F7AB63700741D69 /* KeyboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardViewController.swift; sourceTree = "<group>"; };
 		79244E051F7AB63700741D69 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -5974,6 +5973,9 @@
 		792713261F84193D00C7B7DB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		792738011F63BCCE00C238F0 /* UtilityClasses.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilityClasses.swift; sourceTree = "<group>"; };
 		79292BDA1F6DA05A00015CB3 /* UsersCharacters.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = UsersCharacters.plist; sourceTree = "<group>"; };
+		7929835A1FAF996A008813D2 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
+		7929835B1FAF996A008813D2 /* SignUpVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
+		7929835F1FAF9993008813D2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/WalkThrough.storyboard; sourceTree = "<group>"; };
 		792E1A271F7C081600A7F4C5 /* EmojiCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmojiCell.xib; sourceTree = "<group>"; };
 		7932BB381F61AC3500A25AAF /* background_small1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = background_small1.jpg; sourceTree = "<group>"; };
 		7932BB391F61AC3500A25AAF /* background1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = background1.jpg; sourceTree = "<group>"; };
@@ -6024,8 +6026,6 @@
 		7932BB951F61BBD200A25AAF /* AccountVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountVC.swift; sourceTree = "<group>"; };
 		7932BB991F61C8CB00A25AAF /* LoadingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingVC.swift; sourceTree = "<group>"; };
 		7932BB9B1F61C8DF00A25AAF /* NewUserVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewUserVC.swift; sourceTree = "<group>"; };
-		7932BB9C1F61C8DF00A25AAF /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
-		7932BB9D1F61C8DF00A25AAF /* SignUpVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
 		7932BBB41F61D06600A25AAF /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		7932BBB91F61D1C700A25AAF /* LogoImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogoImage.swift; sourceTree = "<group>"; };
 		7932BBBA1F61D1C700A25AAF /* Head_image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Head_image.swift; sourceTree = "<group>"; };
@@ -8371,8 +8371,8 @@
 			isa = PBXGroup;
 			children = (
 				792713251F84193D00C7B7DB /* Main.storyboard */,
+				7929835E1FAF9993008813D2 /* WalkThrough.storyboard */,
 				7954216B1F460DE500DBBBE0 /* LaunchScreen.storyboard */,
-				7922C3051F5DD3E0007F5D25 /* WalkThrough.storyboard */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -8520,8 +8520,8 @@
 			isa = PBXGroup;
 			children = (
 				7932BB9B1F61C8DF00A25AAF /* NewUserVC.swift */,
-				7932BB9C1F61C8DF00A25AAF /* LoginVC.swift */,
-				7932BB9D1F61C8DF00A25AAF /* SignUpVC.swift */,
+				7929835A1FAF996A008813D2 /* LoginVC.swift */,
+				7929835B1FAF996A008813D2 /* SignUpVC.swift */,
 			);
 			path = LoginSignupVCs;
 			sourceTree = "<group>";
@@ -10357,7 +10357,6 @@
 				13573AC81FA3140700187CFA /* BP006_BT003_OA025_BV001.svg in Resources */,
 				13573A321FA3140700187CFA /* BP006_BT001_OA027_BV003.svg in Resources */,
 				135744091FA3143A00187CFA /* AC027.png in Resources */,
-				7922C3071F5DD3E0007F5D25 /* WalkThrough.storyboard in Resources */,
 				135739601FA3140600187CFA /* BP004_BT004_OA011_BV000.svg in Resources */,
 				13573C3F1FA3140800187CFA /* BP013_BT004_OA006_BV000.svg in Resources */,
 				135739831FA3140600187CFA /* BP005_BT001_OA032_BV004.svg in Resources */,
@@ -10397,6 +10396,7 @@
 				13573BE41FA3140800187CFA /* BP011_BT001_OA000_BV000.svg in Resources */,
 				135745301FA3143B00187CFA /* HS009HC009.png in Resources */,
 				135738711FA3140600187CFA /* BP001_BT002_OA013_BV005.svg in Resources */,
+				792983601FAF9993008813D2 /* WalkThrough.storyboard in Resources */,
 				13573C791FA3140800187CFA /* BP015_BT001_OA019_BV010.svg in Resources */,
 				135746081FA3143C00187CFA /* OC067.png in Resources */,
 				7932BB6D1F61AC3500A25AAF /* background4.jpg in Resources */,
@@ -12546,7 +12546,6 @@
 				795421631F460DE500DBBBE0 /* AppDelegate.swift in Sources */,
 				79E2E4661F82B12B00B68524 /* ShareCharacterVC.swift in Sources */,
 				79153ED81F80A69B00E43DC4 /* ShareCharacterView.swift in Sources */,
-				7932BBA01F61C8DF00A25AAF /* SignUpVC.swift in Sources */,
 				79183D601F55102900A00D50 /* APICalls.swift in Sources */,
 				7932BBC11F61D1C700A25AAF /* LogoImage.swift in Sources */,
 				7932BBB51F61D06600A25AAF /* Global.swift in Sources */,
@@ -12569,14 +12568,15 @@
 				7932BBD81F61D1DD00A25AAF /* LogoView.swift in Sources */,
 				7932BBD31F61D1DD00A25AAF /* NewUserView.swift in Sources */,
 				7932BB961F61BBD200A25AAF /* AccountVC.swift in Sources */,
-				7932BB9F1F61C8DF00A25AAF /* LoginVC.swift in Sources */,
 				791785A01F93A91200467F43 /* EmojiImageGeneratorView.swift in Sources */,
+				7929835D1FAF996A008813D2 /* SignUpVC.swift in Sources */,
 				7932BBD41F61D1DD00A25AAF /* HomeView NO.swift in Sources */,
 				7922C3031F5DCA91007F5D25 /* ClairaBella.xcdatamodeld in Sources */,
 				7932BBD21F61D1DD00A25AAF /* LoadingView.swift in Sources */,
 				79183D5D1F55100000A00D50 /* CharacterBuilderVC.swift in Sources */,
 				7932BBC41F61D1C700A25AAF /* Account_page.swift in Sources */,
 				792294411F5F09DB004845DE /* SetupKeyBoardVC.swift in Sources */,
+				7929835C1FAF996A008813D2 /* LoginVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -12591,20 +12591,20 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		7922C3051F5DD3E0007F5D25 /* WalkThrough.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				7922C3061F5DD3E0007F5D25 /* Base */,
-			);
-			name = WalkThrough.storyboard;
-			sourceTree = "<group>";
-		};
 		792713251F84193D00C7B7DB /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				792713261F84193D00C7B7DB /* Base */,
 			);
 			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		7929835E1FAF9993008813D2 /* WalkThrough.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7929835F1FAF9993008813D2 /* Base */,
+			);
+			name = WalkThrough.storyboard;
 			sourceTree = "<group>";
 		};
 		7954216B1F460DE500DBBBE0 /* LaunchScreen.storyboard */ = {
@@ -12622,14 +12622,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = ClaireaBella/ClaireaBella.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = LCSDGY3TVW;
 				INFOPLIST_FILE = ClaireaBella/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.unitygames.Claireabella.ClaireaBella;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "cb3c19c9-8236-4fb6-a2c3-41db43df8327";
-				PROVISIONING_PROFILE_SPECIFIER = claireabellakeyboardProfile;
+				PROVISIONING_PROFILE = "52d2c52c-af48-4208-9509-9fb694d70295";
+				PROVISIONING_PROFILE_SPECIFIER = Claireabella_keyboard_production;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
 			};
@@ -12639,14 +12639,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = ClaireaBella/ClaireaBella.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = LCSDGY3TVW;
 				INFOPLIST_FILE = ClaireaBella/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.unitygames.Claireabella.ClaireaBella;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "cb3c19c9-8236-4fb6-a2c3-41db43df8327";
-				PROVISIONING_PROFILE_SPECIFIER = claireabellakeyboardProfile;
+				PROVISIONING_PROFILE = "52d2c52c-af48-4208-9509-9fb694d70295";
+				PROVISIONING_PROFILE_SPECIFIER = Claireabella_keyboard_production;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
 			};
@@ -12750,14 +12750,14 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = ClairaBellaDemo/ClairaBellaDemo.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = LCSDGY3TVW;
 				INFOPLIST_FILE = ClairaBellaDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.unitygames.Claireabella;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c80d2cd8-9c0a-4e3c-bf84-d4fac2e245d6";
-				PROVISIONING_PROFILE_SPECIFIER = Developement_Claireabella;
+				PROVISIONING_PROFILE = "13215093-fba5-44db-aa19-a11bf9a2abd1";
+				PROVISIONING_PROFILE_SPECIFIER = Claireabella_Production;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -12769,14 +12769,14 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = ClairaBellaDemo/ClairaBellaDemo.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = LCSDGY3TVW;
 				INFOPLIST_FILE = ClairaBellaDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.unitygames.Claireabella;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c80d2cd8-9c0a-4e3c-bf84-d4fac2e245d6";
-				PROVISIONING_PROFILE_SPECIFIER = Developement_Claireabella;
+				PROVISIONING_PROFILE = "13215093-fba5-44db-aa19-a11bf9a2abd1";
+				PROVISIONING_PROFILE_SPECIFIER = Claireabella_Production;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
