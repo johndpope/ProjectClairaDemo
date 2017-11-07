@@ -9,6 +9,7 @@
 
 import UIKit
 import Social
+import MessageUI
 
 class EmojiesVC: ParentVC {
 
@@ -264,7 +265,7 @@ extension EmojiesVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLay
                 print("twitter")
                 self.shareOnTwitter(image)
             case .mail:
-                print("mail") 
+                self.shareViaMail(image)
             case .save:
                 self.saveToPhots(image)
             case .more:
@@ -311,9 +312,6 @@ extension EmojiesVC {
         UIImageWriteToSavedPhotosAlbum(image, self, #selector(self.image(_:didFinishSavingWithError:contextInfo:)), nil)
     }
     
-    func imageDidSaveToPhotoAlbum() {
-        print("save done")
-    }
     
     @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
         if let error = error {
@@ -333,8 +331,25 @@ extension EmojiesVC {
         self.present(activityVC, animated: true, completion: nil)
     }
 
+    func shareViaMail(_ image: UIImage) {
+        if MFMailComposeViewController.canSendMail() {
+            let mail = MFMailComposeViewController()
+            mail.mailComposeDelegate = self
+            let imageData: Data = UIImagePNGRepresentation(image)!
+            mail.addAttachmentData(imageData, mimeType: "image/png", fileName: "imageName")
+            self.present(mail, animated: true, completion: nil)
+        } else {
+            showAlert(message: "Please go to settings and add your email account. ")
+        }
+    }
+
 }
 
+extension EmojiesVC: MFMailComposeViewControllerDelegate {
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true, completion: nil)
+    }
+}
 
 //MARK:- API calls
 extension EmojiesVC {

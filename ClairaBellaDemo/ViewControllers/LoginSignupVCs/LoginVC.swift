@@ -20,7 +20,7 @@ class LoginVC: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.createLayout()
+        //self.createLayout()
         
         // Do any additional setup after loading the view.
     }
@@ -125,12 +125,12 @@ class LoginVC: UIViewController, UITextFieldDelegate {
     }
     
     
-    func signUpBtnClick(_ sendr: UIButton) {
+   @IBAction func signUpBtnClick(_ sendr: UIButton) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "SignUp") as! SignUpVC
         self.navigationController?.pushViewController(vc, animated: true)
     }
 
-    func Btn_Facebook_Login(_ sender: UIButton) {
+   @IBAction func Btn_Facebook_Login(_ sender: UIButton) {
         
         let progressHUD = ProgressView(text: "Please Wait")
         self.view.addSubview(progressHUD)

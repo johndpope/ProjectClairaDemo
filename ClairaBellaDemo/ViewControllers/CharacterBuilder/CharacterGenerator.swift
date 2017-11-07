@@ -57,7 +57,12 @@ class Character: NSCopying, CharacterType {
         return copy
     }
     
-    static var myCharacters = [Character]()
+    static var myCharacters = [Character]() {
+        didSet {
+            loadingFinish = true
+        }
+    }
+    static var loadingFinish = false
     
     static var mainCharacter: Character? {
         return myCharacters.filter({$0.isMainChar}).first
