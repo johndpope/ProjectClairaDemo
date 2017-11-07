@@ -13,29 +13,63 @@ import FBSDKLoginKit
 
 class LoginVC: UIViewController, UITextFieldDelegate {
 
-    @IBOutlet var emailTextField: UITextField!
-    @IBOutlet var passwordTextField: UITextField!
-    
+    @IBOutlet var txtEmail: UITextField!
+    @IBOutlet var txtPassword: UITextField!
+    @IBOutlet var errorListView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        //self.createLayout()
-        
-        // Do any additional setup after loading the view.
+        txtEmail?.setCornerRadius()
+        txtPassword?.setCornerRadius()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    func isValidate()-> Bool {
+        var isValid = true
+        let email = txtEmail.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        let password = txtPassword.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        
+        txtEmail.setBorder(color:UIColor.clear)
+        txtPassword.setBorder(color:UIColor.clear)
+        
+        let errorColor = UIColor(colorLiteralRed: 150.0/255.0, green: 30.0/255.0, blue: 44.0/255.0, alpha: 0.8)
+        
+        if email.isEmpty || !email.isValidEmail(){
+            isValid = false
+            txtEmail.setBorder(color:errorColor)
+        }
+        
+        if password.isEmpty {
+            isValid = false
+            txtPassword.setBorder(color:errorColor)
+        }
+        errorListView.isHidden = isValid
+        return isValid
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        return textField.resignFirstResponder()
+        switch textField.tag {
+        case 1:
+            txtPassword.becomeFirstResponder()
+        default:
+            textField.resignFirstResponder()
+        }
+        return true
     }
     
+    @IBAction func textFieldEditingBegin(_ sender: UITextField) {
+        let color = UIColor(colorLiteralRed: 74.0/255.0, green: 144.0/255.0, blue: 226.0/255.0, alpha: 1)
+        sender.setBorder(color: color)
+    }
+    
+    @IBAction func textFieldEditingEnd(_ sender: UITextField) {
+        sender.setBorder(color: UIColor.clear)
+    }
+
     @IBAction func loginBtnClick(_ sender: UIButton) {
-        
+        if isValidate() {
+            //Call login api
+        }
     }
     
     @IBAction func backBtnClicked(_ sender: UIButton) {
