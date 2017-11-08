@@ -16,14 +16,47 @@ class LoginVC: UIViewController, UITextFieldDelegate {
     @IBOutlet var txtEmail: UITextField!
     @IBOutlet var txtPassword: UITextField!
     @IBOutlet var errorListView: UIView!
+    @IBOutlet var tblLoginForm: UITableView!
+    @IBOutlet var tblHeaderView: UIView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         txtEmail?.setCornerRadius()
         txtPassword?.setCornerRadius()
+        if let hdView = tblHeaderView {
+            var hdvFrame = hdView.frame
+            hdvFrame.size.height = self.view.frame.height-64
+            hdView.frame = hdvFrame
+        }
+        
+
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(nf:)), name: Notification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(nf:)), name: Notification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.charactersLoadignFinish), name: NSNotification.Name(rawValue: "CharactersLoadingFinish"), object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
     }
 
+
+    //Keyboard notifications
+    func keyboardWillShow(nf: Notification) {
+        tblLoginForm.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 150, right: 0)
+    }
+    
+    func keyboardWillHide(nf: Notification) {
+        tblLoginForm.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    }
+
+    //validation method
     func isValidate()-> Bool {
         var isValid = true
         let email = txtEmail.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
@@ -128,10 +161,16 @@ class LoginVC: UIViewController, UITextFieldDelegate {
                         
                         appDelegate.getCharactersFromServer()
                         //self.btn_clicked.sendActions(for: .touchUpInside)
+                        //self.performSegue(withIdentifier: "goToHome", sender: nil)
                         
                     }
                 }
             }
         })
     }
+    
+    func charactersLoadignFinish() {
+        self.performSegue(withIdentifier: "goToHome", sender: nil)
+    }
+
 }

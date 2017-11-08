@@ -32,7 +32,7 @@ class HomeVC: ParentVC {
         
         if Character.loadingFinish {
             if Character.myCharacters.isEmpty {
-                self.goToCreateNewChar()
+                self.goToCreateNewChar(animation: false)
             }
         }
         
@@ -65,9 +65,7 @@ class HomeVC: ParentVC {
         
         let user_deatils = UserDefaults(suiteName: appGroupName)!.value(forKey: "user_details")as? [String:String]
         
-        let fname: String = user_deatils!["first_name"] ?? ""
-        let lname: String = user_deatils!["last_name"] ?? ""
-        let name = fname + " " + lname
+        let name = user_deatils!["name"] ?? ""
         lblUserName.text = name
         
         if Character.myCharacters.isEmpty {
@@ -123,10 +121,11 @@ class HomeVC: ParentVC {
 //MARK:- IBActions
 extension HomeVC {
     
-    func goToCreateNewChar() {
+    func goToCreateNewChar(animation: Bool = true) {
         let viewController = self.storyboard?.instantiateViewController(withIdentifier: "CharBuilderNavVC") as! UINavigationController
-        self.present(viewController, animated: true, completion: nil)
+        self.present(viewController, animated: animation, completion: nil)
     }
+    
     @IBAction func btn_StartNow(_ sender: UIButton) {
         goToCreateNewChar()
     }

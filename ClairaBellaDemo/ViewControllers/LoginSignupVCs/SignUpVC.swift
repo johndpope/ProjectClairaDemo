@@ -21,6 +21,8 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
     @IBOutlet var btn_pressed: UIButton!
     @IBOutlet var errorListView: UIView!
     
+    let progressHUD = ProgressView(text: "Please Wait")
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -39,7 +41,7 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(nf:)), name: Notification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(nf:)), name: Notification.Name.UIKeyboardWillHide, object: nil)
-
+        NotificationCenter.default.addObserver(self, selector: #selector(self.charactersLoadignFinish), name: NSNotification.Name(rawValue: "CharactersLoadingFinish"), object: nil)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -134,24 +136,24 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
         progressHUD.show()
         
         let params = ["first_name" : firstname,  "Last_name" : lastName]
+        
         APICall.shared.signupUser_APICall(email: email, params: params) { (response,success) in
             if success {
-                let result = ["first_name" : firstname,  "last_name" : lastName, "email": email]
+                let name = firstname + " " + lastName
+                let result = ["name" : name, "email": email]
                 UserDefaults(suiteName: appGroupName)!.setValue(result, forKey: "user_details")
                 //UserDefaults.standard.setValue(result, forKey: "user_details")
                 //UserDefaults.standard.synchronize()
-                self.btn_pressed.sendActions(for: .touchUpInside)
+                //self.btn_pressed.sendActions(for: .touchUpInside)
                 appDelegate.getCharactersFromServer()
             } else {
-                
+                progressHUD.hide()
             }
-            progressHUD.hide()
         }
     }
     
     @IBAction func Btn_Facebook_Login(_ sender: UIButton) {
         
-        let progressHUD = ProgressView(text: "Please Wait")
         self.view.addSubview(progressHUD)
         progressHUD.show()
         let login: FBSDKLoginManager = FBSDKLoginManager()
@@ -161,11 +163,11 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
             if error != nil {
                 // Handle Error
                 NSLog("Process error")
-                progressHUD.hide()
+                self.progressHUD.hide()
             } else if (result?.isCancelled)! {
                 // If process is cancel
                 NSLog("Cancelled")
-                progressHUD.hide()
+                self.progressHUD.hide()
             }
             else {
                 // Parameters for Graph Request
@@ -201,6 +203,12 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
             }
         })
     }
+    
+    func charactersLoadignFinish() {
+        progressHUD.hide()
+        self.btn_pressed.sendActions(for: .touchUpInside)
+    }
+
 }
 
 extension UITextField {
