@@ -407,7 +407,7 @@
                                                     <rect key="frame" x="0.0" y="463" width="345" height="50"/>
                                                     <subviews>
                                                         <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2x7-xl-gEz">
-                                                            <rect key="frame" x="0.0" y="-439.5" width="345" height="0.0"/>
+                                                            <rect key="frame" x="0.0" y="-463" width="345" height="0.0"/>
                                                             <subviews>
                                                                 <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" image="imgErrorSummary" translatesAutoresizingMaskIntoConstraints="NO" id="jwF-aw-R2y">
                                                                     <rect key="frame" x="0.0" y="0.0" width="345" height="0.0"/>
@@ -671,7 +671,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="0aS-1z-A8Z">
-                                                    <rect key="frame" x="0.0" y="338" width="345" height="150"/>
+                                                    <rect key="frame" x="0.0" y="338" width="345" height="184"/>
                                                     <subviews>
                                                         <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1F0-HJ-AfD">
                                                             <rect key="frame" x="0.0" y="0.0" width="345" height="80"/>
@@ -702,10 +702,10 @@
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="34v-vw-g5s">
-                                                            <rect key="frame" x="0.0" y="0.0" width="345" height="80"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="345" height="114"/>
                                                             <subviews>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Zw-PZ-cK0">
-                                                                    <rect key="frame" x="113" y="24" width="119" height="32"/>
+                                                                    <rect key="frame" x="113" y="41" width="119" height="32"/>
                                                                     <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="14"/>
                                                                     <state key="normal" title="Forgot Password?">
                                                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -720,7 +720,7 @@
                                                             </constraints>
                                                         </view>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P5c-lA-Eb9">
-                                                            <rect key="frame" x="0.0" y="100" width="345" height="50"/>
+                                                            <rect key="frame" x="0.0" y="134" width="345" height="50"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="50" id="WMt-44-Uba"/>
                                                             </constraints>
