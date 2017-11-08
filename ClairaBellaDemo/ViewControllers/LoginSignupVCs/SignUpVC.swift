@@ -24,6 +24,11 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        nameTextField.setCornerRadius()
+        emailTextField.setCornerRadius()
+        lastNameTextField.setCornerRadius()
+        passwordTextField.setCornerRadius()
+        
         var hdvFrame = tblHeaderView.frame
         hdvFrame.size.height = self.view.frame.height-64
         tblHeaderView.frame = hdvFrame
@@ -66,6 +71,14 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
         return true
     }
 
+    @IBAction func textFieldEditingBegin(_ sender: UITextField) {
+        let color = UIColor(colorLiteralRed: 74.0/255.0, green: 144.0/255.0, blue: 226.0/255.0, alpha: 1)
+        sender.setBorder(color: color)
+    }
+    
+    @IBAction func textFieldEditingEnd(_ sender: UITextField) {
+        sender.setBorder(color: UIColor.clear)
+    }
     
     func isValidate()-> Bool {
         var isValid = true
@@ -74,28 +87,30 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
         let lastName = lastNameTextField.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         let password = passwordTextField.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         
-        emailTextField.setBorder(0)
-        nameTextField.setBorder(0)
-        lastNameTextField.setBorder(0)
-        passwordTextField.setBorder(0)
+        emailTextField.setBorder(color:UIColor.clear)
+        nameTextField.setBorder(color:UIColor.clear)
+        lastNameTextField.setBorder(color:UIColor.clear)
+        passwordTextField.setBorder(color:UIColor.clear)
         
+        let errorColor = UIColor(colorLiteralRed: 150.0/255.0, green: 30.0/255.0, blue: 44.0/255.0, alpha: 0.8)
+
         if email.isEmpty || !email.isValidEmail(){
             isValid = false
-            emailTextField.setBorder()
+            emailTextField.setBorder(color:errorColor)
         } 
         if firstname.isEmpty {
             isValid = false
-            nameTextField.setBorder()
+            nameTextField.setBorder(color:errorColor)
         }
         
         if lastName.isEmpty {
             isValid = false
-            lastNameTextField.setBorder()
+            lastNameTextField.setBorder(color:errorColor)
         }
         
         if password.isEmpty {
             isValid = false
-            passwordTextField.setBorder()
+            passwordTextField.setBorder(color:errorColor)
         }
         errorListView.isHidden = isValid
         return isValid
@@ -177,8 +192,6 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
                        
                         UserDefaults(suiteName: appGroupName)!.setValue(result, forKey: "user_details")
                         UserDefaults.standard.setValue(facebookProfileUrl, forKey: "user_photoUrl")
-                        print("\(UserDefaults.standard.value(forKey: "user_details")!)")
-                        UserDefaults.standard.synchronize()
                         appDelegate.getCharactersFromServer()
 
                          self.btn_pressed.sendActions(for: .touchUpInside)
@@ -191,9 +204,14 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
 }
 
 extension UITextField {
-    func setBorder(_ width: CGFloat = 1.5) {
-        self.layer.borderColor = UIColor.red.cgColor
+    func setBorder(_ width: CGFloat = 1.5, color: UIColor) {
+        self.layer.borderColor = color.cgColor
         self.layer.borderWidth = width
+    }
+    
+    func setCornerRadius(_ radius: CGFloat = 5) {
+        self.layer.cornerRadius = radius
+        self.clipsToBounds = true
     }
 }
 
