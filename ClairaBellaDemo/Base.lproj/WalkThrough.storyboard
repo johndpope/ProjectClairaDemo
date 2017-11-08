@@ -376,13 +376,13 @@
                                                     <rect key="frame" x="0.0" y="429" width="345" height="45"/>
                                                     <subviews>
                                                         <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2x7-xl-gEz">
-                                                            <rect key="frame" x="0.0" y="-436" width="345" height="60.5"/>
+                                                            <rect key="frame" x="0.0" y="-429" width="345" height="60"/>
                                                             <subviews>
                                                                 <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" image="imgErrorSummary" translatesAutoresizingMaskIntoConstraints="NO" id="jwF-aw-R2y">
                                                                     <rect key="frame" x="0.0" y="0.0" width="345" height="55.5"/>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Oops, some details have not been correctly entered" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4pQ-Q5-2Sm">
-                                                                    <rect key="frame" x="36.5" y="4" width="273.5" height="46.5"/>
+                                                                    <rect key="frame" x="40.5" y="4" width="265" height="46.5"/>
                                                                     <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="17"/>
                                                                     <color key="textColor" red="0.61568627450980395" green="0.17254901960784313" blue="0.22745098039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
@@ -624,7 +624,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="343" height="60"/>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Oops, some details have not been correctly entered" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3bM-1U-O5t">
-                                                <rect key="frame" x="35.5" y="7.5" width="273.5" height="46.5"/>
+                                                <rect key="frame" x="39.5" y="10.5" width="265" height="40"/>
                                                 <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="17"/>
                                                 <color key="textColor" red="0.61568627450000002" green="0.17254901959999999" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
