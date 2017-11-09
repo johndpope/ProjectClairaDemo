@@ -247,20 +247,25 @@ extension SavedCharListVC {
 //MARK:- TableView DataSource and Delegate
 extension SavedCharListVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return savedChars.isEmpty ? 0 : 3
+        return savedChars.isEmpty ? 0 : 4
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         if indexPath.row == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "createCharBtnCell")!
+            let cell = tableView.dequeueReusableCell(withIdentifier: "characterListCell")!
             return cell
             
         } else if indexPath.row == 1 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "createCharBtnCell")!
+            return cell
+            
+        } else if indexPath.row == 2 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "bagAdsCell")!
             return cell
 
-        } else if indexPath.row == 2 {
+        } else if indexPath.row == 3 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "productsCell")!
             return cell
             
@@ -273,9 +278,11 @@ extension SavedCharListVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 0{
             return 300 * widthRatio
-        }  else if indexPath.row == 1 {
-            return 450 * widthRatio
+        } else if indexPath.row == 1 {
+            return 300 * widthRatio
         } else if indexPath.row == 2 {
+            return 450 * widthRatio
+        } else if indexPath.row == 3 {
             return 585 * widthRatio
         } else {
             return 300 * widthRatio

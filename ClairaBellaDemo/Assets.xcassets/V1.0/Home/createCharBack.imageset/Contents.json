@@ -5,6 +5,20 @@
       "scale" : "1x"
     },
     {
+      "resizing" : {
+        "mode" : "9-part",
+        "center" : {
+          "mode" : "tile",
+          "width" : 1,
+          "height" : 1
+        },
+        "cap-insets" : {
+          "bottom" : 32,
+          "top" : 24,
+          "right" : 28,
+          "left" : 28
+        }
+      },
       "idiom" : "universal",
       "filename" : "createCharBack.png",
       "scale" : "2x"
