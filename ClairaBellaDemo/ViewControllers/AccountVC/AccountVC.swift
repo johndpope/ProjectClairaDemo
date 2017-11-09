@@ -25,9 +25,7 @@ class AccountVC: UIViewController {
         let user_deatils = UserDefaults(suiteName: appGroupName)!.value(forKey: "user_details")as? [String:String]
         
         let email: String = user_deatils!["email"] ?? ""
-        let fname: String = user_deatils!["first_name"] ?? ""
-        let lname: String = user_deatils!["last_name"] ?? ""
-        let name = fname + " " + lname
+        let name = user_deatils!["name"] ?? ""
         //profile_Image.layer.borderWidth = 1
         profile_Image.layer.masksToBounds = false
         //profile_Image.layer.borderColor = UIColor.black.cgColor

@@ -128,6 +128,7 @@ extension AppDelegate {
                 
             }
             DispatchQueue.main.async {
+                Character.loadingFinish = true
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "CharactersLoadingFinish"), object: nil)
             }
 

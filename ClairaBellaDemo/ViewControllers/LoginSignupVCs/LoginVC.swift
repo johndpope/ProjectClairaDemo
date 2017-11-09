@@ -16,14 +16,49 @@ class LoginVC: UIViewController, UITextFieldDelegate {
     @IBOutlet var txtEmail: UITextField!
     @IBOutlet var txtPassword: UITextField!
     @IBOutlet var errorListView: UIView!
-    
+    @IBOutlet var tblLoginForm: UITableView!
+    @IBOutlet var tblHeaderView: UIView?
+   
+    let progressHUD = ProgressView(text: "Please Wait")
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         txtEmail?.setCornerRadius()
         txtPassword?.setCornerRadius()
+        if let hdView = tblHeaderView {
+            var hdvFrame = hdView.frame
+            hdvFrame.size.height = self.view.frame.height-64
+            hdView.frame = hdvFrame
+        }
+        
+
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(nf:)), name: Notification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(nf:)), name: Notification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.charactersLoadignFinish), name: NSNotification.Name(rawValue: "CharactersLoadingFinish"), object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
     }
 
+
+    //Keyboard notifications
+    func keyboardWillShow(nf: Notification) {
+        tblLoginForm.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 150, right: 0)
+    }
+    
+    func keyboardWillHide(nf: Notification) {
+        tblLoginForm.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    }
+
+    //validation method
     func isValidate()-> Bool {
         var isValid = true
         let email = txtEmail.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
@@ -84,7 +119,6 @@ class LoginVC: UIViewController, UITextFieldDelegate {
 
    @IBAction func Btn_Facebook_Login(_ sender: UIButton) {
         
-        let progressHUD = ProgressView(text: "Please Wait")
         self.view.addSubview(progressHUD)
         progressHUD.show()
         let login: FBSDKLoginManager = FBSDKLoginManager()
@@ -94,11 +128,11 @@ class LoginVC: UIViewController, UITextFieldDelegate {
             if error != nil {
                 // Handle Error
                 NSLog("Process error")
-                progressHUD.hide()
+                self.progressHUD.hide()
             } else if (result?.isCancelled)! {
                 // If process is cancel
                 NSLog("Cancelled")
-                progressHUD.hide()
+                self.progressHUD.hide()
             }
             else {
                 // Parameters for Graph Request
@@ -111,7 +145,7 @@ class LoginVC: UIViewController, UITextFieldDelegate {
                     }
                     
                     // Result
-                    print("Result: \(result)")
+                    //print("Result: \(result)")
                     
                     // Handle vars
                     if let result = result as? [String:Any], let email = result["email"] as? String, let fbId = result["id"] as? String {
@@ -127,11 +161,24 @@ class LoginVC: UIViewController, UITextFieldDelegate {
                         UserDefaults.standard.synchronize()
                         
                         appDelegate.getCharactersFromServer()
-                        //self.btn_clicked.sendActions(for: .touchUpInside)
                         
                     }
                 }
             }
         })
+    }
+    
+    func charactersLoadignFinish() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if Character.myCharacters.isEmpty {
+            let homeVC = storyboard.instantiateViewController(withIdentifier: "mainTabVC") as! UITabBarController
+            let viewController = storyboard.instantiateViewController(withIdentifier: "CharBuilderNavVC") as! UINavigationController
+            self.navigationController?.present(viewController, animated: true, completion: {
+                self.navigationController?.viewControllers = [homeVC]
+            })
+        } else {
+            self.performSegue(withIdentifier: "goToHome", sender: nil)
+        }
+
     }
 }
