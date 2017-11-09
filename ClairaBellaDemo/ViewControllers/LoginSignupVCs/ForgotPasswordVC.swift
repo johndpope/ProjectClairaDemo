@@ -10,6 +10,7 @@ import UIKit
 
 class ForgotPasswordVC: UIViewController, UITextFieldDelegate {
     @IBOutlet var txtEmail: UITextField!
+    @IBOutlet var errorListView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,6 +57,7 @@ class ForgotPasswordVC: UIViewController, UITextFieldDelegate {
             isValid = false
             txtEmail.setBorder(color:errorColor)
         }
+        errorListView.isHidden = isValid
         return isValid
     }
 

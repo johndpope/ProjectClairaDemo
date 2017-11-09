@@ -410,10 +410,10 @@
                                                             <rect key="frame" x="0.0" y="-463" width="345" height="0.0"/>
                                                             <subviews>
                                                                 <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" image="imgErrorSummary" translatesAutoresizingMaskIntoConstraints="NO" id="jwF-aw-R2y">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="345" height="0.0"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="345" height="53"/>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Oops, some details have not been correctly entered" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4pQ-Q5-2Sm">
-                                                                    <rect key="frame" x="36" y="-12" width="273.5" height="24"/>
+                                                                    <rect key="frame" x="36" y="3" width="273.5" height="46.5"/>
                                                                     <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="17"/>
                                                                     <color key="textColor" red="0.61568627450980395" green="0.17254901960784313" blue="0.22745098039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
@@ -878,7 +878,7 @@
                                         </constraints>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                                         <connections>
                                             <action selector="textFieldEditingBegin:" destination="0B8-ss-ug5" eventType="editingDidBegin" id="aFx-6W-ReH"/>
                                             <action selector="textFieldEditingEnd:" destination="0B8-ss-ug5" eventType="editingDidEnd" id="nJs-2d-Gp5"/>
@@ -902,19 +902,49 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="543-OC-lhm">
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="18x-u7-gUF">
                                         <rect key="frame" x="0.0" y="180" width="345" height="50"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="cq8-df-rxS"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="16"/>
-                                        <state key="normal" title="Reset Password" backgroundImage="btnBack2">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="restPassword_clicked:" destination="0B8-ss-ug5" eventType="touchUpInside" id="k17-2B-Fqz"/>
-                                        </connections>
-                                    </button>
+                                        <subviews>
+                                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nmF-pz-Do8">
+                                                <rect key="frame" x="0.0" y="-244" width="345" height="0.0"/>
+                                                <subviews>
+                                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" image="imgErrorSummary" translatesAutoresizingMaskIntoConstraints="NO" id="KSK-4p-qGx">
+                                                        <rect key="frame" x="0.0" y="0.0" width="345" height="59"/>
+                                                    </imageView>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Oops, email have not been correctly entered." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5mZ-5i-L3g">
+                                                        <rect key="frame" x="64.5" y="6" width="216.5" height="46.5"/>
+                                                        <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="17"/>
+                                                        <color key="textColor" red="0.61568627450000002" green="0.17254901959999999" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="trailing" secondItem="KSK-4p-qGx" secondAttribute="trailing" id="2cT-5X-jpq"/>
+                                                    <constraint firstItem="5mZ-5i-L3g" firstAttribute="centerX" secondItem="nmF-pz-Do8" secondAttribute="centerX" id="FRx-p6-JdP"/>
+                                                    <constraint firstItem="5mZ-5i-L3g" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="nmF-pz-Do8" secondAttribute="leading" constant="8" id="IHE-tm-pG0"/>
+                                                    <constraint firstItem="KSK-4p-qGx" firstAttribute="leading" secondItem="nmF-pz-Do8" secondAttribute="leading" id="TCx-up-h6g"/>
+                                                    <constraint firstItem="KSK-4p-qGx" firstAttribute="top" secondItem="nmF-pz-Do8" secondAttribute="top" id="TIt-bG-Ll6"/>
+                                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="5mZ-5i-L3g" secondAttribute="trailing" constant="8" id="gAz-lf-WFu"/>
+                                                    <constraint firstAttribute="bottom" secondItem="KSK-4p-qGx" secondAttribute="bottom" id="o9f-vI-iW5"/>
+                                                    <constraint firstItem="5mZ-5i-L3g" firstAttribute="centerY" secondItem="nmF-pz-Do8" secondAttribute="centerY" id="onT-H7-ltu"/>
+                                                </constraints>
+                                            </view>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xjv-Yh-PWc">
+                                                <rect key="frame" x="0.0" y="0.0" width="345" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="uPM-rP-gX0"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="16"/>
+                                                <state key="normal" title="Reset Password" backgroundImage="btnBack2">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="restPassword_clicked:" destination="0B8-ss-ug5" eventType="touchUpInside" id="s88-Vg-4eq"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -925,14 +955,14 @@
                                     <constraint firstItem="TDG-17-BCu" firstAttribute="top" secondItem="qQj-er-EZ4" secondAttribute="top" id="9hD-c1-8Fp"/>
                                     <constraint firstItem="esy-vq-HZK" firstAttribute="leading" secondItem="7xz-7F-muv" secondAttribute="leading" id="APd-nT-HDb"/>
                                     <constraint firstItem="xes-2o-sJA" firstAttribute="leading" secondItem="7xz-7F-muv" secondAttribute="leading" id="DUU-HX-GXE"/>
-                                    <constraint firstItem="543-OC-lhm" firstAttribute="top" secondItem="3ss-wA-rIL" secondAttribute="bottom" constant="15" id="EgF-2t-cCN"/>
                                     <constraint firstItem="TDG-17-BCu" firstAttribute="height" secondItem="qQj-er-EZ4" secondAttribute="height" id="HtS-6l-KLK"/>
                                     <constraint firstAttribute="trailing" secondItem="TDG-17-BCu" secondAttribute="trailing" id="IiU-b0-CvS"/>
-                                    <constraint firstAttribute="trailing" secondItem="543-OC-lhm" secondAttribute="trailing" id="P7t-ZF-m1a"/>
+                                    <constraint firstItem="18x-u7-gUF" firstAttribute="leading" secondItem="7xz-7F-muv" secondAttribute="leading" id="Lag-5P-S0i"/>
                                     <constraint firstAttribute="trailing" secondItem="3ss-wA-rIL" secondAttribute="trailing" id="Uqk-5B-mKG"/>
-                                    <constraint firstItem="543-OC-lhm" firstAttribute="leading" secondItem="7xz-7F-muv" secondAttribute="leading" id="ZwH-UR-8xg"/>
+                                    <constraint firstAttribute="trailing" secondItem="18x-u7-gUF" secondAttribute="trailing" id="YK3-yO-btB"/>
                                     <constraint firstItem="TDG-17-BCu" firstAttribute="width" secondItem="qQj-er-EZ4" secondAttribute="width" id="ah1-vF-oze"/>
                                     <constraint firstItem="3ss-wA-rIL" firstAttribute="leading" secondItem="7xz-7F-muv" secondAttribute="leading" id="fLC-ba-tpi"/>
+                                    <constraint firstItem="18x-u7-gUF" firstAttribute="top" secondItem="3ss-wA-rIL" secondAttribute="bottom" constant="15" id="fNG-hl-we4"/>
                                     <constraint firstAttribute="trailing" secondItem="esy-vq-HZK" secondAttribute="trailing" id="qac-ox-Ohh"/>
                                     <constraint firstItem="qQj-er-EZ4" firstAttribute="leading" secondItem="7xz-7F-muv" secondAttribute="leading" id="ukw-BJ-ZTY"/>
                                 </constraints>
@@ -982,6 +1012,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="errorListView" destination="nmF-pz-Do8" id="JRW-aQ-rjc"/>
                         <outlet property="txtEmail" destination="3ss-wA-rIL" id="03o-5D-WL1"/>
                     </connections>
                 </viewController>
@@ -1007,6 +1038,6 @@
         <image name="imgErrorSummary" width="273" height="65"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="chL-R6-lCY"/>
+        <segue reference="IIj-Er-xKI"/>
     </inferredMetricsTieBreakers>
 </document>
