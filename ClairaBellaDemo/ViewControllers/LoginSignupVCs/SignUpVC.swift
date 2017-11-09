@@ -131,7 +131,6 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
         let lastName = lastNameTextField.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         let password = passwordTextField.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
 
-        let progressHUD = ProgressView(text: "Please Wait")
         self.view.addSubview(progressHUD)
         progressHUD.show()
         
@@ -147,7 +146,7 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
                 //self.btn_pressed.sendActions(for: .touchUpInside)
                 appDelegate.getCharactersFromServer()
             } else {
-                progressHUD.hide()
+                self.progressHUD.hide()
             }
         }
     }
@@ -206,7 +205,18 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
     
     func charactersLoadignFinish() {
         progressHUD.hide()
-        self.btn_pressed.sendActions(for: .touchUpInside)
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if Character.myCharacters.isEmpty {
+            let homeVC = storyboard.instantiateViewController(withIdentifier: "mainTabVC") as! UITabBarController
+            let viewController = storyboard.instantiateViewController(withIdentifier: "CharBuilderNavVC") as! UINavigationController
+           
+            self.navigationController?.present(viewController, animated: true, completion: {
+                self.navigationController?.viewControllers = [homeVC]
+            })
+        } else {
+            self.btn_pressed.sendActions(for: .touchUpInside)
+        }
     }
 
 }

@@ -18,7 +18,9 @@ class LoginVC: UIViewController, UITextFieldDelegate {
     @IBOutlet var errorListView: UIView!
     @IBOutlet var tblLoginForm: UITableView!
     @IBOutlet var tblHeaderView: UIView?
-    
+   
+    let progressHUD = ProgressView(text: "Please Wait")
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -117,7 +119,6 @@ class LoginVC: UIViewController, UITextFieldDelegate {
 
    @IBAction func Btn_Facebook_Login(_ sender: UIButton) {
         
-        let progressHUD = ProgressView(text: "Please Wait")
         self.view.addSubview(progressHUD)
         progressHUD.show()
         let login: FBSDKLoginManager = FBSDKLoginManager()
@@ -127,11 +128,11 @@ class LoginVC: UIViewController, UITextFieldDelegate {
             if error != nil {
                 // Handle Error
                 NSLog("Process error")
-                progressHUD.hide()
+                self.progressHUD.hide()
             } else if (result?.isCancelled)! {
                 // If process is cancel
                 NSLog("Cancelled")
-                progressHUD.hide()
+                self.progressHUD.hide()
             }
             else {
                 // Parameters for Graph Request
@@ -144,7 +145,7 @@ class LoginVC: UIViewController, UITextFieldDelegate {
                     }
                     
                     // Result
-                    print("Result: \(result)")
+                    //print("Result: \(result)")
                     
                     // Handle vars
                     if let result = result as? [String:Any], let email = result["email"] as? String, let fbId = result["id"] as? String {
@@ -160,8 +161,6 @@ class LoginVC: UIViewController, UITextFieldDelegate {
                         UserDefaults.standard.synchronize()
                         
                         appDelegate.getCharactersFromServer()
-                        //self.btn_clicked.sendActions(for: .touchUpInside)
-                        //self.performSegue(withIdentifier: "goToHome", sender: nil)
                         
                     }
                 }
@@ -170,7 +169,16 @@ class LoginVC: UIViewController, UITextFieldDelegate {
     }
     
     func charactersLoadignFinish() {
-        self.performSegue(withIdentifier: "goToHome", sender: nil)
-    }
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if Character.myCharacters.isEmpty {
+            let homeVC = storyboard.instantiateViewController(withIdentifier: "mainTabVC") as! UITabBarController
+            let viewController = storyboard.instantiateViewController(withIdentifier: "CharBuilderNavVC") as! UINavigationController
+            self.navigationController?.present(viewController, animated: true, completion: {
+                self.navigationController?.viewControllers = [homeVC]
+            })
+        } else {
+            self.performSegue(withIdentifier: "goToHome", sender: nil)
+        }
 
+    }
 }

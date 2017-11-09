@@ -30,11 +30,11 @@ class HomeVC: ParentVC {
         NotificationCenter.default.addObserver(self, selector: #selector(self.newCharacterAdded(_:)), name: NSNotification.Name(rawValue: "NewCharacterAddedNotification"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.characterUpdateNotification(_:)), name: NSNotification.Name(rawValue: "CharacterUpdateNotification"), object: nil)
         
-        if Character.loadingFinish {
-            if Character.myCharacters.isEmpty {
-                self.goToCreateNewChar(animation: false)
-            }
-        }
+//        if Character.loadingFinish {
+//            if Character.myCharacters.isEmpty {
+//                self.goToCreateNewChar(animation: false)
+//            }
+//        }
         
     }
     
