@@ -10,6 +10,8 @@ import UIKit
 import CoreData
 import FBSDKCoreKit
 import CloudKit
+import Fabric
+import Crashlytics
 
 let appDelegate = UIApplication.shared.delegate as! AppDelegate
 
@@ -25,7 +27,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.getCharactersFromServer()
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
 
-       
+        Fabric.with([Crashlytics.self])
+
         return true
     }
 
