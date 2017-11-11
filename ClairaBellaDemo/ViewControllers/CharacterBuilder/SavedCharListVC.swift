@@ -53,7 +53,18 @@ class SavedCharListVC: ParentVC {
         carouselView.bounces = false
         carouselView.reloadData()
         setCurrentChartInfo()
+        setTabbarItemImages()
     }
+    
+    
+    //This func should call from first controller of tabbar.
+    func setTabbarItemImages() {
+        for item in self.tabBarController!.tabBar.items!{
+            item.selectedImage = item.selectedImage?.withRenderingMode(.alwaysOriginal)
+            item.image = item.image?.withRenderingMode(.alwaysOriginal)
+        }
+    }
+    
     
     func setUI() {
         let carouselViewHeight = 275 * widthRatio
@@ -126,12 +137,30 @@ class SavedCharListVC: ParentVC {
             showHideEmptyItemsView()
             carouselView.insertItem(at: savedChars.count-1, animated: true)
             setCurrentChartInfo()
+
+            //Navigate to emoji screen for genereate emoji for newly created character.
+            if let index = self.emojisTabIndex {
+                characterForEmoji = newChar
+                
+                self.tabBarController?.selectedIndex = index
+            }
+
         }
     }
     
     func characterUpdateNotification(_ nf: Notification) {
         carouselView.reloadItem(at: carouselView.currentItemIndex, animated: true)
         setCurrentChartInfo()
+        
+        //Navigate to emoji screen for genereate emoji for updated character.
+        if let char = nf.userInfo?["updatedChar"] as? Character {
+            characterForEmoji = char
+            
+            if let index = self.emojisTabIndex {
+                self.tabBarController?.selectedIndex = index
+            }
+        }
+
     }
     
     func characterLoadingFinish(_ nf: Notification) {
@@ -139,6 +168,8 @@ class SavedCharListVC: ParentVC {
         carouselView.reloadData()
         showHideEmptyItemsView()
     }
+    
+    
     
 }
 
@@ -177,7 +208,9 @@ extension SavedCharListVC {
 
     @IBAction func btn_CreateEmojisClicked(_ sender: UIButton) {
         characterForEmoji = savedChars[carouselView.currentItemIndex]
-        self.tabBarController?.selectedIndex = 2
+        if let index = self.emojisTabIndex {
+            self.tabBarController?.selectedIndex = index
+        }
     }
     
     @IBAction func Btn_ShopeCollection(_ sender: UIButton) {
@@ -254,7 +287,8 @@ extension SavedCharListVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.row == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "characterListCell")!
+            let cell = tableView.dequeueReusableCell(withIdentifier: "characterListCell") as! CharacterListCell
+            cell.tblView?.reloadData()
             return cell
             
         } else if indexPath.row == 1 {
@@ -412,4 +446,22 @@ class TableCell: UITableViewCell {
         }
     }
 
+}
+
+
+
+//CharacterList cell for tableview.
+//Characters will showing vertically at My characters screen.
+
+class CharacterListCell: TableCell, UITableViewDataSource, UITableViewDelegate {
+    @IBOutlet var tblView: UITableView!
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return Character.myCharacters.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "characterCell") as! TableCell
+        return cell
+    }
 }

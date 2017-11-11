@@ -16,6 +16,7 @@ class ParentVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
         updateConstraints()
     }
     
@@ -32,4 +33,46 @@ class ParentVC: UIViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
+    
+    
+    //MARK:- Tabbar controller's index
+    var myCharactersTabIndex: Int? {
+        guard let tabControllers = self.tabBarController?.viewControllers else {return nil}
+        for (index,tabVC) in tabControllers.enumerated()  {
+            if tabVC.restorationIdentifier! == "MyCharactersVC" {
+                return index
+            }
+        }
+        return nil
+    }
+    
+    var postcardsTabIndex: Int? {
+        guard let tabControllers = self.tabBarController?.viewControllers else {return nil}
+        for (index,tabVC) in tabControllers.enumerated()  {
+            if tabVC.restorationIdentifier! == "PostcardsVC" {
+                return index
+            }
+        }
+        return nil
+    }
+
+    var emojisTabIndex: Int? {
+        guard let tabControllers = self.tabBarController?.viewControllers else {return nil}
+        for (index,tabVC) in tabControllers.enumerated()  {
+            if tabVC.restorationIdentifier! == "EmojisVC" {
+                return index
+            }
+        }
+        return nil
+    }
+    var shopTabIndex: Int? {
+        guard let tabControllers = self.tabBarController?.viewControllers else {return nil}
+        for (index,tabVC) in tabControllers.enumerated()  {
+            if tabVC.restorationIdentifier! == "ShopVC" {
+                return index
+            }
+        }
+        return nil
+    }
+
 }

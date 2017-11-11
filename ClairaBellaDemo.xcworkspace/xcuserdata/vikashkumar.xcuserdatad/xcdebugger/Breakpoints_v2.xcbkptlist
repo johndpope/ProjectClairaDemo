@@ -51,5 +51,101 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ClairaBellaDemo/ViewControllers/CharacterBuilder/SavedCharListVC.swift"
+            timestampString = "532120794.48913"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "154"
+            endingLineNumber = "154"
+            landmarkName = "characterUpdateNotification(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ClairaBellaDemo.SavedCharListVC.characterUpdateNotification (Foundation.Notification) -&gt; ()"
+                  moduleName = "ClairaBellaDemo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vikashkumar/Desktop/Projects/ClairaBella/SourceCode/ProjectClairaDemo/ClairaBellaDemo/ViewControllers/CharacterBuilder/SavedCharListVC.swift"
+                  timestampString = "532117679.829684"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "145"
+                  endingLineNumber = "145"
+                  offsetFromSymbolStart = "419">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ClairaBellaDemo.SavedCharListVC.characterUpdateNotification (Foundation.Notification) -&gt; ()"
+                  moduleName = "ClairaBellaDemo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vikashkumar/Desktop/Projects/ClairaBella/SourceCode/ProjectClairaDemo/ClairaBellaDemo/ViewControllers/CharacterBuilder/SavedCharListVC.swift"
+                  timestampString = "532117679.832772"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "145"
+                  endingLineNumber = "145"
+                  offsetFromSymbolStart = "931">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ClairaBellaDemo/ViewControllers/HomeVC/HomeVC.swift"
+            timestampString = "532117599.59217"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "117"
+            endingLineNumber = "117"
+            landmarkName = "btn_manageChar_clicked(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ClairaBellaDemo.HomeVC.btn_manageChar_clicked (__ObjC.UIButton) -&gt; ()"
+                  moduleName = "ClairaBellaDemo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vikashkumar/Desktop/Projects/ClairaBella/SourceCode/ProjectClairaDemo/ClairaBellaDemo/ViewControllers/HomeVC/HomeVC.swift"
+                  timestampString = "532117679.838264"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "117"
+                  endingLineNumber = "117"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ClairaBellaDemo.HomeVC.btn_manageChar_clicked (__ObjC.UIButton) -&gt; ()"
+                  moduleName = "ClairaBellaDemo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vikashkumar/Desktop/Projects/ClairaBella/SourceCode/ProjectClairaDemo/ClairaBellaDemo/ViewControllers/HomeVC/HomeVC.swift"
+                  timestampString = "532117679.840367"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "117"
+                  endingLineNumber = "117"
+                  offsetFromSymbolStart = "101">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>
