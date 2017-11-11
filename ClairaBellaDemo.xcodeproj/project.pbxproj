@@ -3633,6 +3633,8 @@
 		135746931FA3143C00187CFA /* ST028.png in Resources */ = {isa = PBXBuildFile; fileRef = 135732811FA30EEF00187CFA /* ST028.png */; };
 		135746941FA3143C00187CFA /* ST029.png in Resources */ = {isa = PBXBuildFile; fileRef = 135732821FA30EEF00187CFA /* ST029.png */; };
 		135746951FA3143C00187CFA /* ST030.png in Resources */ = {isa = PBXBuildFile; fileRef = 135732831FA30EEF00187CFA /* ST030.png */; };
+		139C0E961FB5D69600B9F7FE /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 139C0E941FB5D69500B9F7FE /* Crashlytics.framework */; };
+		139C0E971FB5D69700B9F7FE /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 139C0E951FB5D69600B9F7FE /* Fabric.framework */; };
 		13A104C81F87904600F40FCD /* Keyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13A104C71F87904600F40FCD /* Keyboard.storyboard */; };
 		13E1D9451F7CD3D0006907B1 /* CharacterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13E1D9431F7CCCFA006907B1 /* CharacterCell.xib */; };
 		67A1F6B28B7089DC15FA837D /* Pods_ClairaBellaDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35A99DE8EB24D02764ED70FD /* Pods_ClairaBellaDemo.framework */; };
@@ -5943,6 +5945,8 @@
 		135738431FA30F0B00187CFA /* RH001.svg */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = RH001.svg; sourceTree = "<group>"; };
 		137A78BA1F8CF580001CBAA9 /* ClairaBellaDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ClairaBellaDemo.entitlements; sourceTree = "<group>"; };
 		137A78BB1F8CF5B3001CBAA9 /* ClaireaBella.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ClaireaBella.entitlements; sourceTree = "<group>"; };
+		139C0E941FB5D69500B9F7FE /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		139C0E951FB5D69600B9F7FE /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		13A104C71F87904600F40FCD /* Keyboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Keyboard.storyboard; sourceTree = "<group>"; };
 		13E1D9431F7CCCFA006907B1 /* CharacterCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CharacterCell.xib; sourceTree = "<group>"; };
 		35A99DE8EB24D02764ED70FD /* Pods_ClairaBellaDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ClairaBellaDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -6084,7 +6088,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				139C0E961FB5D69600B9F7FE /* Crashlytics.framework in Frameworks */,
 				67A1F6B28B7089DC15FA837D /* Pods_ClairaBellaDemo.framework in Frameworks */,
+				139C0E971FB5D69700B9F7FE /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -8624,6 +8630,8 @@
 		795421561F460DE500DBBBE0 = {
 			isa = PBXGroup;
 			children = (
+				139C0E941FB5D69500B9F7FE /* Crashlytics.framework */,
+				139C0E951FB5D69600B9F7FE /* Fabric.framework */,
 				795421611F460DE500DBBBE0 /* ClairaBellaDemo */,
 				79244E021F7AB63700741D69 /* ClaireaBella */,
 				795421601F460DE500DBBBE0 /* Products */,
@@ -8692,6 +8700,7 @@
 				E3D380639F058B03213650C4 /* [CP] Embed Pods Frameworks */,
 				E93FCDFE0A36DA8089701B1C /* [CP] Copy Pods Resources */,
 				79244E0C1F7AB63700741D69 /* Embed App Extensions */,
+				139C0E931FB5D5F100B9F7FE /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -12472,6 +12481,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		139C0E931FB5D5F100B9F7FE /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run bc0b7b92a339f865a054e14406b9b0a79f5f39f3 5200e159d55b2d2e5a2d90254286bd8be954a9767559495d615bc4ae127c5399";
+		};
 		4935836107D5C221296F4965 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -12756,6 +12778,10 @@
 				CODE_SIGN_ENTITLEMENTS = ClairaBellaDemo/ClairaBellaDemo.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = LCSDGY3TVW;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = ClairaBellaDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.unitygames.Claireabella;
@@ -12775,6 +12801,10 @@
 				CODE_SIGN_ENTITLEMENTS = ClairaBellaDemo/ClairaBellaDemo.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = LCSDGY3TVW;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = ClairaBellaDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.unitygames.Claireabella;
