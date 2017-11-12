@@ -53,17 +53,10 @@ class SavedCharListVC: ParentVC {
         carouselView.bounces = false
         carouselView.reloadData()
         setCurrentChartInfo()
-        setTabbarItemImages()
     }
     
     
     //This func should call from first controller of tabbar.
-    func setTabbarItemImages() {
-        for item in self.tabBarController!.tabBar.items!{
-            item.selectedImage = item.selectedImage?.withRenderingMode(.alwaysOriginal)
-            item.image = item.image?.withRenderingMode(.alwaysOriginal)
-        }
-    }
     
     
     func setUI() {
@@ -77,10 +70,10 @@ class SavedCharListVC: ParentVC {
         headerviewFrame.size.height *= widthRatio
         tblHeaderView.frame = headerviewFrame
         
-        btnNewChar.layer.cornerRadius = 3
-        btnNewChar.layer.borderColor = UIColor.white.cgColor
-        btnNewChar.layer.borderWidth = 1
-        btnNewChar.clipsToBounds = true
+        //btnNewChar.layer.cornerRadius = 3
+        //btnNewChar.layer.borderColor = UIColor.white.cgColor
+        //btnNewChar.layer.borderWidth = 1
+        //btnNewChar.clipsToBounds = true
     }
     
     
@@ -465,3 +458,6 @@ class CharacterListCell: TableCell, UITableViewDataSource, UITableViewDelegate {
         return cell
     }
 }
+
+
+

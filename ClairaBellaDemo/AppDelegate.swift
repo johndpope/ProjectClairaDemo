@@ -23,7 +23,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         CharacterHTMLBuilder.shared.loadBuildData()
-        self.setTabbarAppearance()
         self.getCharactersFromServer()
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
 
@@ -32,15 +31,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
-    func setTabbarAppearance() {
-        UITabBar.appearance().tintColor = UIColor(red: 225.0/255.0, green: 57.0/255.0, blue: 169.0/255.0, alpha: 1.0)
-        
-        UITabBarItem.appearance().badgeColor = UIColor(red: 74.0/255.0, green: 144.0/255.0, blue: 226.0/255.0, alpha: 1.0)
-        
-        UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName:UIColor(red: 225.0/255.0, green: 57.0/255.0, blue: 169.0/255.0, alpha: 1.0)], for: .selected)
-        UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.lightGray], for: .normal)
-
-    }
     
     func applicationWillResignActive(_ application: UIApplication) {
         FBSDKAppEvents.activateApp()
