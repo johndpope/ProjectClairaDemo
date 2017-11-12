@@ -103,7 +103,27 @@ class LoginVC: UIViewController, UITextFieldDelegate {
 
     @IBAction func loginBtnClick(_ sender: UIButton) {
         if isValidate() {
-            //Call login api
+            self.view.addSubview(progressHUD)
+            progressHUD.show()
+
+            let email = txtEmail.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+
+            let password = txtPassword.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+
+            let params = ["password_attempt" : password]
+            APICall.shared.loginUser_APICall(email: email, params: params, block: { (response,success) in
+                if success {
+                    let name = ""//firstname + " " + lastName
+                    let result = ["name" : name, "email": email]
+                    UserDefaults(suiteName: appGroupName)!.setValue(result, forKey: "user_details")
+                    //UserDefaults.standard.setValue(result, forKey: "user_details")
+                    //UserDefaults.standard.synchronize()
+                    //self.btn_pressed.sendActions(for: .touchUpInside)
+                    appDelegate.getCharactersFromServer()
+                } else {
+                    self.progressHUD.hide()
+                }
+            })
         }
     }
     

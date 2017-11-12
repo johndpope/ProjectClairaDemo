@@ -28,6 +28,12 @@
         <array key="NothingYouCouldDoBold.ttf">
             <string>NothingYouCouldDoBold</string>
         </array>
+        <array key="OpenSans-Regular.ttf">
+            <string>OpenSans</string>
+        </array>
+        <array key="OpenSans-Semibold.ttf">
+            <string>OpenSans-Semibold</string>
+        </array>
     </customFonts>
     <scenes>
         <!--Character BuilderVC-->
@@ -385,9 +391,10 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QEH-da-5Yq">
                                 <subviews>
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="HeaderBg" translatesAutoresizingMaskIntoConstraints="NO" id="tby-Oq-ciM"/>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Postcards" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aCK-Mx-31e">
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="textColor" red="0.8784313725490196" green="0.062745098039215685" blue="0.61568627450980395" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="S8d-sd-Mw8">
@@ -407,13 +414,17 @@
                                         </constraints>
                                     </stackView>
                                 </subviews>
-                                <color key="backgroundColor" red="0.87843137250000003" green="0.062745098040000002" blue="0.61568627450000002" alpha="0.93669658690000002" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="64" id="Bmm-h6-kKr"/>
+                                    <constraint firstAttribute="bottom" secondItem="tby-Oq-ciM" secondAttribute="bottom" id="Oqa-A4-dKV"/>
                                     <constraint firstAttribute="bottom" secondItem="aCK-Mx-31e" secondAttribute="bottom" constant="12" id="SbN-rV-seZ"/>
                                     <constraint firstItem="aCK-Mx-31e" firstAttribute="centerX" secondItem="QEH-da-5Yq" secondAttribute="centerX" id="Uoq-3Z-sYR"/>
+                                    <constraint firstItem="tby-Oq-ciM" firstAttribute="leading" secondItem="QEH-da-5Yq" secondAttribute="leading" id="diY-1s-42f"/>
                                     <constraint firstAttribute="bottom" secondItem="S8d-sd-Mw8" secondAttribute="bottom" id="fG0-27-7JZ"/>
+                                    <constraint firstItem="tby-Oq-ciM" firstAttribute="top" secondItem="QEH-da-5Yq" secondAttribute="top" id="kf1-Ra-NlJ"/>
                                     <constraint firstAttribute="trailing" secondItem="S8d-sd-Mw8" secondAttribute="trailing" id="tBQ-YM-hrl"/>
+                                    <constraint firstAttribute="trailing" secondItem="tby-Oq-ciM" secondAttribute="trailing" id="wnp-7s-W83"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -444,16 +455,21 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oPw-sb-ZmI">
                                 <subviews>
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="HeaderBg" translatesAutoresizingMaskIntoConstraints="NO" id="0yF-u1-sg8"/>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ClairaBella" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ikl-Np-hlo">
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="textColor" red="0.8784313725490196" green="0.062745098039215685" blue="0.61568627450980395" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.87843137250000003" green="0.062745098040000002" blue="0.61568627450000002" alpha="0.93669658690000002" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="Ikl-Np-hlo" secondAttribute="bottom" constant="12" id="38J-N6-KZe"/>
+                                    <constraint firstAttribute="bottom" secondItem="0yF-u1-sg8" secondAttribute="bottom" id="GtQ-iW-EKX"/>
+                                    <constraint firstItem="0yF-u1-sg8" firstAttribute="leading" secondItem="oPw-sb-ZmI" secondAttribute="leading" id="NiG-MG-lgr"/>
+                                    <constraint firstAttribute="trailing" secondItem="0yF-u1-sg8" secondAttribute="trailing" id="O1E-lS-M80"/>
                                     <constraint firstItem="Ikl-Np-hlo" firstAttribute="centerX" secondItem="oPw-sb-ZmI" secondAttribute="centerX" id="QUk-rG-StM"/>
+                                    <constraint firstItem="0yF-u1-sg8" firstAttribute="top" secondItem="oPw-sb-ZmI" secondAttribute="top" id="lRZ-Tr-Z07"/>
                                     <constraint firstAttribute="height" constant="64" id="rb8-hT-fg3"/>
                                 </constraints>
                             </view>
@@ -1053,9 +1069,10 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vvR-uW-XD6">
                                 <subviews>
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="HeaderBg" translatesAutoresizingMaskIntoConstraints="NO" id="05t-AP-G8E"/>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create Emojis" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aAz-zv-1lN">
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="textColor" red="0.8784313725490196" green="0.062745098039215685" blue="0.61568627450980395" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wat-ji-ti9">
@@ -1069,12 +1086,16 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.87843137250000003" green="0.062745098040000002" blue="0.61568627450000002" alpha="0.93669658690000002" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="05t-AP-G8E" firstAttribute="leading" secondItem="vvR-uW-XD6" secondAttribute="leading" id="2SK-HK-dXE"/>
+                                    <constraint firstAttribute="trailing" secondItem="05t-AP-G8E" secondAttribute="trailing" id="3u6-3Q-2Qd"/>
                                     <constraint firstAttribute="height" constant="64" id="D5Y-KJ-wH7"/>
                                     <constraint firstAttribute="trailing" secondItem="wat-ji-ti9" secondAttribute="trailing" constant="8" id="LK1-gy-KY2"/>
+                                    <constraint firstItem="05t-AP-G8E" firstAttribute="top" secondItem="vvR-uW-XD6" secondAttribute="top" constant="-4" id="Ske-2Y-v9q"/>
                                     <constraint firstAttribute="bottom" secondItem="aAz-zv-1lN" secondAttribute="bottom" constant="12" id="WNd-K4-dOi"/>
                                     <constraint firstItem="aAz-zv-1lN" firstAttribute="centerX" secondItem="vvR-uW-XD6" secondAttribute="centerX" id="e2O-I9-ChN"/>
+                                    <constraint firstAttribute="bottom" secondItem="05t-AP-G8E" secondAttribute="bottom" id="t9G-s6-d5a"/>
                                     <constraint firstAttribute="bottom" secondItem="wat-ji-ti9" secondAttribute="bottom" id="wfg-jk-WD3"/>
                                 </constraints>
                             </view>
@@ -1616,18 +1637,18 @@ for each of your friends?</string>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ANP-eu-Xhd">
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="jhB-aj-Y00">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="465"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="527"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="catwalkBanner" translatesAutoresizingMaskIntoConstraints="NO" id="hn5-II-x9r">
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="320" id="A7T-2W-rsb"/>
+                                                <constraint firstAttribute="height" constant="290" id="A7T-2W-rsb"/>
                                             </constraints>
                                         </imageView>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sla-EO-vOU" customClass="iCarousel">
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="320" id="Y6N-vI-LrU"/>
+                                                <constraint firstAttribute="height" constant="300" id="Y6N-vI-LrU"/>
                                             </constraints>
                                             <connections>
                                                 <outlet property="dataSource" destination="LjG-Tk-0tP" id="e10-Zc-6i2"/>
@@ -1636,10 +1657,9 @@ for each of your friends?</string>
                                         </view>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cG9-M4-UW8">
                                             <constraints>
-                                                <constraint firstAttribute="width" secondItem="cG9-M4-UW8" secondAttribute="height" multiplier="281:59" id="1KG-co-t0F"/>
-                                                <constraint firstAttribute="width" constant="281" id="2f3-iW-3Np"/>
+                                                <constraint firstAttribute="height" constant="48" id="5md-Bo-IZt"/>
                                             </constraints>
-                                            <state key="normal" image="btnMakeEmoji"/>
+                                            <state key="normal" title="View CharacterName Emojis" backgroundImage="btnBack2"/>
                                             <connections>
                                                 <action selector="btn_CreateEmojisClicked:" destination="LjG-Tk-0tP" eventType="touchUpInside" id="n3c-wx-yxf"/>
                                             </connections>
@@ -1699,36 +1719,9 @@ for each of your friends?</string>
                                                         <constraint firstItem="Nf2-my-foh" firstAttribute="centerX" secondItem="A3g-r7-Wec" secondAttribute="centerX" id="rXl-AO-Z5s"/>
                                                     </constraints>
                                                 </view>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nQk-Mr-ak4">
-                                                    <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="doq-rC-uua">
-                                                            <constraints>
-                                                                <constraint firstAttribute="width" secondItem="doq-rC-uua" secondAttribute="height" multiplier="1:1" id="MGJ-cr-oed"/>
-                                                                <constraint firstAttribute="width" constant="55" id="POQ-zW-sKh"/>
-                                                            </constraints>
-                                                            <state key="normal" image="Btn_Share"/>
-                                                            <connections>
-                                                                <action selector="shareChar_btnClicked:" destination="LjG-Tk-0tP" eventType="touchUpInside" id="AhJ-CO-Gvb"/>
-                                                                <segue destination="Hbd-vc-nHW" kind="show" identifier="ToShareVCSegue" id="6L6-fm-wtS"/>
-                                                            </connections>
-                                                        </button>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Share" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cZ6-iX-QFx">
-                                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                    </subviews>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="bottom" secondItem="cZ6-iX-QFx" secondAttribute="bottom" id="DON-xO-D6A"/>
-                                                        <constraint firstItem="doq-rC-uua" firstAttribute="top" secondItem="nQk-Mr-ak4" secondAttribute="top" id="LI4-dj-0yd"/>
-                                                        <constraint firstItem="cZ6-iX-QFx" firstAttribute="centerX" secondItem="nQk-Mr-ak4" secondAttribute="centerX" id="yGI-9Q-nQO"/>
-                                                        <constraint firstItem="doq-rC-uua" firstAttribute="centerX" secondItem="nQk-Mr-ak4" secondAttribute="centerX" id="yoy-xD-Tno"/>
-                                                    </constraints>
-                                                </view>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="170" id="HfK-HC-68i"/>
+                                                <constraint firstAttribute="width" constant="100" id="HfK-HC-68i"/>
                                                 <constraint firstAttribute="height" constant="70" id="yZz-K3-exS"/>
                                             </constraints>
                                         </stackView>
@@ -1755,35 +1748,66 @@ for each of your friends?</string>
                                             <state key="normal" image="checkboxUncheckd"/>
                                             <state key="selected" image="checkboxCheckd"/>
                                         </button>
+                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="mmk-hv-jdp">
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KXx-TY-dlD">
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="17"/>
+                                                    <state key="normal" title="New">
+                                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="createNewChar_btnClicked:" destination="LjG-Tk-0tP" eventType="touchUpInside" id="xDA-yk-6QN"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zzn-17-YFx">
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="17"/>
+                                                    <state key="normal" title="Share">
+                                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="shareChar_btnClicked:" destination="LjG-Tk-0tP" eventType="touchUpInside" id="TTa-Tk-4qU"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="44" id="7xO-0G-bef"/>
+                                            </constraints>
+                                        </stackView>
                                     </subviews>
                                     <color key="backgroundColor" red="0.91764705882352937" green="0.77254901960784317" blue="0.90980392156862744" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstItem="8fa-Hp-5cn" firstAttribute="top" secondItem="LuV-9v-M1u" secondAttribute="bottom" constant="6" id="EKp-c0-jPL"/>
-                                        <constraint firstItem="cG9-M4-UW8" firstAttribute="centerX" secondItem="jhB-aj-Y00" secondAttribute="centerX" id="GHs-u4-Cgm"/>
-                                        <constraint firstItem="cG9-M4-UW8" firstAttribute="top" secondItem="hn5-II-x9r" secondAttribute="bottom" constant="-10" id="GUc-pU-Lag"/>
                                         <constraint firstItem="Lwx-Fv-qBV" firstAttribute="top" secondItem="8fa-Hp-5cn" secondAttribute="bottom" constant="12" id="HhR-32-4DJ"/>
                                         <constraint firstItem="Sla-EO-vOU" firstAttribute="leading" secondItem="jhB-aj-Y00" secondAttribute="leading" id="JUp-SZ-0mX"/>
                                         <constraint firstItem="hn5-II-x9r" firstAttribute="top" secondItem="jhB-aj-Y00" secondAttribute="top" id="KVH-in-fND"/>
                                         <constraint firstItem="8fa-Hp-5cn" firstAttribute="leading" secondItem="jhB-aj-Y00" secondAttribute="leading" constant="22" id="N0E-uo-JH4"/>
+                                        <constraint firstAttribute="trailing" secondItem="mmk-hv-jdp" secondAttribute="trailing" constant="22" id="NBh-6Q-LFb"/>
                                         <constraint firstItem="Sla-EO-vOU" firstAttribute="top" secondItem="jhB-aj-Y00" secondAttribute="top" id="OiB-sh-v0o"/>
-                                        <constraint firstAttribute="bottom" secondItem="sZo-0u-wTv" secondAttribute="bottom" constant="4" id="Ovj-9x-sY7"/>
                                         <constraint firstItem="Lwx-Fv-qBV" firstAttribute="centerY" secondItem="4aU-x5-BIV" secondAttribute="centerY" id="UCG-hg-OLz"/>
+                                        <constraint firstItem="LuV-9v-M1u" firstAttribute="top" secondItem="Sla-EO-vOU" secondAttribute="bottom" constant="20" id="XoM-Be-ZvG"/>
                                         <constraint firstAttribute="trailing" secondItem="hn5-II-x9r" secondAttribute="trailing" id="aCZ-KA-OJG"/>
                                         <constraint firstItem="Lwx-Fv-qBV" firstAttribute="leading" secondItem="4aU-x5-BIV" secondAttribute="trailing" id="aPh-bW-lSz"/>
                                         <constraint firstItem="4aU-x5-BIV" firstAttribute="leading" secondItem="jhB-aj-Y00" secondAttribute="leading" constant="13" id="bny-Hv-k4Z"/>
-                                        <constraint firstAttribute="trailing" secondItem="sZo-0u-wTv" secondAttribute="trailing" constant="11" id="cog-Yc-xch"/>
+                                        <constraint firstAttribute="trailing" secondItem="sZo-0u-wTv" secondAttribute="trailing" constant="22" id="cog-Yc-xch"/>
                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="8fa-Hp-5cn" secondAttribute="trailing" constant="20" symbolic="YES" id="cxw-Dw-NM1"/>
+                                        <constraint firstAttribute="trailing" secondItem="cG9-M4-UW8" secondAttribute="trailing" constant="22" id="ehD-Bv-XcR"/>
                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="LuV-9v-M1u" secondAttribute="trailing" constant="20" symbolic="YES" id="iop-gA-mFS"/>
                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Lwx-Fv-qBV" secondAttribute="trailing" constant="20" symbolic="YES" id="kM6-H3-Hov"/>
-                                        <constraint firstAttribute="bottom" secondItem="4aU-x5-BIV" secondAttribute="bottom" constant="6" id="m0S-QE-I9D"/>
+                                        <constraint firstItem="sZo-0u-wTv" firstAttribute="top" secondItem="Sla-EO-vOU" secondAttribute="bottom" constant="15" id="oAQ-ia-b5G"/>
+                                        <constraint firstItem="cG9-M4-UW8" firstAttribute="leading" secondItem="jhB-aj-Y00" secondAttribute="leading" constant="22" id="pri-Ts-3uZ"/>
                                         <constraint firstItem="LuV-9v-M1u" firstAttribute="leading" secondItem="jhB-aj-Y00" secondAttribute="leading" constant="22" id="qjV-EY-ZdU"/>
                                         <constraint firstItem="hn5-II-x9r" firstAttribute="leading" secondItem="jhB-aj-Y00" secondAttribute="leading" id="rl8-Xu-lxV"/>
                                         <constraint firstAttribute="trailing" secondItem="Sla-EO-vOU" secondAttribute="trailing" id="sIj-Xe-fyV"/>
+                                        <constraint firstItem="mmk-hv-jdp" firstAttribute="top" secondItem="cG9-M4-UW8" secondAttribute="bottom" constant="8" id="xAW-ni-M2S"/>
+                                        <constraint firstItem="mmk-hv-jdp" firstAttribute="leading" secondItem="jhB-aj-Y00" secondAttribute="leading" constant="22" id="xXg-Ml-gPN"/>
+                                        <constraint firstAttribute="bottom" secondItem="mmk-hv-jdp" secondAttribute="bottom" constant="10" id="zOh-mP-t9U"/>
                                     </constraints>
                                 </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="createCharBtnCell" rowHeight="300" id="xzJ-b0-Let" customClass="TableCell" customModule="ClairaBellaDemo" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="493" width="375" height="300"/>
+                                        <rect key="frame" x="0.0" y="555" width="375" height="300"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xzJ-b0-Let" id="Ga3-do-XAX">
                                             <frame key="frameInset" width="375" height="300"/>
@@ -1825,7 +1849,7 @@ for each of your friends?</string>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="bagAdsCell" rowHeight="450" id="q0N-FG-HZz">
-                                        <rect key="frame" x="0.0" y="793" width="375" height="450"/>
+                                        <rect key="frame" x="0.0" y="855" width="375" height="450"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="q0N-FG-HZz" id="t1M-QI-APO">
                                             <frame key="frameInset" width="375" height="450"/>
@@ -1862,7 +1886,7 @@ for each of your friends?</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="productsCell" rowHeight="585" id="Bso-To-hno" customClass="TableCell" customModule="ClairaBellaDemo" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="1243" width="375" height="585"/>
+                                        <rect key="frame" x="0.0" y="1305" width="375" height="585"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Bso-To-hno" id="OR0-xy-aGC">
                                             <frame key="frameInset" width="375" height="585"/>
@@ -2084,7 +2108,7 @@ for each of your friends?</string>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="personalizedAdsCell" rowHeight="300" id="NE4-fr-YpC">
-                                        <rect key="frame" x="0.0" y="1828" width="375" height="300"/>
+                                        <rect key="frame" x="0.0" y="1890" width="375" height="300"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="NE4-fr-YpC" id="L4y-U7-emp">
                                             <frame key="frameInset" width="375" height="300"/>
@@ -2108,7 +2132,7 @@ for each of your friends?</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="characterListCell" rowHeight="300" id="Ypl-f5-E7V" customClass="CharacterListCell" customModule="ClairaBellaDemo" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="2128" width="375" height="300"/>
+                                        <rect key="frame" x="0.0" y="2190" width="375" height="300"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ypl-f5-E7V" id="uwo-JE-cup">
                                             <frame key="frameInset" width="375" height="300"/>
@@ -2120,14 +2144,39 @@ for each of your friends?</string>
                                                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fzG-AJ-yiq">
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             <prototypes>
-                                                                <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="120" id="N0Q-ss-x6Z">
-                                                                    <rect key="frame" x="0.0" y="28" width="363" height="120"/>
+                                                                <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="characterCell" rowHeight="120" id="N0Q-ss-x6Z" customClass="CharacterCell" customModule="ClairaBellaDemo" customModuleProvider="target">
+                                                                    <rect key="frame" x="0.0" y="28" width="345" height="120"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="N0Q-ss-x6Z" id="W0L-9p-LHT">
-                                                                        <frame key="frameInset" width="363" height="119"/>
+                                                                        <frame key="frameInset" width="345" height="119"/>
                                                                         <autoresizingMask key="autoresizingMask"/>
                                                                         <subviews>
-                                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rnb-2h-1xs">
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Character Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eud-Un-Jfh">
+                                                                                <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="16"/>
+                                                                                <nil key="textColor"/>
+                                                                                <nil key="highlightedColor"/>
+                                                                            </label>
+                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dHm-w1-ENR">
+                                                                                <constraints>
+                                                                                    <constraint firstAttribute="height" constant="40" id="19z-ko-sta"/>
+                                                                                    <constraint firstAttribute="width" constant="80" id="9iY-kS-KlP"/>
+                                                                                </constraints>
+                                                                                <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="15"/>
+                                                                                <state key="normal" title="Emoji's" backgroundImage="btnBack2">
+                                                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                                </state>
+                                                                            </button>
+                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IXo-Aj-FAA">
+                                                                                <constraints>
+                                                                                    <constraint firstAttribute="width" constant="46" id="Owm-lb-SNN"/>
+                                                                                    <constraint firstAttribute="height" constant="30" id="vP1-Pi-csn"/>
+                                                                                </constraints>
+                                                                                <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="15"/>
+                                                                                <state key="normal" title="Edit">
+                                                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                                                </state>
+                                                                            </button>
+                                                                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rnb-2h-1xs">
                                                                                 <subviews>
                                                                                     <webView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xOw-b9-thl">
                                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -2142,25 +2191,43 @@ for each of your friends?</string>
                                                                                     <constraint firstAttribute="bottom" secondItem="xOw-b9-thl" secondAttribute="bottom" id="nDM-Ye-Uj1"/>
                                                                                     <constraint firstAttribute="width" secondItem="rnb-2h-1xs" secondAttribute="height" multiplier="1:1" id="tMk-NS-E8t"/>
                                                                                 </constraints>
+                                                                                <userDefinedRuntimeAttributes>
+                                                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                                        <integer key="value" value="50"/>
+                                                                                    </userDefinedRuntimeAttribute>
+                                                                                </userDefinedRuntimeAttributes>
                                                                             </view>
                                                                         </subviews>
                                                                         <constraints>
+                                                                            <constraint firstAttribute="bottom" secondItem="dHm-w1-ENR" secondAttribute="bottom" constant="15" id="66P-4I-g84"/>
+                                                                            <constraint firstItem="Eud-Un-Jfh" firstAttribute="top" secondItem="W0L-9p-LHT" secondAttribute="top" constant="20" id="Bde-Qm-CeA"/>
+                                                                            <constraint firstItem="IXo-Aj-FAA" firstAttribute="leading" secondItem="dHm-w1-ENR" secondAttribute="trailing" constant="15" id="JRi-Oa-TnU"/>
+                                                                            <constraint firstItem="dHm-w1-ENR" firstAttribute="leading" secondItem="rnb-2h-1xs" secondAttribute="trailing" constant="20" id="Qns-Mt-RyD"/>
                                                                             <constraint firstItem="rnb-2h-1xs" firstAttribute="centerY" secondItem="W0L-9p-LHT" secondAttribute="centerY" id="Ysd-o3-gcj"/>
                                                                             <constraint firstItem="rnb-2h-1xs" firstAttribute="leading" secondItem="W0L-9p-LHT" secondAttribute="leading" constant="8" id="bp3-1t-lYr"/>
+                                                                            <constraint firstItem="Eud-Un-Jfh" firstAttribute="leading" secondItem="rnb-2h-1xs" secondAttribute="trailing" constant="20" id="dZC-f2-pMF"/>
+                                                                            <constraint firstAttribute="bottom" secondItem="IXo-Aj-FAA" secondAttribute="bottom" constant="20" id="fBe-0i-7gc"/>
                                                                         </constraints>
                                                                     </tableViewCellContentView>
+                                                                    <connections>
+                                                                        <outlet property="lblCharacterName" destination="Eud-Un-Jfh" id="kOB-kT-c0y"/>
+                                                                    </connections>
                                                                 </tableViewCell>
                                                             </prototypes>
+                                                            <connections>
+                                                                <outlet property="dataSource" destination="Ypl-f5-E7V" id="rmC-yE-Wzp"/>
+                                                                <outlet property="delegate" destination="Ypl-f5-E7V" id="r7K-57-FLz"/>
+                                                            </connections>
                                                         </tableView>
                                                     </subviews>
                                                     <color key="backgroundColor" red="0.91764705879999997" green="0.7725490196" blue="0.90980392160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
-                                                        <constraint firstItem="fzG-AJ-yiq" firstAttribute="top" secondItem="LQx-hD-alF" secondAttribute="top" id="0gL-XG-lLh"/>
+                                                        <constraint firstItem="fzG-AJ-yiq" firstAttribute="top" secondItem="LQx-hD-alF" secondAttribute="top" constant="10" id="0gL-XG-lLh"/>
                                                         <constraint firstItem="NZR-Uo-NEu" firstAttribute="top" secondItem="LQx-hD-alF" secondAttribute="top" id="Ecz-Xp-e79"/>
                                                         <constraint firstAttribute="bottom" secondItem="NZR-Uo-NEu" secondAttribute="bottom" id="I30-Ux-Pip"/>
-                                                        <constraint firstItem="fzG-AJ-yiq" firstAttribute="leading" secondItem="LQx-hD-alF" secondAttribute="leading" constant="6" id="Lao-iT-euE"/>
-                                                        <constraint firstAttribute="bottom" secondItem="fzG-AJ-yiq" secondAttribute="bottom" id="RG7-he-WZk"/>
-                                                        <constraint firstAttribute="trailing" secondItem="fzG-AJ-yiq" secondAttribute="trailing" constant="6" id="ayT-FI-rnF"/>
+                                                        <constraint firstItem="fzG-AJ-yiq" firstAttribute="leading" secondItem="LQx-hD-alF" secondAttribute="leading" constant="15" id="Lao-iT-euE"/>
+                                                        <constraint firstAttribute="bottom" secondItem="fzG-AJ-yiq" secondAttribute="bottom" constant="10" id="RG7-he-WZk"/>
+                                                        <constraint firstAttribute="trailing" secondItem="fzG-AJ-yiq" secondAttribute="trailing" constant="15" id="ayT-FI-rnF"/>
                                                         <constraint firstItem="NZR-Uo-NEu" firstAttribute="leading" secondItem="LQx-hD-alF" secondAttribute="leading" constant="6" id="smf-ZS-swO"/>
                                                         <constraint firstAttribute="trailing" secondItem="NZR-Uo-NEu" secondAttribute="trailing" constant="6" id="xkq-tm-F7S"/>
                                                     </constraints>
@@ -2173,6 +2240,9 @@ for each of your friends?</string>
                                                 <constraint firstAttribute="trailing" secondItem="LQx-hD-alF" secondAttribute="trailing" id="r5b-af-yJ4"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="tblView" destination="fzG-AJ-yiq" id="NMr-qW-PJl"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -2182,9 +2252,10 @@ for each of your friends?</string>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Mh-Lm-Cj1">
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Saved Characters" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YYN-W7-gFI">
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="HeaderBg" translatesAutoresizingMaskIntoConstraints="NO" id="LJh-TN-hQN"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Characters" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YYN-W7-gFI">
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="textColor" red="0.8784313725490196" green="0.062745098039215685" blue="0.61568627450980395" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="0EW-Ui-7ye">
@@ -2204,16 +2275,21 @@ for each of your friends?</string>
                                         </constraints>
                                     </stackView>
                                 </subviews>
-                                <color key="backgroundColor" red="0.8784313725490196" green="0.062745098039215685" blue="0.61568627450980395" alpha="0.93669658690000002" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="LJh-TN-hQN" firstAttribute="top" secondItem="4Mh-Lm-Cj1" secondAttribute="top" id="3R2-El-WqS"/>
+                                    <constraint firstAttribute="trailing" secondItem="LJh-TN-hQN" secondAttribute="trailing" id="9xF-JM-mRa"/>
                                     <constraint firstAttribute="bottom" secondItem="YYN-W7-gFI" secondAttribute="bottom" constant="12" id="AFk-7X-JtL"/>
                                     <constraint firstAttribute="trailing" secondItem="0EW-Ui-7ye" secondAttribute="trailing" id="LJ5-rv-TlI"/>
                                     <constraint firstAttribute="height" constant="64" id="UsE-mH-q1W"/>
+                                    <constraint firstItem="LJh-TN-hQN" firstAttribute="leading" secondItem="4Mh-Lm-Cj1" secondAttribute="leading" id="iYZ-jd-X40"/>
                                     <constraint firstAttribute="bottom" secondItem="0EW-Ui-7ye" secondAttribute="bottom" id="n4g-b8-HCS"/>
+                                    <constraint firstAttribute="bottom" secondItem="LJh-TN-hQN" secondAttribute="bottom" id="r3Z-it-PC9"/>
                                     <constraint firstItem="YYN-W7-gFI" firstAttribute="centerX" secondItem="4Mh-Lm-Cj1" secondAttribute="centerX" id="z0e-Hm-rcK"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OvR-X9-Hdc" customClass="IndicatorView" customModule="ClairaBellaDemo" customModuleProvider="target">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OvR-X9-Hdc" customClass="IndicatorView" customModule="ClairaBellaDemo" customModuleProvider="target">
+                                <frame key="frameInset" minX="148" minY="475" width="80" height="80"/>
                                 <subviews>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Urz-iV-WPS"/>
                                 </subviews>
@@ -2248,6 +2324,9 @@ for each of your friends?</string>
                     </view>
                     <navigationItem key="navigationItem" id="uID-FQ-1cF"/>
                     <connections>
+                        <outlet property="btnCreateEmojis" destination="cG9-M4-UW8" id="01J-Ka-ikD"/>
+                        <outlet property="btnNewChar" destination="KXx-TY-dlD" id="alV-q1-Hvd"/>
+                        <outlet property="btnShare" destination="Zzn-17-YFx" id="qOF-MW-uXF"/>
                         <outlet property="carouselView" destination="Sla-EO-vOU" id="zOQ-Ca-BWh"/>
                         <outlet property="checkBox" destination="4aU-x5-BIV" id="IiE-0Z-PYu"/>
                         <outlet property="emptyCharactersView" destination="gQ6-7i-irE" id="gCb-bL-pTl"/>
@@ -2260,12 +2339,16 @@ for each of your friends?</string>
                         <outletCollection property="horizontalConstraints" destination="Y6N-vI-LrU" collectionClass="NSMutableArray" id="y23-A0-6MB"/>
                         <outletCollection property="horizontalConstraints" destination="8PZ-EK-wFw" collectionClass="NSMutableArray" id="YXP-wA-85O"/>
                         <outletCollection property="horizontalConstraints" destination="jWF-xU-FzO" collectionClass="NSMutableArray" id="wRH-KV-ltz"/>
-                        <outletCollection property="horizontalConstraints" destination="POQ-zW-sKh" collectionClass="NSMutableArray" id="JOk-Xz-2Jz"/>
                         <outletCollection property="horizontalConstraints" destination="HfK-HC-68i" collectionClass="NSMutableArray" id="kAx-Hm-zMN"/>
                         <outletCollection property="horizontalConstraints" destination="yZz-K3-exS" collectionClass="NSMutableArray" id="VOi-IS-UfR"/>
                         <outletCollection property="horizontalConstraints" destination="HhR-32-4DJ" collectionClass="NSMutableArray" id="zwX-75-R1n"/>
                         <outletCollection property="horizontalConstraints" destination="EKp-c0-jPL" collectionClass="NSMutableArray" id="jxJ-3f-fch"/>
-                        <outletCollection property="horizontalConstraints" destination="2f3-iW-3Np" collectionClass="NSMutableArray" id="Qjt-ad-TLH"/>
+                        <outletCollection property="horizontalConstraints" destination="xAW-ni-M2S" collectionClass="NSMutableArray" id="Qkr-ql-2Cp"/>
+                        <outletCollection property="horizontalConstraints" destination="zOh-mP-t9U" collectionClass="NSMutableArray" id="DcV-Ho-aft"/>
+                        <outletCollection property="horizontalConstraints" destination="XoM-Be-ZvG" collectionClass="NSMutableArray" id="lDZ-2j-khA"/>
+                        <outletCollection property="horizontalConstraints" destination="oAQ-ia-b5G" collectionClass="NSMutableArray" id="c3t-aT-Qan"/>
+                        <outletCollection property="horizontalConstraints" destination="5md-Bo-IZt" collectionClass="NSMutableArray" id="29w-aE-eIO"/>
+                        <outletCollection property="horizontalConstraints" destination="7xO-0G-bef" collectionClass="NSMutableArray" id="xKy-uN-ecs"/>
                         <segue destination="oMH-0n-afk" kind="presentation" identifier="NewCharVCSegue" id="UUh-Zz-Z2w"/>
                         <segue destination="c3h-yz-is9" kind="show" identifier="updateCharSegue" id="Lfp-WX-jeb"/>
                     </connections>
@@ -2445,9 +2528,10 @@ for each of your friends?</string>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W55-qe-Bfd">
                                 <subviews>
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="HeaderBg" translatesAutoresizingMaskIntoConstraints="NO" id="qjY-45-jxb"/>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shop" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ip9-fP-ooa">
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="textColor" red="0.8784313725490196" green="0.062745098039215685" blue="0.61568627450980395" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="0gf-wj-VYB">
@@ -2467,13 +2551,17 @@ for each of your friends?</string>
                                         </constraints>
                                     </stackView>
                                 </subviews>
-                                <color key="backgroundColor" red="0.87843137250000003" green="0.062745098040000002" blue="0.61568627450000002" alpha="0.93669658690000002" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="64" id="2dC-WR-aJM"/>
+                                    <constraint firstAttribute="bottom" secondItem="qjY-45-jxb" secondAttribute="bottom" id="IiZ-2j-X0r"/>
+                                    <constraint firstAttribute="trailing" secondItem="qjY-45-jxb" secondAttribute="trailing" id="Ju5-uW-sEg"/>
                                     <constraint firstAttribute="bottom" secondItem="0gf-wj-VYB" secondAttribute="bottom" id="WLT-ig-fLS"/>
                                     <constraint firstAttribute="trailing" secondItem="0gf-wj-VYB" secondAttribute="trailing" id="WWd-Th-vZH"/>
                                     <constraint firstItem="ip9-fP-ooa" firstAttribute="centerX" secondItem="W55-qe-Bfd" secondAttribute="centerX" id="ak4-38-umC"/>
                                     <constraint firstAttribute="bottom" secondItem="ip9-fP-ooa" secondAttribute="bottom" constant="12" id="k3H-T7-eXS"/>
+                                    <constraint firstItem="qjY-45-jxb" firstAttribute="top" secondItem="W55-qe-Bfd" secondAttribute="top" id="lbd-T4-jtb"/>
+                                    <constraint firstItem="qjY-45-jxb" firstAttribute="leading" secondItem="W55-qe-Bfd" secondAttribute="leading" id="p7r-CF-auU"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -2825,12 +2913,12 @@ for each of your friends?</string>
         <image name="BackArrow" width="8" height="14"/>
         <image name="Btn_Delete" width="80" height="79"/>
         <image name="Btn_Edit" width="80" height="79"/>
-        <image name="Btn_Share" width="80" height="79"/>
         <image name="Create_More_Character" width="278" height="78"/>
         <image name="Delete_Placeholder" width="159" height="145"/>
         <image name="Emoji_BarButton" width="30" height="25"/>
         <image name="Emoji_Pic" width="640" height="319"/>
         <image name="GetFileAttachment" width="143" height="124"/>
+        <image name="HeaderBg" width="375" height="64"/>
         <image name="ICON_Emoji_Selected" width="25" height="24"/>
         <image name="ICON_Welcome_Character" width="87" height="87"/>
         <image name="Keyboard_Installed" width="18" height="17"/>
@@ -2844,8 +2932,8 @@ for each of your friends?</string>
         <image name="account_linkimage" width="320" height="163"/>
         <image name="back_decoration" width="296" height="249"/>
         <image name="background_catwalk_1.jpg" width="1080" height="566"/>
+        <image name="btnBack2" width="276" height="46"/>
         <image name="btnCreateCharGreen" width="281" height="46"/>
-        <image name="btnMakeEmoji" width="281" height="59"/>
         <image name="buttonBackground1" width="281" height="46"/>
         <image name="catwalkBanner" width="320" height="277"/>
         <image name="catwalkBanner2" width="320" height="375"/>
