@@ -412,8 +412,8 @@
                                                                 <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" image="imgErrorSummary" translatesAutoresizingMaskIntoConstraints="NO" id="jwF-aw-R2y">
                                                                     <rect key="frame" x="0.0" y="0.0" width="345" height="53"/>
                                                                 </imageView>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Oops, some details have not been correctly entered" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4pQ-Q5-2Sm">
-                                                                    <rect key="frame" x="40.5" y="3" width="265" height="46.5"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Oops, some details have not been correctly entered" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4pQ-Q5-2Sm">
+                                                                    <rect key="frame" x="36.5" y="3" width="273.5" height="46.5"/>
                                                                     <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="17"/>
                                                                     <color key="textColor" red="0.61568627450980395" green="0.17254901960784313" blue="0.22745098039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
@@ -671,7 +671,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="0aS-1z-A8Z">
-                                                    <rect key="frame" x="0.0" y="338" width="345" height="1412"/>
+                                                    <rect key="frame" x="0.0" y="338" width="345" height="1768.5"/>
                                                     <subviews>
                                                         <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1F0-HJ-AfD">
                                                             <rect key="frame" x="0.0" y="0.0" width="345" height="80"/>
@@ -680,7 +680,7 @@
                                                                     <rect key="frame" x="0.0" y="0.0" width="345" height="80"/>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Oops, your details have been entered incorrectly. Please check your email address and password." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3bM-1U-O5t">
-                                                                    <rect key="frame" x="22.5" y="5" width="301" height="70"/>
+                                                                    <rect key="frame" x="22" y="5" width="301" height="70"/>
                                                                     <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="17"/>
                                                                     <color key="textColor" red="0.61568627450000002" green="0.17254901959999999" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
@@ -702,10 +702,10 @@
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="34v-vw-g5s">
-                                                            <rect key="frame" x="0.0" y="0.0" width="345" height="1342"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="345" height="1698.5"/>
                                                             <subviews>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Zw-PZ-cK0">
-                                                                    <rect key="frame" x="113" y="655" width="119" height="32"/>
+                                                                    <rect key="frame" x="113" y="833" width="119" height="32"/>
                                                                     <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="14"/>
                                                                     <state key="normal" title="Forgot Password?">
                                                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -723,7 +723,7 @@
                                                             </constraints>
                                                         </view>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P5c-lA-Eb9">
-                                                            <rect key="frame" x="0.0" y="1362" width="345" height="50"/>
+                                                            <rect key="frame" x="0.0" y="1718.5" width="345" height="50"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="50" id="WMt-44-Uba"/>
                                                             </constraints>
