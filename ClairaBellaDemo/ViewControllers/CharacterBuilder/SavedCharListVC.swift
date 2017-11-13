@@ -21,6 +21,10 @@ class SavedCharListVC: ParentVC {
     @IBOutlet var lblCreatedDate: UILabel!
     @IBOutlet var checkBox: UIButton!
     @IBOutlet var btnNewChar: UIButton!
+    @IBOutlet var btnShare: UIButton!
+    @IBOutlet var btnCreateEmojis: UIButton!
+
+
     
     lazy var dateFormatter : DateFormatter =  {
         let df = DateFormatter()
@@ -55,6 +59,10 @@ class SavedCharListVC: ParentVC {
         setCurrentChartInfo()
     }
     
+    
+    //This func should call from first controller of tabbar.
+    
+    
     func setUI() {
         let carouselViewHeight = 275 * widthRatio
         var fr = carouselView.frame
@@ -66,20 +74,18 @@ class SavedCharListVC: ParentVC {
         headerviewFrame.size.height *= widthRatio
         tblHeaderView.frame = headerviewFrame
         
-        btnNewChar.layer.cornerRadius = 3
+        btnNewChar.layer.cornerRadius = 5
         btnNewChar.layer.borderColor = UIColor.white.cgColor
         btnNewChar.layer.borderWidth = 1
         btnNewChar.clipsToBounds = true
-    }
-    
-    
-    func setNotificaitonObserver() {
-        NotificationCenter.default.addObserver(self, selector: #selector(self.newCharacterAdded(_:)), name: NSNotification.Name(rawValue: "NewCharacterAddedNotification"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.characterUpdateNotification(_:)), name: NSNotification.Name(rawValue: "CharacterUpdateNotification"), object: nil)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(self.characterLoadingFinish(_:)), name: NSNotification.Name(rawValue: "CharactersLoadingFinish"), object: nil)
+        btnShare.layer.cornerRadius = 5
+        btnShare.layer.borderColor = UIColor.white.cgColor
+        btnShare.layer.borderWidth = 1
+        btnShare.clipsToBounds = true
 
     }
+    
     
     //set selected char's info
     func setCurrentChartInfo() {
@@ -89,6 +95,9 @@ class SavedCharListVC: ParentVC {
             lblCharName.text = char.name
             checkBox.isSelected = char.isMainChar
             lblCreatedDate.text = ""
+            
+            btnCreateEmojis.setTitle("View \(char.name) Emoji's", for: .normal)
+            
             if let date = dateFormatter.date(from: char.createdDate, format: "yyyy-MM-dd'T'HH:mm:ss.SSSZ") {
                 print(date)
                 let dateString = dateFormatter.dateString(from: date, to: "MMM d, yyyy h:mm a")
@@ -97,6 +106,7 @@ class SavedCharListVC: ParentVC {
         }
     }
 
+    //MARK:- Navigations
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "NewCharVCSegue" {
             let dest = segue.destination as! UINavigationController
@@ -120,18 +130,45 @@ class SavedCharListVC: ParentVC {
     }
     
     //MARK:- Notificaitons
+    
+    func setNotificaitonObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(self.newCharacterAdded(_:)), name: NSNotification.Name(rawValue: "NewCharacterAddedNotification"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.characterUpdateNotification(_:)), name: NSNotification.Name(rawValue: "CharacterUpdateNotification"), object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.characterLoadingFinish(_:)), name: NSNotification.Name(rawValue: "CharactersLoadingFinish"), object: nil)
+        
+    }
+
     func newCharacterAdded(_ nf: Notification) {
         if let newChar = nf.userInfo?["NewChar"] as? Character {
             savedChars.append(newChar)
             showHideEmptyItemsView()
             carouselView.insertItem(at: savedChars.count-1, animated: true)
             setCurrentChartInfo()
+
+            //Navigate to emoji screen for genereate emoji for newly created character.
+            if let index = self.emojisTabIndex {
+                characterForEmoji = newChar
+                
+                self.tabBarController?.selectedIndex = index
+            }
+
         }
     }
     
     func characterUpdateNotification(_ nf: Notification) {
         carouselView.reloadItem(at: carouselView.currentItemIndex, animated: true)
         setCurrentChartInfo()
+        
+        //Navigate to emoji screen for genereate emoji for updated character.
+        if let char = nf.userInfo?["updatedChar"] as? Character {
+            characterForEmoji = char
+            
+            if let index = self.emojisTabIndex {
+                self.tabBarController?.selectedIndex = index
+            }
+        }
+
     }
     
     func characterLoadingFinish(_ nf: Notification) {
@@ -172,12 +209,14 @@ extension SavedCharListVC {
     }
 
     @IBAction func shareChar_btnClicked(_ sender: UIButton) {
-        //let char = savedChars[currentCharIndex]
+        let char = savedChars[currentCharIndex]
     }
 
     @IBAction func btn_CreateEmojisClicked(_ sender: UIButton) {
         characterForEmoji = savedChars[carouselView.currentItemIndex]
-        self.tabBarController?.selectedIndex = 2
+        if let index = self.emojisTabIndex {
+            self.tabBarController?.selectedIndex = index
+        }
     }
     
     @IBAction func Btn_ShopeCollection(_ sender: UIButton) {
@@ -254,7 +293,8 @@ extension SavedCharListVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.row == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "characterListCell")!
+            let cell = tableView.dequeueReusableCell(withIdentifier: "characterListCell") as! CharacterListCell
+            cell.tblView?.reloadData()
             return cell
             
         } else if indexPath.row == 1 {
@@ -413,3 +453,36 @@ class TableCell: UITableViewCell {
     }
 
 }
+
+
+
+//CharacterList cell for tableview.
+//Characters will showing vertically at My characters screen.
+
+class CharacterListCell: TableCell, UITableViewDataSource, UITableViewDelegate {
+    @IBOutlet var tblView: UITableView!
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return Character.myCharacters.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "characterCell") as! CharacterCell
+        let char = Character.myCharacters[indexPath.row]
+        cell.lblCharacterName.text = char.name
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 120
+    }
+}
+
+class CharacterCell: TableCell {
+    @IBOutlet var lblCharacterName: UILabel!
+    @IBOutlet var webview: UIWebView!
+    
+}
+
+
+

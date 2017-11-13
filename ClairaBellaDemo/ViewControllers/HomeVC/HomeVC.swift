@@ -27,8 +27,6 @@ class HomeVC: ParentVC {
         super.viewDidLoad()
         setInitialUI()
         NotificationCenter.default.addObserver(self, selector: #selector(self.charactersLoadignFinish), name: NSNotification.Name(rawValue: "CharactersLoadingFinish"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.newCharacterAdded(_:)), name: NSNotification.Name(rawValue: "NewCharacterAddedNotification"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.characterUpdateNotification(_:)), name: NSNotification.Name(rawValue: "CharacterUpdateNotification"), object: nil)
         
 //        if Character.loadingFinish {
 //            if Character.myCharacters.isEmpty {
@@ -100,21 +98,6 @@ class HomeVC: ParentVC {
         
     }
     
-    func newCharacterAdded(_ nf: Notification) {
-        //Navigate to emoji screen for genereate emoji for newly created character.
-        if let newChar = nf.userInfo?["NewChar"] as? Character {
-            characterForEmoji = newChar
-            self.tabBarController?.selectedIndex = 2
-        }
-    }
-    
-    func characterUpdateNotification(_ nf: Notification) {
-        //Navigate to emoji screen for genereate emoji for updated character.
-        if let char = nf.userInfo?["updatedChar"] as? Character {
-            characterForEmoji = char
-            self.tabBarController?.selectedIndex = 2
-        }
-    }
 }
 
 
@@ -131,14 +114,18 @@ extension HomeVC {
     }
     
     @IBAction func btn_manageChar_clicked(_ sender: UIButton) {
-        self.tabBarController?.selectedIndex = 1// My characters tab selected
+        if let index = self.myCharactersTabIndex {
+            self.tabBarController?.selectedIndex = index
+        }
     }
     
     @IBAction func btn_CreateEmojisClicked(_ sender: UIButton?) {
         if Character.myCharacters.isEmpty {
             goToCreateNewChar()
         } else {
-            self.tabBarController?.selectedIndex = 2 //Emojis tab selected
+            if let index = self.emojisTabIndex {
+                self.tabBarController?.selectedIndex = index
+            }
         }
     }
     

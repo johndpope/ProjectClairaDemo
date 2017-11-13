@@ -287,4 +287,33 @@ class APICall {
         
     }
     
+    func loginUser_APICall(email: String, params: [String : Any], block: @escaping ResponseBlock) {
+        
+       // let urlString  = "https://yff8t38cs8.execute-api.eu-west-1.amazonaws.com/latest/users/\(email)"
+        let urlString = "https://yff8t38cs8.execute-api.eu-west-1.amazonaws.com/latest/users/\(email)/login"
+        let url = URL(string: urlString)!
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        let data = try? JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
+        request.httpBody = data
+        
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let data = data {
+                if let json = try? JSONSerialization.jsonObject(with: data, options: [.mutableContainers]) {
+                    DispatchQueue.main.async {
+                        block(json, true)
+                    }
+                    return
+                }
+            }
+            
+            DispatchQueue.main.async {
+                block(nil, false)
+            }
+            
+            }.resume()
+        
+    }
+
 }

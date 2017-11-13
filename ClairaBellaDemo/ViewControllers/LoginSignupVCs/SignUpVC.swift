@@ -134,7 +134,7 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
         self.view.addSubview(progressHUD)
         progressHUD.show()
         
-        let params = ["first_name" : firstname,  "Last_name" : lastName]
+        let params = ["first_name" : firstname,  "Last_name" : lastName, "password" : password]
         
         APICall.shared.signupUser_APICall(email: email, params: params) { (response,success) in
             if success {

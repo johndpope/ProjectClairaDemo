@@ -162,7 +162,9 @@ class EmojiesVC: ParentVC {
 //MARK:- IBActions
 extension EmojiesVC {
     @IBAction func Btn_HomeAct(_ sender: UIBarButtonItem) {
-        tabBarController?.selectedIndex = 0
+        if let index = shopTabIndex {
+            tabBarController?.selectedIndex = index
+        }
     }
     
     @IBAction func Btn_SetupNowAction(_ sender: UIButton) {
@@ -171,7 +173,9 @@ extension EmojiesVC {
     }
     
     @IBAction func change_CharacterAction(_ sender: UIButton) {
-        tabBarController?.selectedIndex = 1
+        if let index = self.myCharactersTabIndex {
+            tabBarController?.selectedIndex = index
+        }
     }
     
     @IBAction func Btn_ShareEmojiAction(_ sender: UIButton) {
