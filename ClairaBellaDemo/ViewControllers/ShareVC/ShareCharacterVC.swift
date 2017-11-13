@@ -115,9 +115,6 @@ extension ShareCharacterVC {
         if SLComposeViewController.isAvailable(forServiceType: SLServiceTypeFacebook) {
             let vc = SLComposeViewController(forServiceType:SLServiceTypeFacebook)!
             vc.add(image)
-            //        vc.add(URL(string: "http://www.example.com/"))
-            //        vc.setInitialText("Initial text here.")
-
             self.present(vc, animated: true, completion: nil)
         } else {
             showAlert(message: "Please go to settings > Facebook and add your facebook account. ")
