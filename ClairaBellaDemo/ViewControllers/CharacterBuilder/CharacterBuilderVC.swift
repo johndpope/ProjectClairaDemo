@@ -119,7 +119,10 @@ class CharacterBuilderVC: ParentVC {
     func loadInterfaceMenus() {
         indicator.startAnimating()
         CharBuilderAPI.shared.getInterface_json { menus in
-            if menus.isEmpty {self.indicator.stopAnimating(); return }
+            if menus.isEmpty {
+                DispatchQueue.main.async {self.indicator.stopAnimating()}
+                return
+            }
             
             self.interfaceMenus = menus
             self.selectedMenu = menus.first
