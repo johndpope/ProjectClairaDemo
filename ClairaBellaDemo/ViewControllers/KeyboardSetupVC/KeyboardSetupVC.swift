@@ -27,6 +27,12 @@ class KeyboardSetupVC: ParentVC {
     }
     
     @IBAction func closeBtn_clicked(_ sender: UIButton) {
-        self.navigationController?.popViewController(animated: true)
+        self.dismiss(animated: true, completion: nil)
+        //self.navigationController?.popViewController(animated: true)
     }
+    
+    @IBAction func keyboard_Setting_Action(_ sender: UIButton) {
+        UIApplication.shared.openURL(URL(string:"App-Prefs:root=General&path=Keyboard")!)
+    }
+
 }
