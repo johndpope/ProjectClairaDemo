@@ -32,7 +32,7 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
         passwordTextField.setCornerRadius()
         
         var hdvFrame = tblHeaderView.frame
-        hdvFrame.size.height = self.view.frame.height-64
+        hdvFrame.size.height = hdvFrame.size.height * widthRatio
         tblHeaderView.frame = hdvFrame
     }
 

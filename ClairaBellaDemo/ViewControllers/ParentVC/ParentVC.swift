@@ -90,4 +90,14 @@ class ParentVC: UIViewController {
         return nil
     }
 
+    
+    @IBAction func keyboardBtn_clicked(_ sender: UIButton) {
+        let kbSetupVC = self.storyboard!.instantiateViewController(withIdentifier: "keyboardSetupVC")
+        kbSetupVC.modalPresentationStyle = .overCurrentContext
+        if let tabbarVC = self.tabBarController {
+            tabbarVC.navigationController?.pushViewController(kbSetupVC, animated: true)
+        } else {
+            self.navigationController?.pushViewController(kbSetupVC, animated: true)
+        }
+    }
 }

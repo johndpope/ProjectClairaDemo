@@ -11,7 +11,7 @@ import UIKit
 import FBSDKCoreKit
 import FBSDKLoginKit
 
-class LoginVC: UIViewController, UITextFieldDelegate {
+class LoginVC: ParentVC, UITextFieldDelegate {
 
     @IBOutlet var txtEmail: UITextField!
     @IBOutlet var txtPassword: UITextField!
@@ -28,7 +28,7 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         txtPassword?.setCornerRadius()
         if let hdView = tblHeaderView {
             var hdvFrame = hdView.frame
-            hdvFrame.size.height = self.view.frame.height-64
+            hdvFrame.size.height = hdvFrame.size.height * widthRatio
             hdView.frame = hdvFrame
         }
         

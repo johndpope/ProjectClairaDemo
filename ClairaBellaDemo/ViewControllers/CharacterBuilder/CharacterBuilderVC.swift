@@ -31,14 +31,15 @@ class CharacterBuilderVC: ParentVC {
         }
         
         didSet{
-            selectedMenu?.selected = true
+            guard let selectedMenu = selectedMenu else {return}
+            selectedMenu.selected = true
             colorChoice = nil
-            if let ch = selectedMenu!.choices.filter({$0.type == .circle}).first {
+            if let ch = selectedMenu.choices.filter({$0.type == .circle}).first {
                 colorChoice = ch
                 //self.reloadInterfaceMenus()
             }
             else {
-                if let ch = selectedMenu!.choices.filter({$0.type == .square}).first {
+                if let ch = selectedMenu.choices.filter({$0.type == .square}).first {
                     if !ch.options.first!.choices.isEmpty {
                         let selectedOptions = ch.options.filter({$0.selected})
                         
@@ -118,6 +119,8 @@ class CharacterBuilderVC: ParentVC {
     func loadInterfaceMenus() {
         indicator.startAnimating()
         CharBuilderAPI.shared.getInterface_json { menus in
+            if menus.isEmpty {self.indicator.stopAnimating(); return }
+            
             self.interfaceMenus = menus
             self.selectedMenu = menus.first
             
