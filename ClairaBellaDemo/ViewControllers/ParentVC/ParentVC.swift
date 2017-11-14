@@ -12,12 +12,22 @@ let widthRatio = UIScreen.main.bounds.width/375
 
 class ParentVC: UIViewController {
     @IBOutlet var horizontalConstraints: [NSLayoutConstraint]?
-
+    @IBOutlet var btnKeyboard: UIButton!
+    @IBOutlet var btnProfile: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        
         updateConstraints()
+        setKeyboardAndProfileBtn()
+    }
+    
+    
+    var cbKeybaordEnabled: Bool {
+        if let keboards = UserDefaults.standard.object(forKey: "AppleKeyboards") as? [String] {
+            guard keboards.contains("com.unitygames.Claireabella.ClaireaBella") else {return false}
+            return true
+        }
+            return false
     }
     
     func updateConstraints() {
@@ -34,6 +44,11 @@ class ParentVC: UIViewController {
         return .default
     }
     
+    
+    func setKeyboardAndProfileBtn() {
+        btnKeyboard?.isSelected = cbKeybaordEnabled
+        //btnProfile?.isSelected = true
+    }
     
     //MARK:- Tabbar controller's index
     var myCharactersTabIndex: Int? {

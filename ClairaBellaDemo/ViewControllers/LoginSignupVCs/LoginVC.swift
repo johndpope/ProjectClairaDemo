@@ -18,12 +18,12 @@ class LoginVC: UIViewController, UITextFieldDelegate {
     @IBOutlet var errorListView: UIView!
     @IBOutlet var tblLoginForm: UITableView!
     @IBOutlet var tblHeaderView: UIView?
-   
+    @IBOutlet var lblErrorMessage: UILabel!
+    
     let progressHUD = ProgressView(text: "Please Wait")
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         txtEmail?.setCornerRadius()
         txtPassword?.setCornerRadius()
         if let hdView = tblHeaderView {
@@ -113,13 +113,21 @@ class LoginVC: UIViewController, UITextFieldDelegate {
             let params = ["password_attempt" : password]
             APICall.shared.loginUser_APICall(email: email, params: params, block: { (response,success) in
                 if success {
-                    let name = ""//firstname + " " + lastName
-                    let result = ["name" : name, "email": email]
-                    UserDefaults(suiteName: appGroupName)!.setValue(result, forKey: "user_details")
-                    //UserDefaults.standard.setValue(result, forKey: "user_details")
-                    //UserDefaults.standard.synchronize()
-                    //self.btn_pressed.sendActions(for: .touchUpInside)
-                    appDelegate.getCharactersFromServer()
+                    let json  = response as! [String : String]
+                    if let _ = json["success"] {
+                        let name = ""//firstname + " " + lastName
+                        let result = ["name" : name, "email": email]
+                        UserDefaults(suiteName: appGroupName)!.setValue(result, forKey: "user_details")
+                        //UserDefaults.standard.setValue(result, forKey: "user_details")
+                        //UserDefaults.standard.synchronize()
+                        //self.btn_pressed.sendActions(for: .touchUpInside)
+                        appDelegate.getCharactersFromServer()
+                    } else  {
+                        print("Email and password is wrong.")
+                        self.errorListView.isHidden = false
+                        self.progressHUD.hide()
+
+                    }
                 } else {
                     self.progressHUD.hide()
                 }

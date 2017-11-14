@@ -207,9 +207,18 @@ extension SavedCharListVC {
         let char = savedChars[currentCharIndex]
         self.performSegue(withIdentifier: "NewCharVCSegue", sender: char)
     }
+    
+    @IBAction func cellEditChar_btnClicked(_ sender: UIButton) {
+        let char = savedChars[sender.tag]
+        self.performSegue(withIdentifier: "NewCharVCSegue", sender: char)
+    }
+
 
     @IBAction func shareChar_btnClicked(_ sender: UIButton) {
         let char = savedChars[currentCharIndex]
+        let shareVC = self.storyboard?.instantiateViewController(withIdentifier: "ShareCharacterVC") as! ShareCharacterVC
+        shareVC.character = char
+        self.navigationController?.pushViewController(shareVC, animated: true)
     }
 
     @IBAction func btn_CreateEmojisClicked(_ sender: UIButton) {
@@ -218,6 +227,15 @@ extension SavedCharListVC {
             self.tabBarController?.selectedIndex = index
         }
     }
+    
+    @IBAction func cellEmojis_btnClicked(_ sender: UIButton) {
+        let char = savedChars[sender.tag]
+        characterForEmoji = char
+        if let index = self.emojisTabIndex {
+            self.tabBarController?.selectedIndex = index
+        }
+    }
+
     
     @IBAction func Btn_ShopeCollection(_ sender: UIButton) {
         let url = URL(string: "http://www.toxicfox.co.uk/claireabella")!
@@ -294,6 +312,7 @@ extension SavedCharListVC: UITableViewDataSource, UITableViewDelegate {
         
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "characterListCell") as! CharacterListCell
+            cell.viewController = self
             cell.tblView?.reloadData()
             return cell
             
@@ -461,6 +480,7 @@ class TableCell: UITableViewCell {
 
 class CharacterListCell: TableCell, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet var tblView: UITableView!
+    weak var viewController: SavedCharListVC?
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return Character.myCharacters.count
@@ -470,6 +490,19 @@ class CharacterListCell: TableCell, UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: "characterCell") as! CharacterCell
         let char = Character.myCharacters[indexPath.row]
         cell.lblCharacterName.text = char.name
+        cell.setBtnTag(tag: indexPath.row)
+        
+        if  !char.charHtml.isEmpty {
+            cell.webview.loadHTMLString(char.charHtml, baseURL: nil)
+        } else {
+            if let charGenerator = viewController?.charGenerator {
+                charGenerator.buildCharHTMLWith(choices: char.choices, block: { html in
+                    char.charHtml = html
+                    cell.webview.loadHTMLString(char.charHtml, baseURL: nil)
+                })
+            }
+        }
+
         return cell
     }
     
@@ -481,6 +514,13 @@ class CharacterListCell: TableCell, UITableViewDataSource, UITableViewDelegate {
 class CharacterCell: TableCell {
     @IBOutlet var lblCharacterName: UILabel!
     @IBOutlet var webview: UIWebView!
+    @IBOutlet var btnEdit: UIButton!
+    @IBOutlet var btnEmojis: UIButton!
+    
+    func setBtnTag(tag: Int) {
+        btnEdit.tag = tag
+        btnEmojis.tag = tag
+    }
     
 }
 
