@@ -3763,6 +3763,7 @@
 		795421631F460DE500DBBBE0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795421621F460DE500DBBBE0 /* AppDelegate.swift */; };
 		7954216D1F460DE500DBBBE0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7954216B1F460DE500DBBBE0 /* LaunchScreen.storyboard */; };
 		796567BE1FBA8E6D0084E8E1 /* allowfullaccess.gif in Resources */ = {isa = PBXBuildFile; fileRef = 796567BD1FBA8E6D0084E8E1 /* allowfullaccess.gif */; };
+		796567C01FBB701E0084E8E1 /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796567BF1FBB701E0084E8E1 /* ProfileVC.swift */; };
 		79DAB6A81F571CA00019C37D /* SavedCharListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DAB6A71F571CA00019C37D /* SavedCharListVC.swift */; };
 		79E2E4661F82B12B00B68524 /* ShareCharacterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791993711F7429A10007E23C /* ShareCharacterVC.swift */; };
 /* End PBXBuildFile section */
@@ -6081,6 +6082,7 @@
 		7954216C1F460DE500DBBBE0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7954216E1F460DE500DBBBE0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		796567BD1FBA8E6D0084E8E1 /* allowfullaccess.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = allowfullaccess.gif; sourceTree = "<group>"; };
+		796567BF1FBB701E0084E8E1 /* ProfileVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
 		79DAB6A71F571CA00019C37D /* SavedCharListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedCharListVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -8532,6 +8534,7 @@
 			isa = PBXGroup;
 			children = (
 				7932BB951F61BBD200A25AAF /* AccountVC.swift */,
+				796567BF1FBB701E0084E8E1 /* ProfileVC.swift */,
 			);
 			path = AccountVC;
 			sourceTree = "<group>";
@@ -12588,6 +12591,7 @@
 				7932BBC61F61D1C700A25AAF /* NewUser.swift in Sources */,
 				7932BBD71F61D1DD00A25AAF /* CharacterView.swift in Sources */,
 				7922C3001F5DC98A007F5D25 /* CoreDataHandler.swift in Sources */,
+				796567C01FBB701E0084E8E1 /* ProfileVC.swift in Sources */,
 				7922C2FD1F5DAAE3007F5D25 /* HomeVC.swift in Sources */,
 				131C3EE11F5E687E00ECD3A0 /* ParentVC.swift in Sources */,
 				795421631F460DE500DBBBE0 /* AppDelegate.swift in Sources */,

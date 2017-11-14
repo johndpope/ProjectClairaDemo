@@ -103,4 +103,10 @@ class ParentVC: UIViewController {
             //self.navigationController?.pushViewController(kbSetupVC, animated: true)
         }
     }
+    
+    @IBAction func profileBtn_clicked(_ sender: UIButton) {
+        //ProfileVC
+        let profileVC = self.storyboard!.instantiateViewController(withIdentifier: "ProfileVC")
+        self.tabBarController?.present(profileVC, animated: true, completion: nil)
+    }
 }
