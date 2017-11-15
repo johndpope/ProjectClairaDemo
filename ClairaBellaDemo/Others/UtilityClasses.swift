@@ -90,3 +90,54 @@ class CheckBox: UIButton {
         return path
     }
 }
+
+
+private var kAssociationKeyMaxLength: Int = 0
+
+extension UITextField {
+    @IBInspectable var maxLength: Int {
+        get {
+            if let length = objc_getAssociatedObject(self, &kAssociationKeyMaxLength) as? Int {
+                return length
+            } else {
+                return Int.max
+            }
+        }
+        set {
+            objc_setAssociatedObject(self, &kAssociationKeyMaxLength, newValue, .OBJC_ASSOCIATION_RETAIN)
+            addTarget(self, action: #selector(checkMaxLength), for: .editingChanged)
+        }
+    }
+    
+    func checkMaxLength(textField: UITextField) {
+        guard let prospectiveText = self.text,
+            prospectiveText.count > maxLength
+            else {
+                return
+        }
+        
+        let selection = selectedTextRange
+        let maxCharIndex = prospectiveText.index(prospectiveText.startIndex, offsetBy: maxLength)
+        text = prospectiveText.substring(to: maxCharIndex)
+        selectedTextRange = selection
+    }
+}
+
+
+
+class TextField: UITextField {
+    
+    let padding = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8);
+    
+    override func textRect(forBounds bounds: CGRect) -> CGRect {
+        return UIEdgeInsetsInsetRect(bounds, padding)
+    }
+    
+    override func placeholderRect(forBounds bounds: CGRect) -> CGRect {
+        return UIEdgeInsetsInsetRect(bounds, padding)
+    }
+    
+    override func editingRect(forBounds bounds: CGRect) -> CGRect {
+        return UIEdgeInsetsInsetRect(bounds, padding)
+    }
+}

@@ -15,6 +15,7 @@ class ProfileVC: ParentVC {
     @IBOutlet var txtDobMonth: UITextField!
     @IBOutlet var txtDobYear: UITextField!
     @IBOutlet var tblView: UITableView!
+    @IBOutlet var lblName: UILabel!
     
     var navigationItems = ["Privacy Policy", "Terms of Service", "Customer Service"]
     
@@ -35,6 +36,8 @@ class ProfileVC: ParentVC {
             }
 
             let name = userDetails["name"] ?? ""
+            lblName.text = "Hi, There, \(name)"
+            
             if !name.isEmpty {
                 txtName.text = name
             } else {
@@ -62,6 +65,57 @@ class ProfileVC: ParentVC {
         
     }
     
+    
+    //validation method
+    func isValidate()-> Bool {
+        var isValid = true
+        let email = txtEmail.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        let name = txtName.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        let dobDay = txtDobDay.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        let dobMonth = txtDobMonth.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        let dobYear = txtDobYear.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+
+        if email.isEmpty || !email.isValidEmail(){
+            txtEmail.background = UIImage(named: "textboxBack_selected")
+            isValid = false
+        }
+        
+        if name.isEmpty {
+            txtName.background = UIImage(named: "textboxBack_selected")
+            isValid = false
+        }
+        
+        if dobDay.isEmpty {
+            txtDobDay.background = UIImage(named: "textboxBack_selected")
+            isValid = false
+        }
+        
+        if dobMonth.isEmpty {
+            txtDobMonth.background =  UIImage(named: "textboxBack_selected")
+            isValid = false
+        }
+        
+        if dobYear.isEmpty {
+            txtDobYear.background = UIImage(named: "textboxBack_selected")
+            isValid = false
+        }
+
+        return isValid
+    }
+    
+    
+    @IBAction func logOutBtn_clicked(_ sender: UIButton) {
+        UserDefaults(suiteName: appGroupName)?.setValue(nil, forKey: "user_details")
+        let loginStoryboard = UIStoryboard(name: "WalkThrough", bundle: nil)
+        let loginVC = loginStoryboard.instantiateViewController(withIdentifier: "LoginVC")
+        let rootNavVC = appDelegate.window?.rootViewController as! UINavigationController
+        rootNavVC.viewControllers = [loginVC]
+        self.dismiss(animated: true, completion: nil)
+    }
+
+    @IBAction func close_btnClicked(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
+    }
 }
 
 extension ProfileVC : UITextFieldDelegate {
@@ -77,14 +131,29 @@ extension ProfileVC : UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         textField.background = UIImage(named: "textboxBack")
     }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        let str = (textView.text + text)
+        if str.characters.count <= 10 {
+            return true
+        }
+        textView.text = str.substring(to: str.index(str.startIndex, offsetBy: 10))
+        return false
+    }
+
 }
 
 extension ProfileVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return navigationItems.count
+        return navigationItems.count + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.row == 3 {
+            //logoutCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "logoutCell") as! TableCell
+            return cell
+        }
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! TableCell
         cell.lblTitle.text = navigationItems[indexPath.row]
         return cell
@@ -101,6 +170,13 @@ extension ProfileVC: UITableViewDataSource, UITableViewDelegate {
         }
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == 3 {
+            return 100
+        } else {
+            return 44
+        }
+    }
     
     func openUrl(_ urlString: String) {
         let url = URL(string: urlString)!
