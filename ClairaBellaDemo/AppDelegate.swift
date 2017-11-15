@@ -12,6 +12,7 @@ import FBSDKCoreKit
 import CloudKit
 import Fabric
 import Crashlytics
+import IQKeyboardManager
 
 let appDelegate = UIApplication.shared.delegate as! AppDelegate
 
@@ -27,6 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
 
         Fabric.with([Crashlytics.self])
+        IQKeyboardManager.shared().isEnabled = true
 
         return true
     }

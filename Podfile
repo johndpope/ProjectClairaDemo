@@ -10,5 +10,6 @@ pod 'GTProgressBar'
 pod 'PocketSVG'
 pod 'FacebookCore'
 pod 'FacebookLogin'
+pod 'IQKeyboardManager'
 
 end

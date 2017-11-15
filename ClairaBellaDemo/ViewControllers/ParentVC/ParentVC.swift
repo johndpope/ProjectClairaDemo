@@ -95,9 +95,18 @@ class ParentVC: UIViewController {
         let kbSetupVC = self.storyboard!.instantiateViewController(withIdentifier: "keyboardSetupVC")
         kbSetupVC.modalPresentationStyle = .overCurrentContext
         if let tabbarVC = self.tabBarController {
-            tabbarVC.navigationController?.pushViewController(kbSetupVC, animated: true)
+            tabbarVC.present(kbSetupVC, animated: true, completion: nil)
+            //tabbarVC.navigationController?.pushViewController(kbSetupVC, animated: true)
         } else {
-            self.navigationController?.pushViewController(kbSetupVC, animated: true)
+            self.present(kbSetupVC, animated: true, completion: nil)
+
+            //self.navigationController?.pushViewController(kbSetupVC, animated: true)
         }
+    }
+    
+    @IBAction func profileBtn_clicked(_ sender: UIButton) {
+        //ProfileVC
+        let profileVC = self.storyboard!.instantiateViewController(withIdentifier: "ProfileVC")
+        self.tabBarController?.present(profileVC, animated: true, completion: nil)
     }
 }
