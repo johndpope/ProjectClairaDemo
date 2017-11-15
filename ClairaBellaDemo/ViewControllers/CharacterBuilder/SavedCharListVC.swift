@@ -312,7 +312,7 @@ extension SavedCharListVC: UITableViewDataSource, UITableViewDelegate {
         
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "characterListCell") as! CharacterListCell
-            cell.viewController = self
+            cell.myCharsVC = self
             cell.tblView?.reloadData()
             return cell
             
@@ -480,7 +480,7 @@ class TableCell: UITableViewCell {
 
 class CharacterListCell: TableCell, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet var tblView: UITableView!
-    weak var viewController: SavedCharListVC?
+    weak var myCharsVC: SavedCharListVC?
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return Character.myCharacters.count
@@ -495,7 +495,7 @@ class CharacterListCell: TableCell, UITableViewDataSource, UITableViewDelegate {
         if  !char.charHtml.isEmpty {
             cell.webview.loadHTMLString(char.charHtml, baseURL: nil)
         } else {
-            if let charGenerator = viewController?.charGenerator {
+            if let charGenerator = myCharsVC?.charGenerator {
                 charGenerator.buildCharHTMLWith(choices: char.choices, block: { html in
                     char.charHtml = html
                     cell.webview.loadHTMLString(char.charHtml, baseURL: nil)
