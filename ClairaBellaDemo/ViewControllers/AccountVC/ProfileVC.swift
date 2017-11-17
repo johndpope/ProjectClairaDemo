@@ -36,7 +36,7 @@ class ProfileVC: ParentVC {
             }
 
             let name = userDetails["name"] ?? ""
-            lblName.text = "Hi, There, \(name)"
+            lblName.text = "Hey There, \(name)"
             
             if !name.isEmpty {
                 txtName.text = name
@@ -144,23 +144,36 @@ extension ProfileVC : UITextFieldDelegate {
 }
 
 extension ProfileVC: UITableViewDataSource, UITableViewDelegate {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return navigationItems.count + 1
+        return  section == 0 ? 1 : (navigationItems.count + 1)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row == 3 {
-            //logoutCell
-            let cell = tableView.dequeueReusableCell(withIdentifier: "logoutCell") as! TableCell
+        if indexPath.section == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "changePasswordCell") as! TableCell
+            return cell
+            
+        } else {
+            if indexPath.row == 3 {
+                //logoutCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: "logoutCell") as! TableCell
+                return cell
+            }
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! TableCell
+            cell.lblTitle.text = navigationItems[indexPath.row]
             return cell
         }
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! TableCell
-        cell.lblTitle.text = navigationItems[indexPath.row]
-        return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        if indexPath.section == 0 {
+            return
+        }
         if indexPath.row == 0 {
             openUrl("https://google.com")
         } else if indexPath.row == 1 {
@@ -171,10 +184,14 @@ extension ProfileVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row == 3 {
-            return 100
+        if indexPath.section == 0 {
+            return 330
         } else {
-            return 44
+            if indexPath.row == 3 {
+                return 100
+            } else {
+                return 44
+            }
         }
     }
     

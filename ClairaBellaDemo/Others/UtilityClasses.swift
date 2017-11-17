@@ -111,7 +111,7 @@ extension UITextField {
     
     func checkMaxLength(textField: UITextField) {
         guard let prospectiveText = self.text,
-            prospectiveText.count > maxLength
+            prospectiveText.characters.count > maxLength
             else {
                 return
         }
@@ -127,7 +127,7 @@ extension UITextField {
 
 class TextField: UITextField {
     
-    let padding = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8);
+    let padding = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10);
     
     override func textRect(forBounds bounds: CGRect) -> CGRect {
         return UIEdgeInsetsInsetRect(bounds, padding)
