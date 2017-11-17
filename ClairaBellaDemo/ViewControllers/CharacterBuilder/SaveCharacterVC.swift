@@ -29,7 +29,7 @@ class SaveCharacterVC: ParentVC, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        lblNameCharsCount.text = "\(maxCharNameLength)"
+        lblNameCharsCount?.text = "\(maxCharNameLength)"
         
         //checkbox should be checked if user haven't any saved Character.
         checkbox.isSelected = Character.myCharacters.isEmpty
@@ -46,7 +46,7 @@ class SaveCharacterVC: ParentVC, UITextFieldDelegate {
     }
 
     func setUI() {
-        save_btn.isHidden = !isCharacterEditMode
+       // save_btn.isHidden = !isCharacterEditMode
         name_textfield.text = character.name
         
         self.name_textfield.delegate = self;
@@ -69,7 +69,7 @@ class SaveCharacterVC: ParentVC, UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {    //delegate method
         //name_textfield.text = ""
        // right_arrowImage.isHidden = true
-        save_btn.isHidden = true
+        //save_btn.isHidden = true
     }
     
     
@@ -77,7 +77,7 @@ class SaveCharacterVC: ParentVC, UITextFieldDelegate {
         
         if  (name_textfield.text?.characters.count)! > 0 {
            // right_arrowImage.isHidden = false
-            save_btn.isHidden = false
+            //save_btn.isHidden = false
         }
         return true
     }
