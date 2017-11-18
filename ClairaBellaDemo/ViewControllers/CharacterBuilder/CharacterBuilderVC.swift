@@ -182,9 +182,9 @@ extension CharacterBuilderVC {
     
     
     @IBAction func saveCharacter_btnClicked(_ sender: UIButton) {
-        guard !character.charHtml.isEmpty else {
-            return
-        }
+//        guard !character.charHtml.isEmpty else {
+//            return
+//        }
         if let  savCharVC = self.storyboard?.instantiateViewController(withIdentifier: "SaveCharacterVC") as? SaveCharacterVC {
             if isCharacterEditMode {
                 savCharVC.character = self.character

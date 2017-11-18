@@ -16,9 +16,15 @@ class KeyboardSetupVC: ParentVC {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         keyboardInstalledView.isHidden = !cbKeybaordEnabled
         keyboardNotInstalledView.isHidden = cbKeybaordEnabled
         gifImageView.image = UIImage.gifImageWithName("allowfullaccess")
+
     }
 
     override func didReceiveMemoryWarning() {

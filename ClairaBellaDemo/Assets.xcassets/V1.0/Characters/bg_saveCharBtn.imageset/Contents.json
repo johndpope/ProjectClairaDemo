@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "PLACECHOLDER - Emoji's.png",
+      "filename" : "bg_saveCharBtn.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "PLACECHOLDER - Emoji's@2x.png",
+      "filename" : "bg_saveCharBtn@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "PLACECHOLDER - Emoji's@3x.png",
+      "filename" : "bg_saveCharBtn@3x.png",
       "scale" : "3x"
     }
   ],

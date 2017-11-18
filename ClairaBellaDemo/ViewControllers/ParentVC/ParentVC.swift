@@ -18,9 +18,12 @@ class ParentVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         updateConstraints()
-        setKeyboardAndProfileBtn()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setKeyboardAndProfileBtn()
+    }
     
     var cbKeybaordEnabled: Bool {
         if let keboards = UserDefaults.standard.object(forKey: "AppleKeyboards") as? [String] {
