@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SaveCharacterVC: ParentVC, UITextFieldDelegate {
+class SaveCharacterVC: ParentVC {
     @IBOutlet var indicator: IndicatorView!
     
     @IBOutlet var Character_Imageview: UIImageView!
@@ -16,9 +16,12 @@ class SaveCharacterVC: ParentVC, UITextFieldDelegate {
     @IBOutlet var Character_View: UIView!
     @IBOutlet var lblNameCharsCount: UILabel!
     @IBOutlet var checkbox: UIButton!
-    
+    @IBOutlet var tblHeaderView: UIView?
+    @IBOutlet var errorView: UIView!
     @IBOutlet weak var save_btn: UIButton!
-
+    @IBOutlet var mainCharInfoView: UIView!
+    @IBOutlet var mainCharInfoViewTopConstraint: NSLayoutConstraint!
+    
     let maxCharNameLength = 12
     var isCharacterEditMode = false
     
@@ -47,58 +50,43 @@ class SaveCharacterVC: ParentVC, UITextFieldDelegate {
 
     func setUI() {
        // save_btn.isHidden = !isCharacterEditMode
+        mainCharInfoView.isHidden = true
         name_textfield.text = character.name
         
-        self.name_textfield.delegate = self;
-        let leftView = UILabel(frame: CGRect(x: CGFloat(10), y: CGFloat(0), width: CGFloat(7), height: CGFloat(26)))
-        leftView.backgroundColor = UIColor.clear
-        name_textfield.leftView = leftView
-        name_textfield.leftViewMode = .always
-        name_textfield.contentVerticalAlignment = .center
-        
-        name_textfield.placeholder = "Name Your Character"
-        name_textfield.contentVerticalAlignment = .center
+        if let hdView = tblHeaderView {
+            var hdvFrame = hdView.frame
+            hdvFrame.size.height = hdvFrame.size.height * widthRatio
+            hdView.frame = hdvFrame
+        }
+
  
     }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool // called when 'return' key pressed. return false to ignore.
-    {
-        name_textfield.resignFirstResponder()
-        return true
-    }
-    func textFieldDidBeginEditing(_ textField: UITextField) {    //delegate method
-        //name_textfield.text = ""
-       // right_arrowImage.isHidden = true
-        //save_btn.isHidden = true
-    }
-    
-    
-    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {  //delegate method
         
-        if  (name_textfield.text?.characters.count)! > 0 {
-           // right_arrowImage.isHidden = false
-            //save_btn.isHidden = false
+    func isValidate()-> Bool {
+        var isValid = true
+        let charName = name_textfield.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        
+        name_textfield.setBorder(color:UIColor.clear)
+        
+        let errorColor = UIColor(colorLiteralRed: 150.0/255.0, green: 30.0/255.0, blue: 44.0/255.0, alpha: 0.8)
+        
+        if charName.isEmpty {
+            isValid = false
+            name_textfield.background = UIImage(named: "textboxBack_selected")
         }
-        return true
+        errorView.isHidden = isValid
+        return isValid
     }
-    
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        guard let text = textField.text else { return true }
-        let newLength = text.characters.count + string.characters.count - range.length
-        character.name = text
-        return newLength <= maxCharNameLength // Bool
-    }
-    
-    
-    func keyboardWillShow(_ notification: Notification) {
-        UIView.animate(withDuration: 0.1, animations: { () -> Void in
-            self.view.frame.origin.y = -150
-        })
-    }
-    
-    func keyboardWillHide(_ notification: Notification) {
-        self.view.frame.origin.y = 0
-    }
+
+//    func keyboardWillShow(_ notification: Notification) {
+//        UIView.animate(withDuration: 0.1, animations: { () -> Void in
+//            self.view.frame.origin.y = -150
+//        })
+//    }
+//    
+//    func keyboardWillHide(_ notification: Notification) {
+//        self.view.frame.origin.y = 0
+//    }
   
     func enableUserInteraction() {
         UIApplication.shared.endIgnoringInteractionEvents()
@@ -106,18 +94,14 @@ class SaveCharacterVC: ParentVC, UITextFieldDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name: .UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(_:)), name: .UIKeyboardWillHide, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name: .UIKeyboardWillShow, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(_:)), name: .UIKeyboardWillHide, object: nil)
 
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
-    }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+//        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
+//        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
     }
     
     
@@ -126,7 +110,7 @@ class SaveCharacterVC: ParentVC, UITextFieldDelegate {
         
         let OKAction = UIAlertAction(title: "OK", style: .default, handler: {
             alert -> Void in
-            _ = self.navigationController?.dismiss(animated: true, completion: nil)
+            //_ = self.navigationController?.dismiss(animated: true, completion: nil)
         })
         alertController.addAction(OKAction)
         
@@ -160,20 +144,8 @@ extension SaveCharacterVC {
     
     @IBAction func BtnSaved_ViewCharacter_Action(_ sender: UIButton) {
         
-        func showAlert(message: String, isCharacterSaved: Bool = false) {
-            let alertController = UIAlertController(title: message, message: "", preferredStyle: .alert)
-            
-            let OKAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-            alertController.addAction(OKAction)
-            
-            self.present(alertController, animated: true, completion: nil)
-            
-        }
-        if  (name_textfield.text?.characters.count)! > 0 {
+        if  isValidate() {
             isCharacterEditMode ? self.updateCharacterAPICall() : self.saveCharacterAPICAll()
-            
-        } else {
-            showAlert(message: "Character name is required.")
             
         }
     }
@@ -186,8 +158,28 @@ extension SaveCharacterVC {
     }
 
 
+    @IBAction func whatIsThis_btnCliked(_ sender: UIButton) {
+        let senderRect = self.view.convert(sender.bounds, from: sender)
+        mainCharInfoViewTopConstraint.constant = senderRect.origin.y - 80
+        mainCharInfoView.isHidden = !mainCharInfoView.isHidden
+        
+    }
 }
 
+extension SaveCharacterVC : UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        return textField.resignFirstResponder()
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        //print("begin")
+        textField.background = UIImage(named: "textboxBack_selected")
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        textField.background = UIImage(named: "textboxBack")
+    }
+}
 //MARK:- API calls
 extension SaveCharacterVC {
     
