@@ -518,8 +518,8 @@ class CharacterCell: TableCell {
     @IBOutlet var btnEmojis: UIButton!
     
     func setBtnTag(tag: Int) {
-        btnEdit.tag = tag
-        btnEmojis.tag = tag
+        btnEdit?.tag = tag
+        btnEmojis?.tag = tag
     }
     
 }

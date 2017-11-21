@@ -13,9 +13,12 @@ import MessageUI
 
 class EmojiesVC: ParentVC {
 
+    @IBOutlet weak var charsTableView: UITableView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var emojiToImageGeneratorView: EmojiImageGeneratorView!
     @IBOutlet weak var loadingHudView: UIView!
+    @IBOutlet weak var noCharactersView: UIView!
+    @IBOutlet weak var charListView: UIView!
     
     var filemanager = FileManager.default
     var isNewChar = false
@@ -42,6 +45,7 @@ class EmojiesVC: ParentVC {
     var emojis = [Emoji]()
     
     let numberOfEmojisInRow = 3
+    
     var emojiItemHeight: CGFloat {
      return (SCREEN_WIDTH-6)/CGFloat(numberOfEmojisInRow)
     }
@@ -56,12 +60,13 @@ class EmojiesVC: ParentVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        getEmojisContexts()
+        self.getEmojisContexts()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-       
+        self.setUI()
+
         if let char = characterForEmoji {
             character = char
             characterDidChange()
@@ -86,6 +91,32 @@ class EmojiesVC: ParentVC {
         characterForEmoji = nil
         //character = nil
     }
+    
+    
+    func setUI() {
+        self.charsTableView.dataSource = nil
+        self.charsTableView.delegate = nil
+
+        if Character.myCharacters.isEmpty {
+            self.noCharactersView.isHidden = false
+            self.charListView.isHidden = true
+            
+        } else if Character.myCharacters.count > 1 {
+            self.noCharactersView.isHidden = true
+            self.charListView.isHidden = false
+            self.charsTableView.dataSource = self
+            self.charsTableView.delegate = self
+            
+        } else {
+            self.noCharactersView.isHidden = true
+            self.charListView.isHidden = true
+        }
+        
+        self.noCharactersView.isHidden = true
+        self.charListView.isHidden = true
+
+    }
+    
     
     func characterDidChange() {
         if self.isNewChar {
@@ -185,33 +216,80 @@ extension EmojiesVC {
         
     }
     
+    @IBAction func selectCharacter_btnClicked(_ sender: UIButton) {
+        
+    }
+    
 }
 
 //MARK:- TableView DataSource and Delgate
 extension EmojiesVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return  1 + ((character?.emojis.count ?? 0) > 0  ? 1 : 0)
+        if tableView == charsTableView {
+            return Character.myCharacters.count
+        } else {
+            return  2 + ((character?.emojis.count ?? 0) > 0  ? 1 : 0)
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        if indexPath.row == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "bannerCell")!
+        if tableView == charsTableView {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "characterCell") as! CharacterCell
+            let char = Character.myCharacters[indexPath.row]
+            cell.lblCharacterName.text = char.name
+            cell.setBtnTag(tag: indexPath.row)
+            
+            if  !char.charHtml.isEmpty {
+                cell.webview.loadHTMLString(char.charHtml, baseURL: nil)
+            } else {
+                charGenerator.buildCharHTMLWith(choices: char.choices, block: { html in
+                    char.charHtml = html
+                    cell.webview.loadHTMLString(char.charHtml, baseURL: nil)
+                })
+            }
+            
             return cell
+            
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "emojiesCell") as! EmojiTableViewCell
-            cell.collectionview.reloadData()
-            return cell
+            if indexPath.row == 0 {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "bannerCell")!
+                return cell
+            } else if indexPath.row == 1 {
+                if let count = character?.emojis.count, count > 0 {
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "emojiesCell") as! EmojiTableViewCell
+                    cell.collectionview.reloadData()
+                    return cell
+                } else {
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "createMoreCharCell")!
+                    return cell
+
+                }
+            } else {//createMoreCharCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: "createMoreCharCell")!
+                return cell
+
+            }
         }
     }
     
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let bannerCellHeight = 186 * widthRatio
-        if indexPath.row == 0 {
-            return bannerCellHeight
+        if tableView == charsTableView {
+            return 120
         } else {
-            return emojisCellHeight//SCREEN_HEIGHT - bannerCellHeight - 64 - 49
+            let bannerCellHeight = 135 * widthRatio
+            if indexPath.row == 0 {
+                return bannerCellHeight
+            } else if indexPath.row == 1{
+                if let count = character?.emojis.count, count > 0 {
+                    return emojisCellHeight//SCREEN_HEIGHT - bannerCellHeight - 64 - 49
+
+                } else {
+                    return 550 * widthRatio
+                }
+            } else {
+                return 550 * widthRatio
+            }
         }
         
     }
