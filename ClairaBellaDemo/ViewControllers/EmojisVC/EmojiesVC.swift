@@ -21,6 +21,10 @@ class EmojiesVC: ParentVC {
     @IBOutlet weak var charListView: UIView!
     @IBOutlet weak var btnChangeChar: UIButton!
     
+    @IBOutlet weak var progressView: UIView!
+    @IBOutlet weak var progressBarImg: UIImageView!
+    @IBOutlet weak var progressBarRightConstraint: NSLayoutConstraint!
+    
     var filemanager = FileManager.default
     var isNewChar = false
     
@@ -77,6 +81,8 @@ class EmojiesVC: ParentVC {
         super.viewWillDisappear(animated)
         characterForEmoji = nil
         //character = nil
+        self.progressBarRightConstraint.constant = 0
+
     }
     
     
@@ -168,22 +174,33 @@ class EmojiesVC: ParentVC {
     
     //MARK: Convert emoji web to image
     func startGenerateEmojiImages() {
+        
         if let char = self.character {
             self.emojiToImageGeneratorView.character = char
-            let progressHUD = ProgressView(text: "Saving Emojis")
+            //let progressHUD = ProgressView(text: "Saving Emojis")
             
             self.emojiToImageGeneratorView.didStartBlock = {[weak self] in
-                //self?.loadingHudView.addSubview(progressHUD)
-                self?.loadingHudView.isHidden = false
                 
-                progressHUD.show()
+                self?.loadingHudView.isHidden = false
+                self?.progressBarRightConstraint.constant = 0
+                self?.loadingHudView.layoutIfNeeded()
+                
                 self?.tabBarController?.tabBar.isUserInteractionEnabled = false
                 self?.emojis.removeAll()
 
             }
             
+            let progressValue = emojis.count > 0 ? CGFloat(130/emojis.count) : 0
+
             self.emojiToImageGeneratorView.didImageCapturedForEmojiBlock = {[weak self] emoji in
                 if let weakSelf = self {
+
+                    //show progress
+                    UIView.animate(withDuration: 0.3, delay: 2, options: [.curveEaseInOut], animations: {
+                        self?.progressBarRightConstraint.constant += progressValue
+                        self?.loadingHudView.layoutIfNeeded()
+                    })
+
                     weakSelf.emojis.append(emoji)
                     let index = weakSelf.emojis.count-1
                     let indexPath = IndexPath(item: index, section: 0)
@@ -200,6 +217,7 @@ class EmojiesVC: ParentVC {
             self.emojiToImageGeneratorView.completionBlock = { [weak self] in
                 DispatchQueue.main.async(execute: {
                     if let weakSelf = self {
+                        weakSelf.loadingHudView.isHidden = true
                         weakSelf.emojis = weakSelf.character!.emojis
                         weakSelf.tableView.reloadData()
                         weakSelf.loadingHudView.isHidden = true
@@ -288,11 +306,30 @@ extension EmojiesVC {
 
 extension EmojiesVC: UITableViewDataSource, UITableViewDelegate {
 
+    enum EmojiCellType {
+        case typeBanner, typeCharName, typeEmojis, typeEmoji_CharBanner
+    }
+    var rows: [EmojiCellType] {
+        var rowCounts: [EmojiCellType] = []
+        if cbKeybaordEnabled {
+            rowCounts += [.typeBanner]
+        }
+        if let char = character {
+            if char.emojis.count > 0 {
+                    rowCounts += [.typeCharName, .typeEmojis]
+            }
+        }
+    
+        rowCounts += [.typeEmoji_CharBanner]
+        
+        return rowCounts
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == charsTableView {
             return Character.myCharacters.count
         } else {
-            return  2 + ((character?.emojis.count ?? 0) > 0  ? 1 : 0)
+            return  rows.count
         }
     }
     
@@ -316,23 +353,21 @@ extension EmojiesVC: UITableViewDataSource, UITableViewDelegate {
             return cell
             
         } else {
-            if indexPath.row == 0 {
+            if rows[indexPath.row] == .typeBanner {
                
                 let cell = tableView.dequeueReusableCell(withIdentifier: "bannerCell")!
                 return cell
            
-            } else if indexPath.row == 1 {
+            } else if rows[indexPath.row] == .typeCharName {
                 
-                if let count = character?.emojis.count, count > 0 {
-                    let cell = tableView.dequeueReusableCell(withIdentifier: "emojiesCell") as! EmojiTableViewCell
-                    cell.collectionview.reloadData()
-                    return cell
-               
-                } else {
-                    let cell = tableView.dequeueReusableCell(withIdentifier: "createMoreCharCell")!
-                    return cell
-                }
-           
+                let cell = tableView.dequeueReusableCell(withIdentifier: "emojiesCell") as! TableCell
+                cell.lblTitle.text  = character?.name
+                return cell
+            } else if rows[indexPath.row] == .typeEmojis {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "emojiesCell") as! EmojiTableViewCell
+                cell.collectionview.reloadData()
+                return cell
+
             } else {//createMoreCharCell
                
                 let cell = tableView.dequeueReusableCell(withIdentifier: "createMoreCharCell")!
@@ -348,9 +383,12 @@ extension EmojiesVC: UITableViewDataSource, UITableViewDelegate {
             return 120
         } else {
             let bannerCellHeight = 135 * widthRatio
-            if indexPath.row == 0 {
+            if rows[indexPath.row] == .typeBanner {
                 return bannerCellHeight
-            } else if indexPath.row == 1{
+                
+            } else if rows[indexPath.row] == .typeCharName {
+            return 60
+            } else if rows[indexPath.row] == .typeEmojis{
                 if let count = character?.emojis.count, count > 0 {
                     return emojisCellHeight//SCREEN_HEIGHT - bannerCellHeight - 64 - 49
 
