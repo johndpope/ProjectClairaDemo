@@ -3,7 +3,6 @@
 //  EmojiesVC.swift
 //  Claireabella
 //
-//  Created by Intelivita on 05/05/17.
 //  Copyright © 2017 Intelivita. All rights reserved.
 //
 
@@ -87,6 +86,7 @@ class EmojiesVC: ParentVC {
     
     
     func setUI() {
+        loadingHudView.isHidden = true
         if let _ = characterForEmoji {
             self.noCharactersView.isHidden = true
             self.charListView.isHidden = true

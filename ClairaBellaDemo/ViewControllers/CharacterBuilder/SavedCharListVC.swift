@@ -74,15 +74,15 @@ class SavedCharListVC: ParentVC {
         headerviewFrame.size.height *= widthRatio
         tblHeaderView.frame = headerviewFrame
         
-        btnNewChar.layer.cornerRadius = 5
-        btnNewChar.layer.borderColor = UIColor.white.cgColor
-        btnNewChar.layer.borderWidth = 1
-        btnNewChar.clipsToBounds = true
-        
-        btnShare.layer.cornerRadius = 5
-        btnShare.layer.borderColor = UIColor.white.cgColor
-        btnShare.layer.borderWidth = 1
-        btnShare.clipsToBounds = true
+//        btnNewChar.layer.cornerRadius = 5
+//        btnNewChar.layer.borderColor = UIColor.white.cgColor
+//        btnNewChar.layer.borderWidth = 1
+//        btnNewChar.clipsToBounds = true
+//        
+//        btnShare.layer.cornerRadius = 5
+//        btnShare.layer.borderColor = UIColor.white.cgColor
+//        btnShare.layer.borderWidth = 1
+//        btnShare.clipsToBounds = true
 
     }
     
@@ -96,7 +96,7 @@ class SavedCharListVC: ParentVC {
             checkBox.isSelected = char.isMainChar
             lblCreatedDate.text = ""
             
-            btnCreateEmojis.setTitle("View \(char.name) Emoji's", for: .normal)
+//            btnCreateEmojis.setTitle("View \(char.name) Emoji's", for: .normal)
             
             if let date = dateFormatter.date(from: char.createdDate, format: "yyyy-MM-dd'T'HH:mm:ss.SSSZ") {
                 print(date)
