@@ -1072,7 +1072,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CH0-dJ-NTT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1447" y="1760"/>
+            <point key="canvasLocation" x="1516" y="2018"/>
         </scene>
         <!--Keyboard SetupVC-->
         <scene sceneID="dxS-Pt-fya">
@@ -1468,7 +1468,7 @@
                                                 <state key="normal" image="Keyboard_Not_Installed"/>
                                                 <state key="selected" image="Keyboard_Installed"/>
                                                 <connections>
-                                                    <action selector="keyboardBtn_clicked:" destination="91g-WZ-lev" eventType="touchUpInside" id="KzG-Pz-GI1"/>
+                                                    <action selector="keyboardBtn_clicked:" destination="91g-WZ-lev" eventType="touchUpInside" id="Kkh-Kb-fPj"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RaJ-ZS-XPi">
@@ -1973,6 +1973,8 @@
                     <size key="freeformSize" width="375" height="1000"/>
                     <connections>
                         <outlet property="btnChangeChar" destination="mfK-Ws-ThN" id="xd6-k0-bBn"/>
+                        <outlet property="btnKeyboard" destination="fHb-YL-fBz" id="LQy-lQ-LXV"/>
+                        <outlet property="btnProfile" destination="RaJ-ZS-XPi" id="6cD-hR-cwm"/>
                         <outlet property="charListView" destination="0qU-to-lb2" id="Pog-LD-LWi"/>
                         <outlet property="charsTableView" destination="f6h-FO-9hb" id="7RG-P9-mnm"/>
                         <outlet property="emojiToImageGeneratorView" destination="eX2-WJ-x0q" id="V7s-xj-ttQ"/>
@@ -2002,7 +2004,7 @@
                 <navigationController restorationIdentifier="MyCharactersVC" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="bwH-up-kzs" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Characters" image="icon_tab_characters" id="Jkj-P9-c5a"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="gsv-2b-TeE">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="gsv-2b-TeE">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -2024,7 +2026,7 @@
                         <viewControllerLayoutGuide type="bottom" id="oPS-vq-Ygw"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Xob-FJ-1Du">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="1100"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Th-ht-pdn">
@@ -2072,8 +2074,7 @@
                                     <constraint firstAttribute="bottom" secondItem="2kx-gh-o3X" secondAttribute="bottom" constant="2" id="zPe-K3-QP3"/>
                                 </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Vee-RA-BwO">
-                                <frame key="frameInset" minY="65" width="375" height="553"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Vee-RA-BwO">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="JWG-xD-Uny">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="680"/>
@@ -2082,13 +2083,6 @@
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="catwalk" translatesAutoresizingMaskIntoConstraints="NO" id="Knh-OD-Rb1">
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="300" id="CXT-il-mMw"/>
-                                            </constraints>
-                                        </imageView>
-                                        <imageView hidden="YES" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="oval" translatesAutoresizingMaskIntoConstraints="NO" id="Ajm-8T-TMD">
-                                            <frame key="frameInset" minX="72" minY="305" width="231" height="50"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="231" id="LBx-NN-da7"/>
-                                                <constraint firstAttribute="height" constant="50" id="b23-oe-zlA"/>
                                             </constraints>
                                         </imageView>
                                         <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WKq-f8-c9S">
@@ -2184,12 +2178,12 @@
                                                                         <action selector="checkBox_btnClicked:" destination="c3h-yz-is9" eventType="touchUpInside" id="MsK-gn-vXE"/>
                                                                     </connections>
                                                                 </button>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is my main character" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rxj-GD-fWr">
-                                                                    <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="This is my main character" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rxj-GD-fWr">
+                                                                    <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7tg-Zj-csd">
+                                                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7tg-Zj-csd">
                                                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
                                                                     <state key="normal" title="What is this?">
                                                                         <color key="titleColor" red="0.87843137250000003" green="0.062745098040000002" blue="0.61568627450000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2201,14 +2195,16 @@
                                                             </subviews>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             <constraints>
+                                                                <constraint firstAttribute="height" constant="40" id="0b6-NG-l4D"/>
                                                                 <constraint firstItem="7tg-Zj-csd" firstAttribute="height" secondItem="aL9-NP-lRg" secondAttribute="height" id="DYi-28-pNf"/>
                                                                 <constraint firstAttribute="bottom" secondItem="aL9-NP-lRg" secondAttribute="bottom" id="EAO-qc-roW"/>
                                                                 <constraint firstItem="aL9-NP-lRg" firstAttribute="top" secondItem="L7f-pt-DJ7" secondAttribute="top" id="FDS-GN-SBz"/>
                                                                 <constraint firstItem="Rxj-GD-fWr" firstAttribute="centerY" secondItem="L7f-pt-DJ7" secondAttribute="centerY" id="YIh-FG-2TC"/>
-                                                                <constraint firstItem="Rxj-GD-fWr" firstAttribute="leading" secondItem="aL9-NP-lRg" secondAttribute="trailing" constant="-5" id="b2s-Cu-Trt"/>
+                                                                <constraint firstItem="Rxj-GD-fWr" firstAttribute="leading" secondItem="aL9-NP-lRg" secondAttribute="trailing" constant="2" id="b2s-Cu-Trt"/>
                                                                 <constraint firstAttribute="trailing" secondItem="7tg-Zj-csd" secondAttribute="trailing" constant="2" id="bLY-8D-jMf"/>
                                                                 <constraint firstItem="7tg-Zj-csd" firstAttribute="centerY" secondItem="aL9-NP-lRg" secondAttribute="centerY" id="cO5-pY-I2a"/>
                                                                 <constraint firstItem="aL9-NP-lRg" firstAttribute="leading" secondItem="L7f-pt-DJ7" secondAttribute="leading" id="h9l-ac-ts6"/>
+                                                                <constraint firstItem="7tg-Zj-csd" firstAttribute="leading" secondItem="Rxj-GD-fWr" secondAttribute="trailing" constant="4" id="hJ9-qI-6ap"/>
                                                             </constraints>
                                                         </view>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="IRd-yq-bRn">
@@ -2322,7 +2318,6 @@
                                         <constraint firstItem="G7D-jM-GdU" firstAttribute="leading" secondItem="JWG-xD-Uny" secondAttribute="leading" id="DId-8D-Z2E"/>
                                         <constraint firstItem="Knh-OD-Rb1" firstAttribute="leading" secondItem="JWG-xD-Uny" secondAttribute="leading" id="G0H-ZH-jq1"/>
                                         <constraint firstItem="Knh-OD-Rb1" firstAttribute="top" secondItem="JWG-xD-Uny" secondAttribute="top" id="GPl-XZ-B44"/>
-                                        <constraint firstItem="Ajm-8T-TMD" firstAttribute="centerX" secondItem="JWG-xD-Uny" secondAttribute="centerX" id="TYD-c9-Zg9"/>
                                         <constraint firstAttribute="trailing" secondItem="Knh-OD-Rb1" secondAttribute="trailing" id="YTg-Vv-otM"/>
                                         <constraint firstItem="WKq-f8-c9S" firstAttribute="leading" secondItem="JWG-xD-Uny" secondAttribute="leading" id="f7z-eI-0et"/>
                                         <constraint firstAttribute="trailing" secondItem="WKq-f8-c9S" secondAttribute="trailing" id="gtD-dn-dPc"/>
@@ -2386,6 +2381,8 @@
                             <constraint firstItem="Vee-RA-BwO" firstAttribute="top" secondItem="Xob-FJ-1Du" secondAttribute="top" constant="65" id="wQx-G9-x64"/>
                         </constraints>
                     </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="375" height="667"/>
                     <connections>
                         <outlet property="Character_View" destination="WKq-f8-c9S" id="eNL-Pf-ffr"/>
                         <outlet property="checkbox" destination="aL9-NP-lRg" id="Lbp-jB-p5u"/>
@@ -2402,7 +2399,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T7U-0Q-heV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3599.1999999999998" y="431.33433283358323"/>
+            <point key="canvasLocation" x="3175" y="713"/>
         </scene>
         <!--SavedCharListVC-->
         <scene sceneID="Me0-uX-g9j">
@@ -3293,7 +3290,7 @@
                 <navigationController restorationIdentifier="HomeVC" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="WA2-t6-pCw" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Postcards" image="icon_tab_postcards" id="xn7-UT-V6d"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="0ch-Kc-ZsK">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="0ch-Kc-ZsK">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -3311,7 +3308,7 @@
             <objects>
                 <navigationController storyboardIdentifier="CharBuilderNavVC" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="oMH-0n-afk" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="6CF-sR-Y4t">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="6CF-sR-Y4t">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -3330,7 +3327,7 @@
                 <navigationController restorationIdentifier="EmojisVC" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="sQC-hR-Ev0" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Emojis" image="icon_tab_emoji" id="wib-9V-HJq"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Gx5-Mo-dbd">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Gx5-Mo-dbd">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -3844,7 +3841,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XWi-aE-kCA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2785" y="1740"/>
+            <point key="canvasLocation" x="3263" y="2018"/>
         </scene>
         <!--Shop-->
         <scene sceneID="9OZ-xD-saP">
@@ -3852,7 +3849,7 @@
                 <navigationController restorationIdentifier="ProfileVC" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="eEv-NT-HZg" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Shop" image="icon_tab_shop" id="33s-en-IA2"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="OsM-Q3-QCx">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="OsM-Q3-QCx">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -3863,7 +3860,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WKJ-i9-bWD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="785" y="1760"/>
+            <point key="canvasLocation" x="785" y="2019"/>
         </scene>
         <!--Share CharacterVC-->
         <scene sceneID="V20-Kd-Q8u">
@@ -4079,7 +4076,6 @@
         <image name="jute" width="151" height="151"/>
         <image name="keyboardSetupImg" width="375" height="131"/>
         <image name="keyboard_1" width="342" height="256"/>
-        <image name="oval" width="180" height="30"/>
         <image name="phone" width="151" height="152"/>
         <image name="postcard_Big" width="47" height="38"/>
         <image name="progressBar" width="38" height="15"/>

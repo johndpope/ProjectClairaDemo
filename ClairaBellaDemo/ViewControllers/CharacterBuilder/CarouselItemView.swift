@@ -39,11 +39,17 @@ class CarouselItemView: UIView {
 //        }
 //        
 //        webView.scrollView.setZoomScale(zoomFac, animated: false)
-        webView.scrollView.isScrollEnabled = false
+        webView?.scrollView.isScrollEnabled = false
     }
     
     class func loadView()-> CarouselItemView {
         let views = Bundle.main.loadNibNamed("CarouselItemView", owner: nil, options: nil) as! [UIView]
         return views.first as! CarouselItemView
     }
+    
+    class func loadLastTile()-> CarouselItemView {
+        let views = Bundle.main.loadNibNamed("CarouselItemView", owner: nil, options: nil) as! [UIView]
+        return views[1] as! CarouselItemView
+    }
+
 }

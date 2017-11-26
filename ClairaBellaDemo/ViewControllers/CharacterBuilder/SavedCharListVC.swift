@@ -352,29 +352,36 @@ extension SavedCharListVC: UITableViewDataSource, UITableViewDelegate {
 //MARK:- iCarousel DataSource and Delegate
 extension SavedCharListVC : iCarouselDelegate, iCarouselDataSource {
     func numberOfItems(in carousel: iCarousel) -> Int {
-        return savedChars.count
+        return savedChars.count + 1
     }
     
     func carousel(_ carousel: iCarousel, viewForItemAt index: Int, reusing view: UIView?) -> UIView {
         var itemView: CarouselItemView
-        if let iView = view as? CarouselItemView {
-            itemView = iView
-        } else {
-            itemView = CarouselItemView.loadView()
+        if index == (carousel.numberOfItems-1){
+            itemView = CarouselItemView.loadLastTile()
             itemView.frame = CGRect(x: 0, y: 0, width: 172 * widthRatio, height: 275*widthRatio)
-        }
-        
-        let char = savedChars[index]
-        if  !char.charHtml.isEmpty {
-            itemView.htmlString = char.charHtml
+            return itemView
+            
         } else {
-            charGenerator.buildCharHTMLWith(choices: char.choices, block: { html in
-                itemView.htmlString = html
-                char.charHtml = html
-            })
+            if let iView = view as? CarouselItemView {
+                itemView = iView
+            } else {
+                itemView = CarouselItemView.loadView()
+                itemView.frame = CGRect(x: 0, y: 0, width: 172 * widthRatio, height: 275*widthRatio)
+            }
+            
+            let char = savedChars[index]
+            if  !char.charHtml.isEmpty {
+                itemView.htmlString = char.charHtml
+            } else {
+                charGenerator.buildCharHTMLWith(choices: char.choices, block: { html in
+                    itemView.htmlString = html
+                    char.charHtml = html
+                })
+            }
+            
+            return itemView
         }
-
-        return itemView
     }
     
     func carousel(_ carousel: iCarousel, valueFor option: iCarouselOption, withDefault value: CGFloat) -> CGFloat {
