@@ -158,15 +158,22 @@ extension ShareCharacterVC {
     }
     
     func shareViaMail(_ image: UIImage) {
-        if MFMailComposeViewController.canSendMail() {
-            let mail = MFMailComposeViewController()
-            mail.mailComposeDelegate = self
-            let imageData: Data = UIImagePNGRepresentation(image)!
-            mail.addAttachmentData(imageData, mimeType: "image/png", fileName: "imageName")
-            self.present(mail, animated: true, completion: nil)
-        } else {
-            showAlert(message: "Please go to settings and add your email account. ")
-        }
+        //code for copy image //previously this func used for sending email
+        let pasteBoard = UIPasteboard.general
+        let imagedata = UIImagePNGRepresentation(image)
+        pasteBoard.setData(imagedata!, forPasteboardType: UIPasteboardTypeListImage.object(at: 0) as! String)
+        
+        //
+//        if MFMailComposeViewController.canSendMail() {
+//            let mail = MFMailComposeViewController()
+//            mail.mailComposeDelegate = self
+//            let imageData: Data = UIImagePNGRepresentation(image)!
+//            mail.addAttachmentData(imageData, mimeType: "image/png", fileName: "imageName")
+//            self.present(mail, animated: true, completion: nil)
+//        } else {
+//            showAlert(message: "Please go to settings and add your email account. ")
+//        }
+
     }
     
 }
