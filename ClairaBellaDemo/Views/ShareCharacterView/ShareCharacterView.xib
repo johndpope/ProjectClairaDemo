@@ -268,7 +268,12 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zaz-Ir-UYV">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zaz-Ir-UYV">
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="Vjh-lh-q6h"/>
+                        <constraint firstAttribute="width" constant="50" id="mil-cV-8Zw"/>
+                    </constraints>
+                    <state key="normal" image="Close"/>
                     <connections>
                         <action selector="close_btnClicked:" destination="gGL-fD-Gc0" eventType="touchUpInside" id="wU3-la-Lnq"/>
                     </connections>
@@ -329,7 +334,6 @@
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Facebook" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dad-xF-gfg">
                                             <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="12"/>
-                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -360,7 +364,6 @@
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Twitter" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uf1-Zv-C4c">
                                             <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="12"/>
-                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -391,7 +394,6 @@
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wuc-TO-1Y5">
                                             <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="12"/>
-                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -422,7 +424,6 @@
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Save" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K6t-UU-vxJ">
                                             <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="12"/>
-                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -455,7 +456,6 @@
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="More" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="opZ-OL-bR4">
                                             <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="12"/>
-                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -481,24 +481,21 @@
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Share this character with :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4xU-4D-Dui">
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
-                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
-            <color key="backgroundColor" white="0.0" alpha="0.90295987180281689" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.95686274509803915" green="0.792156862745098" blue="0.87058823529411766" alpha="0.90295987180281689" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="4xU-4D-Dui" firstAttribute="leading" secondItem="9Ki-kE-FMW" secondAttribute="leading" id="Cnw-HB-MLs"/>
                 <constraint firstItem="VMN-YE-SG4" firstAttribute="leading" secondItem="0fA-Td-cVR" secondAttribute="leading" constant="-10" id="ErB-Ra-g8E"/>
                 <constraint firstItem="0fA-Td-cVR" firstAttribute="centerX" secondItem="gGL-fD-Gc0" secondAttribute="centerX" id="JuW-Nh-PmY"/>
+                <constraint firstAttribute="trailing" secondItem="zaz-Ir-UYV" secondAttribute="trailing" constant="10" id="SXd-gN-fYm"/>
+                <constraint firstItem="zaz-Ir-UYV" firstAttribute="top" secondItem="gGL-fD-Gc0" secondAttribute="top" constant="20" id="UTJ-8U-FMB"/>
                 <constraint firstItem="VMN-YE-SG4" firstAttribute="trailing" secondItem="0fA-Td-cVR" secondAttribute="trailing" constant="10" id="bIt-Eg-LvC"/>
                 <constraint firstItem="0fA-Td-cVR" firstAttribute="top" secondItem="gGL-fD-Gc0" secondAttribute="top" constant="100" id="eyK-XJ-9Bf"/>
-                <constraint firstItem="zaz-Ir-UYV" firstAttribute="top" secondItem="gGL-fD-Gc0" secondAttribute="top" id="hZy-yJ-sA6"/>
                 <constraint firstItem="0fA-Td-cVR" firstAttribute="width" secondItem="gGL-fD-Gc0" secondAttribute="width" multiplier="0.7" id="hsU-IZ-F3d"/>
                 <constraint firstItem="VMN-YE-SG4" firstAttribute="top" secondItem="0fA-Td-cVR" secondAttribute="bottom" constant="53" id="hyN-dE-LzW"/>
                 <constraint firstItem="4xU-4D-Dui" firstAttribute="top" secondItem="0fA-Td-cVR" secondAttribute="bottom" constant="22" id="iWW-GD-26q"/>
-                <constraint firstAttribute="trailing" secondItem="zaz-Ir-UYV" secondAttribute="trailing" id="lkT-KO-rl6"/>
-                <constraint firstItem="zaz-Ir-UYV" firstAttribute="leading" secondItem="gGL-fD-Gc0" secondAttribute="leading" id="nzw-0z-7fj"/>
-                <constraint firstAttribute="bottom" secondItem="zaz-Ir-UYV" secondAttribute="bottom" id="svX-Kx-uca"/>
                 <constraint firstItem="VMN-YE-SG4" firstAttribute="centerX" secondItem="0fA-Td-cVR" secondAttribute="centerX" id="zEb-72-C04"/>
             </constraints>
             <connections>
