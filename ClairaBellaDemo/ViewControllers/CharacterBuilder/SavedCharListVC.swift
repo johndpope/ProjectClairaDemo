@@ -49,6 +49,7 @@ class SavedCharListVC: ParentVC {
         super.viewDidLoad()
         self.savedChars = Character.myCharacters
 
+
         self.setUI()
         self.setNotificaitonObserver()
         self.showHideEmptyItemsView()
@@ -360,10 +361,12 @@ extension SavedCharListVC : iCarouselDelegate, iCarouselDataSource {
         if index == (carousel.numberOfItems-1){
             itemView = CarouselItemView.loadLastTile()
             itemView.frame = CGRect(x: 0, y: 0, width: 172 * widthRatio, height: 275*widthRatio)
+            itemView.tag = 1000
             return itemView
             
         } else {
-            if let iView = view as? CarouselItemView {
+            
+            if let iView = view as? CarouselItemView, iView.tag != 1000{
                 itemView = iView
             } else {
                 itemView = CarouselItemView.loadView()

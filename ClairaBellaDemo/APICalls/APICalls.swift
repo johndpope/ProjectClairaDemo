@@ -32,16 +32,16 @@ class APICall {
     let assetUrl = "http://builder.midnightplatform.net/midnight/system/asset_library/interface/v1.0/"
 
     enum APIName {
-        static var apiVersion = "v1.0.0"
+        static var apiVersion = "v1.0"
 
-        static var getCharacters    = apiVersion + "/character.json"
-        static let getPartsMap      = apiVersion + "/parts_map.json"
-        static let getParts         = apiVersion + "/parts.json"
-        static let getPartMeta      = apiVersion + "/parts_meta.json"
-        static let getContexts      = apiVersion + "/contexts.json"
-        static let getEmojisContexts = apiVersion + "/emojis.json"
+        static var getCharacters    = apiVersion + "/claireabella/character"
+        static let getPartsMap      = apiVersion + "/claireabella/parts_map"
+        static let getParts         = apiVersion + "/claireabella/parts"
+        static let getPartMeta      = apiVersion + "/claireabella/parts_meta"
+        static let getContexts      = apiVersion + "/claireabella/contexts"
+        static let getEmojisContexts = apiVersion + "/claireabella/emojis"
 
-        static let getInterfaces = apiVersion + "/interface.json"
+        static let getInterfaces = apiVersion + "/claireabella/web_interface"
     }
     
     typealias ResponseBlock = (Any?, Bool)-> Void

@@ -181,25 +181,26 @@ class EmojiesVC: ParentVC {
             
             self.emojiToImageGeneratorView.didStartBlock = {[weak self] in
                 
-                self?.loadingHudView.isHidden = false
                 self?.progressBarRightConstraint.constant = 0
                 self?.loadingHudView.layoutIfNeeded()
-                
+                self?.loadingHudView.isHidden = false
                 self?.tabBarController?.tabBar.isUserInteractionEnabled = false
                 self?.emojis.removeAll()
 
             }
             
-            let progressValue = emojis.count > 0 ? CGFloat(130/emojis.count) : 0
 
             self.emojiToImageGeneratorView.didImageCapturedForEmojiBlock = {[weak self] emoji in
                 if let weakSelf = self {
+                    self?.loadingHudView.isHidden = false
+
+                    let progressValue = weakSelf.emojisContextKeys.count > 0 ? CGFloat(130.0/CGFloat(weakSelf.emojisContextKeys.count)) : 0
+
+                    print("progress value : \(progressValue)")
+                    self?.progressBarRightConstraint.constant += progressValue
+                    self?.loadingHudView.layoutIfNeeded()
 
                     //show progress
-                    UIView.animate(withDuration: 0.3, delay: 2, options: [.curveEaseInOut], animations: {
-                        self?.progressBarRightConstraint.constant += progressValue
-                        self?.loadingHudView.layoutIfNeeded()
-                    })
 
                     weakSelf.emojis.append(emoji)
                     let index = weakSelf.emojis.count-1
@@ -223,6 +224,7 @@ class EmojiesVC: ParentVC {
                         weakSelf.loadingHudView.isHidden = true
                         weakSelf.tabBarController?.tabBar.isUserInteractionEnabled = true
                         self?.character?.editMode = false
+                        self?.btnChangeChar.isHidden = !(Character.myCharacters.count > 1)
                     }
                 })
             }
@@ -280,8 +282,6 @@ extension EmojiesVC {
 
             }) { (finish) in
                 self.charListView.isHidden = true
-                self.btnChangeChar.isHidden = false
-                
 
         }
     }
@@ -360,7 +360,7 @@ extension EmojiesVC: UITableViewDataSource, UITableViewDelegate {
            
             } else if rows[indexPath.row] == .typeCharName {
                 
-                let cell = tableView.dequeueReusableCell(withIdentifier: "emojiesCell") as! TableCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: "charNameCell") as! TableCell
                 cell.lblTitle.text  = character?.name
                 return cell
             } else if rows[indexPath.row] == .typeEmojis {
@@ -550,6 +550,7 @@ extension EmojiesVC: MFMailComposeViewControllerDelegate {
 //MARK:- API calls
 extension EmojiesVC {
     func getEmojisContexts() {
+        
         APICall.shared.emojis_context_APICall { (response, success) in
             if success {
                 if let json = response as? [String : Any] {
