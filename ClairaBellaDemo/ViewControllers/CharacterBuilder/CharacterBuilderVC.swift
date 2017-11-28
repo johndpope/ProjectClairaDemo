@@ -128,7 +128,7 @@ class CharacterBuilderVC: ParentVC {
             self.selectedMenu = menus.first
             
             let body = menus.filter({$0.title == "Body"}).first!
-            body.choices[1].choiceId = "skin_tone" //api have skin_colour instead of skin_tone thats why need this line.
+            //body.choices[1].choiceId = "skin_tone" //api have skin_colour instead of skin_tone thats why need this line.
             
             
             for item in menus {

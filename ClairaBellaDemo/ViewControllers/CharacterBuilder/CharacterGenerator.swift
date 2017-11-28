@@ -171,8 +171,8 @@ class CharacterHTMLBuilder {
             
             
             if let fileMeta = self.partsMeta[fileName + ".svg"] {
-                fileWidth = (fileMeta as! [String : Any])["width"] as! String
-                fileHeight = (fileMeta as! [String : Any])["height"] as! String
+                fileWidth = RConverter.string((fileMeta as! [String : Any])["width"])
+                fileHeight = RConverter.string((fileMeta as! [String : Any])["height"])
                 fileJoints = ((fileMeta as! [String : Any])["joints"] as? [String : [String : String]]) ?? [:]
             }
             
@@ -663,6 +663,7 @@ class ChoiceMenu {
     var heading = ""
     var choices = [CharacterChoice]()
     
+    
     var selected = false
     
     init(_ json: [String : Any]) {
@@ -672,8 +673,15 @@ class ChoiceMenu {
 
         heading = (json["heading"] as? String) ?? ""
         
-        if let jsChoices = json["choices"] as? [[String : Any]] {
-            self.choices = jsChoices.map({CharacterChoice($0)})
+        if let jsChoices = json["choices"] as? [String : Any] {
+            for (key, obj) in jsChoices.enumerated() {
+                print(key)
+                print(obj)
+                
+                let charChoice = CharacterChoice(obj.value as! [String : Any])
+                self.choices.append(charChoice)
+            }
+            //self.choices = jsChoices.map({CharacterChoice($0)})
         }
     }
 }
@@ -717,8 +725,15 @@ class ChoiceOption {
         name = (json["name"] as? String) ?? ""
         self.iconName = iconName //+ ".png"
         
-        if let jsChoices = json["choices"] as? [[String : Any]] {
-            self.choices = jsChoices.map({CharacterChoice($0)})
+        if let jsChoices = json["choices"] as? [String : Any] {
+            for (key, obj) in jsChoices.enumerated() {
+                print(key)
+                print(obj)
+                
+                let charChoice = CharacterChoice(obj.value as! [String : Any])
+                self.choices.append(charChoice)
+            }
+
         }
         
     }

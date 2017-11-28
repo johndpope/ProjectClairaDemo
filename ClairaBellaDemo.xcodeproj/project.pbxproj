@@ -3665,6 +3665,8 @@
 		79244E101F7ABBF400741D69 /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79244E0F1F7ABBF400741D69 /* KeyboardView.swift */; };
 		792638171FB8596500BA1183 /* CBTabbarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792638161FB8596500BA1183 /* CBTabbarVC.swift */; };
 		792713271F84193D00C7B7DB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 792713251F84193D00C7B7DB /* Main.storyboard */; };
+		792721251FCDE54100DC67AE /* RConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792721231FCDE4B700DC67AE /* RConverter.swift */; };
+		792721261FCDE6B600DC67AE /* RConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792721231FCDE4B700DC67AE /* RConverter.swift */; };
 		792738021F63BCCE00C238F0 /* UtilityClasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792738011F63BCCE00C238F0 /* UtilityClasses.swift */; };
 		79292BDB1F6DA05B00015CB3 /* UsersCharacters.plist in Resources */ = {isa = PBXBuildFile; fileRef = 79292BDA1F6DA05A00015CB3 /* UsersCharacters.plist */; };
 		7929835C1FAF996A008813D2 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7929835A1FAF996A008813D2 /* LoginVC.swift */; };
@@ -5985,6 +5987,7 @@
 		79244E0F1F7ABBF400741D69 /* KeyboardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardView.swift; sourceTree = "<group>"; };
 		792638161FB8596500BA1183 /* CBTabbarVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CBTabbarVC.swift; sourceTree = "<group>"; };
 		792713261F84193D00C7B7DB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		792721231FCDE4B700DC67AE /* RConverter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RConverter.swift; sourceTree = "<group>"; };
 		792738011F63BCCE00C238F0 /* UtilityClasses.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilityClasses.swift; sourceTree = "<group>"; };
 		79292BDA1F6DA05A00015CB3 /* UsersCharacters.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = UsersCharacters.plist; sourceTree = "<group>"; };
 		7929835A1FAF996A008813D2 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
@@ -8425,6 +8428,7 @@
 		792294441F5F0BA0004845DE /* Others */ = {
 			isa = PBXGroup;
 			children = (
+				792721231FCDE4B700DC67AE /* RConverter.swift */,
 				796567BD1FBA8E6D0084E8E1 /* allowfullaccess.gif */,
 				1347CF451FBAECB5008ABD9D /* iOSDevCenters+GIF.swift */,
 				7932BBDC1F61D71700A25AAF /* Fonts */,
@@ -12573,6 +12577,7 @@
 				792E1A251F7C056400A7F4C5 /* CharacterGenerator.swift in Sources */,
 				79244E041F7AB63700741D69 /* KeyboardViewController.swift in Sources */,
 				79185ADA1F86A1D50035B92F /* KeyboardCell.swift in Sources */,
+				792721261FCDE6B600DC67AE /* RConverter.swift in Sources */,
 				792E1A261F7C056B00A7F4C5 /* APICalls.swift in Sources */,
 				79244E101F7ABBF400741D69 /* KeyboardView.swift in Sources */,
 			);
@@ -12611,6 +12616,7 @@
 				7932BBC71F61D1C700A25AAF /* Loading1.swift in Sources */,
 				7917CA2F1F89455100EE7824 /* CharacterAlertView.swift in Sources */,
 				7932BBC31F61D1C700A25AAF /* Bella_image.swift in Sources */,
+				792721251FCDE54100DC67AE /* RConverter.swift in Sources */,
 				79183D631F5514B600A00D50 /* SaveCharacterVC.swift in Sources */,
 				7932BBD51F61D1DD00A25AAF /* AccountView.swift in Sources */,
 				79DAB6A81F571CA00019C37D /* SavedCharListVC.swift in Sources */,
