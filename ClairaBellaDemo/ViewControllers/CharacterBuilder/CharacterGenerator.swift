@@ -681,7 +681,10 @@ class ChoiceMenu {
                 let charChoice = CharacterChoice(obj.value as! [String : Any])
                 self.choices.append(charChoice)
             }
-            //self.choices = jsChoices.map({CharacterChoice($0)})
+            
+            self.choices.sort(by: { (ch1, ch2) -> Bool in
+                return ch1.type == .square
+            })
         }
     }
 }
