@@ -51,7 +51,7 @@ class EmojiesVC: ParentVC {
     let numberOfEmojisInRow = 3
     
     var emojiItemHeight: CGFloat {
-        return (SCREEN_WIDTH-6)/CGFloat(numberOfEmojisInRow)
+        return (SCREEN_WIDTH-22)/CGFloat(numberOfEmojisInRow)
     }
    
     var emojisCellHeight: CGFloat {
@@ -78,7 +78,7 @@ class EmojiesVC: ParentVC {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        characterForEmoji = nil
+        userSelectedCharForEmoji = nil
         //character = nil
         self.progressBarRightConstraint.constant = 0
 
@@ -87,7 +87,7 @@ class EmojiesVC: ParentVC {
     
     func setUI() {
         loadingHudView.isHidden = true
-        if let _ = characterForEmoji {
+        if let _ = userSelectedCharForEmoji {
             self.noCharactersView.isHidden = true
             self.charListView.isHidden = true
             self.tableView.isHidden = false
@@ -129,11 +129,11 @@ class EmojiesVC: ParentVC {
     
     
     func setCharacterForEmojis() {
-        if let char = characterForEmoji {
+        if let char = userSelectedCharForEmoji {
             character = char
             characterDidChange()
             
-            characterForEmoji = nil
+            userSelectedCharForEmoji = nil
         } else  {
             if Character.myCharacters.count == 1 {
                 if let defaultChar = Character.mainCharacter {
@@ -176,7 +176,6 @@ class EmojiesVC: ParentVC {
     func startGenerateEmojiImages() {
         
         if let char = self.character {
-            self.emojiToImageGeneratorView.character = char
             //let progressHUD = ProgressView(text: "Saving Emojis")
             
             self.emojiToImageGeneratorView.didStartBlock = {[weak self] in
@@ -208,7 +207,7 @@ class EmojiesVC: ParentVC {
                     
                     if let cell = self?.tableView.cellForRow(at: IndexPath(row:1, section:0)) as? EmojiTableViewCell {
                         cell.collectionview.insertItems(at: [indexPath])
-                        //cell.collectionview.scrollToItem(at: indexPath, at: .centeredVertically, animated: true)
+
                     } else {
                         self?.tableView.reloadData()
                     }
@@ -228,6 +227,10 @@ class EmojiesVC: ParentVC {
                     }
                 })
             }
+            
+            
+            self.emojiToImageGeneratorView.character = char
+
         }
 
     }
@@ -247,8 +250,9 @@ extension EmojiesVC {
     
    
     @IBAction func Btn_SetupNowAction(_ sender: UIButton) {
-        self.performSegue(withIdentifier: "KeyBoardSegue", sender: nil)
-        
+        //self.performSegue(withIdentifier: "KeyBoardSegue", sender: nil)
+        UIApplication.shared.openURL(URL(string:"App-Prefs:root=General&path=Keyboard")!)
+
     }
     
    
@@ -270,7 +274,7 @@ extension EmojiesVC {
     @IBAction func selectCharacter_btnClicked(_ sender: UIButton) {
         
         let char = Character.myCharacters[sender.tag]
-        characterForEmoji = char
+        userSelectedCharForEmoji = char
         self.setCharacterForEmojis()
         
         self.tableView.alpha = 0
@@ -299,6 +303,11 @@ extension EmojiesVC {
         }
     }
     
+    @IBAction func createNewChar_btnClicked(_ sender: UIButton) {
+        self.performSegue(withIdentifier: "NewCharVCSegue", sender: nil)
+    }
+    
+
 }
 
 
@@ -311,7 +320,7 @@ extension EmojiesVC: UITableViewDataSource, UITableViewDelegate {
     }
     var rows: [EmojiCellType] {
         var rowCounts: [EmojiCellType] = []
-        if cbKeybaordEnabled {
+        if !cbKeybaordEnabled {
             rowCounts += [.typeBanner]
         }
         if let char = character {
@@ -393,10 +402,10 @@ extension EmojiesVC: UITableViewDataSource, UITableViewDelegate {
                     return emojisCellHeight//SCREEN_HEIGHT - bannerCellHeight - 64 - 49
 
                 } else {
-                    return 550 * widthRatio
+                    return 753 * widthRatio
                 }
             } else {
-                return 550 * widthRatio
+                return 753 * widthRatio
             }
         }
         

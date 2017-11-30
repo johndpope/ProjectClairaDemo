@@ -54,7 +54,7 @@ class EmojiImageGeneratorView : UIView, UIWebViewDelegate {
             let url = filemanager.containerURL(forSecurityApplicationGroupIdentifier: appGroupName)!.appendingPathComponent((character.createdDate) + "/" + currentEmoji.key)
             
             if fileExistAt(path: url.path) {
-                loadNextEmoji()
+                return loadNextEmoji()
                 
             } else {
                 if currentEmoji.charHtml.isEmpty {
@@ -126,7 +126,6 @@ class EmojiImageGeneratorView : UIView, UIWebViewDelegate {
     func webViewDidFinishLoad(_ webView: UIWebView) {
         if !webView.isLoading {
             print("loading finish \(currntIndex)")
-            //webView.scrollView.contentInset = UIEdgeInsets(top: 25, left: 0, bottom: -25, right: 0)
             save(emoji: currentEmoji, savePath: emojiSavePath)
         }
     }

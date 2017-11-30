@@ -65,7 +65,7 @@ class SaveCharacterVC: ParentVC {
     func isValidate()-> Bool {
         var isValid = true
         let charName = name_textfield.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-        
+        self.character.name = charName
         name_textfield.setBorder(color:UIColor.clear)
         
         let errorColor = UIColor(colorLiteralRed: 150.0/255.0, green: 30.0/255.0, blue: 44.0/255.0, alpha: 0.8)
@@ -164,6 +164,17 @@ extension SaveCharacterVC {
         mainCharInfoView.isHidden = !mainCharInfoView.isHidden
         
     }
+    
+    @IBAction func createEmoji_btnClicked(_ sender: UIButton) {
+        self.navigationController?.presentingViewController?.tabBarController?.selectedIndex = 2
+        self.navigationController?.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func postcard_btnClicked(_ sender: UIButton) {
+        self.navigationController?.presentingViewController?.tabBarController?.selectedIndex = 1
+        self.navigationController?.dismiss(animated: true, completion: nil)
+    }
+
 }
 
 extension SaveCharacterVC : UITextFieldDelegate {
@@ -185,7 +196,7 @@ extension SaveCharacterVC {
     
     func saveCharacterAPICAll() {
         indicator.startAnimating()
-        
+    
         let params = ["choices" : character.choices,
                       "saved_name": character.name,
                       "source": "ios_app",

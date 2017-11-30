@@ -9,7 +9,7 @@
 import UIKit
 import iCarousel
 
-var characterForEmoji: Character?
+var userSelectedCharForEmoji: Character?
 
 class SavedCharListVC: ParentVC {
     @IBOutlet var tableView: UITableView!
@@ -134,9 +134,12 @@ class SavedCharListVC: ParentVC {
     
     func setNotificaitonObserver() {
         NotificationCenter.default.addObserver(self, selector: #selector(self.newCharacterAdded(_:)), name: NSNotification.Name(rawValue: "NewCharacterAddedNotification"), object: nil)
+        
         NotificationCenter.default.addObserver(self, selector: #selector(self.characterUpdateNotification(_:)), name: NSNotification.Name(rawValue: "CharacterUpdateNotification"), object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.characterLoadingFinish(_:)), name: NSNotification.Name(rawValue: "CharactersLoadingFinish"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.characterLoadingFinish(_:)), name: NSNotification.Name(rawValue: "CharacterBuilderJsonLoadingFinish"), object: nil)
+
         
     }
 
@@ -149,9 +152,9 @@ class SavedCharListVC: ParentVC {
 
             //Navigate to emoji screen for genereate emoji for newly created character.
             if let index = self.emojisTabIndex {
-                characterForEmoji = newChar
+                //userSelectedCharForEmoji = newChar
                 
-                self.tabBarController?.selectedIndex = index
+               // self.tabBarController?.selectedIndex = index
             }
 
         }
@@ -163,7 +166,7 @@ class SavedCharListVC: ParentVC {
         
         //Navigate to emoji screen for genereate emoji for updated character.
         if let char = nf.userInfo?["updatedChar"] as? Character {
-            characterForEmoji = char
+            userSelectedCharForEmoji = char
             
             if let index = self.emojisTabIndex {
                 self.tabBarController?.selectedIndex = index
@@ -223,7 +226,7 @@ extension SavedCharListVC {
     }
 
     @IBAction func btn_CreateEmojisClicked(_ sender: UIButton) {
-        characterForEmoji = savedChars[carouselView.currentItemIndex]
+        userSelectedCharForEmoji = savedChars[carouselView.currentItemIndex]
         if let index = self.emojisTabIndex {
             self.tabBarController?.selectedIndex = index
         }
@@ -231,7 +234,7 @@ extension SavedCharListVC {
     
     @IBAction func cellEmojis_btnClicked(_ sender: UIButton) {
         let char = savedChars[sender.tag]
-        characterForEmoji = char
+        userSelectedCharForEmoji = char
         if let index = self.emojisTabIndex {
             self.tabBarController?.selectedIndex = index
         }

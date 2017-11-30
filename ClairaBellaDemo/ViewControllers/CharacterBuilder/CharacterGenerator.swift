@@ -541,6 +541,7 @@ extension CharacterHTMLBuilder {
     func getEmojisContexts() {
         CharBuilderAPI.shared.get_emojisContext_json { contexts in
             self.emojisContextJson = contexts
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "CharacterBuilderJsonLoadingFinish"), object: nil, userInfo: nil)
         }
     }
 
