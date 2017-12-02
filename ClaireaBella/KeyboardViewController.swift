@@ -27,7 +27,8 @@ class KeyboardViewController: UIInputViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-                let expandedHeight:CGFloat = 260
+                let expandedHeight:CGFloat = 250
+        
                 let heightConstraint = NSLayoutConstraint(item:self.view,
                                                           attribute: .height,
                                                           relatedBy: .equal,
@@ -38,7 +39,9 @@ class KeyboardViewController: UIInputViewController {
                 self.view.addConstraint(heightConstraint)
 
         keyboardView = KeyboardView.add(in: self.view)
-        CharacterHTMLBuilder.shared.loadBuildData()
+        CharacterHTMLBuilder.shared.loadBuildData { success in
+            
+        }
         keyboardView.btnKeyboard.addTarget(self, action: #selector(handleInputModeList(from:with:)), for: .allTouchEvents)
         getEmojisContexts()
 

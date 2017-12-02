@@ -21,14 +21,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
+    var mainTabbarController: UITabBarController? {
+        if let childViewControlelrs = self.window?.rootViewController?.childViewControllers {
+            for vc in childViewControlelrs {
+                if vc is UITabBarController {
+                    return vc as? UITabBarController
+                }
+            }
+        }
+        return nil
+    }
+    
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        CharacterHTMLBuilder.shared.loadBuildData()
-        self.getCharactersFromServer()
+       
+        
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
 
         Fabric.with([Crashlytics.self])
         IQKeyboardManager.shared().isEnabled = true
+
+        //API calls: Call api for Get all character.
+        //Call api for Getting character builder json
+        
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        self.getCharactersFromServer()
+        CharacterHTMLBuilder.shared.loadBuildData { (success) in
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
+        }
 
         return true
     }
@@ -94,7 +114,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 extension AppDelegate {
     func getCharactersFromServer() {
-        
         self.loadCharactersFromPlist()
         
         APICall.shared.getSavedCharaters_APICall() { (response, success) in
@@ -113,14 +132,18 @@ extension AppDelegate {
                         return character
                     })
                     
-                    Character.myCharacters = charters.filter({$0.alive})
+                    let chars = charters.filter({$0.alive})
+                    Character.myCharacters =  self.sortCharacters(chars: chars)
                     print("CharactersLoadingFinish")
                     
                     self.saveCharacterInToLocalFile(json: jsonArr)
+                } else {
+                    Character.myCharacters = []
                 }
                 
             } else {
-                
+                Character.myCharacters = []
+
             }
             DispatchQueue.main.async {
                 Character.loadingFinish = true
@@ -168,10 +191,30 @@ extension AppDelegate {
                     return character
                 })
                 
-                Character.myCharacters = charters.filter({$0.alive})
+                let chars = charters.filter({$0.alive})
+                
+                Character.myCharacters = sortCharacters(chars: chars)
             }
         }
 
     }
+    
+    func sortCharacters(chars: [Character])-> [Character] {
+        var characters = chars
+        characters.sort { (ch1, ch2) -> Bool in
+            return ch1.createdDate < ch2.createdDate
+        }
+        
+        let temp = chars
+        
+        for (index, ch) in temp.enumerated() {
+            if ch.isMainChar {
+                characters.remove(at: index)
+                characters.insert(ch, at: 0)
+            }
+        }
+        return characters
+    }
+
 }
 

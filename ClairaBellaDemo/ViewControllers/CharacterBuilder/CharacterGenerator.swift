@@ -68,6 +68,7 @@ class Character: NSCopying, CharacterType {
         return myCharacters.filter({$0.isMainChar}).first
     }
     
+
     //
 }
 
@@ -84,6 +85,9 @@ class CharacterHTMLBuilder {
     enum CharacterType {
         case character, emoji
     }
+    
+    //block call when finish loading of all the character related apis.
+    var didFinishLoadingAllCharacterAPIBlock: ((Bool)->Void)?
     
     var characterType = CharacterType.character
     
@@ -117,7 +121,8 @@ class CharacterHTMLBuilder {
 
     }
     
-    func loadBuildData() {
+    func loadBuildData(block: @escaping (Bool)->Void) {
+        didFinishLoadingAllCharacterAPIBlock = block
         self.getDefaultChoices()
     }
     
@@ -539,9 +544,12 @@ extension CharacterHTMLBuilder {
     }
 
     func getEmojisContexts() {
+        
         CharBuilderAPI.shared.get_emojisContext_json { contexts in
             self.emojisContextJson = contexts
+        
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "CharacterBuilderJsonLoadingFinish"), object: nil, userInfo: nil)
+            self.didFinishLoadingAllCharacterAPIBlock?(true)
         }
     }
 

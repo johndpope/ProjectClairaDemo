@@ -45,8 +45,6 @@ class KeyboardView: UIView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-//        collView.dataSource = nil
-//        collView.delegate = nil
         let nib = UINib(nibName: "EmojiCell", bundle: Bundle(for: KeyboardView.self))
         let nib2 = UINib(nibName: "CharacterCell", bundle: Bundle(for: KeyboardView.self))
 
@@ -86,29 +84,19 @@ extension KeyboardView: UICollectionViewDataSource, UICollectionViewDelegateFlow
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "charCell", for: indexPath) as! EmojiCell
             cell.backgroundColor = UIColor.white
             if indexPath.row == 0 {
-                cell.imgView.image = UIImage(named: "AddChars")
+                cell.imgView.image = UIImage(named: "BtnNewChar")
                 cell.webView.isHidden = true
-                //cell.backgroundColor = UIColor.white
+                
             } else {
                 cell.imgView.image = nil
                 cell.webView.isHidden = false
                 let char = characters[indexPath.row - 1]
-                let url = filemanager.containerURL(forSecurityApplicationGroupIdentifier: appGroupName)!.appendingPathComponent(char.createdDate + "/" + char.createdDate)
-
-                do  {
-                    let data = try Data(contentsOf: url)
-                    let image = UIImage(data: data)
-                    cell.imgView.image = image
-                } catch {
-                    
-                }
-
-//                charGenerator.buildCharHTMLWith(for: .character, choices: char.choices) { (html) in
-//                    cell.webView.loadHTMLString(html, baseURL: nil)
-//                }
                 
+                cell.imgView.image = imageFor(char: char)
                 cell.layer.cornerRadius = cell.frame.height/2
                 cell.clipsToBounds = true
+                cell.imgView.contentMode = .scaleAspectFill
+                cell.imgView.clipsToBounds = true
                 //cell.backgroundColor = UIColor(colorLiteralRed: 230.0/255, green: 44.0/255.0, blue: 152.0/255.0, alpha: 1)
             }
             
@@ -116,29 +104,10 @@ extension KeyboardView: UICollectionViewDataSource, UICollectionViewDelegateFlow
 
         } else { //cell for display emojies
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "emojiCell", for: indexPath) as! EmojiCell
+            
             let emoji = selectedCharacter!.emojis[indexPath.item]
+            cell.imgView.image = imageFor(emoji: emoji)
             
-            let url = filemanager.containerURL(forSecurityApplicationGroupIdentifier: appGroupName)!.appendingPathComponent(selectedCharacter!.createdDate + "/" + emoji.key)
-            
-            do  {
-                let data = try Data(contentsOf: url)
-                let image = UIImage(data: data)
-                cell.imgView.image = image
-            } catch {
-                
-            }
-//            if emoji.charHtml.isEmpty {
-//                charGenerator.buildCharHTMLWith(for: .emoji, choices: selectedCharacter!.choices, for: emoji.key) {[weak cell, weak emoji] (html) in
-//                    
-//                    cell?.webView.loadHTMLString(html, baseURL: nil)
-//                    emoji?.charHtml = html
-//                }
-//
-//            } else {
-//
-//                cell.webView.loadHTMLString(emoji.charHtml, baseURL: nil)
-//            }
-            //cell.backgroundColor = .black
             return cell
         }
     }
@@ -158,44 +127,82 @@ extension KeyboardView: UICollectionViewDataSource, UICollectionViewDelegateFlow
             }
         } else {
             let emoji = selectedCharacter!.emojis[indexPath.item]
-            let url = filemanager.containerURL(forSecurityApplicationGroupIdentifier: appGroupName)!.appendingPathComponent(selectedCharacter!.createdDate + "/" + emoji.key)
-            
-            do  {
-                let data = try Data(contentsOf: url)
-                let image = UIImage(data: data)
-                let pasteBoard = UIPasteboard.general
-                let imagedata = UIImagePNGRepresentation(image!)
-                pasteBoard.setData(imagedata!, forPasteboardType: UIPasteboardTypeListImage.object(at: 0) as! String)
-                
-            } catch {
-                
-            }
-            
-            
-            self.messageViewTop.constant = -50
-            self.layoutIfNeeded()
-            
-            UIView.animate(withDuration: 0.3, animations: {
-                self.messageViewTop.constant = 0
-                self.layoutIfNeeded()
-            }, completion: { (finish) in
-                UIView.animate(withDuration: 0.3, delay: 1, options: [.curveEaseInOut], animations: {
-                    self.messageViewTop.constant = -50
-                    self.layoutIfNeeded()
-                }, completion: { (finish) in
-                })
-            })
+            saveEmojiInPastboard(emoji: emoji)
+            showAnimatingAlert()
         }
     }
+    
+    
+}
+
+
+//MARK:- Other Important Methods
+
+extension KeyboardView {
     
     func openApp() {
         let instagramHooks = "instagram://user?username=your_username"
         _ = URL(string: instagramHooks)
     }
+    
+    func imageFor(emoji: Emoji)-> UIImage? {
+        let url = filemanager.containerURL(forSecurityApplicationGroupIdentifier: appGroupName)!.appendingPathComponent(selectedCharacter!.createdDate + "/" + emoji.key)
+        
+        do  {
+            let data = try Data(contentsOf: url)
+            let image = UIImage(data: data)
+            return image
+        } catch {
+            
+        }
+        return nil
+    }
+    
+    func imageFor(char: Character)-> UIImage? {
+        let url = filemanager.containerURL(forSecurityApplicationGroupIdentifier: appGroupName)!.appendingPathComponent(char.createdDate + "/" + char.createdDate)
+        
+        do  {
+            let data = try Data(contentsOf: url)
+            let image = UIImage(data: data)
+            return image
+        } catch {
+            
+        }
+        return nil
+    }
+    
+    
+    func saveEmojiInPastboard(emoji: Emoji) {
+        let url = filemanager.containerURL(forSecurityApplicationGroupIdentifier: appGroupName)!.appendingPathComponent(selectedCharacter!.createdDate + "/" + emoji.key)
+        
+        do  {
+            let data = try Data(contentsOf: url)
+            let image = UIImage(data: data)
+            let pasteBoard = UIPasteboard.general
+            let imagedata = UIImagePNGRepresentation(image!)
+            pasteBoard.setData(imagedata!, forPasteboardType: UIPasteboardTypeListImage.object(at: 0) as! String)
+            
+        } catch {
+            
+        }
+    }
+    
+    func showAnimatingAlert() {
+        self.messageViewTop.constant = -50
+        self.layoutIfNeeded()
+        
+        UIView.animate(withDuration: 0.3, animations: {
+            self.messageViewTop.constant = 0
+            self.layoutIfNeeded()
+            }, completion: { (finish) in
+                UIView.animate(withDuration: 0.3, delay: 1, options: [.curveEaseInOut], animations: {
+                    self.messageViewTop.constant = -50
+                    self.layoutIfNeeded()
+                    }, completion: { (finish) in
+                })
+        })
+    }
 }
-
-
-
 
 extension UIImage {
     class func imageWithView(view: UIView) -> UIImage {

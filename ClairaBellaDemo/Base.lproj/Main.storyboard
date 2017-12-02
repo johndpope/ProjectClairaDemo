@@ -2094,7 +2094,7 @@
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="catwalk" translatesAutoresizingMaskIntoConstraints="NO" id="Knh-OD-Rb1">
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="300" id="CXT-il-mMw"/>
+                                                <constraint firstAttribute="height" constant="320" id="CXT-il-mMw"/>
                                             </constraints>
                                         </imageView>
                                         <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WKq-f8-c9S">
@@ -2106,10 +2106,10 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="mdm-mi-uYU" secondAttribute="bottom" id="3h4-Fi-Q0v"/>
-                                                <constraint firstAttribute="height" constant="300" id="IBE-Yl-zi3"/>
+                                                <constraint firstAttribute="height" constant="320" id="IBE-Yl-zi3"/>
                                                 <constraint firstItem="mdm-mi-uYU" firstAttribute="top" secondItem="WKq-f8-c9S" secondAttribute="top" id="bu7-dF-RYQ"/>
-                                                <constraint firstAttribute="trailing" secondItem="mdm-mi-uYU" secondAttribute="trailing" constant="-25" id="i57-ws-Jqr"/>
-                                                <constraint firstItem="mdm-mi-uYU" firstAttribute="leading" secondItem="WKq-f8-c9S" secondAttribute="leading" constant="-25" id="iDB-Py-Emy"/>
+                                                <constraint firstAttribute="trailing" secondItem="mdm-mi-uYU" secondAttribute="trailing" id="i57-ws-Jqr"/>
+                                                <constraint firstItem="mdm-mi-uYU" firstAttribute="leading" secondItem="WKq-f8-c9S" secondAttribute="leading" id="iDB-Py-Emy"/>
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G7D-jM-GdU">
@@ -2699,6 +2699,9 @@
                                             </constraints>
                                             <state key="normal" image="checkboxUncheckd"/>
                                             <state key="selected" image="checkboxCheckd"/>
+                                            <connections>
+                                                <action selector="btnCheckBox_clicked:" destination="LjG-Tk-0tP" eventType="touchUpInside" id="EuF-ER-MnM"/>
+                                            </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X4S-op-G1K">
                                             <constraints>
@@ -3812,7 +3815,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yed-ny-nkP">
-                                <frame key="frameInset" minX="27.47%" minY="32.08%" width="56.53%" height="3.75%"/>
+                                <frame key="frameInset" minX="27.47%" minY="31.93%" width="56.53%" height="3.75%"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -4106,6 +4109,6 @@
         <image name="user_detailsImage" width="337" height="164"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="5To-OK-OUu"/>
+        <segue reference="UUh-Zz-Z2w"/>
     </inferredMetricsTieBreakers>
 </document>

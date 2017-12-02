@@ -94,7 +94,7 @@ class EmojiesVC: ParentVC {
             self.tableView.alpha = 1
             self.btnChangeChar.isHidden = !(Character.myCharacters.count > 1)
 
-            return
+            return //should return from here
         }
         
         self.charsTableView.dataSource = nil
@@ -222,8 +222,8 @@ class EmojiesVC: ParentVC {
                         weakSelf.tableView.reloadData()
                         weakSelf.loadingHudView.isHidden = true
                         weakSelf.tabBarController?.tabBar.isUserInteractionEnabled = true
-                        self?.character?.editMode = false
-                        self?.btnChangeChar.isHidden = !(Character.myCharacters.count > 1)
+                        weakSelf.character?.editMode = false
+                        weakSelf.btnChangeChar.isHidden = !(Character.myCharacters.count > 1)
                     }
                 })
             }
@@ -279,14 +279,13 @@ extension EmojiesVC {
         
         self.tableView.alpha = 0
         self.tableView.isHidden = false
-       
         UIView.animate(withDuration: 0.3, animations: {
             self.charListView.alpha = 0
             self.tableView.alpha = 1
 
             }) { (finish) in
                 self.charListView.isHidden = true
-
+                
         }
     }
     
@@ -297,6 +296,11 @@ extension EmojiesVC {
         self.charListView.isHidden = false
         self.btnChangeChar.isHidden = true
        
+        if charsTableView.dataSource == nil {
+            charsTableView.dataSource = self
+            charsTableView.delegate = self
+            charsTableView.reloadData()
+        }
         UIView.animate(withDuration: 0.3) {
             self.charListView.alpha = 1
             self.tableView.alpha = 0

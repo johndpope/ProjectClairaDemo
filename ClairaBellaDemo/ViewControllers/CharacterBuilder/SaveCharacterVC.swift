@@ -18,7 +18,7 @@ class SaveCharacterVC: ParentVC {
     @IBOutlet var checkbox: UIButton!
     @IBOutlet var tblHeaderView: UIView?
     @IBOutlet var errorView: UIView!
-    @IBOutlet weak var save_btn: UIButton!
+    @IBOutlet var save_btn: UIButton!
     @IBOutlet var mainCharInfoView: UIView!
     @IBOutlet var mainCharInfoViewTopConstraint: NSLayoutConstraint!
     
@@ -27,6 +27,8 @@ class SaveCharacterVC: ParentVC {
     
     //this json object required for saving character.
     var character: Character!
+    
+    var saveCharOperationDone = false
     
     @IBOutlet var webView: UIWebView!
     
@@ -42,7 +44,7 @@ class SaveCharacterVC: ParentVC {
         
         if !character.charHtml.isEmpty {
             webView.loadHTMLString(character.charHtml, baseURL: nil)
-            webView.scrollView.setZoomScale(1.05, animated: false)
+            //webView.scrollView.setZoomScale(1.05, animated: false)
         }
         
         self.setUI()
@@ -78,30 +80,9 @@ class SaveCharacterVC: ParentVC {
         return isValid
     }
 
-//    func keyboardWillShow(_ notification: Notification) {
-//        UIView.animate(withDuration: 0.1, animations: { () -> Void in
-//            self.view.frame.origin.y = -150
-//        })
-//    }
-//    
-//    func keyboardWillHide(_ notification: Notification) {
-//        self.view.frame.origin.y = 0
-//    }
   
     func enableUserInteraction() {
         UIApplication.shared.endIgnoringInteractionEvents()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-//        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name: .UIKeyboardWillShow, object: nil)
-//        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(_:)), name: .UIKeyboardWillHide, object: nil)
-
-    }
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-//        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
-//        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
     }
     
     
@@ -137,14 +118,18 @@ extension SaveCharacterVC {
     }
     
     @IBAction func Btn_BackClicked() {
-        if let navController = self.navigationController {
-            navController.popViewController(animated: true)
+        if saveCharOperationDone {
+            self.navigationController?.dismiss(animated: true, completion: nil)
+        } else {
+            if let navController = self.navigationController {
+                navController.popViewController(animated: true)
+            }
         }
     }
     
     @IBAction func BtnSaved_ViewCharacter_Action(_ sender: UIButton) {
         
-        if  isValidate() {
+        if  isValidate() && !saveCharOperationDone {
             isCharacterEditMode ? self.updateCharacterAPICall() : self.saveCharacterAPICAll()
             
         }
@@ -166,13 +151,18 @@ extension SaveCharacterVC {
     }
     
     @IBAction func createEmoji_btnClicked(_ sender: UIButton) {
-        self.navigationController?.presentingViewController?.tabBarController?.selectedIndex = 2
-        self.navigationController?.dismiss(animated: true, completion: nil)
+        if saveCharOperationDone {
+            userSelectedCharForEmoji = self.character
+            appDelegate.mainTabbarController?.selectedIndex = 2
+            self.navigationController?.dismiss(animated: true, completion: nil)
+        }
     }
     
     @IBAction func postcard_btnClicked(_ sender: UIButton) {
-        self.navigationController?.presentingViewController?.tabBarController?.selectedIndex = 1
-        self.navigationController?.dismiss(animated: true, completion: nil)
+        if saveCharOperationDone {
+            appDelegate.mainTabbarController?.selectedIndex = 1
+            self.navigationController?.dismiss(animated: true, completion: nil)
+        }
     }
 
 }
@@ -217,7 +207,7 @@ extension SaveCharacterVC {
 
                 self.showAlertMessage(message: "Character saved successfully.")
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "NewCharacterAddedNotification"), object: nil, userInfo: ["NewChar" : self.character])
-               
+               self.saveCharOperationDone = true
                 
             } else {
                 self.showAlertMessage(message: "Something went wrong.")
@@ -247,7 +237,7 @@ extension SaveCharacterVC {
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "CharacterUpdateNotification"), object: nil, userInfo: ["updatedChar" : self.character])
                 self.generateCharacterImage()
                 self.showAlertMessage(message: "Character updated successfully.")
-                
+                self.saveCharOperationDone = true
 
             } else {
                 self.showAlertMessage(message: "Something went wrong.")

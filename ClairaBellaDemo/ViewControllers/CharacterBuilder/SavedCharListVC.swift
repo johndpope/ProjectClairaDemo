@@ -166,10 +166,10 @@ class SavedCharListVC: ParentVC {
         
         //Navigate to emoji screen for genereate emoji for updated character.
         if let char = nf.userInfo?["updatedChar"] as? Character {
-            userSelectedCharForEmoji = char
             
             if let index = self.emojisTabIndex {
-                self.tabBarController?.selectedIndex = index
+                //userSelectedCharForEmoji = char
+                //self.tabBarController?.selectedIndex = index
             }
         }
 
@@ -299,6 +299,24 @@ extension SavedCharListVC {
         } else {
             UIApplication.shared.openURL(url)
         }
+    }
+    
+    @IBAction func btnCheckBox_clicked(_ sender: UIButton) {
+        checkBox.isSelected = !checkBox.isSelected
+
+        if self.checkBox.isSelected {
+            let char = Character.myCharacters[currentCharIndex]
+            //let char = Character.myCharacters.remove(at: currentCharIndex)
+            UserDefaults.standard.set(char.createdDate, forKey: "MainCharacter")
+            
+//            Character.myCharacters.insert(char, at: 0)
+//            carouselView.reloadData()
+        } else {
+            UserDefaults.standard.set(nil, forKey: "MainCharacter")
+        }
+        
+        
+
     }
     
 

@@ -127,12 +127,23 @@ class CharacterBuilderVC: ParentVC {
             self.interfaceMenus = menus
             self.selectedMenu = menus.first
             
-            let body = menus.filter({$0.title == "Body"}).first!
+            //let body = menus.filter({$0.title == "Body"}).first!
             //body.choices[1].choiceId = "skin_tone" //api have skin_colour instead of skin_tone thats why need this line.
             
             
             for item in menus {
                 for choice in item.choices {
+                    if choice.type == .square {
+                        choice.options.sort(by: { (op1, op2) -> Bool in
+                            if op1.name.lowercased() == "none" {
+                                return true
+                            }
+                            if op2.name.lowercased() == "none" {
+                                return true
+                            }
+                            return false
+                        })
+                    }
                     if let characterChoiceValue = self.character.choices[choice.choiceId] {
                         for option in choice.options {
                             if option.name == characterChoiceValue {
