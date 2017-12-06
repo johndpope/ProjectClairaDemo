@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
@@ -155,10 +155,12 @@
                 <constraint firstItem="SyY-vz-zsc" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="zh0-65-01x"/>
             </constraints>
             <connections>
+                <outlet property="btnGlobe" destination="anR-ey-nFn" id="xbG-fZ-wmp"/>
                 <outlet property="btnKeyboard" destination="dBI-WC-Iid" id="gyt-ba-e5g"/>
                 <outlet property="collView" destination="cX5-ZH-j2g" id="Juv-5c-rhz"/>
                 <outlet property="indicator" destination="SyY-vz-zsc" id="kFX-nN-Jen"/>
                 <outlet property="messageViewTop" destination="Pem-oH-sPA" id="MTb-Gn-iFP"/>
+                <outlet property="noFullAccessView" destination="cjp-7P-5ca" id="ySF-D2-aPG"/>
             </connections>
             <point key="canvasLocation" x="17.5" y="42.5"/>
         </view>

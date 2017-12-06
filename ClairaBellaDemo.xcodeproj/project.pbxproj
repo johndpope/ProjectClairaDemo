@@ -3653,6 +3653,7 @@
 		79183D631F5514B600A00D50 /* SaveCharacterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79183D621F5514B600A00D50 /* SaveCharacterVC.swift */; };
 		79185ADA1F86A1D50035B92F /* KeyboardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79185AD91F86A1D50035B92F /* KeyboardCell.swift */; };
 		79185ADB1F86A1ED0035B92F /* KeyboardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79185AD91F86A1D50035B92F /* KeyboardCell.swift */; };
+		791B44AD1FD870AB002D7FF5 /* ShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791B44AC1FD870AB002D7FF5 /* ShopViewController.swift */; };
 		792294411F5F09DB004845DE /* SetupKeyBoardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792294401F5F09DB004845DE /* SetupKeyBoardVC.swift */; };
 		792294431F5F0A17004845DE /* EmojiesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792294421F5F0A17004845DE /* EmojiesVC.swift */; };
 		792294461F5F0BDD004845DE /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792294451F5F0BDD004845DE /* Constant.swift */; };
@@ -5974,6 +5975,7 @@
 		79183D621F5514B600A00D50 /* SaveCharacterVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaveCharacterVC.swift; sourceTree = "<group>"; };
 		79185AD91F86A1D50035B92F /* KeyboardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardCell.swift; sourceTree = "<group>"; };
 		791993711F7429A10007E23C /* ShareCharacterVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareCharacterVC.swift; sourceTree = "<group>"; };
+		791B44AC1FD870AB002D7FF5 /* ShopViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopViewController.swift; sourceTree = "<group>"; };
 		792294401F5F09DB004845DE /* SetupKeyBoardVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetupKeyBoardVC.swift; sourceTree = "<group>"; };
 		792294421F5F0A17004845DE /* EmojiesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiesVC.swift; sourceTree = "<group>"; };
 		792294451F5F0BDD004845DE /* Constant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
@@ -8366,6 +8368,7 @@
 		79183D581F550FFF00A00D50 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				791B44AB1FD8707B002D7FF5 /* ShopVC */,
 				1347CF421FBACEC2008ABD9D /* KeyboardSetupVC */,
 				791993701F7429820007E23C /* ShareVC */,
 				7932BB971F61C8B900A25AAF /* LoadingVC */,
@@ -8415,6 +8418,14 @@
 				791993711F7429A10007E23C /* ShareCharacterVC.swift */,
 			);
 			path = ShareVC;
+			sourceTree = "<group>";
+		};
+		791B44AB1FD8707B002D7FF5 /* ShopVC */ = {
+			isa = PBXGroup;
+			children = (
+				791B44AC1FD870AB002D7FF5 /* ShopViewController.swift */,
+			);
+			path = ShopVC;
 			sourceTree = "<group>";
 		};
 		7922943F1F5F093D004845DE /* EmojisVC */ = {
@@ -12627,6 +12638,7 @@
 				792638171FB8596500BA1183 /* CBTabbarVC.swift in Sources */,
 				1332FBD41F57ECA6003E3217 /* CarouselItemView.swift in Sources */,
 				7932BBD61F61D1DD00A25AAF /* LoaderView.swift in Sources */,
+				791B44AD1FD870AB002D7FF5 /* ShopViewController.swift in Sources */,
 				7932BBD81F61D1DD00A25AAF /* LogoView.swift in Sources */,
 				7932BBD31F61D1DD00A25AAF /* NewUserView.swift in Sources */,
 				7932BB961F61BBD200A25AAF /* AccountVC.swift in Sources */,

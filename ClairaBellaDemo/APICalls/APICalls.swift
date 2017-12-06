@@ -41,7 +41,7 @@ class APICall {
         static let getContexts      = apiVersion + "/claireabella/contexts"
         static let getEmojisContexts = apiVersion + "/claireabella/emojis"
 
-        static let getInterfaces = apiVersion + "/claireabella/web_interface"
+        static let getInterfaces = apiVersion + "/claireabella/app_interface"//web_interface"
     }
     
     typealias ResponseBlock = (Any?, Bool)-> Void

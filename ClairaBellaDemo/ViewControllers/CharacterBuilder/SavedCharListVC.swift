@@ -23,8 +23,9 @@ class SavedCharListVC: ParentVC {
     @IBOutlet var btnNewChar: UIButton!
     @IBOutlet var btnShare: UIButton!
     @IBOutlet var btnCreateEmojis: UIButton!
-
-
+    @IBOutlet var btnsStackView: UIStackView!
+    @IBOutlet var lblMainChar: UILabel!
+    @IBOutlet var btnEdit: UIButton!
     
     lazy var dateFormatter : DateFormatter =  {
         let df = DateFormatter()
@@ -181,12 +182,21 @@ class SavedCharListVC: ParentVC {
         showHideEmptyItemsView()
     }
     
+    //hide all buttons and lables of characters 
+    func hideCharacterInfoViews(_ shouldShow: Bool) {
+        lblCharName.isHidden = shouldShow
+        lblCreatedDate.isHidden = shouldShow
+        btnsStackView.isHidden = shouldShow
+        checkBox.isHidden = shouldShow
+        lblMainChar.isHidden = shouldShow
+        btnEdit.isHidden = shouldShow
+    }
 }
 
 
 //MARK:- IBActions
 extension SavedCharListVC {
-    @IBAction func createNewChar_btnClicked(_ sender: UIButton) {
+    @IBAction func createNewChar_btnClicked(_ sender: UIButton?) {
         self.performSegue(withIdentifier: "NewCharVCSegue", sender: nil)
     }
 
@@ -413,11 +423,22 @@ extension SavedCharListVC : iCarouselDelegate, iCarouselDataSource {
     }
     
     func carouselCurrentItemIndexDidChange(_ carousel: iCarousel) {
-        print(carousel.currentItemIndex)
+        hideCharacterInfoViews(carousel.currentItemIndex == (carousel.numberOfItems-1))
         if carousel.currentItemIndex >= 0 {
             setCurrentChartInfo()
         }
     }
+    
+    func carouselDidEndDecelerating(_ carousel: iCarousel) {
+        hideCharacterInfoViews(carousel.currentItemIndex == (carousel.numberOfItems-1))
+    }
+    
+    func carousel(_ carousel: iCarousel, didSelectItemAt index: Int) {
+        if index == (carousel.numberOfItems-1) && carousel.currentItemIndex == index {
+            createNewChar_btnClicked(nil)
+        }
+    }
+    
 }
 
 //MARK:- API Calls

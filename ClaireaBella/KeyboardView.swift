@@ -11,8 +11,10 @@ import UIKit
 class KeyboardView: UIView {
     @IBOutlet var collView: UICollectionView!
     @IBOutlet var btnKeyboard: UIButton!
+    @IBOutlet var btnGlobe: UIButton!
     @IBOutlet var indicator: UIActivityIndicatorView!
     @IBOutlet var messageViewTop: NSLayoutConstraint!
+    @IBOutlet var noFullAccessView: UIView!
     
     var filemanager = FileManager.default
     var charGenerator = CharacterHTMLBuilder.shared
@@ -50,7 +52,7 @@ class KeyboardView: UIView {
 
         collView.register(nib, forCellWithReuseIdentifier: "emojiCell")
         collView.register(nib2, forCellWithReuseIdentifier: "charCell")
-
+        noFullAccessView.isHidden = isKeyboardHasFullAccess()
     }
    
     class func add(in view: UIView)-> KeyboardView {
@@ -85,11 +87,9 @@ extension KeyboardView: UICollectionViewDataSource, UICollectionViewDelegateFlow
             cell.backgroundColor = UIColor.white
             if indexPath.row == 0 {
                 cell.imgView.image = UIImage(named: "BtnNewChar")
-                cell.webView.isHidden = true
                 
             } else {
                 cell.imgView.image = nil
-                cell.webView.isHidden = false
                 let char = characters[indexPath.row - 1]
                 
                 cell.imgView.image = imageFor(char: char)
@@ -97,7 +97,6 @@ extension KeyboardView: UICollectionViewDataSource, UICollectionViewDelegateFlow
                 cell.clipsToBounds = true
                 cell.imgView.contentMode = .scaleAspectFill
                 cell.imgView.clipsToBounds = true
-                //cell.backgroundColor = UIColor(colorLiteralRed: 230.0/255, green: 44.0/255.0, blue: 152.0/255.0, alpha: 1)
             }
             
             return cell
@@ -213,5 +212,9 @@ extension UIImage {
         UIGraphicsEndImageContext()
         return img!
     }
+}
+
+func isKeyboardHasFullAccess()-> Bool {
+        return UIPasteboard.general.isKind(of: UIPasteboard.self)
 }
 

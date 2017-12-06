@@ -111,7 +111,7 @@ class CharacterHTMLBuilder {
     
     func buildCharHTMLWith(for type:CharacterType = .character, choices: [String : String], for contextKey: String = Character.characterContext, block: ((String)->Void)? = nil) {
         self.contextKey = contextKey
-        deviceScaleFactor = type == .character ? 1.0 : 1.30
+        deviceScaleFactor = type == .character ? 0.9 : 1.30
        
         if let block = block {
             resultBlock = block
@@ -565,12 +565,17 @@ class CharBuilderAPI {
     func getInterface_json(block: @escaping ([ChoiceMenu])->Void) {
         APICall.shared.interface_APICall { (json, isSuccess) in
             if isSuccess {
-                if let json = json as? [String : [String : Any]] {
-                    let menus =  json.map({ (key, value) -> ChoiceMenu in
-                        return ChoiceMenu(value)
-                    })
+                if let json = json as? [String : [[String : Any]]] {
+                    if let jsonData = json["data"] {
+                        let menus =  jsonData.map({ obj -> ChoiceMenu in
+                            let firstKey = obj.keys.first!
+                            let value = obj[firstKey] as! [String : Any]
+                            return ChoiceMenu(value)
+
+                        })
+                        block(menus)
+                    }
                     
-                    block(menus)
                 }
             } else {
                 block([])
@@ -716,9 +721,11 @@ class CharacterChoice {
         
         self.type = typeValue == "square" ? .square : .circle
         
-        if let jsOptions = json["options"] as? [String : [String : Any]] {
-            options = jsOptions.map({ (key, option) -> ChoiceOption in
-                return ChoiceOption(option, iconName: key)
+        if let jsOptions = json["options"] as? [[String : [String : Any]]] {
+            options = jsOptions.map({ obj -> ChoiceOption in
+                let optionKey = obj.keys.first!
+                let option = obj[optionKey]!
+                return ChoiceOption(option, iconName: optionKey)
             })
         }
     }

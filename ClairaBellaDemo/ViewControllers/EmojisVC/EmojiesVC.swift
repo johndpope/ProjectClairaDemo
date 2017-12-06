@@ -192,7 +192,7 @@ class EmojiesVC: ParentVC {
             self.emojiToImageGeneratorView.didImageCapturedForEmojiBlock = {[weak self] emoji in
                 if let weakSelf = self {
                     self?.loadingHudView.isHidden = false
-
+                    weakSelf.btnChangeChar.isHidden = true
                     let progressValue = weakSelf.emojisContextKeys.count > 0 ? CGFloat(130.0/CGFloat(weakSelf.emojisContextKeys.count)) : 0
 
                     print("progress value : \(progressValue)")

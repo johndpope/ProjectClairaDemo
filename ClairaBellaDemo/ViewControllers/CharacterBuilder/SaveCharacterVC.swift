@@ -8,6 +8,8 @@
 
 import UIKit
 
+
+
 class SaveCharacterVC: ParentVC {
     @IBOutlet var indicator: IndicatorView!
     
@@ -30,6 +32,13 @@ class SaveCharacterVC: ParentVC {
     
     var saveCharOperationDone = false
     
+    
+    enum NavigationChoice {
+        case none, emoji, postcard
+    }
+    
+    var navigationChoice = NavigationChoice.none
+    
     @IBOutlet var webView: UIWebView!
     
     override func viewDidLoad() {
@@ -49,9 +58,9 @@ class SaveCharacterVC: ParentVC {
         
         self.setUI()
     }
-
+    
     func setUI() {
-       // save_btn.isHidden = !isCharacterEditMode
+        save_btn.isHidden = !isCharacterEditMode
         mainCharInfoView.isHidden = true
         name_textfield.text = character.name
         
@@ -60,17 +69,15 @@ class SaveCharacterVC: ParentVC {
             hdvFrame.size.height = hdvFrame.size.height * widthRatio
             hdView.frame = hdvFrame
         }
-
- 
-    }
         
+        
+    }
+    
     func isValidate()-> Bool {
         var isValid = true
         let charName = name_textfield.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         self.character.name = charName
         name_textfield.setBorder(color:UIColor.clear)
-        
-        let errorColor = UIColor(colorLiteralRed: 150.0/255.0, green: 30.0/255.0, blue: 44.0/255.0, alpha: 0.8)
         
         if charName.isEmpty {
             isValid = false
@@ -79,8 +86,8 @@ class SaveCharacterVC: ParentVC {
         errorView.isHidden = isValid
         return isValid
     }
-
-  
+    
+    
     func enableUserInteraction() {
         UIApplication.shared.endIgnoringInteractionEvents()
     }
@@ -98,17 +105,17 @@ class SaveCharacterVC: ParentVC {
         self.present(alertController, animated: true, completion: nil)
         
     }
-
-func getCurrentTimeStampWOMiliseconds(dateToConvert: NSDate) -> String {
-    let objDateformat: DateFormatter = DateFormatter()
-    objDateformat.dateFormat = "yyyy-MM-dd HH:mm:ss"
-    let strTime: String = objDateformat.string(from: dateToConvert as Date)
-    let objUTCDate: NSDate = objDateformat.date(from: strTime)! as NSDate
-    let milliseconds: Int64 = Int64(objUTCDate.timeIntervalSince1970)
-    let strTimeStamp: String = "\(milliseconds)"
-    return strTimeStamp
-}
-
+    
+    func getCurrentTimeStampWOMiliseconds(dateToConvert: NSDate) -> String {
+        let objDateformat: DateFormatter = DateFormatter()
+        objDateformat.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let strTime: String = objDateformat.string(from: dateToConvert as Date)
+        let objUTCDate: NSDate = objDateformat.date(from: strTime)! as NSDate
+        let milliseconds: Int64 = Int64(objUTCDate.timeIntervalSince1970)
+        let strTimeStamp: String = "\(milliseconds)"
+        return strTimeStamp
+    }
+    
 }
 
 //MARK:- IBActions
@@ -127,12 +134,13 @@ extension SaveCharacterVC {
         }
     }
     
-    @IBAction func BtnSaved_ViewCharacter_Action(_ sender: UIButton) {
+    @IBAction func BtnSaved_ViewCharacter_Action(_ sender: UIButton?) {
         
-        if  isValidate() && !saveCharOperationDone {
-            isCharacterEditMode ? self.updateCharacterAPICall() : self.saveCharacterAPICAll()
-            
+        if !saveCharOperationDone {
+            navigationChoice = .none
+            callSaveAPI()
         }
+        
     }
     
     @IBAction func textFieldDidChangeText(_ sender: UITextField) {
@@ -141,8 +149,8 @@ extension SaveCharacterVC {
         let remainingChars =  maxCharNameLength - character.name.characters.count
         lblNameCharsCount.text = "\(remainingChars)"
     }
-
-
+    
+    
     @IBAction func whatIsThis_btnCliked(_ sender: UIButton) {
         let senderRect = self.view.convert(sender.bounds, from: sender)
         mainCharInfoViewTopConstraint.constant = senderRect.origin.y - 80
@@ -150,21 +158,17 @@ extension SaveCharacterVC {
         
     }
     
-    @IBAction func createEmoji_btnClicked(_ sender: UIButton) {
-        if saveCharOperationDone {
-            userSelectedCharForEmoji = self.character
-            appDelegate.mainTabbarController?.selectedIndex = 2
-            self.navigationController?.dismiss(animated: true, completion: nil)
-        }
+    @IBAction func createEmoji_btnClicked(_ sender: UIButton?) {
+        navigationChoice = .emoji
+        self.callSaveAPI()
     }
     
-    @IBAction func postcard_btnClicked(_ sender: UIButton) {
-        if saveCharOperationDone {
-            appDelegate.mainTabbarController?.selectedIndex = 1
-            self.navigationController?.dismiss(animated: true, completion: nil)
-        }
+    @IBAction func postcard_btnClicked(_ sender: UIButton?) {
+       
+        navigationChoice = .postcard
+        self.callSaveAPI()
     }
-
+    
 }
 
 extension SaveCharacterVC : UITextFieldDelegate {
@@ -181,12 +185,20 @@ extension SaveCharacterVC : UITextFieldDelegate {
         textField.background = UIImage(named: "textboxBack")
     }
 }
+
+
 //MARK:- API calls
 extension SaveCharacterVC {
     
+    func callSaveAPI() {
+        if isValidate() {
+            isCharacterEditMode ? updateCharacterAPICall() : saveCharacterAPICAll()
+        }
+    }
+    
     func saveCharacterAPICAll() {
         indicator.startAnimating()
-    
+        
         let params = ["choices" : character.choices,
                       "saved_name": character.name,
                       "source": "ios_app",
@@ -204,11 +216,11 @@ extension SaveCharacterVC {
                     }
                 }
                 self.generateCharacterImage()
-
-                self.showAlertMessage(message: "Character saved successfully.")
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "NewCharacterAddedNotification"), object: nil, userInfo: ["NewChar" : self.character])
-               self.saveCharOperationDone = true
                 
+               // self.showAlertMessage(message: "Character saved successfully.")
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "NewCharacterAddedNotification"), object: nil, userInfo: ["NewChar" : self.character])
+                self.saveCharOperationDone = true
+                self.navigateWithUserChoice()
             } else {
                 self.showAlertMessage(message: "Something went wrong.")
             }
@@ -236,9 +248,9 @@ extension SaveCharacterVC {
                 
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "CharacterUpdateNotification"), object: nil, userInfo: ["updatedChar" : self.character])
                 self.generateCharacterImage()
-                self.showAlertMessage(message: "Character updated successfully.")
+                //self.showAlertMessage(message: "Character updated successfully.")
                 self.saveCharOperationDone = true
-
+                self.navigateWithUserChoice()
             } else {
                 self.showAlertMessage(message: "Something went wrong.")
             }
@@ -246,16 +258,17 @@ extension SaveCharacterVC {
         }
         
     }
-
+    
     
     func generateCharacterImage() {
         let renderer = UIGraphicsImageRenderer(size: Character_View.bounds.size)
         let image = renderer.image { ctx in
+            Character_View.backgroundColor = UIColor(colorLiteralRed: 0.96, green: 0.82, blue: 0.92, alpha: 1)
             Character_View.drawHierarchy(in: Character_View.bounds, afterScreenUpdates: true)
         }
-       let filemanager = FileManager.default
+        let filemanager = FileManager.default
         let directoryURl = filemanager.containerURL(forSecurityApplicationGroupIdentifier: appGroupName)!.appendingPathComponent( self.character.createdDate)
-
+        
         let direcotryPath = directoryURl.path
         let filePath = direcotryPath + "/" + self.character.createdDate
         if !filemanager.fileExists(atPath: direcotryPath) {
@@ -271,10 +284,27 @@ extension SaveCharacterVC {
         } catch {
             //
         }
-
+        Character_View.backgroundColor = UIColor.clear
+        
     }
     
-
+    
+    //navigation with user choice
+    
+    func navigateWithUserChoice() {
+        if self.navigationChoice == .emoji {
+            userSelectedCharForEmoji = self.character
+            appDelegate.mainTabbarController?.selectedIndex = 2
+            self.navigationController?.dismiss(animated: true, completion: nil)
+            
+        } else if self.navigationChoice == .postcard {
+            appDelegate.mainTabbarController?.selectedIndex = 1
+            self.navigationController?.dismiss(animated: true, completion: nil)
+            
+        } else {
+            //nothing to do.
+        }
+    }
 }
 
 

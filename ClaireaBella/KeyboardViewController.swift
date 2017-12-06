@@ -43,6 +43,8 @@ class KeyboardViewController: UIInputViewController {
             
         }
         keyboardView.btnKeyboard.addTarget(self, action: #selector(handleInputModeList(from:with:)), for: .allTouchEvents)
+        keyboardView.btnGlobe.addTarget(self, action: #selector(handleInputModeList(from:with:)), for: .allTouchEvents)
+
         getEmojisContexts()
 
     }

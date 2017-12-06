@@ -155,10 +155,10 @@ class CharacterBuilderVC: ParentVC {
             }
             
             
-            let hair = menus.filter({$0.title == "Hair"}).first!
-            let hairOption = hair.choices[1].options.filter({$0.selected}).first
+//            let hair = menus.filter({$0.title == "Hair"}).first!
+//            let hairOption = hair.choices[1].options.filter({$0.selected}).first
             //hairOption?.selected = true
-            self.selectedHairColorOption = hairOption
+            //self.selectedHairColorOption = hairOption
 
             DispatchQueue.main.async {
                 self.indicator.stopAnimating()
