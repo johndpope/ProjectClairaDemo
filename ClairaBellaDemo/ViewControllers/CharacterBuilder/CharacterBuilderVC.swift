@@ -133,17 +133,17 @@ class CharacterBuilderVC: ParentVC {
             
             for item in menus {
                 for choice in item.choices {
-                    if choice.type == .square {
-                        choice.options.sort(by: { (op1, op2) -> Bool in
-                            if op1.name.lowercased() == "none" {
-                                return true
-                            }
-                            if op2.name.lowercased() == "none" {
-                                return true
-                            }
-                            return false
-                        })
-                    }
+//                    if choice.type == .square {
+//                        choice.options.sort(by: { (op1, op2) -> Bool in
+//                            if op1.name.lowercased() == "none" {
+//                                return true
+//                            }
+//                            if op2.name.lowercased() == "none" {
+//                                return true
+//                            }
+//                            return false
+//                        })
+//                    }
                     if let characterChoiceValue = self.character.choices[choice.choiceId] {
                         for option in choice.options {
                             if option.name == characterChoiceValue {
@@ -155,10 +155,10 @@ class CharacterBuilderVC: ParentVC {
             }
             
             
-//            let hair = menus.filter({$0.title == "Hair"}).first!
-//            let hairOption = hair.choices[1].options.filter({$0.selected}).first
+            let hair = menus.filter({$0.title == "Hair"}).first!
+            let hairOption = hair.choices[1].options.filter({$0.selected}).first
             //hairOption?.selected = true
-            //self.selectedHairColorOption = hairOption
+            self.selectedHairColorOption = hairOption
 
             DispatchQueue.main.async {
                 self.indicator.stopAnimating()
