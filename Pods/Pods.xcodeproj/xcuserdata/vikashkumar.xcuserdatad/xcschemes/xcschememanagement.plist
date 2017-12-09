@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Alamofire.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Bolts.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -49,6 +54,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>SSZipArchive.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>iCarousel.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -58,11 +68,6 @@
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>44CAD6CE523055ED339E87154473A254</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>4DA7C0E6A202827F47DE7A6FD13A9596</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -77,7 +82,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>6B67DC519F74AAA03EFA7A3193F4804A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>7335E9C9689F3B8A16F063A884748533</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>88E9EC28B8B46C3631E6B242B50F4442</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>98A43A7CED692360C7ED0F142C863585</key>
 		<dict>
 			<key>primary</key>
 			<true/>

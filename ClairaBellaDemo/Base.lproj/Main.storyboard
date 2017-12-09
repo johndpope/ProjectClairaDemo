@@ -130,7 +130,7 @@
                                                     </collectionViewFlowLayout>
                                                     <cells>
                                                         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="rCs-L5-3C6" customClass="CollectionViewCell" customModule="ClairaBellaDemo" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="8" width="60" height="60"/>
+                                                            <rect key="frame" x="0.0" y="7.5" width="60" height="60"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                                 <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
@@ -245,7 +245,7 @@
                                                 <constraint firstItem="sgS-Xg-3Ug" firstAttribute="top" secondItem="p0s-Lc-4S7" secondAttribute="top" id="vdo-F6-0bI"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.80999226923788681" green="0.79270282804108561" blue="0.81636845886243647" alpha="0.93669658690000002" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="1" green="0.89019607840000003" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
                                             <outlet property="collView" destination="sgS-Xg-3Ug" id="TaT-Q4-den"/>
                                         </connections>
@@ -458,7 +458,6 @@
         <!--Shop View Controller-->
         <scene sceneID="Whc-zo-Xb2">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="CH0-dJ-NTT" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController automaticallyAdjustsScrollViewInsets="NO" id="YvN-an-Gqd" customClass="ShopViewController" customModule="ClairaBellaDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="V4Z-WM-Lwf"/>
@@ -524,7 +523,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="La5-MR-MDU" customClass="CollectionViewCell" customModule="ClairaBellaDemo" customModuleProvider="target">
-                                        <rect key="frame" x="65" y="0.0" width="246" height="218"/>
+                                        <rect key="frame" x="64.5" y="0.0" width="246" height="218"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="246" height="218"/>
@@ -569,6 +568,7 @@
                         <outlet property="collView" destination="U0x-rn-hXh" id="t0I-3R-B20"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CH0-dJ-NTT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1516" y="2017.2413793103449"/>
         </scene>
@@ -1091,7 +1091,7 @@
                                                         <rect key="frame" x="0.0" y="28" width="345" height="120"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="V3I-Ms-pPT" id="RK5-lh-JLh">
-                                                            <frame key="frameInset" width="345" height="119"/>
+                                                            <frame key="frameInset" width="345" height="119.5"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Character Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lt4-1e-1Sr">
@@ -2254,11 +2254,11 @@
                                                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fzG-AJ-yiq">
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             <prototypes>
-                                                                <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="characterCell" rowHeight="120" id="N0Q-ss-x6Z" customClass="CharacterCell" customModule="ClairaBellaDemo" customModuleProvider="target">
+                                                                <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="characterCell" rowHeight="120" id="N0Q-ss-x6Z" customClass="CharacterCell" customModule="ClairaBellaDemo" customModuleProvider="target">
                                                                     <rect key="frame" x="0.0" y="28" width="345" height="120"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="N0Q-ss-x6Z" id="W0L-9p-LHT">
-                                                                        <frame key="frameInset" width="345" height="119"/>
+                                                                        <frame key="frameInset" width="345" height="119.5"/>
                                                                         <autoresizingMask key="autoresizingMask"/>
                                                                         <subviews>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Character Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eud-Un-Jfh">
@@ -3054,7 +3054,7 @@
                                         <rect key="frame" x="0.0" y="369" width="375" height="330"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zq7-RP-TTK" id="L7K-Bt-Vuv">
-                                            <frame key="frameInset" width="375" height="329"/>
+                                            <frame key="frameInset" width="375" height="329.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ULF-XT-4TT">
@@ -3137,7 +3137,7 @@
                                         <rect key="frame" x="0.0" y="699" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cSq-6p-wZ5" id="P2q-63-0bt">
-                                            <frame key="frameInset" width="375" height="43"/>
+                                            <frame key="frameInset" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WFI-7J-LIv">
@@ -3163,7 +3163,7 @@
                                         <rect key="frame" x="0.0" y="743" width="375" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0go-a7-gCE" id="i1i-ua-nKy">
-                                            <frame key="frameInset" width="375" height="99"/>
+                                            <frame key="frameInset" width="375" height="99.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l71-rg-uyf">
@@ -3316,7 +3316,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yed-ny-nkP">
-                                <frame key="frameInset" minX="27.47%" minY="31.63%" width="56.53%" height="3.75%"/>
+                                <frame key="frameInset" minX="27.47%" minY="31.48%" width="56.53%" height="3.75%"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>

@@ -39,9 +39,9 @@ class KeyboardViewController: UIInputViewController {
                 self.view.addConstraint(heightConstraint)
 
         keyboardView = KeyboardView.add(in: self.view)
-        CharacterHTMLBuilder.shared.loadBuildData { success in
-            
-        }
+//        CharacterHTMLBuilder.shared.loadBuildData { success in
+//            
+//        }
         keyboardView.btnKeyboard.addTarget(self, action: #selector(handleInputModeList(from:with:)), for: .allTouchEvents)
         keyboardView.btnGlobe.addTarget(self, action: #selector(handleInputModeList(from:with:)), for: .allTouchEvents)
 

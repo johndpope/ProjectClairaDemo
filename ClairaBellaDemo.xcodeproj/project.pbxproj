@@ -3673,7 +3673,6 @@
 		7929835C1FAF996A008813D2 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7929835A1FAF996A008813D2 /* LoginVC.swift */; };
 		7929835D1FAF996A008813D2 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7929835B1FAF996A008813D2 /* SignUpVC.swift */; };
 		792983601FAF9993008813D2 /* WalkThrough.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7929835E1FAF9993008813D2 /* WalkThrough.storyboard */; };
-		792E1A251F7C056400A7F4C5 /* CharacterGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79183D5A1F550FFF00A00D50 /* CharacterGenerator.swift */; };
 		792E1A261F7C056B00A7F4C5 /* APICalls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79183D5F1F55102900A00D50 /* APICalls.swift */; };
 		792E1A281F7C081600A7F4C5 /* EmojiCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 792E1A271F7C081600A7F4C5 /* EmojiCell.xib */; };
 		7932BB661F61AC3500A25AAF /* background_small1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7932BB381F61AC3500A25AAF /* background_small1.jpg */; };
@@ -5995,6 +5994,7 @@
 		7929835A1FAF996A008813D2 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		7929835B1FAF996A008813D2 /* SignUpVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
 		7929835F1FAF9993008813D2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/WalkThrough.storyboard; sourceTree = "<group>"; };
+		792AF7A71FDC687A0015F548 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/ClairaBellaDemo-cwypmtblpioslcgnwgxmwpyconrp/Build/Products/Debug-iphonesimulator/Alamofire/Alamofire.framework"; sourceTree = "<group>"; };
 		792E1A271F7C081600A7F4C5 /* EmojiCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmojiCell.xib; sourceTree = "<group>"; };
 		7932BB381F61AC3500A25AAF /* background_small1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = background_small1.jpg; sourceTree = "<group>"; };
 		7932BB391F61AC3500A25AAF /* background1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = background1.jpg; sourceTree = "<group>"; };
@@ -8314,6 +8314,7 @@
 		658F767CA63C4438E5BD6B3F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				792AF7A71FDC687A0015F548 /* Alamofire.framework */,
 				35A99DE8EB24D02764ED70FD /* Pods_ClairaBellaDemo.framework */,
 			);
 			name = Frameworks;
@@ -12587,7 +12588,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				792E1A251F7C056400A7F4C5 /* CharacterGenerator.swift in Sources */,
 				79244E041F7AB63700741D69 /* KeyboardViewController.swift in Sources */,
 				79185ADA1F86A1D50035B92F /* KeyboardCell.swift in Sources */,
 				792721261FCDE6B600DC67AE /* RConverter.swift in Sources */,
@@ -12700,6 +12700,7 @@
 				DEVELOPMENT_TEAM = LCSDGY3TVW;
 				INFOPLIST_FILE = ClaireaBella/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.unitygames.Claireabella.ClaireaBella;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "52d2c52c-af48-4208-9509-9fb694d70295";

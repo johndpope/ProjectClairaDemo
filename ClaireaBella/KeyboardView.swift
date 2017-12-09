@@ -17,7 +17,7 @@ class KeyboardView: UIView {
     @IBOutlet var noFullAccessView: UIView!
     
     var filemanager = FileManager.default
-    var charGenerator = CharacterHTMLBuilder.shared
+    //var charGenerator = CharacterHTMLBuilder.shared
     
     var characters = [Character]() {
         didSet {

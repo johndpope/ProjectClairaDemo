@@ -127,23 +127,8 @@ class CharacterBuilderVC: ParentVC {
             self.interfaceMenus = menus
             self.selectedMenu = menus.first
             
-            //let body = menus.filter({$0.title == "Body"}).first!
-            //body.choices[1].choiceId = "skin_tone" //api have skin_colour instead of skin_tone thats why need this line.
-            
-            
             for item in menus {
                 for choice in item.choices {
-//                    if choice.type == .square {
-//                        choice.options.sort(by: { (op1, op2) -> Bool in
-//                            if op1.name.lowercased() == "none" {
-//                                return true
-//                            }
-//                            if op2.name.lowercased() == "none" {
-//                                return true
-//                            }
-//                            return false
-//                        })
-//                    }
                     if let characterChoiceValue = self.character.choices[choice.choiceId] {
                         for option in choice.options {
                             if option.name == characterChoiceValue {
@@ -168,6 +153,51 @@ class CharacterBuilderVC: ParentVC {
         }
 
     }
+    
+    
+    func downloadMenuIcon(for menu: ChoiceMenu, cell: CollectionViewCell) {
+        if let image = menu.icon {
+            cell.imgView.image = image
+        } else {
+            DispatchQueue.global(qos: .userInitiated).async {
+                let imgUrl = documetDirectoryURL().appendingPathComponent("interface/claireabella/v1.0/\(menu.iconName)")
+                print(imgUrl)
+                if let data = try? Data(contentsOf: imgUrl), let image = UIImage(data: data) {
+                    
+                    menu.icon = image
+                    
+                    DispatchQueue.main.async {
+                        cell.imgView.image = image
+                    }
+                    
+                }
+            }
+        }
+    }
+    
+    
+    func downloadOptionIcon(for option: ChoiceOption, iconName: String, cell: CollectionViewCell) {
+        if let image = option.icon {
+            cell.imgView.image = image
+        } else {
+            DispatchQueue.global(qos: .userInitiated).async {
+                let imgUrl = documetDirectoryURL().appendingPathComponent("interface/claireabella/v1.0/\(iconName).png")
+                print(imgUrl)
+                if let data = try? Data(contentsOf: imgUrl), let image = UIImage(data: data) {
+                    
+                    option.icon = image
+                    
+                    DispatchQueue.main.async {
+                        cell.imgView.image = image
+                    }
+                    
+                }
+            }
+        }
+        
+    }
+    
+
 }
 
 //MARK:- IBActions
@@ -330,20 +360,9 @@ class MenuTableViewCell: UITableViewCell,  UICollectionViewDataSource, UICollect
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CollectionViewCell
         let menu = menus[indexPath.row]
-        cell.imgView.image = UIImage(named: menu.iconName)
+        //cell.imgView.image = UIImage(named: menu.iconName)
         
-        if let image = menu.icon {
-            cell.imgView.image = image
-        } else {
-            DispatchQueue.global(qos: .userInitiated).async {
-                let image = UIImage(named: menu.iconName)
-                menu.icon = image
-                
-                DispatchQueue.main.async {
-                    cell.imgView.image = image
-                }
-            }
-        }
+           viewcontroller?.downloadMenuIcon(for: menu, cell: cell)
 
         //cell.imgView.setImage(url: URL(string: menu.icon)!)
         cell.lblTitle.text = menu.title
@@ -406,22 +425,10 @@ class OptionsTableViewCell: UITableViewCell,  UICollectionViewDataSource, UIColl
              iconName = option.iconName + viewcontroller!.selectedHairColorOption.iconName
         }
         
-        //let iconUrl = APICall.shared.assetUrl + iconName + ".png"
         
         cell.imgView.image = nil
-        if let image = option.icon {
-            cell.imgView.image = image
-        } else {
-            DispatchQueue.global(qos: .userInitiated).async {
-                let image = UIImage(named: iconName)
-                option.icon = image
-               
-                DispatchQueue.main.async {
-                    cell.imgView.image = image
-                }
-            }
-        }
-        //cell.imgView.setImage(url: URL(string : iconUrl)!)
+        viewcontroller?.downloadOptionIcon(for: option, iconName: iconName, cell: cell)
+        
         cell.lblTitle.text = ""//option.name
         
         cell.imgView.layer.cornerRadius = choice.type == .circle ? cell.imgView.frame.width/2 : 0

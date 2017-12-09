@@ -13,6 +13,8 @@ import CloudKit
 import Fabric
 import Crashlytics
 import IQKeyboardManager
+import Alamofire
+import SSZipArchive
 
 let appDelegate = UIApplication.shared.delegate as! AppDelegate
 
@@ -216,5 +218,63 @@ extension AppDelegate {
         return characters
     }
 
+}
+
+
+extension AppDelegate {
+    //Download new character and interface assets with latest version
+    
+    func downloadNewAssets(completion callBack: @escaping (Bool, Double)->Void) {
+        
+        if let url = URL(string: APICall.APIName.characterAssetsDownload) {
+            let destination: DownloadRequest.DownloadFileDestination = {_,  _ in
+                let savePathURL = documetDirectoryURL().appendingPathComponent("characterImages.zip")
+                return (savePathURL, [.removePreviousFile])
+            }
+            
+            Alamofire.download(url,
+                               method: .get,
+                               parameters: nil,
+                               encoding: JSONEncoding.default,
+                               headers: nil, to: destination).downloadProgress(closure: { (progress) in
+                                //show progress
+                                print(progress.fractionCompleted)
+                                callBack(false, progress.fractionCompleted)
+                                
+                               }).response(completionHandler: { (response) in
+                                //download completed
+                                print(response)
+                                if let url = response.destinationURL {
+                                    let unZipPath = documetDirectoryURL().appendingPathComponent("/CharacterAssets/Version").path
+                                    let success = self.unzipFile(at: url.path, to: unZipPath)
+                                    callBack(success, 1.0)
+                                }
+                               })
+            
+        }
+        
+    }
+    
+    
+    
+    
+    //UNZip assets
+    func unzipFile(at sourcePath: String, to destinationPath: String)-> Bool {
+        let success = SSZipArchive.unzipFile(atPath: sourcePath, toDestination: destinationPath)
+        let message = success ? "Success" : "Fail"
+        print(message)
+        return success
+    }
+
+
+}
+
+
+
+
+func documetDirectoryURL()-> URL {
+    let fileManager = FileManager.default
+    let documentDirectory = try! fileManager.url(for: .documentDirectory, in: .userDomainMask, appropriateFor:nil, create:false)
+    return documentDirectory
 }
 

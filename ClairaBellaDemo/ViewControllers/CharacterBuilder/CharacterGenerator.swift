@@ -9,68 +9,6 @@
 import UIKit
 
 
-struct CharBackground {
-    var icon = ""
-    var image = ""
-}
-
-protocol CharacterType {
-    var charHtml: String {get set}
-}
-
-class Emoji: CharacterType {
-    var charHtml = ""
-    var key: String = ""
-    var characterCreatedDate = ""
-}
-
-class Character: NSCopying, CharacterType {
-
-    var name = ""
-    var choices = [String : String]()
-    var charHtml: String = ""
-    var createdDate = ""
-    var alive = false
-    var characterBackground: CharBackground?
-    
-    var editMode = false//used for creating emojis after user update the character.
-    
-    static let characterContext = "CX001"
-
-    var emojis = [Emoji]()
-
-    var isMainChar: Bool {
-        if let mainCharDate = UserDefaults.standard.value(forKey: "MainCharacter") as? String {
-            return createdDate == mainCharDate
-        } else {
-            return false
-        }
-    }
-    
-    func copy(with zone: NSZone? = nil) -> Any {
-        let copy = Character()
-        copy.name = self.name
-        copy.choices = self.choices
-        copy.charHtml = self.charHtml
-        copy.createdDate = self.createdDate
-        copy.alive = self.alive
-        return copy
-    }
-    
-    static var myCharacters = [Character]() {
-        didSet {
-            loadingFinish = true
-        }
-    }
-    static var loadingFinish = false
-    
-    static var mainCharacter: Character? {
-        return myCharacters.filter({$0.isMainChar}).first
-    }
-    
-
-    //
-}
 
 
 class CharacterHTMLBuilder {
@@ -467,11 +405,17 @@ class CharacterHTMLBuilder {
 
 //                htmlBody += "<object id=\"\(bodyPart)\" type=\"image/svg+xml\" name=\"\(bodyPart)\" data=\"\(fileUrl)\" style=\"\(getFileStyle(data: data))\"></object>"
 
-                if let filePath = Bundle.main.path(forResource: fileName, ofType: "svg") {
-                    let pathWithColorAtt = filePath + "?" + attributes
-                    
-                    htmlBody += "<object id=\"\(bodyPart)\" type=\"image/svg+xml\" name=\"\(bodyPart)\" data=\"file://\(pathWithColorAtt)\" style=\"\(getFileStyle(data: data))\"></object>"
-                }
+                let filePath = documetDirectoryURL().appendingPathComponent("character/claireabella/v1.0/\(fileName).svg").path
+                
+                let pathWithColorAtt = filePath + "?" + attributes
+                
+                htmlBody += "<object id=\"\(bodyPart)\" type=\"image/svg+xml\" name=\"\(bodyPart)\" data=\"file://\(pathWithColorAtt)\" style=\"\(getFileStyle(data: data))\"></object>"
+
+//                if let filePath = Bundle.main.path(forResource: fileName, ofType: "svg") {
+//                    let pathWithColorAtt = filePath + "?" + attributes
+//                    
+//                    htmlBody += "<object id=\"\(bodyPart)\" type=\"image/svg+xml\" name=\"\(bodyPart)\" data=\"file://\(pathWithColorAtt)\" style=\"\(getFileStyle(data: data))\"></object>"
+//                }
                 
             }
         }
@@ -565,16 +509,39 @@ class CharBuilderAPI {
     func getInterface_json(block: @escaping ([ChoiceMenu])->Void) {
         APICall.shared.interface_APICall { (json, isSuccess) in
             if isSuccess {
-                if let json = json as? [String : [[String : Any]]] {
-                    if let jsonData = json["data"] {
-                        let menus =  jsonData.map({ obj -> ChoiceMenu in
+                if let json = json as? [String : Any] {
+                    
+                    //Parsing Interface menu jsons
+                    var menus = [ChoiceMenu]()
+                    
+                    if let jsonData = json["data"] as? [[String : Any]] {
+                        menus =  jsonData.map({ obj -> ChoiceMenu in
                             let firstKey = obj.keys.first!
                             let value = obj[firstKey] as! [String : Any]
                             return ChoiceMenu(value)
-
+                            
                         })
+                    }
+                    
+                    
+                    //checking version.
+                    //Downloads all new assets if server version is greater than local version
+                    
+                    let serverVersion = json["version"] as! String
+                    if serverVersion != APICall.shared.assetLocalVersion {
+                        //save version string in local
+                        UserDefaults.standard.setValue(serverVersion, forKey: APICall.shared.assetVersionKey)
+                        
+                        appDelegate.downloadNewAssets(completion: { (isFinish, progressValue) in
+                            if isFinish {
+                                block(menus)
+                            }
+                        })
+                        
+                    } else {
                         block(menus)
                     }
+                    
                     
                 }
             } else {
