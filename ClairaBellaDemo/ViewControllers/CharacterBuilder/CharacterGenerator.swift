@@ -400,10 +400,6 @@ class CharacterHTMLBuilder {
             if let _ = data["x"] as? String, let _ = data["y"] as? String {
                 let fileName = data["file"] as! String
                 let attributes = data["param"] as! String
-                
-                //let fileUrl = "http://34.252.124.216/midnight/system/asset_library/character/\(fileName).svg?" + attributes
-
-//                htmlBody += "<object id=\"\(bodyPart)\" type=\"image/svg+xml\" name=\"\(bodyPart)\" data=\"\(fileUrl)\" style=\"\(getFileStyle(data: data))\"></object>"
 
                 let filePath = documetDirectoryURL().appendingPathComponent("character/claireabella/v1.0/\(fileName).svg").path
                 
@@ -411,12 +407,6 @@ class CharacterHTMLBuilder {
                 
                 htmlBody += "<object id=\"\(bodyPart)\" type=\"image/svg+xml\" name=\"\(bodyPart)\" data=\"file://\(pathWithColorAtt)\" style=\"\(getFileStyle(data: data))\"></object>"
 
-//                if let filePath = Bundle.main.path(forResource: fileName, ofType: "svg") {
-//                    let pathWithColorAtt = filePath + "?" + attributes
-//                    
-//                    htmlBody += "<object id=\"\(bodyPart)\" type=\"image/svg+xml\" name=\"\(bodyPart)\" data=\"file://\(pathWithColorAtt)\" style=\"\(getFileStyle(data: data))\"></object>"
-//                }
-                
             }
         }
         
