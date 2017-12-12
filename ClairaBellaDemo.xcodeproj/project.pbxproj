@@ -3654,6 +3654,8 @@
 		79185ADA1F86A1D50035B92F /* KeyboardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79185AD91F86A1D50035B92F /* KeyboardCell.swift */; };
 		79185ADB1F86A1ED0035B92F /* KeyboardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79185AD91F86A1D50035B92F /* KeyboardCell.swift */; };
 		791B44AD1FD870AB002D7FF5 /* ShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791B44AC1FD870AB002D7FF5 /* ShopViewController.swift */; };
+		791E4E6C1FE03BFE0070380E /* CharacterModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791E4E6B1FE03BFE0070380E /* CharacterModels.swift */; };
+		791E4E6D1FE03C4F0070380E /* CharacterModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791E4E6B1FE03BFE0070380E /* CharacterModels.swift */; };
 		792294411F5F09DB004845DE /* SetupKeyBoardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792294401F5F09DB004845DE /* SetupKeyBoardVC.swift */; };
 		792294431F5F0A17004845DE /* EmojiesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792294421F5F0A17004845DE /* EmojiesVC.swift */; };
 		792294461F5F0BDD004845DE /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792294451F5F0BDD004845DE /* Constant.swift */; };
@@ -5975,6 +5977,7 @@
 		79185AD91F86A1D50035B92F /* KeyboardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardCell.swift; sourceTree = "<group>"; };
 		791993711F7429A10007E23C /* ShareCharacterVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareCharacterVC.swift; sourceTree = "<group>"; };
 		791B44AC1FD870AB002D7FF5 /* ShopViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopViewController.swift; sourceTree = "<group>"; };
+		791E4E6B1FE03BFE0070380E /* CharacterModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharacterModels.swift; sourceTree = "<group>"; };
 		792294401F5F09DB004845DE /* SetupKeyBoardVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetupKeyBoardVC.swift; sourceTree = "<group>"; };
 		792294421F5F0A17004845DE /* EmojiesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiesVC.swift; sourceTree = "<group>"; };
 		792294451F5F0BDD004845DE /* Constant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
@@ -8391,6 +8394,7 @@
 				79183D621F5514B600A00D50 /* SaveCharacterVC.swift */,
 				79183D5B1F55100000A00D50 /* CharacterBuilderVC.swift */,
 				79183D5A1F550FFF00A00D50 /* CharacterGenerator.swift */,
+				791E4E6B1FE03BFE0070380E /* CharacterModels.swift */,
 			);
 			path = CharacterBuilder;
 			sourceTree = "<group>";
@@ -12593,6 +12597,7 @@
 				792721261FCDE6B600DC67AE /* RConverter.swift in Sources */,
 				792E1A261F7C056B00A7F4C5 /* APICalls.swift in Sources */,
 				79244E101F7ABBF400741D69 /* KeyboardView.swift in Sources */,
+				791E4E6D1FE03C4F0070380E /* CharacterModels.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -12625,6 +12630,7 @@
 				7932BBC81F61D1C700A25AAF /* LoadingBar.swift in Sources */,
 				7932BBDA1F61D1DD00A25AAF /* ProgressView.swift in Sources */,
 				7932BBC51F61D1C700A25AAF /* HomeNOCharacter.swift in Sources */,
+				791E4E6C1FE03BFE0070380E /* CharacterModels.swift in Sources */,
 				792294461F5F0BDD004845DE /* Constant.swift in Sources */,
 				7932BBC71F61D1C700A25AAF /* Loading1.swift in Sources */,
 				7917CA2F1F89455100EE7824 /* CharacterAlertView.swift in Sources */,

@@ -271,10 +271,3 @@ extension AppDelegate {
 
 
 
-
-func documetDirectoryURL()-> URL {
-    let fileManager = FileManager.default
-    let documentDirectory = try! fileManager.url(for: .documentDirectory, in: .userDomainMask, appropriateFor:nil, create:false)
-    return documentDirectory
-}
-

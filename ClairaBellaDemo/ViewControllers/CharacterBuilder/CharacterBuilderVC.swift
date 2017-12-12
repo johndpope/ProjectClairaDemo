@@ -32,6 +32,8 @@ class CharacterBuilderVC: ParentVC {
         
         didSet{
             guard let selectedMenu = selectedMenu else {return}
+            
+            //set color choice for selected Option
             selectedMenu.selected = true
             colorChoice = nil
             if let ch = selectedMenu.choices.filter({$0.type == .circle}).first {
@@ -43,7 +45,7 @@ class CharacterBuilderVC: ParentVC {
                         
                         colorChoice = selectedOptions.isEmpty ? ch.options.first!.choices.first : selectedOptions.first?.choices.first
                        
-                        //select a color if already not selected.
+                        //set selected a default color if yet user haven't select any color from interface..
                         if let _ = colorChoice?.options.filter({$0.selected}).first {
                             
                         } else {
@@ -254,15 +256,8 @@ extension CharacterBuilderVC : UITableViewDelegate, UITableViewDataSource {
         } else {
             let choice = indexPath.row == 0 ? selectedMenu!.choices.first! : colorChoice!
 
-            var height: CGFloat
-            
-            if let _ = colorChoice {
-                height = (tableView.frame.height - 70) - 50
-                return choice.type == .square ?   height : 50
-            } else {
-                height = (tableView.frame.height - 70)
-                return choice.type == .square ?   height : 50
-            }
+            let height = (tableView.frame.height - 70) - (colorChoice == nil ? 0 : 50)
+            return choice.type == .square ?   height : 50
         }
     }
     
@@ -366,9 +361,8 @@ class MenuTableViewCell: UITableViewCell,  UICollectionViewDataSource, UICollect
         let menu = menus[indexPath.row]
         //cell.imgView.image = UIImage(named: menu.iconName)
         
-           viewcontroller?.downloadMenuIcon(for: menu, cell: cell)
+        viewcontroller?.downloadMenuIcon(for: menu, cell: cell)
 
-        //cell.imgView.setImage(url: URL(string: menu.icon)!)
         cell.lblTitle.text = menu.title
         if menu.selected {
             cell.backgroundColor = UIColor(colorLiteralRed: 229.0/255.0, green: 17.0/255.0, blue: 152.0/255.0, alpha: 1)

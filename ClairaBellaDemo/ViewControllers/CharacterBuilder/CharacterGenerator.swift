@@ -683,6 +683,8 @@ class CharacterChoice {
                 let optionKey = obj.keys.first!
                 let option = obj[optionKey]!
                 return ChoiceOption(option, iconName: optionKey)
+            }).filter({ option -> Bool in
+                return !option.hidden
             })
         }
     }
@@ -693,13 +695,16 @@ class ChoiceOption {
     var choices = [CharacterChoice] ()
     var iconName = ""
     var selected = false
+    var hidden = false
     
     var icon: UIImage?
     
     convenience init(_ json: [String : Any], iconName: String) {
         self.init()
-        name = (json["name"] as? String) ?? ""
+       
+        self.name = (json["name"] as? String) ?? ""
         self.iconName = iconName //+ ".png"
+        self.hidden = (json["hide_hair"] as? Bool) ?? false
         
         if let jsChoices = json["choices"] as? [String : Any] {
             for (key, obj) in jsChoices.enumerated() {

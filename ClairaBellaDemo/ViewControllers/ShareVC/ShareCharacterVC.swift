@@ -93,6 +93,8 @@ extension ShareCharacterVC {
     }
     
     @IBAction func share_btnClicekd(_ sender:UIButton) {
+        self.tabBarController?.tabBar.isHidden = true
+
         ShareCharacterView.show(in: self.view, character: character) { (action, image) in
             switch action {
             case .facebook:
@@ -105,6 +107,8 @@ extension ShareCharacterVC {
                 self.saveToPhots(image)
             case .more:
                 self.moreShare(image: image)
+            case .none:
+                self.tabBarController?.tabBar.isHidden = false
             }
         }
     

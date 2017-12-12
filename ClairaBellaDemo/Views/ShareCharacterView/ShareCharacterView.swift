@@ -43,7 +43,7 @@ class ShareCharacterView: UIView {
     }
     
     enum ShareOptions: Int {
-        case facebook = 1, twitter, mail, save, more
+        case facebook = 1, twitter, mail, save, more, none
     }
     
     var actionBlock: ((ShareOptions, UIImage)-> Void)?
@@ -71,6 +71,7 @@ class ShareCharacterView: UIView {
     
     //IBActions
     @IBAction func close_btnClicked(_ sender: UIButton) {
+        actionBlock?(.none, UIImage())
         hideWithAnimation()
     }
 

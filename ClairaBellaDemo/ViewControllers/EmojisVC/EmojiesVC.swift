@@ -128,112 +128,6 @@ class EmojiesVC: ParentVC {
     }
     
     
-    func setCharacterForEmojis() {
-        if let char = userSelectedCharForEmoji {
-            character = char
-            characterDidChange()
-            
-            userSelectedCharForEmoji = nil
-        } else  {
-            if Character.myCharacters.count == 1 {
-                if let defaultChar = Character.mainCharacter {
-                    character = defaultChar
-                    
-                } else {
-                    character = Character.myCharacters.first!
-                }
-                characterDidChange()
-                
-            }
-        }
-        
-    }
-
-    func characterDidChange() {
-        if self.isNewChar {
-            character?.emojis.removeAll()
-            tableView.reloadData()
-            
-            DispatchQueue.global().async {
-                for type in self.emojisContextKeys {
-                    let emoji = Emoji()
-                    emoji.key = type
-                    emoji.charHtml = ""
-                    emoji.characterCreatedDate = self.character?.createdDate ?? ""
-                    self.character?.emojis.append(emoji)
-                }
-                
-
-                DispatchQueue.main.async {
-                    self.startGenerateEmojiImages()
-                }
-            }
-            
-        }
-    }
-    
-    //MARK: Convert emoji web to image
-    func startGenerateEmojiImages() {
-        
-        if let char = self.character {
-            //let progressHUD = ProgressView(text: "Saving Emojis")
-            
-            self.emojiToImageGeneratorView.didStartBlock = {[weak self] in
-                
-                self?.progressBarRightConstraint.constant = 0
-                self?.loadingHudView.layoutIfNeeded()
-                self?.loadingHudView.isHidden = false
-                self?.tabBarController?.tabBar.isUserInteractionEnabled = false
-                self?.emojis.removeAll()
-
-            }
-            
-
-            self.emojiToImageGeneratorView.didImageCapturedForEmojiBlock = {[weak self] emoji in
-                if let weakSelf = self {
-                    self?.loadingHudView.isHidden = false
-                    weakSelf.btnChangeChar.isHidden = true
-                    let progressValue = weakSelf.emojisContextKeys.count > 0 ? CGFloat(130.0/CGFloat(weakSelf.emojisContextKeys.count)) : 0
-
-                    print("progress value : \(progressValue)")
-                    self?.progressBarRightConstraint.constant += progressValue
-                    self?.loadingHudView.layoutIfNeeded()
-
-                    //show progress
-
-                    weakSelf.emojis.append(emoji)
-                    let index = weakSelf.emojis.count-1
-                    let indexPath = IndexPath(item: index, section: 0)
-                    
-                    if let cell = self?.tableView.cellForRow(at: IndexPath(row:1, section:0)) as? EmojiTableViewCell {
-                        cell.collectionview.insertItems(at: [indexPath])
-
-                    } else {
-                        self?.tableView.reloadData()
-                    }
-                }
-            }
-            
-            self.emojiToImageGeneratorView.completionBlock = { [weak self] in
-                DispatchQueue.main.async(execute: {
-                    if let weakSelf = self {
-                        weakSelf.loadingHudView.isHidden = true
-                        weakSelf.emojis = weakSelf.character!.emojis
-                        weakSelf.tableView.reloadData()
-                        weakSelf.loadingHudView.isHidden = true
-                        weakSelf.tabBarController?.tabBar.isUserInteractionEnabled = true
-                        weakSelf.character?.editMode = false
-                        weakSelf.btnChangeChar.isHidden = !(Character.myCharacters.count > 1)
-                    }
-                })
-            }
-            
-            
-            self.emojiToImageGeneratorView.character = char
-
-        }
-
-    }
 
 }
 
@@ -274,20 +168,9 @@ extension EmojiesVC {
     @IBAction func selectCharacter_btnClicked(_ sender: UIButton) {
         
         let char = Character.myCharacters[sender.tag]
-        userSelectedCharForEmoji = char
-        self.setCharacterForEmojis()
-        
-        self.tableView.alpha = 0
-        self.tableView.isHidden = false
-        UIView.animate(withDuration: 0.3, animations: {
-            self.charListView.alpha = 0
-            self.tableView.alpha = 1
-
-            }) { (finish) in
-                self.charListView.isHidden = true
-                
-        }
+        showEmojisFor(character: char)
     }
+    
     
    
     @IBAction func changeChar_btnClicked(_ sender: UIButton) {
@@ -311,6 +194,127 @@ extension EmojiesVC {
         self.performSegue(withIdentifier: "NewCharVCSegue", sender: nil)
     }
     
+    
+    //MARK:- 
+    
+    func showEmojisFor(character: Character) {
+        userSelectedCharForEmoji = character
+        self.setCharacterForEmojis()
+        
+        self.tableView.alpha = 0
+        self.tableView.isHidden = false
+        UIView.animate(withDuration: 0.3, animations: {
+            self.charListView.alpha = 0
+            self.tableView.alpha = 1
+            
+        }) { (finish) in
+            self.charListView.isHidden = true
+            
+        }
+        
+    }
+
+    func setCharacterForEmojis() {
+        if let char = userSelectedCharForEmoji {
+            character = char
+            characterDidChange()
+            
+            userSelectedCharForEmoji = nil
+        } else  {
+            if Character.myCharacters.count == 1 {
+                character = Character.mainCharacter
+                characterDidChange()
+            }
+        }
+        
+    }
+    
+    func characterDidChange() {
+        if self.isNewChar {
+            character?.emojis.removeAll()
+            tableView.reloadData()
+            
+            DispatchQueue.global().async {
+                for type in self.emojisContextKeys {
+                    let emoji = Emoji()
+                    emoji.key = type
+                    emoji.charHtml = ""
+                    emoji.characterCreatedDate = self.character?.createdDate ?? ""
+                    self.character?.emojis.append(emoji)
+                }
+                
+                
+                DispatchQueue.main.async {
+                    self.startGenerateEmojiImages()
+                }
+            }
+            
+        }
+    }
+    
+    //MARK: Convert emoji web to image
+    func startGenerateEmojiImages() {
+        
+        if let char = self.character {
+            //let progressHUD = ProgressView(text: "Saving Emojis")
+            
+            self.emojiToImageGeneratorView.didStartBlock = {[weak self] in
+                
+                self?.progressBarRightConstraint.constant = 0
+                self?.loadingHudView.layoutIfNeeded()
+                self?.loadingHudView.isHidden = false
+                self?.tabBarController?.tabBar.isUserInteractionEnabled = false
+                self?.emojis.removeAll()
+                
+            }
+            
+            
+            self.emojiToImageGeneratorView.didImageCapturedForEmojiBlock = {[weak self] emoji in
+                if let weakSelf = self {
+                    self?.loadingHudView.isHidden = false
+                    weakSelf.btnChangeChar.isHidden = true
+                    let progressValue = weakSelf.emojisContextKeys.count > 0 ? CGFloat(130.0/CGFloat(weakSelf.emojisContextKeys.count)) : 0
+                    
+                    print("progress value : \(progressValue)")
+                    self?.progressBarRightConstraint.constant += progressValue
+                    self?.loadingHudView.layoutIfNeeded()
+                    
+                    //show progress
+                    
+                    weakSelf.emojis.append(emoji)
+                    let index = weakSelf.emojis.count-1
+                    let indexPath = IndexPath(item: index, section: 0)
+                    
+                    if let cell = self?.tableView.cellForRow(at: IndexPath(row:1, section:0)) as? EmojiTableViewCell {
+                        cell.collectionview.insertItems(at: [indexPath])
+                        
+                    } else {
+                        self?.tableView.reloadData()
+                    }
+                }
+            }
+            
+            self.emojiToImageGeneratorView.completionBlock = { [weak self] in
+                DispatchQueue.main.async(execute: {
+                    if let weakSelf = self {
+                        weakSelf.loadingHudView.isHidden = true
+                        weakSelf.emojis = weakSelf.character!.emojis
+                        weakSelf.tableView.reloadData()
+                        weakSelf.loadingHudView.isHidden = true
+                        weakSelf.tabBarController?.tabBar.isUserInteractionEnabled = true
+                        weakSelf.character?.editMode = false
+                        weakSelf.btnChangeChar.isHidden = !(Character.myCharacters.count > 1)
+                    }
+                })
+            }
+            
+            
+            self.emojiToImageGeneratorView.character = char
+            
+        }
+        
+    }
+
 
 }
 
@@ -414,6 +418,13 @@ extension EmojiesVC: UITableViewDataSource, UITableViewDelegate {
         }
         
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if tableView == charsTableView {
+            let char = Character.myCharacters[indexPath.row]
+            showEmojisFor(character: char)
+        }
+    }
 }
 
 extension EmojiesVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -459,6 +470,7 @@ extension EmojiesVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLay
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let emoji = emojis[indexPath.item]
       
+        self.tabBarController?.tabBar.isHidden = true
         ShareCharacterView.show(in: self.view, character: emoji) { (action, image) in
            
             switch action {
@@ -474,6 +486,8 @@ extension EmojiesVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLay
             case .more:
                 print("more")
                 self.moreShare(image: image)
+            case .none:
+                self.tabBarController?.tabBar.isHidden = false
             }
         }
 
