@@ -13,6 +13,7 @@ import UIKit
 class EmojiCell: UICollectionViewCell {
     @IBOutlet var webView: UIWebView!
     @IBOutlet var imgView: UIImageView!
+    @IBOutlet var lblTilte: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

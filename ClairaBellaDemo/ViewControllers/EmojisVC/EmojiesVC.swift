@@ -24,6 +24,8 @@ class EmojiesVC: ParentVC {
     @IBOutlet weak var progressBarImg: UIImageView!
     @IBOutlet weak var progressBarRightConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var charTblHeightConstraint: NSLayoutConstraint!
+    
     var filemanager = FileManager.default
     var isNewChar = false
     
@@ -124,6 +126,8 @@ class EmojiesVC: ParentVC {
             self.btnChangeChar.isHidden = !(Character.myCharacters.count > 1)
 
         }
+        
+        charTblHeightConstraint.constant = CGFloat(Character.myCharacters.count * 120)
         
     }
     

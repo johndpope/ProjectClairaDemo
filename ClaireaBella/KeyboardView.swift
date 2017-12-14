@@ -52,6 +52,7 @@ class KeyboardView: UIView {
 
         collView.register(nib, forCellWithReuseIdentifier: "emojiCell")
         collView.register(nib2, forCellWithReuseIdentifier: "charCell")
+        collView.contentInset = UIEdgeInsets(top: 8, left: 15, bottom: 8, right: 15)
         noFullAccessView.isHidden = isKeyboardHasFullAccess()
     }
    
@@ -86,19 +87,26 @@ extension KeyboardView: UICollectionViewDataSource, UICollectionViewDelegateFlow
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "charCell", for: indexPath) as! EmojiCell
             cell.backgroundColor = UIColor.white
             if indexPath.row == 0 {
-                cell.imgView.image = UIImage(named: "BtnNewChar")
+                cell.imgView.image = nil//UIImage(named: "BtnNewChar")
+                cell.backgroundColor = UIColor(colorLiteralRed: 0.47, green: 0.84, blue: 0.23, alpha: 1)
+                cell.lblTilte.text = "New"
+                cell.imgView.clipsToBounds = true
                 
             } else {
                 cell.imgView.image = nil
                 let char = characters[indexPath.row - 1]
                 
                 cell.imgView.image = imageFor(char: char)
-                cell.layer.cornerRadius = cell.frame.height/2
-                cell.clipsToBounds = true
                 cell.imgView.contentMode = .scaleAspectFill
                 cell.imgView.clipsToBounds = true
+                cell.backgroundColor = UIColor(colorLiteralRed: 0.97 , green: 0.82, blue: 0.93, alpha: 1)
+                cell.lblTilte.text = ""
+
             }
             
+            cell.layer.cornerRadius = cell.frame.height/2
+            cell.clipsToBounds = true
+
             return cell
 
         } else { //cell for display emojies
@@ -112,7 +120,7 @@ extension KeyboardView: UICollectionViewDataSource, UICollectionViewDelegateFlow
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = showCharters ? 100 : ((collectionView.frame.width)/3)
+        let width = (collectionView.frame.width - (showCharters ? 60 : 50)) / (showCharters ? 4 : 3)
         return CGSize(width: width, height:  width)
     }
     
@@ -122,6 +130,7 @@ extension KeyboardView: UICollectionViewDataSource, UICollectionViewDelegateFlow
 
             } else {
                 showCharters = !showCharters
+                
                 selectedCharacter = characters[indexPath.row - 1]
             }
         } else {

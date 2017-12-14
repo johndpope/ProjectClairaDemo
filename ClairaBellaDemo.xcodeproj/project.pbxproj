@@ -3640,6 +3640,7 @@
 		13A104C81F87904600F40FCD /* Keyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13A104C71F87904600F40FCD /* Keyboard.storyboard */; };
 		13E1D9451F7CD3D0006907B1 /* CharacterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13E1D9431F7CCCFA006907B1 /* CharacterCell.xib */; };
 		67A1F6B28B7089DC15FA837D /* Pods_ClairaBellaDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35A99DE8EB24D02764ED70FD /* Pods_ClairaBellaDemo.framework */; };
+		791062681FE2FC2B0012E346 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 791062661FE2FC2B0012E346 /* Main.storyboard */; };
 		79153ED61F80A68400E43DC4 /* ShareCharacterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79153ED51F80A68400E43DC4 /* ShareCharacterView.xib */; };
 		79153ED81F80A69B00E43DC4 /* ShareCharacterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79153ED71F80A69B00E43DC4 /* ShareCharacterView.swift */; };
 		791785A01F93A91200467F43 /* EmojiImageGeneratorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7917859F1F93A91200467F43 /* EmojiImageGeneratorView.swift */; };
@@ -3667,7 +3668,6 @@
 		79244E0E1F7ABBD600741D69 /* KeyboardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79244E0D1F7ABBD600741D69 /* KeyboardView.xib */; };
 		79244E101F7ABBF400741D69 /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79244E0F1F7ABBF400741D69 /* KeyboardView.swift */; };
 		792638171FB8596500BA1183 /* CBTabbarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792638161FB8596500BA1183 /* CBTabbarVC.swift */; };
-		792713271F84193D00C7B7DB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 792713251F84193D00C7B7DB /* Main.storyboard */; };
 		792721251FCDE54100DC67AE /* RConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792721231FCDE4B700DC67AE /* RConverter.swift */; };
 		792721261FCDE6B600DC67AE /* RConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792721231FCDE4B700DC67AE /* RConverter.swift */; };
 		792738021F63BCCE00C238F0 /* UtilityClasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792738011F63BCCE00C238F0 /* UtilityClasses.swift */; };
@@ -5963,6 +5963,7 @@
 		35A99DE8EB24D02764ED70FD /* Pods_ClairaBellaDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ClairaBellaDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E3CB6A597CC857291E48488 /* Pods-ClairaBellaDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ClairaBellaDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ClairaBellaDemo/Pods-ClairaBellaDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		521D4AFBB295765553039816 /* Pods-ClairaBellaDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ClairaBellaDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-ClairaBellaDemo/Pods-ClairaBellaDemo.release.xcconfig"; sourceTree = "<group>"; };
+		791062671FE2FC2B0012E346 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		79153ED51F80A68400E43DC4 /* ShareCharacterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShareCharacterView.xib; sourceTree = "<group>"; };
 		79153ED71F80A69B00E43DC4 /* ShareCharacterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareCharacterView.swift; sourceTree = "<group>"; };
 		7917859F1F93A91200467F43 /* EmojiImageGeneratorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiImageGeneratorView.swift; sourceTree = "<group>"; };
@@ -5990,7 +5991,6 @@
 		79244E0D1F7ABBD600741D69 /* KeyboardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KeyboardView.xib; sourceTree = "<group>"; };
 		79244E0F1F7ABBF400741D69 /* KeyboardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardView.swift; sourceTree = "<group>"; };
 		792638161FB8596500BA1183 /* CBTabbarVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CBTabbarVC.swift; sourceTree = "<group>"; };
-		792713261F84193D00C7B7DB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		792721231FCDE4B700DC67AE /* RConverter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RConverter.swift; sourceTree = "<group>"; };
 		792738011F63BCCE00C238F0 /* UtilityClasses.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilityClasses.swift; sourceTree = "<group>"; };
 		79292BDA1F6DA05A00015CB3 /* UsersCharacters.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = UsersCharacters.plist; sourceTree = "<group>"; };
@@ -8410,7 +8410,7 @@
 		79183D611F55103800A00D50 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				792713251F84193D00C7B7DB /* Main.storyboard */,
+				791062661FE2FC2B0012E346 /* Main.storyboard */,
 				7929835E1FAF9993008813D2 /* WalkThrough.storyboard */,
 				7954216B1F460DE500DBBBE0 /* LaunchScreen.storyboard */,
 			);
@@ -10970,7 +10970,6 @@
 				135745F71FA3143C00187CFA /* OC050.png in Resources */,
 				1357394D1FA3140600187CFA /* BP004_BT001_OA001_BV000.svg in Resources */,
 				13573DB51FA3140900187CFA /* EX031.svg in Resources */,
-				792713271F84193D00C7B7DB /* Main.storyboard in Resources */,
 				1357466A1FA3143C00187CFA /* OF020.png in Resources */,
 				135745C71FA3143C00187CFA /* OC002.png in Resources */,
 				135744431FA3143B00187CFA /* CS001.png in Resources */,
@@ -12398,6 +12397,7 @@
 				13573DA91FA3140900187CFA /* EX019.svg in Resources */,
 				13573D571FA3140800187CFA /* EJ032.svg in Resources */,
 				13573B111FA3140700187CFA /* BP006_BT004_OA023_BV002.svg in Resources */,
+				791062681FE2FC2B0012E346 /* Main.storyboard in Resources */,
 				13573DE71FA3140900187CFA /* HW003.svg in Resources */,
 				13573B711FA3140700187CFA /* BP007_BT004_OA038_BV000.svg in Resources */,
 				1357458B1FA3143C00187CFA /* HWC012.png in Resources */,
@@ -12671,10 +12671,10 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		792713251F84193D00C7B7DB /* Main.storyboard */ = {
+		791062661FE2FC2B0012E346 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				792713261F84193D00C7B7DB /* Base */,
+				791062671FE2FC2B0012E346 /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
