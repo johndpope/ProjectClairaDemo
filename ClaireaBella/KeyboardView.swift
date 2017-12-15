@@ -15,8 +15,11 @@ class KeyboardView: UIView {
     @IBOutlet var indicator: UIActivityIndicatorView!
     @IBOutlet var messageViewTop: NSLayoutConstraint!
     @IBOutlet var noFullAccessView: UIView!
+    @IBOutlet var currentCharView: UIView!
+    @IBOutlet var currentCharImageView: UIImageView!
     
     var filemanager = FileManager.default
+    
     //var charGenerator = CharacterHTMLBuilder.shared
     
     var characters = [Character]() {
@@ -35,10 +38,16 @@ class KeyboardView: UIView {
                     emoji.key = type
                     selectedCharacter?.emojis.append(emoji)
                 }
+                
             }
             print("selected character name : \(selectedCharacter!.name)")
             DispatchQueue.main.async {
                 self.collView.reloadData()
+                if let char = self.selectedCharacter {
+                    self.currentCharImageView.image = self.imageFor(char: char)
+                }
+
+                
             }
         }
     }
@@ -54,6 +63,10 @@ class KeyboardView: UIView {
         collView.register(nib2, forCellWithReuseIdentifier: "charCell")
         collView.contentInset = UIEdgeInsets(top: 8, left: 15, bottom: 8, right: 15)
         noFullAccessView.isHidden = isKeyboardHasFullAccess()
+        
+        currentCharView.layer.cornerRadius = 27//currentCharView.frame.height/2
+        currentCharView.clipsToBounds = true
+        currentCharView.backgroundColor = UIColor(colorLiteralRed: 0.97 , green: 0.82, blue: 0.93, alpha: 1)
     }
    
     class func add(in view: UIView)-> KeyboardView {
@@ -68,7 +81,9 @@ class KeyboardView: UIView {
     
     @IBAction func changeChar_btnClicked(_ sender: UIButton) {
         showCharters = !showCharters
-        collView.reloadData()
+        DispatchQueue.main.async {
+            self.collView.reloadData()
+        }
     }
 }
 
@@ -88,9 +103,10 @@ extension KeyboardView: UICollectionViewDataSource, UICollectionViewDelegateFlow
             cell.backgroundColor = UIColor.white
             if indexPath.row == 0 {
                 cell.imgView.image = nil//UIImage(named: "BtnNewChar")
-                cell.backgroundColor = UIColor(colorLiteralRed: 0.47, green: 0.84, blue: 0.23, alpha: 1)
+                cell.roundView.backgroundColor = UIColor(colorLiteralRed: 0.47, green: 0.84, blue: 0.23, alpha: 1)
                 cell.lblTilte.text = "New"
                 cell.imgView.clipsToBounds = true
+                cell.tickMark.isHidden = true
                 
             } else {
                 cell.imgView.image = nil
@@ -99,13 +115,15 @@ extension KeyboardView: UICollectionViewDataSource, UICollectionViewDelegateFlow
                 cell.imgView.image = imageFor(char: char)
                 cell.imgView.contentMode = .scaleAspectFill
                 cell.imgView.clipsToBounds = true
-                cell.backgroundColor = UIColor(colorLiteralRed: 0.97 , green: 0.82, blue: 0.93, alpha: 1)
+                cell.roundView.backgroundColor = UIColor(colorLiteralRed: 0.97 , green: 0.82, blue: 0.93, alpha: 1)
                 cell.lblTilte.text = ""
+                cell.tickMark.isHidden = selectedCharacter == char ? false : true
 
             }
             
-            cell.layer.cornerRadius = cell.frame.height/2
-            cell.clipsToBounds = true
+            cell.backgroundColor = UIColor.clear
+            cell.roundView.layer.cornerRadius = cell.roundView.frame.height/2
+            cell.roundView.clipsToBounds = true
 
             return cell
 

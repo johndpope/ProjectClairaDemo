@@ -20,31 +20,55 @@
                 <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Rxw-QI-dJy">
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    </imageView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PPa-K4-A1A">
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Rxw-QI-dJy">
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Rxw-QI-dJy" secondAttribute="trailing" constant="-25" id="4Jc-H4-8pQ"/>
+                            <constraint firstItem="Rxw-QI-dJy" firstAttribute="leading" secondItem="PPa-K4-A1A" secondAttribute="leading" constant="-25" id="EmO-sM-Ng5"/>
+                            <constraint firstAttribute="bottom" secondItem="Rxw-QI-dJy" secondAttribute="bottom" constant="-50" id="NcL-v6-4d2"/>
+                            <constraint firstItem="Rxw-QI-dJy" firstAttribute="top" secondItem="PPa-K4-A1A" secondAttribute="top" constant="-10" id="bVC-dX-G4J"/>
+                        </constraints>
+                    </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TsJ-XN-ZCV">
                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="18"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tickmarkIcon" translatesAutoresizingMaskIntoConstraints="NO" id="4dj-9j-bJ9">
+                        <constraints>
+                            <constraint firstAttribute="width" constant="18" id="usD-Lm-YgW"/>
+                            <constraint firstAttribute="height" constant="18" id="y0A-Of-Tuw"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
             </view>
-            <color key="backgroundColor" red="0.91764705882352937" green="0.77254901960784317" blue="0.90980392156862744" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="PPa-K4-A1A" firstAttribute="top" secondItem="IXx-W9-FTm" secondAttribute="top" constant="2" id="0r9-ee-bvt"/>
                 <constraint firstItem="TsJ-XN-ZCV" firstAttribute="centerX" secondItem="IXx-W9-FTm" secondAttribute="centerX" id="CV9-lS-NTe"/>
-                <constraint firstAttribute="bottom" secondItem="Rxw-QI-dJy" secondAttribute="bottom" constant="-60" id="DLF-da-Ggh"/>
                 <constraint firstItem="TsJ-XN-ZCV" firstAttribute="centerY" secondItem="IXx-W9-FTm" secondAttribute="centerY" id="Gbb-gc-XI8"/>
-                <constraint firstItem="Rxw-QI-dJy" firstAttribute="top" secondItem="IXx-W9-FTm" secondAttribute="top" constant="-15" id="NgE-cc-k1D"/>
-                <constraint firstAttribute="trailing" secondItem="Rxw-QI-dJy" secondAttribute="trailing" constant="-30" id="dIT-I3-jch"/>
-                <constraint firstItem="Rxw-QI-dJy" firstAttribute="leading" secondItem="IXx-W9-FTm" secondAttribute="leading" constant="-30" id="zok-Wv-diK"/>
+                <constraint firstAttribute="trailing" secondItem="PPa-K4-A1A" secondAttribute="trailing" constant="2" id="RMd-3M-O5l"/>
+                <constraint firstAttribute="trailing" secondItem="4dj-9j-bJ9" secondAttribute="trailing" constant="4" id="bHY-d7-GFk"/>
+                <constraint firstAttribute="bottom" secondItem="4dj-9j-bJ9" secondAttribute="bottom" constant="4" id="f1g-U8-YNT"/>
+                <constraint firstAttribute="bottom" secondItem="PPa-K4-A1A" secondAttribute="bottom" constant="2" id="l7N-SS-old"/>
+                <constraint firstItem="PPa-K4-A1A" firstAttribute="leading" secondItem="IXx-W9-FTm" secondAttribute="leading" constant="2" id="s7M-C5-fdi"/>
             </constraints>
             <size key="customSize" width="157" height="151"/>
             <connections>
                 <outlet property="imgView" destination="Rxw-QI-dJy" id="CLp-ZO-Al2"/>
                 <outlet property="lblTilte" destination="TsJ-XN-ZCV" id="g7g-ty-Eq7"/>
+                <outlet property="roundView" destination="PPa-K4-A1A" id="aZK-IR-neX"/>
+                <outlet property="tickMark" destination="4dj-9j-bJ9" id="NC2-ii-79j"/>
             </connections>
             <point key="canvasLocation" x="-95.5" y="132.5"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="tickmarkIcon" width="18" height="18"/>
+    </resources>
 </document>

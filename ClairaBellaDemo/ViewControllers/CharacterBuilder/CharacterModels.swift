@@ -27,7 +27,7 @@ struct CharBackground {
 
 
 
-class Character: NSCopying, CharacterType {
+class Character: NSCopying, CharacterType, Equatable {
     
     var name = ""
     var choices = [String : String]()
@@ -71,6 +71,9 @@ class Character: NSCopying, CharacterType {
         return myCharacters.filter({$0.isMainChar}).first ?? myCharacters.first
     }
     
+    static func ==(lhs: Character, rhs: Character)-> Bool {
+        return lhs.createdDate == rhs.createdDate
+    }
     
     //
 }

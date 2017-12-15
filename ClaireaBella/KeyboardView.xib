@@ -74,10 +74,10 @@
                             </constraints>
                             <state key="normal" image="Computer-Hardware-Keyboard-icon"/>
                         </button>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nZq-Gb-cVG">
+                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nZq-Gb-cVG">
                             <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bIN-Ux-WuW"/>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BuO-k1-hTW">
-                                    <state key="normal" image="tempChart1"/>
                                     <connections>
                                         <action selector="changeChar_btnClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="OUQ-eg-PFV"/>
                                     </connections>
@@ -85,9 +85,15 @@
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="60" id="Tcg-Jt-PGS"/>
-                                <constraint firstItem="BuO-k1-hTW" firstAttribute="centerX" secondItem="nZq-Gb-cVG" secondAttribute="centerX" id="gWC-3x-Nm0"/>
-                                <constraint firstItem="BuO-k1-hTW" firstAttribute="centerY" secondItem="nZq-Gb-cVG" secondAttribute="centerY" id="oe3-gb-kst"/>
+                                <constraint firstItem="BuO-k1-hTW" firstAttribute="top" secondItem="nZq-Gb-cVG" secondAttribute="top" id="8P0-Db-OCW"/>
+                                <constraint firstAttribute="width" constant="54" id="Tcg-Jt-PGS"/>
+                                <constraint firstItem="BuO-k1-hTW" firstAttribute="leading" secondItem="nZq-Gb-cVG" secondAttribute="leading" id="Wx4-In-PGH"/>
+                                <constraint firstItem="bIN-Ux-WuW" firstAttribute="leading" secondItem="nZq-Gb-cVG" secondAttribute="leading" constant="-10" id="Y4f-21-8uh"/>
+                                <constraint firstAttribute="trailing" secondItem="BuO-k1-hTW" secondAttribute="trailing" id="Zdc-SQ-2oD"/>
+                                <constraint firstAttribute="trailing" secondItem="bIN-Ux-WuW" secondAttribute="trailing" constant="-10" id="gcQ-hz-6Lt"/>
+                                <constraint firstAttribute="bottom" secondItem="BuO-k1-hTW" secondAttribute="bottom" id="gmN-j8-2nn"/>
+                                <constraint firstAttribute="bottom" secondItem="bIN-Ux-WuW" secondAttribute="bottom" constant="-20" id="nTH-Gs-EQz"/>
+                                <constraint firstItem="bIN-Ux-WuW" firstAttribute="top" secondItem="nZq-Gb-cVG" secondAttribute="top" id="nWK-qc-Adt"/>
                             </constraints>
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cQc-lf-keF">
@@ -130,10 +136,10 @@
                         <constraint firstItem="YaV-AI-Kne" firstAttribute="top" secondItem="FLp-nI-lBG" secondAttribute="top" id="UYJ-62-w2z"/>
                         <constraint firstAttribute="bottom" secondItem="dBI-WC-Iid" secondAttribute="bottom" constant="5" id="WK4-ql-as7"/>
                         <constraint firstItem="cQc-lf-keF" firstAttribute="leading" secondItem="nZq-Gb-cVG" secondAttribute="trailing" id="cxf-9x-Y7i"/>
-                        <constraint firstItem="nZq-Gb-cVG" firstAttribute="top" secondItem="FLp-nI-lBG" secondAttribute="top" id="g98-4N-OPK"/>
+                        <constraint firstItem="nZq-Gb-cVG" firstAttribute="top" secondItem="FLp-nI-lBG" secondAttribute="top" constant="3" id="g98-4N-OPK"/>
                         <constraint firstItem="YaV-AI-Kne" firstAttribute="leading" secondItem="FLp-nI-lBG" secondAttribute="leading" id="hys-ic-p89"/>
                         <constraint firstItem="yo5-gb-W6b" firstAttribute="leading" secondItem="FLp-nI-lBG" secondAttribute="leading" id="lPP-Af-aCJ"/>
-                        <constraint firstAttribute="bottom" secondItem="nZq-Gb-cVG" secondAttribute="bottom" id="s0f-I1-Man"/>
+                        <constraint firstAttribute="bottom" secondItem="nZq-Gb-cVG" secondAttribute="bottom" constant="3" id="s0f-I1-Man"/>
                         <constraint firstAttribute="trailing" secondItem="yo5-gb-W6b" secondAttribute="trailing" id="tYu-3O-fR4"/>
                     </constraints>
                 </view>
@@ -177,6 +183,8 @@
                 <outlet property="btnGlobe" destination="anR-ey-nFn" id="xbG-fZ-wmp"/>
                 <outlet property="btnKeyboard" destination="dBI-WC-Iid" id="gyt-ba-e5g"/>
                 <outlet property="collView" destination="cX5-ZH-j2g" id="Juv-5c-rhz"/>
+                <outlet property="currentCharImageView" destination="bIN-Ux-WuW" id="2Oa-To-qeZ"/>
+                <outlet property="currentCharView" destination="nZq-Gb-cVG" id="ZAY-ik-obd"/>
                 <outlet property="indicator" destination="SyY-vz-zsc" id="kFX-nN-Jen"/>
                 <outlet property="messageViewTop" destination="Pem-oH-sPA" id="MTb-Gn-iFP"/>
                 <outlet property="noFullAccessView" destination="cjp-7P-5ca" id="ySF-D2-aPG"/>
@@ -189,6 +197,5 @@
         <image name="Globe" width="21" height="21"/>
         <image name="allowFullAccessInstructions" width="364" height="171"/>
         <image name="appLogo" width="134" height="26"/>
-        <image name="tempChart1" width="51" height="51"/>
     </resources>
 </document>
