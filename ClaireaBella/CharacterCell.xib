@@ -61,7 +61,7 @@
             <size key="customSize" width="157" height="151"/>
             <connections>
                 <outlet property="imgView" destination="Rxw-QI-dJy" id="CLp-ZO-Al2"/>
-                <outlet property="lblTilte" destination="TsJ-XN-ZCV" id="g7g-ty-Eq7"/>
+                <outlet property="lblTitle" destination="TsJ-XN-ZCV" id="7uM-cD-RWQ"/>
                 <outlet property="roundView" destination="PPa-K4-A1A" id="aZK-IR-neX"/>
                 <outlet property="tickMark" destination="4dj-9j-bJ9" id="NC2-ii-79j"/>
             </connections>

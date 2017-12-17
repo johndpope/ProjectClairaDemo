@@ -13,7 +13,7 @@ import UIKit
 class EmojiCell: UICollectionViewCell {
     @IBOutlet var webView: UIWebView!
     @IBOutlet var imgView: UIImageView!
-    @IBOutlet var lblTilte: UILabel!
+    @IBOutlet var lblTitle: UILabel!
     @IBOutlet var tickMark: UIImageView!
     @IBOutlet var roundView: UIView!
     

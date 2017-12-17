@@ -51,7 +51,10 @@ class KeyboardView: UIView {
             }
         }
     }
-        
+    
+    
+    weak var viewController: KeyboardViewController?
+    
     var showCharters = false
     
     override func awakeFromNib() {
@@ -100,30 +103,32 @@ extension KeyboardView: UICollectionViewDataSource, UICollectionViewDelegateFlow
         
         if showCharters { //cell for display characters
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "charCell", for: indexPath) as! EmojiCell
-            cell.backgroundColor = UIColor.white
             if indexPath.row == 0 {
-                cell.imgView.image = nil//UIImage(named: "BtnNewChar")
+                //cell.imgView.image = nil//UIImage(named: "BtnNewChar")
                 cell.roundView.backgroundColor = UIColor(colorLiteralRed: 0.47, green: 0.84, blue: 0.23, alpha: 1)
-                cell.lblTilte.text = "New"
+                cell.lblTitle.text = "New"
                 cell.imgView.clipsToBounds = true
                 cell.tickMark.isHidden = true
+                cell.imgView.isHidden = true
                 
             } else {
-                cell.imgView.image = nil
+                //cell.imgView.image = nil
                 let char = characters[indexPath.row - 1]
                 
                 cell.imgView.image = imageFor(char: char)
                 cell.imgView.contentMode = .scaleAspectFill
                 cell.imgView.clipsToBounds = true
+                
                 cell.roundView.backgroundColor = UIColor(colorLiteralRed: 0.97 , green: 0.82, blue: 0.93, alpha: 1)
-                cell.lblTilte.text = ""
+                cell.lblTitle.text = ""
                 cell.tickMark.isHidden = selectedCharacter == char ? false : true
-
+                cell.imgView.isHidden = false
             }
             
             cell.backgroundColor = UIColor.clear
             cell.roundView.layer.cornerRadius = cell.roundView.frame.height/2
             cell.roundView.clipsToBounds = true
+            cell.roundView.isHidden = false
 
             return cell
 
@@ -145,7 +150,7 @@ extension KeyboardView: UICollectionViewDataSource, UICollectionViewDelegateFlow
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if showCharters {
             if indexPath.row == 0 {
-
+                viewController?.openApp()
             } else {
                 showCharters = !showCharters
                 
@@ -165,11 +170,6 @@ extension KeyboardView: UICollectionViewDataSource, UICollectionViewDelegateFlow
 //MARK:- Other Important Methods
 
 extension KeyboardView {
-    
-    func openApp() {
-        let instagramHooks = "instagram://user?username=your_username"
-        _ = URL(string: instagramHooks)
-    }
     
     func imageFor(emoji: Emoji)-> UIImage? {
         let url = filemanager.containerURL(forSecurityApplicationGroupIdentifier: appGroupName)!.appendingPathComponent(selectedCharacter!.createdDate + "/" + emoji.key)

@@ -44,7 +44,7 @@ class KeyboardViewController: UIInputViewController {
 //        }
         keyboardView.btnKeyboard.addTarget(self, action: #selector(handleInputModeList(from:with:)), for: .allTouchEvents)
         keyboardView.btnGlobe.addTarget(self, action: #selector(handleInputModeList(from:with:)), for: .allTouchEvents)
-
+        keyboardView.viewController = self
         getEmojisContexts()
 
     }
@@ -72,6 +72,13 @@ class KeyboardViewController: UIInputViewController {
 
     @IBAction func returnKeyAction(_ sender: UIButton) {
         self.inputView?.endEditing(true)
+    }
+    
+    func openApp() {
+        let instagramHooks = "claireabellaApp://"
+        if let appUrl = URL(string: instagramHooks) {
+            _ = openURL(url: appUrl as NSURL)
+        }
     }
     
     func getCharacters() {
@@ -131,6 +138,32 @@ class KeyboardViewController: UIInputViewController {
 }
 
 
+extension UIInputViewController {
+    
+    func openURL(url: NSURL) -> Bool {
+        do {
+            let application = try self.sharedApplication()
+            return application.performSelector(inBackground: "openURL:", with: url) != nil
+        }
+        catch {
+            return false
+        }
+    }
+    
+    func sharedApplication() throws -> UIApplication {
+        var responder: UIResponder? = self
+        while responder != nil {
+            if let application = responder as? UIApplication {
+                return application
+            }
+            
+            responder = responder?.next
+        }
+        
+        throw NSError(domain: "UIInputViewController+sharedApplication.swift", code: 1, userInfo: nil)
+    }
+    
+}
 
 
 // Perform custom UI setup here

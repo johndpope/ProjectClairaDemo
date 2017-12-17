@@ -21,38 +21,6 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cjp-7P-5ca">
-                    <subviews>
-                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" image="allowFullAccessInstructions" translatesAutoresizingMaskIntoConstraints="NO" id="BHK-6Y-00w">
-                            <constraints>
-                                <constraint firstAttribute="width" secondItem="BHK-6Y-00w" secondAttribute="height" multiplier="125:57" id="fPx-Vw-80N"/>
-                            </constraints>
-                        </imageView>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="anR-ey-nFn">
-                            <constraints>
-                                <constraint firstAttribute="height" constant="44" id="Rqe-8T-C5w"/>
-                                <constraint firstAttribute="width" constant="44" id="ocz-7u-5Eh"/>
-                            </constraints>
-                            <state key="normal" image="Globe"/>
-                        </button>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="appLogo" translatesAutoresizingMaskIntoConstraints="NO" id="Dto-yh-m4T">
-                            <constraints>
-                                <constraint firstAttribute="width" constant="134" id="jWB-wB-KEC"/>
-                                <constraint firstAttribute="height" constant="26" id="msU-fo-1aZ"/>
-                            </constraints>
-                        </imageView>
-                    </subviews>
-                    <color key="backgroundColor" red="0.87843137250000003" green="0.062745098040000002" blue="0.61568627450000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <constraints>
-                        <constraint firstItem="BHK-6Y-00w" firstAttribute="centerY" secondItem="cjp-7P-5ca" secondAttribute="centerY" constant="-10" id="6ny-th-UaX"/>
-                        <constraint firstItem="BHK-6Y-00w" firstAttribute="leading" secondItem="cjp-7P-5ca" secondAttribute="leading" id="AnZ-fi-xp1"/>
-                        <constraint firstAttribute="bottom" secondItem="anR-ey-nFn" secondAttribute="bottom" id="OJd-SG-x2T"/>
-                        <constraint firstAttribute="trailing" secondItem="BHK-6Y-00w" secondAttribute="trailing" id="RLv-pT-M22"/>
-                        <constraint firstAttribute="bottom" secondItem="Dto-yh-m4T" secondAttribute="bottom" constant="9" id="S9a-qy-luB"/>
-                        <constraint firstItem="anR-ey-nFn" firstAttribute="leading" secondItem="cjp-7P-5ca" secondAttribute="leading" id="bNb-VB-V84"/>
-                        <constraint firstItem="Dto-yh-m4T" firstAttribute="centerX" secondItem="cjp-7P-5ca" secondAttribute="centerX" id="rRA-b5-lIe"/>
-                    </constraints>
-                </view>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="cX5-ZH-j2g">
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="m40-qZ-QIX">
@@ -156,6 +124,38 @@
                         <constraint firstAttribute="height" constant="50" id="KbS-Ow-vTz"/>
                         <constraint firstItem="IRi-Ci-y9o" firstAttribute="centerY" secondItem="H4x-Hy-3gq" secondAttribute="centerY" id="dPD-Ad-O84"/>
                         <constraint firstItem="IRi-Ci-y9o" firstAttribute="centerX" secondItem="H4x-Hy-3gq" secondAttribute="centerX" id="z50-jP-6T0"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cjp-7P-5ca">
+                    <subviews>
+                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" image="allowFullAccessInstructions" translatesAutoresizingMaskIntoConstraints="NO" id="BHK-6Y-00w">
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="BHK-6Y-00w" secondAttribute="height" multiplier="125:57" id="fPx-Vw-80N"/>
+                            </constraints>
+                        </imageView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="anR-ey-nFn">
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="Rqe-8T-C5w"/>
+                                <constraint firstAttribute="width" constant="44" id="ocz-7u-5Eh"/>
+                            </constraints>
+                            <state key="normal" image="Globe"/>
+                        </button>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="appLogo" translatesAutoresizingMaskIntoConstraints="NO" id="Dto-yh-m4T">
+                            <constraints>
+                                <constraint firstAttribute="width" constant="134" id="jWB-wB-KEC"/>
+                                <constraint firstAttribute="height" constant="26" id="msU-fo-1aZ"/>
+                            </constraints>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" red="0.87843137250000003" green="0.062745098040000002" blue="0.61568627450000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstItem="BHK-6Y-00w" firstAttribute="centerY" secondItem="cjp-7P-5ca" secondAttribute="centerY" constant="-10" id="6ny-th-UaX"/>
+                        <constraint firstItem="BHK-6Y-00w" firstAttribute="leading" secondItem="cjp-7P-5ca" secondAttribute="leading" id="AnZ-fi-xp1"/>
+                        <constraint firstAttribute="bottom" secondItem="anR-ey-nFn" secondAttribute="bottom" id="OJd-SG-x2T"/>
+                        <constraint firstAttribute="trailing" secondItem="BHK-6Y-00w" secondAttribute="trailing" id="RLv-pT-M22"/>
+                        <constraint firstAttribute="bottom" secondItem="Dto-yh-m4T" secondAttribute="bottom" constant="9" id="S9a-qy-luB"/>
+                        <constraint firstItem="anR-ey-nFn" firstAttribute="leading" secondItem="cjp-7P-5ca" secondAttribute="leading" id="bNb-VB-V84"/>
+                        <constraint firstItem="Dto-yh-m4T" firstAttribute="centerX" secondItem="cjp-7P-5ca" secondAttribute="centerX" id="rRA-b5-lIe"/>
                     </constraints>
                 </view>
                 <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="SyY-vz-zsc"/>
