@@ -83,7 +83,6 @@ class EmojiesVC: ParentVC {
         userSelectedCharForEmoji = nil
         //character = nil
         self.progressBarRightConstraint.constant = 0
-
     }
     
     
@@ -127,11 +126,13 @@ class EmojiesVC: ParentVC {
 
         }
         
-        charTblHeightConstraint.constant = CGFloat(Character.myCharacters.count * 120)
-        
+        self.setCharsTableHeight()
     }
     
     
+    func setCharsTableHeight() {
+        charTblHeightConstraint.constant = CGFloat(Character.myCharacters.count * 120)
+    }
 
 }
 

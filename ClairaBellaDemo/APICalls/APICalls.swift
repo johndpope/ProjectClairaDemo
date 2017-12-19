@@ -68,95 +68,156 @@ class APICall {
     typealias ResponseBlock = (Any?, Bool)-> Void
     
     
-    func saveJsonWithEncoder(json: Any, fileName: String) {
-        let pathToSave = documetDirectoryURL().appendingPathComponent("characterJsons/\(fileName)")
-       // NSKeyedArchiver.archiveRootObject(json, toFile: <#T##String#>)
+    func encode(json: Any, fileName: String) {
+        UserDefaults(suiteName: appGroupName)?.setValue(json, forKey: fileName)
+    }
+    
+    func decodeJsonFrom(fileName: String)-> Any? {
+
+        return  UserDefaults(suiteName: appGroupName)?.object(forKey: fileName)
     }
     
     //API Calls methods
     
-    func characterAPICall(block: @escaping ResponseBlock) {
-        let urlString = APIName.getCharacters
-        let url = URL(string: urlString)!
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
-            if let data = data {
-                if let json = try? JSONSerialization.jsonObject(with: data, options: [.mutableContainers]) {
-                    return block(json, true)
-                }
-            }
+    
+    func interface_APICall(block: @escaping ResponseBlock) {
+        if let localJson = decodeJsonFrom(fileName: "InterfaceJson") {
+            block(localJson, true)
+        } else {
             
-            block(nil, false)
-            }.resume()
+            let urlString =  APIName.getInterfaces
+            let url = URL(string: urlString)!
+            URLSession.shared.dataTask(with: url) { (data, response, error) in
+                if let data = data {
+                    if let json = try? JSONSerialization.jsonObject(with: data, options: [.mutableContainers]) {
+                        self.encode(json: json, fileName: "InterfaceJson")
+                        return block(json, true)
+                    }
+                }
+                
+                block(nil, false)
+                }.resume()
+        }
+    }
+
+    func characterAPICall(block: @escaping ResponseBlock) {
         
+        if let localJson = decodeJsonFrom(fileName: "CharacterJson") {
+            block(localJson, true)
+        } else {
+            let urlString = APIName.getCharacters
+            let url = URL(string: urlString)!
+            URLSession.shared.dataTask(with: url) { (data, response, error) in
+                if let data = data {
+                    if let json = try? JSONSerialization.jsonObject(with: data, options: [.mutableContainers]) {
+                        self.encode(json: json, fileName: "CharacterJson")
+                        return block(json, true)
+                    }
+                }
+                
+                block(nil, false)
+                }.resume()
+            
+        }
     }
     
     
     func partsMap_APICall(block: @escaping ResponseBlock) {
+        if let localJson = decodeJsonFrom(fileName: "PartMapJson") {
+            block(localJson, true)
+        } else {
         let urlString = APIName.getPartsMap
         let url = URL(string: urlString)!
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             if let data = data {
                 if let json = try? JSONSerialization.jsonObject(with: data, options: [.mutableContainers]) {
+                    self.encode(json: json, fileName: "PartMapJson")
                     return block(json, true)
                 }
             }
             
             block(nil, false)
             }.resume()
+        }
         
     }
     
     func parts_APICall(block: @escaping ResponseBlock) {
+        
+        if let localJson = decodeJsonFrom(fileName: "PartsJson") {
+            block(localJson, true)
+            
+        } else {
+            
         let urlString =  APIName.getParts
         let url = URL(string: urlString)!
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             if let data = data {
                 if let json = try? JSONSerialization.jsonObject(with: data, options: [.mutableContainers]) {
+                    self.encode(json: json, fileName: "PartsJson")
                     return block(json, true)
                 }
             }
             
             block(nil, false)
             }.resume()
-        
+        }
     }
     
     func parts_meta_APICall(block: @escaping ResponseBlock) {
+        if let localJson = decodeJsonFrom(fileName: "PartsMetaJson") {
+            block(localJson, true)
+            
+        } else {
+
         let urlString =  APIName.getPartMeta
         let url = URL(string: urlString)!
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             if let data = data {
                 if let json = try? JSONSerialization.jsonObject(with: data, options: [.mutableContainers]) {
+                    self.encode(json: json, fileName: "PartsMetaJson")
                     return block(json, true)
                 }
             }
             
             block(nil, false)
             }.resume()
-        
+        }
     }
     
     func context_APICall(block: @escaping ResponseBlock) {
+        if let localJson = decodeJsonFrom(fileName: "CharacterContextJson") {
+            block(localJson, true)
+            
+        } else {
+            
         let urlString =  APIName.getContexts
         let url = URL(string: urlString)!
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             if let data = data {
                 if let json = try? JSONSerialization.jsonObject(with: data, options: [.mutableContainers]) {
+                    self.encode(json: json, fileName: "CharacterContextJson")
                     return block(json, true)
                 }
             }
             
             block(nil, false)
             }.resume()
+        }
     }
     
     func emojis_context_APICall(block: @escaping ResponseBlock) {
+        if let localJson = decodeJsonFrom(fileName: "EmojiContextJson") {
+            block(localJson, true)
+        } else {
+            
         let urlString =  APIName.getEmojisContexts
         let url = URL(string: urlString)!
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             if let data = data {
                 if let json = try? JSONSerialization.jsonObject(with: data, options: [.mutableContainers]) {
                     DispatchQueue.main.async {
+                        self.encode(json: json, fileName: "EmojiContextJson")
                         block(json, true)
                     }
                     return
@@ -165,22 +226,10 @@ class APICall {
             
             block(nil, false)
             }.resume()
+        }
     }
 
     
-    func interface_APICall(block: @escaping ResponseBlock) {
-        let urlString =  APIName.getInterfaces
-        let url = URL(string: urlString)!
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
-            if let data = data {
-                if let json = try? JSONSerialization.jsonObject(with: data, options: [.mutableContainers]) {
-                    return block(json, true)
-                }
-            }
-            
-            block(nil, false)
-            }.resume()
-    }
     
     
     func createNewCharacter_APICall(json: [String : Any], block: @escaping ResponseBlock) {

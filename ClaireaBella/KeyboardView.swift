@@ -65,7 +65,7 @@ class KeyboardView: UIView {
         collView.register(nib, forCellWithReuseIdentifier: "emojiCell")
         collView.register(nib2, forCellWithReuseIdentifier: "charCell")
         collView.contentInset = UIEdgeInsets(top: 8, left: 15, bottom: 8, right: 15)
-        noFullAccessView.isHidden = isKeyboardHasFullAccess()
+        noFullAccessView.isHidden = isFullAccessGranted()
         
         currentCharView.layer.cornerRadius = 27//currentCharView.frame.height/2
         currentCharView.clipsToBounds = true
@@ -241,7 +241,28 @@ extension UIImage {
     }
 }
 
-func isKeyboardHasFullAccess()-> Bool {
+ func isFullAccessGranted() -> Bool {
+    if #available(iOSApplicationExtension 10.0, *) {
+        if UIPasteboard.general.hasStrings {
+            return  true
+        } else if UIPasteboard.general.hasURLs {
+            return true
+        } else if UIPasteboard.general.hasColors {
+            return true
+        } else if UIPasteboard.general.hasImages {
+            return true
+        } else { // In case the pasteboard is blank
+            UIPasteboard.general.string = ""
+            
+            if UIPasteboard.general.hasStrings {
+                return  true
+            } else {
+                return  false
+            }
+        }
+    } else {
+        // before iOS10
         return UIPasteboard.general.isKind(of: UIPasteboard.self)
+    }
 }
 
