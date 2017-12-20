@@ -64,10 +64,13 @@ class EmojiesVC: ParentVC {
         return cellHeight +  CGFloat(rowCount * 2)
     }
     
+    var showingChartList = false
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.getEmojisContexts()
+        setUI()
     }
     
     
@@ -123,7 +126,6 @@ class EmojiesVC: ParentVC {
             self.tableView.isHidden = false
             self.tableView.alpha = 1
             self.btnChangeChar.isHidden = !(Character.myCharacters.count > 1)
-
         }
         
         self.setCharsTableHeight()
@@ -189,6 +191,7 @@ extension EmojiesVC {
             charsTableView.delegate = self
             charsTableView.reloadData()
         }
+        setUI()
         UIView.animate(withDuration: 0.3) {
             self.charListView.alpha = 1
             self.tableView.alpha = 0
@@ -204,6 +207,7 @@ extension EmojiesVC {
     
     func showEmojisFor(character: Character) {
         userSelectedCharForEmoji = character
+        setUI()
         self.setCharacterForEmojis()
         
         self.tableView.alpha = 0
@@ -462,7 +466,7 @@ extension EmojiesVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLay
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "emojiCell", for: indexPath) as! EmojiItemCell
-            cell.imgView.isHidden = !isNewChar
+            //cell.imgView.isHidden = !isNewChar
             return cell
     }
     
@@ -482,14 +486,12 @@ extension EmojiesVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLay
             case .facebook:
                 self.shareOnFacebook(image)
             case .twitter:
-                print("twitter")
                 self.shareOnTwitter(image)
             case .mail:
                 self.shareViaMail(image)
             case .save:
                 self.saveToPhots(image)
             case .more:
-                print("more")
                 self.moreShare(image: image)
             case .none:
                 self.tabBarController?.tabBar.isHidden = false

@@ -26,6 +26,7 @@ class SavedCharListVC: ParentVC {
     @IBOutlet var btnsStackView: UIStackView!
     @IBOutlet var lblMainChar: UILabel!
     @IBOutlet var btnEdit: UIButton!
+    @IBOutlet var seeMoreImgView: UIImageView!
     
     lazy var dateFormatter : DateFormatter =  {
         let df = DateFormatter()
@@ -48,6 +49,7 @@ class SavedCharListVC: ParentVC {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        seeMoreImgView.isHidden = !(Character.myCharacters.count > 1)
         self.savedChars = Character.myCharacters
 
 
@@ -163,6 +165,7 @@ class SavedCharListVC: ParentVC {
     
     func characterUpdateNotification(_ nf: Notification) {
         carouselView.reloadItem(at: carouselView.currentItemIndex, animated: true)
+        tableView.reloadData()
         setCurrentChartInfo()
         
         //Navigate to emoji screen for genereate emoji for updated character.
@@ -190,6 +193,16 @@ class SavedCharListVC: ParentVC {
         checkBox.isHidden = shouldShow
         lblMainChar.isHidden = shouldShow
         btnEdit.isHidden = shouldShow
+        seeMoreImgView.isHidden = shouldShow
+    }
+    
+    func showEmojiFor(charIndex: Int) {
+        let char = savedChars[charIndex]
+        userSelectedCharForEmoji = char
+        if let index = self.emojisTabIndex {
+            self.tabBarController?.selectedIndex = index
+        }
+
     }
 }
 
@@ -217,7 +230,7 @@ extension SavedCharListVC {
 
     }
     
-    @IBAction func editChar_btnClicked(_ sender: UIButton) {
+    @IBAction func editChar_btnClicked(_ sender: UIButton?) {
         let char = savedChars[currentCharIndex]
         self.performSegue(withIdentifier: "NewCharVCSegue", sender: char)
     }
@@ -235,19 +248,12 @@ extension SavedCharListVC {
         self.navigationController?.pushViewController(shareVC, animated: true)
     }
 
-    @IBAction func btn_CreateEmojisClicked(_ sender: UIButton) {
-        userSelectedCharForEmoji = savedChars[carouselView.currentItemIndex]
-        if let index = self.emojisTabIndex {
-            self.tabBarController?.selectedIndex = index
-        }
+    @IBAction func btn_CreateEmojisClicked(_ sender: UIButton?) {
+        showEmojiFor(charIndex: carouselView.currentItemIndex)
     }
     
     @IBAction func cellEmojis_btnClicked(_ sender: UIButton) {
-        let char = savedChars[sender.tag]
-        userSelectedCharForEmoji = char
-        if let index = self.emojisTabIndex {
-            self.tabBarController?.selectedIndex = index
-        }
+        showEmojiFor(charIndex: sender.tag)
     }
 
     
@@ -336,7 +342,7 @@ extension SavedCharListVC {
 //MARK:- TableView DataSource and Delegate
 extension SavedCharListVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return savedChars.isEmpty ? 0 : 4
+        return savedChars.isEmpty ? 0 : 2
     }
     
     
@@ -368,7 +374,7 @@ extension SavedCharListVC: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 0{
-            return 300 * widthRatio
+            return CGFloat(savedChars.count * 120) + 40
         } else if indexPath.row == 1 {
             return 300 * widthRatio
         } else if indexPath.row == 2 {
@@ -424,6 +430,8 @@ extension SavedCharListVC : iCarouselDelegate, iCarouselDataSource {
     
     func carouselCurrentItemIndexDidChange(_ carousel: iCarousel) {
         hideCharacterInfoViews(carousel.currentItemIndex == (carousel.numberOfItems-1))
+        seeMoreImgView.isHidden = carousel.currentItemIndex >= (carousel.numberOfItems-2)
+
         if carousel.currentItemIndex >= 0 {
             setCurrentChartInfo()
         }
@@ -431,11 +439,15 @@ extension SavedCharListVC : iCarouselDelegate, iCarouselDataSource {
     
     func carouselDidEndDecelerating(_ carousel: iCarousel) {
         hideCharacterInfoViews(carousel.currentItemIndex == (carousel.numberOfItems-1))
+        seeMoreImgView.isHidden = carousel.currentItemIndex >= (carousel.numberOfItems-2)
+        
     }
     
     func carousel(_ carousel: iCarousel, didSelectItemAt index: Int) {
         if index == (carousel.numberOfItems-1) && carousel.currentItemIndex == index {
             createNewChar_btnClicked(nil)
+        } else if index == carousel.currentItemIndex {
+            editChar_btnClicked(nil)
         }
     }
     
@@ -534,6 +546,11 @@ class CharacterListCell: TableCell, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet var tblView: UITableView!
     weak var myCharsVC: SavedCharListVC?
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+            tblView.bounces = false
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return Character.myCharacters.count
     }
@@ -560,6 +577,10 @@ class CharacterListCell: TableCell, UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 120
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        myCharsVC?.showEmojiFor(charIndex: indexPath.row)
     }
 }
 
