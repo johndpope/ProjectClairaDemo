@@ -12,6 +12,8 @@ class KeyboardView: UIView {
     @IBOutlet var collView: UICollectionView!
     @IBOutlet var btnKeyboard: UIButton!
     @IBOutlet var btnGlobe: UIButton!
+    @IBOutlet var btnGlobe2: UIButton!
+
     @IBOutlet var indicator: UIActivityIndicatorView!
     @IBOutlet var messageViewTop: NSLayoutConstraint!
     @IBOutlet var noFullAccessView: UIView!
@@ -126,9 +128,11 @@ extension KeyboardView: UICollectionViewDataSource, UICollectionViewDelegateFlow
             }
             
             cell.backgroundColor = UIColor.clear
-            cell.roundView.layer.cornerRadius = cell.roundView.frame.height/2
-            cell.roundView.clipsToBounds = true
             cell.roundView.isHidden = false
+            let width = ((collectionView.frame.width -  60) / 4) - 4
+
+            cell.roundView?.layer.cornerRadius = width/2
+            cell.roundView?.clipsToBounds = true
 
             return cell
 

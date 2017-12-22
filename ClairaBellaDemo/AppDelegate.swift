@@ -52,6 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UIApplication.shared.isNetworkActivityIndicatorVisible = false
         }
 
+        //UserDefaults.standard.removeObject(forKey: "AssetVersion")
         return true
     }
 

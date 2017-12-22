@@ -22,10 +22,10 @@
             </view>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="Rxw-QI-dJy" secondAttribute="bottom" constant="-20" id="DLF-da-Ggh"/>
-                <constraint firstItem="Rxw-QI-dJy" firstAttribute="top" secondItem="IXx-W9-FTm" secondAttribute="top" constant="-20" id="NgE-cc-k1D"/>
-                <constraint firstAttribute="trailing" secondItem="Rxw-QI-dJy" secondAttribute="trailing" constant="-20" id="dIT-I3-jch"/>
-                <constraint firstItem="Rxw-QI-dJy" firstAttribute="leading" secondItem="IXx-W9-FTm" secondAttribute="leading" constant="-20" id="zok-Wv-diK"/>
+                <constraint firstAttribute="bottom" secondItem="Rxw-QI-dJy" secondAttribute="bottom" constant="-10" id="DLF-da-Ggh"/>
+                <constraint firstItem="Rxw-QI-dJy" firstAttribute="top" secondItem="IXx-W9-FTm" secondAttribute="top" constant="-10" id="NgE-cc-k1D"/>
+                <constraint firstAttribute="trailing" secondItem="Rxw-QI-dJy" secondAttribute="trailing" constant="-10" id="dIT-I3-jch"/>
+                <constraint firstItem="Rxw-QI-dJy" firstAttribute="leading" secondItem="IXx-W9-FTm" secondAttribute="leading" constant="-10" id="zok-Wv-diK"/>
             </constraints>
             <size key="customSize" width="157" height="151"/>
             <connections>

@@ -91,39 +91,34 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tc4-6a-bgd">
+                            <constraints>
+                                <constraint firstAttribute="width" constant="40" id="HPi-QJ-y0g"/>
+                            </constraints>
+                            <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            <state key="normal" image="Globe"/>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="YaV-AI-Kne" secondAttribute="trailing" id="1NY-EX-BBQ"/>
                         <constraint firstAttribute="bottom" secondItem="yo5-gb-W6b" secondAttribute="bottom" id="5rR-Kx-OQ6"/>
-                        <constraint firstItem="dBI-WC-Iid" firstAttribute="leading" secondItem="FLp-nI-lBG" secondAttribute="leading" constant="5" id="6bi-Y7-7pj"/>
+                        <constraint firstItem="dBI-WC-Iid" firstAttribute="leading" secondItem="FLp-nI-lBG" secondAttribute="leading" constant="40" id="6bi-Y7-7pj"/>
                         <constraint firstItem="cQc-lf-keF" firstAttribute="centerY" secondItem="FLp-nI-lBG" secondAttribute="centerY" id="7i9-Dw-rBx"/>
                         <constraint firstItem="nZq-Gb-cVG" firstAttribute="leading" secondItem="dBI-WC-Iid" secondAttribute="trailing" constant="1" id="9cT-bQ-qFO"/>
+                        <constraint firstItem="Tc4-6a-bgd" firstAttribute="leading" secondItem="FLp-nI-lBG" secondAttribute="leading" constant="5" id="9wj-FF-v7I"/>
                         <constraint firstAttribute="height" constant="60" id="Bcz-Tv-geH"/>
                         <constraint firstItem="dBI-WC-Iid" firstAttribute="top" secondItem="FLp-nI-lBG" secondAttribute="top" constant="5" id="Lfn-gy-Vl5"/>
+                        <constraint firstItem="Tc4-6a-bgd" firstAttribute="top" secondItem="YaV-AI-Kne" secondAttribute="bottom" id="MK1-D6-5bV"/>
                         <constraint firstItem="YaV-AI-Kne" firstAttribute="top" secondItem="FLp-nI-lBG" secondAttribute="top" id="UYJ-62-w2z"/>
                         <constraint firstAttribute="bottom" secondItem="dBI-WC-Iid" secondAttribute="bottom" constant="5" id="WK4-ql-as7"/>
-                        <constraint firstItem="cQc-lf-keF" firstAttribute="leading" secondItem="nZq-Gb-cVG" secondAttribute="trailing" id="cxf-9x-Y7i"/>
+                        <constraint firstItem="cQc-lf-keF" firstAttribute="leading" secondItem="nZq-Gb-cVG" secondAttribute="trailing" constant="4" id="cxf-9x-Y7i"/>
                         <constraint firstItem="nZq-Gb-cVG" firstAttribute="top" secondItem="FLp-nI-lBG" secondAttribute="top" constant="3" id="g98-4N-OPK"/>
+                        <constraint firstItem="yo5-gb-W6b" firstAttribute="top" secondItem="Tc4-6a-bgd" secondAttribute="bottom" id="hdF-ZW-W3p"/>
                         <constraint firstItem="YaV-AI-Kne" firstAttribute="leading" secondItem="FLp-nI-lBG" secondAttribute="leading" id="hys-ic-p89"/>
                         <constraint firstItem="yo5-gb-W6b" firstAttribute="leading" secondItem="FLp-nI-lBG" secondAttribute="leading" id="lPP-Af-aCJ"/>
                         <constraint firstAttribute="bottom" secondItem="nZq-Gb-cVG" secondAttribute="bottom" constant="3" id="s0f-I1-Man"/>
                         <constraint firstAttribute="trailing" secondItem="yo5-gb-W6b" secondAttribute="trailing" id="tYu-3O-fR4"/>
-                    </constraints>
-                </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H4x-Hy-3gq">
-                    <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Copied. Paste it in your message!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IRi-Ci-y9o">
-                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                    </subviews>
-                    <color key="backgroundColor" red="0.2188306874" green="0.75535209189999997" blue="0.77188056709999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="50" id="KbS-Ow-vTz"/>
-                        <constraint firstItem="IRi-Ci-y9o" firstAttribute="centerY" secondItem="H4x-Hy-3gq" secondAttribute="centerY" id="dPD-Ad-O84"/>
-                        <constraint firstItem="IRi-Ci-y9o" firstAttribute="centerX" secondItem="H4x-Hy-3gq" secondAttribute="centerX" id="z50-jP-6T0"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cjp-7P-5ca">
@@ -138,6 +133,7 @@
                                 <constraint firstAttribute="height" constant="44" id="Rqe-8T-C5w"/>
                                 <constraint firstAttribute="width" constant="44" id="ocz-7u-5Eh"/>
                             </constraints>
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <state key="normal" image="Globe"/>
                         </button>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="appLogo" translatesAutoresizingMaskIntoConstraints="NO" id="Dto-yh-m4T">
@@ -156,6 +152,21 @@
                         <constraint firstAttribute="bottom" secondItem="Dto-yh-m4T" secondAttribute="bottom" constant="9" id="S9a-qy-luB"/>
                         <constraint firstItem="anR-ey-nFn" firstAttribute="leading" secondItem="cjp-7P-5ca" secondAttribute="leading" id="bNb-VB-V84"/>
                         <constraint firstItem="Dto-yh-m4T" firstAttribute="centerX" secondItem="cjp-7P-5ca" secondAttribute="centerX" id="rRA-b5-lIe"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H4x-Hy-3gq">
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Copied. Paste it in your message!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IRi-Ci-y9o">
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="0.2188306874" green="0.75535209189999997" blue="0.77188056709999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="KbS-Ow-vTz"/>
+                        <constraint firstItem="IRi-Ci-y9o" firstAttribute="centerY" secondItem="H4x-Hy-3gq" secondAttribute="centerY" id="dPD-Ad-O84"/>
+                        <constraint firstItem="IRi-Ci-y9o" firstAttribute="centerX" secondItem="H4x-Hy-3gq" secondAttribute="centerX" id="z50-jP-6T0"/>
                     </constraints>
                 </view>
                 <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="SyY-vz-zsc"/>
@@ -181,6 +192,7 @@
             </constraints>
             <connections>
                 <outlet property="btnGlobe" destination="anR-ey-nFn" id="xbG-fZ-wmp"/>
+                <outlet property="btnGlobe2" destination="Tc4-6a-bgd" id="Lwr-Yc-Qjv"/>
                 <outlet property="btnKeyboard" destination="dBI-WC-Iid" id="gyt-ba-e5g"/>
                 <outlet property="collView" destination="cX5-ZH-j2g" id="Juv-5c-rhz"/>
                 <outlet property="currentCharImageView" destination="bIN-Ux-WuW" id="2Oa-To-qeZ"/>

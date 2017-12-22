@@ -519,12 +519,14 @@ class CharBuilderAPI {
                     
                     let serverVersion = json["version"] as! String
                     if serverVersion != APICall.shared.assetLocalVersion {
-                        //save version string in local
                         UserDefaults.standard.setValue(serverVersion, forKey: APICall.shared.assetVersionKey)
-                        
+
                         appDelegate.downloadNewAssets(completion: { (isFinish, progressValue) in
                             if isFinish {
                                 block(menus)
+                            } else {
+                                //UserDefaults.standard.setValue("", forKey: APICall.shared.assetVersionKey)
+
                             }
                         })
                         

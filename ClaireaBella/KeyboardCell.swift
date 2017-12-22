@@ -19,6 +19,21 @@ class EmojiCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        //webView.scrollView.setZoomScale(2.0, animated: false)
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        if roundView != nil {
+//            roundView.layer.cornerRadius = roundView.frame.size.height/2
+//            roundView.clipsToBounds = true
+        }
+    }
+    
+    override func updateConstraints() {
+        super.updateConstraints()
+        if roundView != nil {
+//            roundView.layer.cornerRadius = roundView.frame.size.height/2
+//            roundView.clipsToBounds = true
+        }
     }
 }
