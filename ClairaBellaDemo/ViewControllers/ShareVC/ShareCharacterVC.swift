@@ -15,30 +15,70 @@ class ShareCharacterVC: ParentVC {
     @IBOutlet var collView: UICollectionView!
     @IBOutlet var indicator: IndicatorView!
     @IBOutlet var backImageView: UIImageView!
+    @IBOutlet var backBtn: UIButton!
+    @IBOutlet var noCharactersView: UIView!
+    @IBOutlet var charListView: UIScrollView!
+    @IBOutlet var tblView: UITableView!
     
+    @IBOutlet var charTblHeightConstraint: NSLayoutConstraint!
+
     var character: Character?
     
     var backgrounds = [CharBackground]()
+    var charGenerator = CharacterHTMLBuilder.shared
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         collView.contentInset = UIEdgeInsetsMake(8, 8, 8, 8)
         loadBackgroundImages()
-        
-
+        charListView.bounces = false
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if character == nil {
-            character = Character.mainCharacter
+        noCharactersView.isHidden = !Character.myCharacters.isEmpty
+        
+        setUI()
+        
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        character = nil
+    }
+    
+    func setUI() {
+        
+        if character == nil { //user select Postcard Tab
             
+            character = Character.mainCharacter
+
+            if Character.myCharacters.isEmpty {
+                noCharactersView.isHidden = false
+                charListView.isHidden = true
+                
+            } else if Character.myCharacters.count == 1 {
+                charListView.isHidden = true
+
+            } else {
+                charListView.isHidden = false
+            }
+            
+            backBtn.isHidden = true
+            
+        } else { // user select postcard for a character.
+            noCharactersView.isHidden = true
+            charListView.isHidden = true
         }
         
-        CharacterHTMLBuilder.shared.buildCharHTMLWith(choices: character!.choices, block: { html in
-            self.webview.loadHTMLString(html, baseURL: nil)
-        })
-
+        if let char = character {
+            CharacterHTMLBuilder.shared.buildCharHTMLWith(choices: char.choices, block: { html in
+                self.webview.loadHTMLString(html, baseURL: nil)
+            })
+        }
+        
+        setTableViewHeight()
     }
     
     func loadBackgroundImages() {
@@ -47,7 +87,7 @@ class ShareCharacterVC: ParentVC {
         noneBack.icon = "Background_none"
        // self.backgrounds.append(noneBack)
         
-        (0...23).forEach { index in
+        (0...16).forEach { index in
             let iconName = "background_small\(index).jpg"
             let imgName = "background\(index).jpg"
             var back = CharBackground()
@@ -59,6 +99,13 @@ class ShareCharacterVC: ParentVC {
         }
         backImageView.image = UIImage(named: (backgrounds.first?.image)!)
 
+    }
+
+    
+    @IBAction func selectCharacter_btnClicked(_ sender: UIButton) {
+        
+        character = Character.myCharacters[sender.tag]
+        setUI()
     }
 
 }
@@ -81,7 +128,7 @@ extension ShareCharacterVC: UICollectionViewDataSource, UICollectionViewDelegate
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = (collectionView.frame.width - 40)/4
+        let width = (collectionView.frame.width - 32)/3
         return CGSize(width: width, height: width)
     }
     
@@ -94,7 +141,10 @@ extension ShareCharacterVC: UICollectionViewDataSource, UICollectionViewDelegate
 }
 
 extension ShareCharacterVC {
-    
+    @IBAction func createNewChar_btnClicked(_ sender: UIButton) {
+        self.performSegue(withIdentifier: "NewCharVCSegue", sender: nil)
+    }
+
     @IBAction func changeChar_btnClicked(_ sender: UIButton) {
         if let index = self.myCharactersTabIndex {
             self.tabBarController?.selectedIndex = index
@@ -207,4 +257,48 @@ extension UIViewController {
         alert.addAction(action)
         self.present(alert, animated: true, completion: nil)
     }
+}
+
+
+//MARK:- Tableview delegate
+
+extension ShareCharacterVC: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+            return Character.myCharacters.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "characterCell") as! CharacterCell
+            let char = Character.myCharacters[indexPath.row]
+            cell.lblCharacterName.text = char.name
+            cell.setBtnTag(tag: indexPath.row)
+            
+            if  !char.charHtml.isEmpty {
+                cell.webview.loadHTMLString(char.charHtml, baseURL: nil)
+                
+            } else {
+                charGenerator.buildCharHTMLWith(choices: char.choices, block: { html in
+                    char.charHtml = html
+                    cell.webview.loadHTMLString(char.charHtml, baseURL: nil)
+                })
+            }
+            
+            return cell
+            
+    }
+    
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+            return 120
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+            character = Character.myCharacters[indexPath.row]
+            setUI()
+    }
+
+    func setTableViewHeight() {
+        charTblHeightConstraint.constant = CGFloat(Character.myCharacters.count * 120)
+    }
+
 }

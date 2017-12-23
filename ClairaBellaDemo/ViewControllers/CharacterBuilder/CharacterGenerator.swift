@@ -685,8 +685,6 @@ class CharacterChoice {
                 let optionKey = obj.keys.first!
                 let option = obj[optionKey]!
                 return ChoiceOption(option, iconName: optionKey)
-            }).filter({ option -> Bool in
-                return !option.hidden
             })
         }
     }
