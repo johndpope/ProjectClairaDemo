@@ -16,7 +16,7 @@ class ShareCharacterVC: ParentVC {
     @IBOutlet var indicator: IndicatorView!
     @IBOutlet var backImageView: UIImageView!
     
-    var character: Character!
+    var character: Character?
     
     var backgrounds = [CharBackground]()
     
@@ -25,7 +25,17 @@ class ShareCharacterVC: ParentVC {
         collView.contentInset = UIEdgeInsetsMake(8, 8, 8, 8)
         loadBackgroundImages()
         
-        CharacterHTMLBuilder.shared.buildCharHTMLWith(choices: character.choices, block: { html in
+
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if character == nil {
+            character = Character.mainCharacter
+            
+        }
+        
+        CharacterHTMLBuilder.shared.buildCharHTMLWith(choices: character!.choices, block: { html in
             self.webview.loadHTMLString(html, baseURL: nil)
         })
 
@@ -35,9 +45,9 @@ class ShareCharacterVC: ParentVC {
         
         var noneBack = CharBackground()
         noneBack.icon = "Background_none"
-        self.backgrounds.append(noneBack)
+       // self.backgrounds.append(noneBack)
         
-        (1...23).forEach { index in
+        (0...23).forEach { index in
             let iconName = "background_small\(index).jpg"
             let imgName = "background\(index).jpg"
             var back = CharBackground()
@@ -47,6 +57,8 @@ class ShareCharacterVC: ParentVC {
             self.backgrounds.append(back)
             
         }
+        backImageView.image = UIImage(named: (backgrounds.first?.image)!)
+
     }
 
 }
@@ -76,7 +88,7 @@ extension ShareCharacterVC: UICollectionViewDataSource, UICollectionViewDelegate
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let back = self.backgrounds[indexPath.row]
         backImageView.image = UIImage(named: back.image)
-        character.characterBackground = back
+        character?.characterBackground = back
     }
     
 }
@@ -95,7 +107,7 @@ extension ShareCharacterVC {
     @IBAction func share_btnClicekd(_ sender:UIButton) {
         self.tabBarController?.tabBar.isHidden = true
 
-        ShareCharacterView.show(in: self.view, character: character) { (action, image) in
+        ShareCharacterView.show(in: self.view, character: character!) { (action, image) in
             switch action {
             case .facebook:
                 self.shareOnFacebook(image)

@@ -49,7 +49,7 @@ class CharacterHTMLBuilder {
     
     func buildCharHTMLWith(for type:CharacterType = .character, choices: [String : String], for contextKey: String = Character.characterContext, block: ((String)->Void)? = nil) {
         self.contextKey = contextKey
-        deviceScaleFactor = type == .character ? 0.9 : 1.30
+        deviceScaleFactor = type == .character ? 1.05 : 1.30
        
         if let block = block {
             resultBlock = block

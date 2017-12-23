@@ -407,7 +407,7 @@ extension SavedCharListVC : iCarouselDelegate, iCarouselDataSource {
                 itemView = iView
             } else {
                 itemView = CarouselItemView.loadView()
-                itemView.frame = CGRect(x: 0, y: 0, width: 172 * widthRatio, height: 275*widthRatio)
+                itemView.frame = CGRect(x: 0, y: 0, width: 172 * widthRatio, height: 300*widthRatio)
             }
             
             let char = savedChars[index]
