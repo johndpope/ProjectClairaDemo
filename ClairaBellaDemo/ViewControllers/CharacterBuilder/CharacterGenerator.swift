@@ -20,8 +20,24 @@ class CharacterHTMLBuilder {
     var charName = ""
     var contextKey = "CX001"
    
+    var hiddenParts = [String]()
+
     enum CharacterType {
         case character, emoji
+    }
+    
+     private init() {
+        
+    }
+    
+    init(builder: CharacterHTMLBuilder) {
+        self.defaultChoices = builder.defaultChoices
+        part_mapJson = builder.part_mapJson
+        parts = builder.parts
+        partsMeta = builder.partsMeta
+        contextJson = builder.contextJson
+        currentContext = builder.currentContext
+        emojisContextJson = builder.emojisContextJson
     }
     
     //block call when finish loading of all the character related apis.
@@ -397,16 +413,18 @@ class CharacterHTMLBuilder {
         
         //Generate html for svg images
         poseData.forEach { (bodyPart, data) in
-            if let _ = data["x"] as? String, let _ = data["y"] as? String {
-                let fileName = data["file"] as! String
-                let attributes = data["param"] as! String
-
-                let filePath = documetDirectoryURL().appendingPathComponent("character/claireabella/v1.0/\(fileName).svg").path
-                
-                let pathWithColorAtt = filePath + "?" + attributes
-                
-                htmlBody += "<object id=\"\(bodyPart)\" type=\"image/svg+xml\" name=\"\(bodyPart)\" data=\"file://\(pathWithColorAtt)\" style=\"\(getFileStyle(data: data))\"></object>"
-
+            if !hiddenParts.contains(bodyPart) {
+                if let _ = data["x"] as? String, let _ = data["y"] as? String {
+                    let fileName = data["file"] as! String
+                    let attributes = data["param"] as! String
+                    
+                    let filePath = documetDirectoryURL().appendingPathComponent("character/claireabella/v1.0/\(fileName).svg").path
+                    
+                    let pathWithColorAtt = filePath + "?" + attributes
+                    
+                    htmlBody += "<object id=\"\(bodyPart)\" type=\"image/svg+xml\" name=\"\(bodyPart)\" data=\"file://\(pathWithColorAtt)\" style=\"\(getFileStyle(data: data))\"></object>"
+                    
+                }
             }
         }
         
@@ -695,7 +713,7 @@ class ChoiceOption {
     var choices = [CharacterChoice] ()
     var iconName = ""
     var selected = false
-    var hidden = false
+    var hideHair = false
     
     var icon: UIImage?
     
@@ -704,7 +722,7 @@ class ChoiceOption {
        
         self.name = (json["name"] as? String) ?? ""
         self.iconName = iconName //+ ".png"
-        self.hidden = (json["hide_hair"] as? Bool) ?? false
+        self.hideHair = (json["hide_hair"] as? Bool) ?? false
         
         if let jsChoices = json["choices"] as? [String : Any] {
             for (key, obj) in jsChoices.enumerated() {

@@ -18,12 +18,15 @@ class CharacterBuilderVC: ParentVC {
 
     var completionBlock: (Bool)-> Void = {_ in}
     
+    var showColorOption = false
+    
     var interfaceMenus = [ChoiceMenu]()
     
     // save character before edit start. Used for restore character's original state while user cancel editing.
     //This variable is only used during character editing.
     var copyedCharacter: Character!
 
+    
     var selectedMenu: ChoiceMenu? = nil {
         willSet {
             //unselect previous selected menu
@@ -31,38 +34,14 @@ class CharacterBuilderVC: ParentVC {
         }
         
         didSet{
-            guard let selectedMenu = selectedMenu else {return}
             
-            //set color choice for selected Option
-            selectedMenu.selected = true
-            colorChoice = nil
-            if let ch = selectedMenu.choices.filter({$0.type == .circle}).first {
-                colorChoice = ch
-            } else {
-                if let ch = selectedMenu.choices.filter({$0.type == .square}).first {
-                    if !ch.options.first!.choices.isEmpty {
-                        let selectedOptions = ch.options.filter({$0.selected})
-                        
-                        colorChoice = selectedOptions.isEmpty ? ch.options.first!.choices.first : selectedOptions.first?.choices.first
-                       
-                        //set selected a default color if yet user haven't select any color from interface..
-                        if let _ = colorChoice?.options.filter({$0.selected}).first {
-                            
-                        } else {
-                            colorChoice?.options.first?.selected = true
-                        }
-                    }
-                }
-            }
+            selectedMenu?.selected = true
+            setColorChoice()
         }
     }
     
     //colorChoice used to showing color option at colorGlint view.
-    var colorChoice: CharacterChoice? {
-        didSet {
-
-        }
-    }
+    var colorChoice: CharacterChoice?
     
     ///This variable is used to generate icon name for hair style with selected color.
     var selectedHairColorOption: ChoiceOption!
@@ -80,7 +59,7 @@ class CharacterBuilderVC: ParentVC {
         super.viewDidLoad()
         btnSave.isHidden = true
         
-        charGenerator = CharacterHTMLBuilder.shared
+        charGenerator = CharacterHTMLBuilder(builder: CharacterHTMLBuilder.shared)
         
         if !isCharacterEditMode {
             character = Character()
@@ -116,6 +95,42 @@ class CharacterBuilderVC: ParentVC {
         }
     }
     
+    
+    func setColorChoice() {
+        
+        colorChoice = nil
+        guard let selectedMenu = selectedMenu else {
+            showColorOption = false
+            return
+        }
+
+        
+        if let ch = selectedMenu.choices.filter({$0.type == .circle}).first {
+            colorChoice = ch
+        } else {
+            if let selectedSquarChoice = selectedMenu.choices.filter({$0.type == .square}).first {
+                if !selectedSquarChoice.options.first!.choices.isEmpty {
+                    let selectedOptions = selectedSquarChoice.options.filter({$0.selected})
+                    
+                    colorChoice = selectedOptions.isEmpty ? selectedSquarChoice.options.first!.choices.first : selectedOptions.first?.choices.first
+                    
+                    //set selected a default color if user haven't selected any color from interface..
+                    if let _ = colorChoice?.options.filter({$0.selected}).first {
+                    } else {
+                        colorChoice?.options.first?.selected = true
+                    }
+                }
+            }
+        }
+        
+        showColorOption = colorChoice == nil ? false : true
+        
+        //if selected squar menu is none then color option hide.
+    
+        if let _ = colorChoice, let selectedSquareOption = selectedMenu.choices.filter({$0.type == .square}).first?.options.filter({$0.selected}).first {
+            showColorOption = selectedSquareOption.name.lowercased() != "none"
+        }
+    }
     
     //API Calls
     func loadInterfaceMenus() {
@@ -256,7 +271,7 @@ extension CharacterBuilderVC : UITableViewDelegate, UITableViewDataSource {
         } else {
             let choice = indexPath.row == 0 ? selectedMenu!.choices.first! : colorChoice!
 
-            let height = (tableView.frame.height - 70) - (colorChoice == nil ? 0 : 50)
+            let height = (tableView.frame.height - 70) - (showColorOption ? 50 : 0)
             return choice.type == .square ?   height : 50
         }
     }
@@ -269,7 +284,7 @@ extension CharacterBuilderVC : UITableViewDelegate, UITableViewDataSource {
         if section == 0 {
             return 1
         } else {
-            return 1 + (colorChoice == nil ? 0 : 1)
+            return 1 + (showColorOption ? 1 : 0)
         }
 
     }
@@ -305,6 +320,7 @@ extension CharacterBuilderVC : UITableViewDelegate, UITableViewDataSource {
     }
     
     func changeUserSelection() {
+        self.setColorChoice()
         
         if let colorChoice = colorChoice {
             let selectedColor = colorChoice.options.filter({$0.selected}).first
@@ -460,6 +476,10 @@ class OptionsTableViewCell: UITableViewCell,  UICollectionViewDataSource, UIColl
         
         if choice.type == .square && !option.choices.isEmpty {
             viewcontroller?.colorChoice  = option.choices.first
+        }
+        
+        if choice.choiceId == "head_wear" {
+            viewcontroller?.charGenerator.hiddenParts = option.hideHair ? ["hair_style"] : []
         }
         
         /*if user has select color for hair style, selectedHairColorOption should be change

@@ -66,7 +66,7 @@ class EmojiesVC: ParentVC {
     
     var showingChartList = false
     
-    
+    //MARK-
     override func viewDidLoad() {
         super.viewDidLoad()
         self.getEmojisContexts()
@@ -261,7 +261,9 @@ extension EmojiesVC {
         }
     }
     
+    
     //MARK: Convert emoji web to image
+    
     func startGenerateEmojiImages() {
         
         if let char = self.character {
