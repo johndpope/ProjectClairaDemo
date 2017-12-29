@@ -201,6 +201,7 @@ extension SaveCharacterVC {
         
         let params = ["choices" : character.choices,
                       "saved_name": character.name,
+                      "default" : checkbox.isSelected,
                       "source": "ios_app",
                       "brand": "claireabella"] as [String : Any]
         APICall.shared.createNewCharacter_APICall(json: params) { (response, success) in
@@ -233,7 +234,7 @@ extension SaveCharacterVC {
         
         let params = ["choices" : character.choices,
                       "saved_name": character.name,
-                      "default": true,
+                      "default": checkbox.isSelected,
                       ] as [String : Any]
         
         APICall.shared.updateCharacter_APICall(params: params, createdDate: character.createdDate) { (json, success) in

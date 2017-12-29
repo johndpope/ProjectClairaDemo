@@ -26,7 +26,9 @@ class CharacterBuilderVC: ParentVC {
     //This variable is only used during character editing.
     var copyedCharacter: Character!
 
-    
+    var selectedHairStyle = ""
+    var selectedHeadWear: ChoiceOption?
+
     var selectedMenu: ChoiceMenu? = nil {
         willSet {
             //unselect previous selected menu
@@ -34,7 +36,6 @@ class CharacterBuilderVC: ParentVC {
         }
         
         didSet{
-            
             selectedMenu?.selected = true
             setColorChoice()
         }
@@ -66,7 +67,9 @@ class CharacterBuilderVC: ParentVC {
             character.choices = charGenerator.defaultChoices
             charGenerator.upateCharacter(choices: character.choices)
         } else {
+            
             copyedCharacter = character.copy() as! Character
+            
         }
         
         self.loadInterfaceMenus()
@@ -233,6 +236,8 @@ extension CharacterBuilderVC {
             if btnIndex == 1 {
             } else {
                 if self.isCharacterEditMode {
+                    self.character.charHtml = self.copyedCharacter.charHtml
+                    self.character.choices = self.copyedCharacter.choices
                     self.character = self.copyedCharacter
                 }
                 _ = self.navigationController?.dismiss(animated: true, completion: nil)
@@ -311,6 +316,14 @@ extension CharacterBuilderVC : UITableViewDelegate, UITableViewDataSource {
         guard let selectedOption = choice.options.filter({$0.selected}).first else {return}
         character!.choices[choice.choiceId] = selectedOption.name
         
+//        if choice.choiceId == "head_wear" {
+//           character.choices["hair_style"] = selectedOption.hideHair ? "" : selectedHairStyle
+//        }
+
+        if let selectedHeadWear = self.selectedHeadWear {
+            character.choices["hair_style"] = selectedHeadWear.hideHair ? "" : selectedHairStyle
+        }
+        
         charGenerator.upateCharacter(choices: character!.choices)
 
         if !selectedOption.choices.isEmpty {
@@ -336,6 +349,8 @@ extension CharacterBuilderVC : UITableViewDelegate, UITableViewDataSource {
             setSelected(choice: choice)
         }
         
+
+
     }
     
     
@@ -410,6 +425,7 @@ class MenuTableViewCell: UITableViewCell,  UICollectionViewDataSource, UICollect
 
 class OptionsTableViewCell: UITableViewCell,  UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     @IBOutlet var collView: UICollectionView!
+    
     var choice: CharacterChoice! {
         didSet {
             if choice.type == .square {
@@ -420,6 +436,7 @@ class OptionsTableViewCell: UITableViewCell,  UICollectionViewDataSource, UIColl
     }
     
     weak var viewcontroller: CharacterBuilderVC?
+    
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -478,9 +495,17 @@ class OptionsTableViewCell: UITableViewCell,  UICollectionViewDataSource, UIColl
             viewcontroller?.colorChoice  = option.choices.first
         }
         
-        if choice.choiceId == "head_wear" {
-            viewcontroller?.charGenerator.hiddenParts = option.hideHair ? ["hair_style"] : []
+        if choice.type == .square && choice.choiceId == "hair_style" {
+            viewcontroller?.selectedHairStyle = option.name
         }
+
+        if choice.type == .square && choice.choiceId == "head_wear" {
+            viewcontroller?.selectedHeadWear = option
+        }
+        
+//        if choice.choiceId == "head_wear" {
+//            viewcontroller?.character.choices["hair_style"] = option.hideHair ? "" : selectedHairStyle
+//        }
         
         /*if user has select color for hair style, selectedHairColorOption should be change
         for generating hair style images for selected color.*/

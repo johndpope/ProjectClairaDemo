@@ -110,6 +110,9 @@ class CharacterHTMLBuilder {
                         })
                     })
                 })
+            } else {
+                self.parts[choice]?["file"]?["hair_style_code"] = ""
+
             }
         }
         
@@ -121,18 +124,25 @@ class CharacterHTMLBuilder {
         var svgDataDic = [String : [String : Any]]()
         
         parts.forEach { (bodyPart, structure) in
-            let fileName = self.generateFileName(fileInfo: structure["file"] as! [String : String])
-            let attributes = self.getAttributes(attributeInfo: structure["attributes"] as! [String : String])
-            
             var fileWidth = "0"
             var fileHeight = "0"
             var fileJoints: [String : [String : String]] = [:]
+            var fileName = ""
+            var attributes = ""
             
-            
-            if let fileMeta = self.partsMeta[fileName + ".svg"] {
-                fileWidth = RConverter.string((fileMeta as! [String : Any])["width"])
-                fileHeight = RConverter.string((fileMeta as! [String : Any])["height"])
-                fileJoints = ((fileMeta as! [String : Any])["joints"] as? [String : [String : String]]) ?? [:]
+            if !structure.isEmpty {
+                
+                
+                fileName = self.generateFileName(fileInfo: structure["file"] as! [String : String])
+                attributes = self.getAttributes(attributeInfo: structure["attributes"] as! [String : String])
+                
+                
+                
+                if let fileMeta = self.partsMeta[fileName + ".svg"] {
+                    fileWidth = RConverter.string((fileMeta as! [String : Any])["width"])
+                    fileHeight = RConverter.string((fileMeta as! [String : Any])["height"])
+                    fileJoints = ((fileMeta as! [String : Any])["joints"] as? [String : [String : String]]) ?? [:]
+                }
             }
             
             svgDataDic[bodyPart] = ["body_part" : bodyPart,

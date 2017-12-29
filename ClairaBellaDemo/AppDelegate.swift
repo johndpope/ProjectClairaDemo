@@ -51,7 +51,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         CharacterHTMLBuilder.shared.loadBuildData { (success) in
             UIApplication.shared.isNetworkActivityIndicatorVisible = false
         }
-
+        
+        checkAndDownloadNewAssetsIfAvailable()
         //UserDefaults.standard.removeObject(forKey: "AssetVersion")
         return true
     }
@@ -225,6 +226,12 @@ extension AppDelegate {
 extension AppDelegate {
     //Download new character and interface assets with latest version
     
+    func checkAndDownloadNewAssetsIfAvailable() {
+        CharBuilderAPI.shared.getInterface_json { menu in
+            //
+        }
+    }
+    
     func downloadNewAssets(completion callBack: @escaping (Bool, Double)->Void) {
         
         if let url = URL(string: APICall.APIName.characterAssetsDownload) {
@@ -244,11 +251,11 @@ extension AppDelegate {
                                 
                                }).response(completionHandler: { (response) in
                                 //download completed
-                                print(response)
                                 if let url = response.destinationURL {
                                     let unZipPath = documetDirectoryURL().appendingPathComponent("/CharacterAssets/Version").path
                                     let success = self.unzipFile(at: url.path, to: unZipPath)
                                     callBack(success, 1.0)
+                                    NotificationCenter.default.post(name: Notification.Name(rawValue: "CharactersLoadingFinish"), object: nil)
                                 }
                                })
             

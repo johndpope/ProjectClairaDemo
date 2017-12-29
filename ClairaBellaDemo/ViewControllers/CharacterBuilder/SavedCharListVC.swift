@@ -129,6 +129,7 @@ class SavedCharListVC: ParentVC {
             }
         } else if segue.identifier == "ToShareVCSegue" {
             let shareVC = segue.destination as! ShareCharacterVC
+            shareVC.comeFromHomeScreen = true
             shareVC.character = savedChars[carouselView.currentItemIndex]
         }
     }
@@ -244,6 +245,7 @@ extension SavedCharListVC {
     @IBAction func shareChar_btnClicked(_ sender: UIButton) {
         let char = savedChars[currentCharIndex]
         let shareVC = self.storyboard?.instantiateViewController(withIdentifier: "ShareCharacterVC") as! ShareCharacterVC
+        shareVC.comeFromHomeScreen = true
         shareVC.character = char
         self.navigationController?.pushViewController(shareVC, animated: true)
     }

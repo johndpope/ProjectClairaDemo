@@ -27,6 +27,7 @@ class ShareCharacterVC: ParentVC {
     var backgrounds = [CharBackground]()
     var charGenerator = CharacterHTMLBuilder.shared
 
+    var comeFromHomeScreen = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,9 +39,8 @@ class ShareCharacterVC: ParentVC {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         noCharactersView.isHidden = !Character.myCharacters.isEmpty
-        
+        tblView.reloadData()
         setUI()
-        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -57,12 +57,20 @@ class ShareCharacterVC: ParentVC {
             if Character.myCharacters.isEmpty {
                 noCharactersView.isHidden = false
                 charListView.isHidden = true
-                
+                backBtn.isHidden = true
+                collView.isHidden = true
+
+
             } else if Character.myCharacters.count == 1 {
                 charListView.isHidden = true
+                backBtn.isHidden = true
+                collView.isHidden = false
 
             } else {
                 charListView.isHidden = false
+                backBtn.isHidden = false
+                collView.isHidden = true
+
             }
             
             backBtn.isHidden = true
@@ -70,6 +78,8 @@ class ShareCharacterVC: ParentVC {
         } else { // user select postcard for a character.
             noCharactersView.isHidden = true
             charListView.isHidden = true
+            backBtn.isHidden = false
+            collView.isHidden = false
         }
         
         if let char = character {
@@ -110,6 +120,8 @@ class ShareCharacterVC: ParentVC {
 
 }
 
+//MARK:- CollectionViewDelegate
+
 extension ShareCharacterVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -118,6 +130,7 @@ extension ShareCharacterVC: UICollectionViewDataSource, UICollectionViewDelegate
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return backgrounds.count
     }
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CollectionViewCell
        
@@ -151,7 +164,15 @@ extension ShareCharacterVC {
         }
     }
     @IBAction func back_btnClicked(_ sender: UIButton) {
-        _ = self.navigationController?.popViewController(animated: true)
+        if comeFromHomeScreen {
+            _ = self.navigationController?.popViewController(animated: true)
+        } else {
+            if !Character.myCharacters.isEmpty {
+                charListView.isHidden = false
+                backBtn.isHidden = true
+                collView.isHidden = true
+            }
+        }
     }
     
     @IBAction func share_btnClicekd(_ sender:UIButton) {
@@ -229,6 +250,10 @@ extension ShareCharacterVC {
         let imagedata = UIImagePNGRepresentation(image)
         pasteBoard.setData(imagedata!, forPasteboardType: UIPasteboardTypeListImage.object(at: 0) as! String)
         
+        let ac = UIAlertController(title: "Saved!", message: "Your character image has been copied to pastboard.", preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "OK", style: .default))
+        present(ac, animated: true)
+
         //
 //        if MFMailComposeViewController.canSendMail() {
 //            let mail = MFMailComposeViewController()
