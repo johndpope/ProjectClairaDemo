@@ -244,10 +244,17 @@ extension SavedCharListVC {
 
     @IBAction func shareChar_btnClicked(_ sender: UIButton) {
         let char = savedChars[currentCharIndex]
-        let shareVC = self.storyboard?.instantiateViewController(withIdentifier: "ShareCharacterVC") as! ShareCharacterVC
-        shareVC.comeFromHomeScreen = true
-        shareVC.character = char
-        self.navigationController?.pushViewController(shareVC, animated: true)
+        //let shareVC = self.storyboard?.instantiateViewController(withIdentifier: "ShareCharacterVC") as! ShareCharacterVC
+        //shareVC.comeFromHomeScreen = true
+        //shareVC.character = char
+        
+        selectedCharForPostcard = char
+        if let index = self.postcardsTabIndex {
+            self.tabBarController?.selectedIndex = index
+        }
+        
+
+        //self.navigationController?.pushViewController(shareVC, animated: true)
     }
 
     @IBAction func btn_CreateEmojisClicked(_ sender: UIButton?) {

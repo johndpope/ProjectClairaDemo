@@ -7,8 +7,12 @@
 //
 
 import UIKit
-import Social
-import MessageUI
+import FBSDKShareKit
+import TwitterKit
+
+
+
+var selectedCharForPostcard: Character?
 
 class ShareCharacterVC: ParentVC {
     @IBOutlet var webview: UIWebView!
@@ -50,7 +54,7 @@ class ShareCharacterVC: ParentVC {
     
     func setUI() {
         
-        if character == nil { //user select Postcard Tab
+        if selectedCharForPostcard == nil { //user select Postcard Tab
             
             character = Character.mainCharacter
 
@@ -76,9 +80,11 @@ class ShareCharacterVC: ParentVC {
             backBtn.isHidden = true
             
         } else { // user select postcard for a character.
+            character = selectedCharForPostcard
+            selectedCharForPostcard = nil
             noCharactersView.isHidden = true
             charListView.isHidden = true
-            backBtn.isHidden = false
+            backBtn.isHidden = Character.myCharacters.count == 1
             collView.isHidden = false
         }
         
@@ -114,7 +120,7 @@ class ShareCharacterVC: ParentVC {
     
     @IBAction func selectCharacter_btnClicked(_ sender: UIButton) {
         
-        character = Character.myCharacters[sender.tag]
+        selectedCharForPostcard = Character.myCharacters[sender.tag]
         setUI()
     }
 
@@ -199,27 +205,30 @@ extension ShareCharacterVC {
     
     
     func shareOnFacebook(_ image: UIImage) {
-        if SLComposeViewController.isAvailable(forServiceType: SLServiceTypeFacebook) {
-            let vc = SLComposeViewController(forServiceType:SLServiceTypeFacebook)!
-            vc.add(image)
-            self.present(vc, animated: true, completion: nil)
-        } else {
-            showAlert(message: "Please go to settings > Facebook and add your facebook account. ")
-        }
+        
+        let photo = FBSDKSharePhoto(image: image, userGenerated: true)
+        let content = FBSDKSharePhotoContent()
+        content.photos = [photo]
+        
+        let dialog = FBSDKShareDialog()
+        dialog.fromViewController = self
+        dialog.shareContent = content
+        dialog.mode = .automatic
+        dialog.show()
     }
 
     
     func shareOnTwitter(_ image: UIImage) {
-        if SLComposeViewController.isAvailable(forServiceType: SLServiceTypeTwitter) {
-            let vc = SLComposeViewController(forServiceType:SLServiceTypeTwitter)!
-            vc.add(image)
-            //        vc.add(URL(string: "http://www.example.com/"))
-            //        vc.setInitialText("Initial text here.")
-            
-            self.present(vc, animated: true, completion: nil)
-        } else {
-            showAlert(message: "Please go to settings > Twitter and add your twitter account. ")
+        let composer = TWTRComposer()
+        composer.setImage(image)
+        composer.show(from: self) { (result) in
+            if result == .done {
+                
+            } else {
+                
+            }
         }
+        
     }
 
     func saveToPhots(_ image: UIImage) {
@@ -245,7 +254,7 @@ extension ShareCharacterVC {
     }
     
     func shareViaMail(_ image: UIImage) {
-        //code for copy image //previously this func used for sending email
+        //code for copy image //previously this func was used for sending email
         let pasteBoard = UIPasteboard.general
         let imagedata = UIImagePNGRepresentation(image)
         pasteBoard.setData(imagedata!, forPasteboardType: UIPasteboardTypeListImage.object(at: 0) as! String)
@@ -254,26 +263,10 @@ extension ShareCharacterVC {
         ac.addAction(UIAlertAction(title: "OK", style: .default))
         present(ac, animated: true)
 
-        //
-//        if MFMailComposeViewController.canSendMail() {
-//            let mail = MFMailComposeViewController()
-//            mail.mailComposeDelegate = self
-//            let imageData: Data = UIImagePNGRepresentation(image)!
-//            mail.addAttachmentData(imageData, mimeType: "image/png", fileName: "imageName")
-//            self.present(mail, animated: true, completion: nil)
-//        } else {
-//            showAlert(message: "Please go to settings and add your email account. ")
-//        }
-
     }
     
 }
 
-extension ShareCharacterVC: MFMailComposeViewControllerDelegate {
-    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
-        controller.dismiss(animated: true, completion: nil)
-    }
-}
 
 extension UIViewController {
     func showAlert(message: String) {
@@ -318,7 +311,7 @@ extension ShareCharacterVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-            character = Character.myCharacters[indexPath.row]
+            selectedCharForPostcard = Character.myCharacters[indexPath.row]
             setUI()
     }
 

@@ -7,8 +7,9 @@
 //
 
 import UIKit
-import Social
-import MessageUI
+import FBSDKShareKit
+import TwitterKit
+
 
 class EmojiesVC: ParentVC {
 
@@ -65,6 +66,7 @@ class EmojiesVC: ParentVC {
     }
     
     var showingChartList = false
+    var isDownloading = false
     
     //MARK-
     override func viewDidLoad() {
@@ -152,7 +154,9 @@ extension EmojiesVC {
    
     @IBAction func Btn_SetupNowAction(_ sender: UIButton) {
         //self.performSegue(withIdentifier: "KeyBoardSegue", sender: nil)
-        UIApplication.shared.openURL(URL(string:"App-Prefs:root=General&path=Keyboard")!)
+        if !isDownloading {
+            UIApplication.shared.openURL(URL(string:"App-Prefs:root=General&path=Keyboard")!)
+        }
 
     }
     
@@ -270,11 +274,13 @@ extension EmojiesVC {
             //let progressHUD = ProgressView(text: "Saving Emojis")
             
             self.emojiToImageGeneratorView.didStartBlock = {[weak self] in
-                
+                self?.isDownloading = true
                 self?.progressBarRightConstraint.constant = 0
                 self?.loadingHudView.layoutIfNeeded()
                 self?.loadingHudView.isHidden = false
                 self?.tabBarController?.tabBar.isUserInteractionEnabled = false
+                self?.btnKeyboard.isEnabled = false
+                self?.btnProfile.isEnabled = false
                 self?.emojis.removeAll()
                 
             }
@@ -313,6 +319,9 @@ extension EmojiesVC {
                         weakSelf.tableView.reloadData()
                         weakSelf.loadingHudView.isHidden = true
                         weakSelf.tabBarController?.tabBar.isUserInteractionEnabled = true
+                        weakSelf.btnKeyboard.isEnabled = true
+                        weakSelf.btnProfile.isEnabled = true
+                        weakSelf.isDownloading = false
                         weakSelf.character?.editMode = false
                         weakSelf.btnChangeChar.isHidden = !(Character.myCharacters.count > 1)
                     }
@@ -438,6 +447,8 @@ extension EmojiesVC: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
+//MARK:- CollectionView delegate 
+
 extension EmojiesVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -479,6 +490,7 @@ extension EmojiesVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLay
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if isDownloading {return}
         let emoji = emojis[indexPath.item]
       
         self.tabBarController?.tabBar.isHidden = true
@@ -508,32 +520,52 @@ extension EmojiesVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLay
 //MARK:- Share option methods
 extension EmojiesVC {
     func shareOnFacebook(_ image: UIImage) {
-        if SLComposeViewController.isAvailable(forServiceType: SLServiceTypeFacebook) {
-            let vc = SLComposeViewController(forServiceType:SLServiceTypeFacebook)!
-            vc.add(image)
-            //        vc.add(URL(string: "http://www.example.com/"))
-            //        vc.setInitialText("Initial text here.")
-            
-            self.present(vc, animated: true, completion: nil)
-        } else {
-            showAlert(message: "Please go to settings > Facebook and add your facebook account. ")
-        }
+        
+        let photo = FBSDKSharePhoto(image: image, userGenerated: true)
+        let content = FBSDKSharePhotoContent()
+        content.photos = [photo]
+        
+        let dialog = FBSDKShareDialog()
+        dialog.fromViewController = self
+        dialog.shareContent = content
+        dialog.mode = .automatic
+        dialog.show()
+
     }
     
     
     func shareOnTwitter(_ image: UIImage) {
-        if SLComposeViewController.isAvailable(forServiceType: SLServiceTypeTwitter) {
-            let vc = SLComposeViewController(forServiceType:SLServiceTypeTwitter)!
-            vc.add(image)
-            //        vc.add(URL(string: "http://www.example.com/"))
-            //        vc.setInitialText("Initial text here.")
-            
-            self.present(vc, animated: true, completion: nil)
-        } else {
-            showAlert(message: "Please go to settings > Twitter and add your twitter account. ")
+        let composer = TWTRComposer()
+        composer.setImage(image)
+        composer.show(from: self) { (result) in
+            if result == .done {
+                
+            } else {
+                
+            }
         }
     }
     
+    
+    func moreShare(image: UIImage)  {
+        let activityVC = UIActivityViewController(activityItems: [image], applicationActivities: nil)
+        self.present(activityVC, animated: true, completion: nil)
+    }
+    
+    
+    func shareViaMail(_ image: UIImage) {
+        
+        //code for copy image //previously this func was used for sending email
+        let pasteBoard = UIPasteboard.general
+        let imagedata = UIImagePNGRepresentation(image)
+        pasteBoard.setData(imagedata!, forPasteboardType: UIPasteboardTypeListImage.object(at: 0) as! String)
+        
+        let ac = UIAlertController(title: "Saved!", message: "Your character image has been copied to pastboard.", preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "OK", style: .default))
+        present(ac, animated: true)
+        
+    }
+
     func saveToPhots(_ image: UIImage) {
         UIImageWriteToSavedPhotosAlbum(image, self, #selector(self.image(_:didFinishSavingWithError:contextInfo:)), nil)
     }
@@ -552,35 +584,7 @@ extension EmojiesVC {
         }
     }
     
-    func moreShare(image: UIImage)  {
-        let activityVC = UIActivityViewController(activityItems: [image], applicationActivities: nil)
-        self.present(activityVC, animated: true, completion: nil)
-    }
 
-    func shareViaMail(_ image: UIImage) {
-        
-        //code for copy image //previously this func used for sending email
-        let pasteBoard = UIPasteboard.general
-        let imagedata = UIImagePNGRepresentation(image)
-        pasteBoard.setData(imagedata!, forPasteboardType: UIPasteboardTypeListImage.object(at: 0) as! String)
-
-//        if MFMailComposeViewController.canSendMail() {
-//            let mail = MFMailComposeViewController()
-//            mail.mailComposeDelegate = self
-//            let imageData: Data = UIImagePNGRepresentation(image)!
-//            mail.addAttachmentData(imageData, mimeType: "image/png", fileName: "imageName")
-//            self.present(mail, animated: true, completion: nil)
-//        } else {
-//            showAlert(message: "Please go to settings and add your email account. ")
-//        }
-    }
-
-}
-
-extension EmojiesVC: MFMailComposeViewControllerDelegate {
-    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
-        controller.dismiss(animated: true, completion: nil)
-    }
 }
 
 //MARK:- API calls

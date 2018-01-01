@@ -8,11 +8,16 @@ target 'ClairaBellaDemo' do
 pod 'iCarousel'
 pod 'GTProgressBar'
 pod 'PocketSVG'
-pod 'FacebookCore'
-pod 'FacebookLogin'
 pod 'IQKeyboardManager'
 pod 'SSZipArchive'
 pod 'Alamofire'
+
+pod 'FacebookCore'
+pod 'FacebookLogin'
+pod 'FacebookShare'
+
+pod 'TwitterKit'
+
 
 end
 

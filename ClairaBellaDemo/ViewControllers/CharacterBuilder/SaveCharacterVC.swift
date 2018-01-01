@@ -204,6 +204,7 @@ extension SaveCharacterVC {
                       "default" : checkbox.isSelected,
                       "source": "ios_app",
                       "brand": "claireabella"] as [String : Any]
+        print("Request params :=====>>>>   \n\(params)")
         APICall.shared.createNewCharacter_APICall(json: params) { (response, success) in
             self.indicator.stopAnimating()
             if success {
