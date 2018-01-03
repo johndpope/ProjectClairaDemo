@@ -167,6 +167,10 @@ class CharacterBuilderVC: ParentVC {
             if let hair = menus.filter({$0.title == "Hair"}).first {
                 let hairOption = hair.choices[1].options.filter({$0.selected}).first
                 self.selectedHairColorOption = hairOption
+                
+                let hairStyle = hair.choices[0].options.filter({$0.selected}).first
+                self.selectedHairStyle = hairStyle?.name ?? ""
+
             }
             
             DispatchQueue.main.async {

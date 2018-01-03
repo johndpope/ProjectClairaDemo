@@ -60,7 +60,7 @@ class SaveCharacterVC: ParentVC {
     }
     
     func setUI() {
-        save_btn.isHidden = !isCharacterEditMode
+        save_btn.isHidden = true//!isCharacterEditMode
         mainCharInfoView.isHidden = true
         name_textfield.text = character.name
         
@@ -300,6 +300,7 @@ extension SaveCharacterVC {
             self.navigationController?.dismiss(animated: true, completion: nil)
             
         } else if self.navigationChoice == .postcard {
+            selectedCharForPostcard = character
             appDelegate.mainTabbarController?.selectedIndex = 1
             self.navigationController?.dismiss(animated: true, completion: nil)
             
