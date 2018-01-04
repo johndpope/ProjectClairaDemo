@@ -535,12 +535,17 @@ extension EmojiesVC {
     
     
     func shareOnTwitter(_ image: UIImage) {
-        let composer = TWTRComposer()
-        composer.setImage(image)
-        composer.show(from: self) { (result) in
-            if result == .done {
-                
-            } else {
+        Twitter.sharedInstance().logIn { (session, error) in
+            if let _ = session {
+                let composer = TWTRComposer()
+                composer.setImage(image)
+                composer.show(from: self) { (result) in
+                    if result == .done {
+                        
+                    } else {
+                        
+                    }
+                }
                 
             }
         }

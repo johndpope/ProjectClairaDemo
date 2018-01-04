@@ -15,6 +15,7 @@ import Crashlytics
 import IQKeyboardManager
 import Alamofire
 import SSZipArchive
+import TwitterKit
 
 let appDelegate = UIApplication.shared.delegate as! AppDelegate
 
@@ -54,6 +55,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         checkAndDownloadNewAssetsIfAvailable()
         //UserDefaults.standard.removeObject(forKey: "AssetVersion")
+        
+        Twitter.sharedInstance().start(withConsumerKey: twitterConsumerKey, consumerSecret: twitterConsumerSecret)
         return true
     }
 
@@ -66,7 +69,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     //Facebook Delegate Methods
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-        return FBSDKApplicationDelegate.sharedInstance().application(app, open: url, options: options)
+        let directedByTWTR =  Twitter.sharedInstance().application(app, open: url, options: options)
+        let directedByFacebook = FBSDKApplicationDelegate.sharedInstance().application(app, open: url, options: options)
+        return directedByTWTR || directedByFacebook
     }
 
     

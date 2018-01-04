@@ -20,7 +20,7 @@ class CharacterHTMLBuilder {
     var charName = ""
     var contextKey = "CX001"
    
-    var hiddenParts = [String]()
+    var headWearsForHideHair = ["Turban Wrap", "Tie Bow Wrap", "Knotted Wrap", "Head Shawl"]
 
     enum CharacterType {
         case character, emoji
@@ -100,8 +100,15 @@ class CharacterHTMLBuilder {
             }
         }
         
+        //remove hair_style if head_wear option belongs to hideHair collection.
+        userChoices.forEach { (choice,  option) in
+            if choice == "head_wear" && headWearsForHideHair.contains(option) {
+                userChoices["hair_style"] = ""
+            }
+        }
         
         userChoices.forEach { (choice, option)  in
+        
             if let partsMapMatch = self.part_mapJson[choice]?[option] as? [String: [String : [String : Any]]] {
                 partsMapMatch.forEach({ (part, mapMatch) in
                     mapMatch.forEach({ (matchKey, matchValueObj) in
@@ -423,7 +430,6 @@ class CharacterHTMLBuilder {
         
         //Generate html for svg images
         poseData.forEach { (bodyPart, data) in
-            if !hiddenParts.contains(bodyPart) {
                 if let _ = data["x"] as? String, let _ = data["y"] as? String {
                     let fileName = data["file"] as! String
                     let attributes = data["param"] as! String
@@ -436,7 +442,6 @@ class CharacterHTMLBuilder {
                     
                 }
             }
-        }
         
         htmlBody += "</div></body></html>"
         let completeHtml = htmlHeadStyle + htmlBody

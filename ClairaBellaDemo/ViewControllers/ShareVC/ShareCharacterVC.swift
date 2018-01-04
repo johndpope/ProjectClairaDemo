@@ -8,6 +8,7 @@
 
 import UIKit
 import FBSDKShareKit
+import FBSDKLoginKit
 import TwitterKit
 
 
@@ -206,26 +207,54 @@ extension ShareCharacterVC {
     
     func shareOnFacebook(_ image: UIImage) {
         
-        let photo = FBSDKSharePhoto(image: image, userGenerated: true)
-        let content = FBSDKSharePhotoContent()
-        content.photos = [photo]
         
-        let dialog = FBSDKShareDialog()
-        dialog.fromViewController = self
-        dialog.shareContent = content
-        dialog.mode = .automatic
-        dialog.show()
+        func sharePhoto() {
+            let photo = FBSDKSharePhoto(image: image, userGenerated: false)
+            let content = FBSDKSharePhotoContent()
+            content.photos = [photo!]
+            
+            let dialog = FBSDKShareDialog()
+            dialog.shareContent = content
+            dialog.fromViewController = self
+            
+            if UIApplication.shared.canOpenURL(URL(string: "fbauth2://")!) {
+                dialog.mode = .native
+            } else {
+                dialog.mode = .browser
+            }
+            
+            dialog.show()
+
+        }
+        
+        sharePhoto()
+    
+//        let loginManager = FBSDKLoginManager()
+//        loginManager.logIn(withReadPermissions: ["email"], from: self) { (result, error) in
+//            if result?.token != nil {
+//                loginManager.logIn(withPublishPermissions: ["publish_actions"], from: self, handler: { (result, err) in
+//                    sharePhoto()
+//                })
+//            }
+//        }
+        //FBSDKShareDialog.show(from: self, with: content, delegate: nil)
     }
 
     
     func shareOnTwitter(_ image: UIImage) {
-        let composer = TWTRComposer()
-        composer.setImage(image)
-        composer.show(from: self) { (result) in
-            if result == .done {
-                
-            } else {
-                
+        
+        Twitter.sharedInstance().logIn { (session, error) in
+            if let _ = session {
+                let composer = TWTRComposer()
+                composer.setImage(image)
+                composer.show(from: self) { (result) in
+                    if result == .done {
+                        
+                    } else {
+                        
+                    }
+                }
+
             }
         }
         

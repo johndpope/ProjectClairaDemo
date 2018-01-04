@@ -26,8 +26,6 @@ class CharacterBuilderVC: ParentVC {
     //This variable is only used during character editing.
     var copyedCharacter: Character!
 
-    var selectedHairStyle = ""
-    var selectedHeadWear: ChoiceOption?
 
     var selectedMenu: ChoiceMenu? = nil {
         willSet {
@@ -167,9 +165,6 @@ class CharacterBuilderVC: ParentVC {
             if let hair = menus.filter({$0.title == "Hair"}).first {
                 let hairOption = hair.choices[1].options.filter({$0.selected}).first
                 self.selectedHairColorOption = hairOption
-                
-                let hairStyle = hair.choices[0].options.filter({$0.selected}).first
-                self.selectedHairStyle = hairStyle?.name ?? ""
 
             }
             
@@ -320,13 +315,6 @@ extension CharacterBuilderVC : UITableViewDelegate, UITableViewDataSource {
         guard let selectedOption = choice.options.filter({$0.selected}).first else {return}
         character!.choices[choice.choiceId] = selectedOption.name
         
-//        if choice.choiceId == "head_wear" {
-//           character.choices["hair_style"] = selectedOption.hideHair ? "" : selectedHairStyle
-//        }
-
-        if let selectedHeadWear = self.selectedHeadWear {
-            character.choices["hair_style"] = selectedHeadWear.hideHair ? "" : selectedHairStyle
-        }
         
         charGenerator.upateCharacter(choices: character!.choices)
 
@@ -499,13 +487,13 @@ class OptionsTableViewCell: UITableViewCell,  UICollectionViewDataSource, UIColl
             viewcontroller?.colorChoice  = option.choices.first
         }
         
-        if choice.type == .square && choice.choiceId == "hair_style" {
-            viewcontroller?.selectedHairStyle = option.name
-        }
-
-        if choice.type == .square && choice.choiceId == "head_wear" {
-            viewcontroller?.selectedHeadWear = option
-        }
+//        if choice.type == .square && choice.choiceId == "hair_style" {
+//            viewcontroller?.selectedHairStyle = option.name
+//        }
+//
+//        if choice.type == .square && choice.choiceId == "head_wear" {
+//            viewcontroller?.selectedHeadWear = option
+//        }
         
 //        if choice.choiceId == "head_wear" {
 //            viewcontroller?.character.choices["hair_style"] = option.hideHair ? "" : selectedHairStyle

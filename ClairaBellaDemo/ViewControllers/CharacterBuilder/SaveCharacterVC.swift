@@ -219,10 +219,12 @@ extension SaveCharacterVC {
                 }
                 self.generateCharacterImage()
                 
-               // self.showAlertMessage(message: "Character saved successfully.")
+                self.setUserNavigationChoice()
+                
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "NewCharacterAddedNotification"), object: nil, userInfo: ["NewChar" : self.character])
                 self.saveCharOperationDone = true
-                self.navigateWithUserChoice()
+                
+                self.navigationController?.dismiss(animated: true, completion: nil)
             } else {
                 self.showAlertMessage(message: "Something went wrong.")
             }
@@ -248,11 +250,15 @@ extension SaveCharacterVC {
                 deleteCharacterEmojisFromLocal(char: self.character)
                 self.character.editMode = true //used for generating emojis
                 
+                self.setUserNavigationChoice()
+
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "CharacterUpdateNotification"), object: nil, userInfo: ["updatedChar" : self.character])
                 self.generateCharacterImage()
                 //self.showAlertMessage(message: "Character updated successfully.")
                 self.saveCharOperationDone = true
-                self.navigateWithUserChoice()
+                
+                self.navigationController?.dismiss(animated: true, completion: nil)
+
             } else {
                 self.showAlertMessage(message: "Something went wrong.")
             }
@@ -293,17 +299,11 @@ extension SaveCharacterVC {
     
     //navigation with user choice
     
-    func navigateWithUserChoice() {
+    func setUserNavigationChoice() {
         if self.navigationChoice == .emoji {
             userSelectedCharForEmoji = self.character
-            appDelegate.mainTabbarController?.selectedIndex = 2
-            self.navigationController?.dismiss(animated: true, completion: nil)
-            
         } else if self.navigationChoice == .postcard {
             selectedCharForPostcard = character
-            appDelegate.mainTabbarController?.selectedIndex = 1
-            self.navigationController?.dismiss(animated: true, completion: nil)
-            
         } else {
             //nothing to do.
         }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-//let ScreenSize = UIScreen.main.bounds.size
-//
-//let SCREEN_WIDTH = ScreenSize.width
-//let SCREEN_HEIGHT = ScreenSize.height
+
+
+let twitterConsumerKey = "DvECLbI40YUIJTVqiQaCzK4Ge" //vikashbiwal twitter acount
+let twitterConsumerSecret = "EY2u50jWgNCchzLLG59LRKDZpjjxFrBKhwhbqpBeaWmYzhqFet"

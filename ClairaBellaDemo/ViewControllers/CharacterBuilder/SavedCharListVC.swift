@@ -155,10 +155,14 @@ class SavedCharListVC: ParentVC {
             setCurrentChartInfo()
 
             //Navigate to emoji screen for genereate emoji for newly created character.
-            if let index = self.emojisTabIndex {
-                //userSelectedCharForEmoji = newChar
-                
-               // self.tabBarController?.selectedIndex = index
+            if let _ = userSelectedCharForEmoji {
+                if let index = self.emojisTabIndex {
+                    self.tabBarController?.selectedIndex = index
+                }
+            } else if let _ = selectedCharForPostcard {
+                if let index = self.postcardsTabIndex {
+                    self.tabBarController?.selectedIndex = index
+                }
             }
 
         }
@@ -172,9 +176,14 @@ class SavedCharListVC: ParentVC {
         //Navigate to emoji screen for genereate emoji for updated character.
         if let char = nf.userInfo?["updatedChar"] as? Character {
             
-            if let index = self.emojisTabIndex {
-                //userSelectedCharForEmoji = char
-                //self.tabBarController?.selectedIndex = index
+            if let _ = userSelectedCharForEmoji {
+                if let index = self.emojisTabIndex {
+                    self.tabBarController?.selectedIndex = index
+                }
+            } else if let _ = selectedCharForPostcard {
+                if let index = self.postcardsTabIndex {
+                    self.tabBarController?.selectedIndex = index
+                }
             }
         }
 
