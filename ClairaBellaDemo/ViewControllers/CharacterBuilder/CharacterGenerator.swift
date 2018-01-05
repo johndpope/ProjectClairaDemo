@@ -100,10 +100,13 @@ class CharacterHTMLBuilder {
             }
         }
         
+        
+        var hideHair = false
+        
         //remove hair_style if head_wear option belongs to hideHair collection.
         userChoices.forEach { (choice,  option) in
             if choice == "head_wear" && headWearsForHideHair.contains(option) {
-                userChoices["hair_style"] = ""
+                hideHair = true
             }
         }
         
@@ -113,13 +116,18 @@ class CharacterHTMLBuilder {
                 partsMapMatch.forEach({ (part, mapMatch) in
                     mapMatch.forEach({ (matchKey, matchValueObj) in
                         matchValueObj.forEach({ (key, value)  in
-                            self.parts[part]?[matchKey]?[key] = value
+                            var vlue = value
+                            if key == "hair_style_code" && hideHair {
+                                self.parts[part]?[matchKey]?["hideHair"] = "true"
+                            } else {
+                                self.parts[part]?[matchKey]?["hideHair"] = "false"
+                            }
+                            self.parts[part]?[matchKey]?[key] = vlue
                         })
                     })
                 })
             } else {
                 self.parts[choice]?["file"]?["hair_style_code"] = ""
-
             }
         }
         
@@ -136,14 +144,14 @@ class CharacterHTMLBuilder {
             var fileJoints: [String : [String : String]] = [:]
             var fileName = ""
             var attributes = ""
-            
+            var hideHair = ""
             if !structure.isEmpty {
                 
                 
                 fileName = self.generateFileName(fileInfo: structure["file"] as! [String : String])
                 attributes = self.getAttributes(attributeInfo: structure["attributes"] as! [String : String])
                 
-                
+                hideHair = (structure["file"] as! [String : String])["hideHair"] ?? "false"
                 
                 if let fileMeta = self.partsMeta[fileName + ".svg"] {
                     fileWidth = RConverter.string((fileMeta as! [String : Any])["width"])
@@ -158,7 +166,8 @@ class CharacterHTMLBuilder {
                                     "width" : fileWidth,
                                     "height" : fileHeight,
                                     "joints" : fileJoints,
-                                    "x" : "", "y" : ""] //fill later
+                                    "x" : "", "y" : "",
+                                    "hideHair" : hideHair] //fill later
         }
         
         
@@ -384,7 +393,6 @@ class CharacterHTMLBuilder {
         var bodyVariation = ""
         var otherCode = ""
         fileInfo.forEach { (key, value) in
-            
             switch key {
             case "body_type_code" :
                 bodyType = value
@@ -394,14 +402,18 @@ class CharacterHTMLBuilder {
                 outfitArticle = value
             case "body_variation_code" :
                 bodyVariation = value
+            
             default :
-                otherCode = value
+                    otherCode = value
+
             }
             
             if otherCode.isEmpty {
                 fileName = bodyPart + "_" + bodyType + "_" + outfitArticle + "_" + bodyVariation
             } else {
-                fileName = otherCode
+                if key != "hideHair" {
+                    fileName = otherCode
+                }
             }
         }
         return fileName
@@ -430,15 +442,20 @@ class CharacterHTMLBuilder {
         
         //Generate html for svg images
         poseData.forEach { (bodyPart, data) in
+            print(data)
                 if let _ = data["x"] as? String, let _ = data["y"] as? String {
                     let fileName = data["file"] as! String
                     let attributes = data["param"] as! String
                     
-                    let filePath = documetDirectoryURL().appendingPathComponent("character/claireabella/v1.0/\(fileName).svg").path
+                    if let hideHair = data["hideHair"] as? String, hideHair == "false" {
+                        let filePath = documetDirectoryURL().appendingPathComponent("character/claireabella/v1.0/\(fileName).svg").path
+                        
+                        let pathWithColorAtt = filePath + "?" + attributes
+                        
+                        htmlBody += "<object id=\"\(bodyPart)\" type=\"image/svg+xml\" name=\"\(bodyPart)\" data=\"file://\(pathWithColorAtt)\" style=\"\(getFileStyle(data: data))\"></object>"
+
+                    }
                     
-                    let pathWithColorAtt = filePath + "?" + attributes
-                    
-                    htmlBody += "<object id=\"\(bodyPart)\" type=\"image/svg+xml\" name=\"\(bodyPart)\" data=\"file://\(pathWithColorAtt)\" style=\"\(getFileStyle(data: data))\"></object>"
                     
                 }
             }
