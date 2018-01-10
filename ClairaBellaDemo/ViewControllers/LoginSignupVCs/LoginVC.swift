@@ -11,6 +11,11 @@ import UIKit
 import FBSDKCoreKit
 import FBSDKLoginKit
 
+
+protocol LoginVCDelegate: class {
+    func loginWith(email: String, password: String)
+}
+
 class LoginVC: ParentVC, UITextFieldDelegate {
 
     @IBOutlet var txtEmail: UITextField!
@@ -19,6 +24,9 @@ class LoginVC: ParentVC, UITextFieldDelegate {
     @IBOutlet var tblLoginForm: UITableView!
     @IBOutlet var tblHeaderView: UIView?
     @IBOutlet var lblErrorMessage: UILabel!
+
+
+    weak var delegate: LoginVCDelegate?
     
     let progressHUD = ProgressView(text: "Please Wait")
 
@@ -104,12 +112,19 @@ class LoginVC: ParentVC, UITextFieldDelegate {
     @IBAction func loginBtnClick(_ sender: UIButton) {
         if isValidate() {
             self.view.addSubview(progressHUD)
-            progressHUD.show()
+            //progressHUD.show()
 
             let email = txtEmail.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
 
             let password = txtPassword.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
 
+            
+            delegate?.loginWith(email: email, password: password)
+            
+            
+            
+            return
+            
             let params = ["password_attempt" : password]
             APICall.shared.loginUser_APICall(email: email, params: params, block: { (response,success) in
                 if success {
@@ -210,3 +225,5 @@ class LoginVC: ParentVC, UITextFieldDelegate {
 
     }
 }
+
+

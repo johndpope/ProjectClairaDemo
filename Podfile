@@ -18,6 +18,9 @@ pod 'FacebookShare'
 
 pod 'TwitterKit'
 
+pod 'AWSCore'
+pod 'AWSCognitoIdentityProvider'
+
 
 end
 

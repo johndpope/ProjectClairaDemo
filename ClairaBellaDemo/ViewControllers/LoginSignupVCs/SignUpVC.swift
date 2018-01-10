@@ -9,6 +9,7 @@
 import UIKit
 import FBSDKCoreKit
 import FBSDKLoginKit
+import AWSCognitoIdentityProvider
 
 class SignUpVC: UIViewController, UITextFieldDelegate {
 
@@ -21,11 +22,16 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
     @IBOutlet var btn_pressed: UIButton!
     @IBOutlet var errorListView: UIView!
     
+    var pool: AWSCognitoIdentityUserPool?
+    var sentTo: String?
+
     let progressHUD = ProgressView(text: "Please Wait")
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.pool = AWSCognitoIdentityUserPool.init(forKey: AWSCognitoUserPoolsSignInProviderKey)
+
         nameTextField.setCornerRadius()
         emailTextField.setCornerRadius()
         lastNameTextField.setCornerRadius()
@@ -126,29 +132,74 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
     @IBAction func signUpBtnClick(_ sender: UIButton) {
         if !isValidate() {return}
         
+        self.view.addSubview(progressHUD)
+        progressHUD.show()
+
         let email = emailTextField.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         let firstname = nameTextField.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         let lastName = lastNameTextField.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         let password = passwordTextField.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
 
-        self.view.addSubview(progressHUD)
-        progressHUD.show()
         
-        let params = ["first_name" : firstname,  "Last_name" : lastName, "password" : password]
+
         
-        APICall.shared.signupUser_APICall(email: email, params: params) { (response,success) in
-            if success {
-                let name = firstname + " " + lastName
-                let result = ["name" : name, "email": email]
-                UserDefaults(suiteName: appGroupName)!.setValue(result, forKey: "user_details")
-                //UserDefaults.standard.setValue(result, forKey: "user_details")
-                //UserDefaults.standard.synchronize()
-                //self.btn_pressed.sendActions(for: .touchUpInside)
-                appDelegate.getCharactersFromServer()
-            } else {
-                self.progressHUD.hide()
-            }
+        let emailAtt = AWSCognitoIdentityUserAttributeType()
+        emailAtt?.name = "email"
+        emailAtt?.value = email
+        
+        let nameAtt = AWSCognitoIdentityUserAttributeType()
+        nameAtt?.name = "given_name"
+        nameAtt?.value = firstname + " " + lastName
+        
+        
+        let dobAtt = AWSCognitoIdentityUserAttributeType()
+        dobAtt?.name = "birthdate"
+        dobAtt?.value = "00-00-0000"
+
+        
+        //sign up the user
+        self.pool?.signUp(email, password: password, userAttributes: [emailAtt!, nameAtt!, dobAtt!], validationData: nil).continueWith {[weak self] (task) -> Any? in
+            guard let strongSelf = self else { return nil }
+            DispatchQueue.main.async(execute: {
+                if let error = task.error as NSError? {
+                    let alertController = UIAlertController(title: error.userInfo["__type"] as? String,
+                                                            message: error.userInfo["message"] as? String,
+                                                            preferredStyle: .alert)
+                    let retryAction = UIAlertAction(title: "Retry", style: .default, handler: nil)
+                    alertController.addAction(retryAction)
+                    
+                    self?.present(alertController, animated: true, completion:  nil)
+                } else if let result = task.result  {
+                    // handle the case where user has to confirm his identity via email / SMS
+                    if (result.user.confirmedStatus != AWSCognitoIdentityUserStatus.confirmed) {
+                        strongSelf.sentTo = result.codeDeliveryDetails?.destination
+                        strongSelf.performSegue(withIdentifier: "confirmSignUpSegue", sender:sender)
+                    } else {
+                        let _ = strongSelf.navigationController?.popToRootViewController(animated: true)
+                    }
+                }
+                
+            })
+            return nil
         }
+        
+        
+        
+//        let params = ["first_name" : firstname,  "Last_name" : lastName, "password" : password]
+//        
+//        APICall.shared.signupUser_APICall(email: email, params: params) { (response,success) in
+//            if success {
+//                let name = firstname + " " + lastName
+//                let result = ["name" : name, "email": email]
+//                UserDefaults(suiteName: appGroupName)!.setValue(result, forKey: "user_details")
+//                //UserDefaults.standard.setValue(result, forKey: "user_details")
+//                //UserDefaults.standard.synchronize()
+//                //self.btn_pressed.sendActions(for: .touchUpInside)
+//                appDelegate.getCharactersFromServer()
+//            } else {
+//                self.progressHUD.hide()
+//            }
+//        }
     }
     
     @IBAction func Btn_Facebook_Login(_ sender: UIButton) {

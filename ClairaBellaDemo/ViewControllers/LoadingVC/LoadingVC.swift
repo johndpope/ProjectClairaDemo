@@ -9,9 +9,15 @@
 import UIKit
 import GTProgressBar
 import PocketSVG
+import AWSCognitoIdentityProvider
+
+
 class LoadingVC: UIViewController {
 
-   
+    var response: AWSCognitoIdentityUserGetDetailsResponse?
+    var user: AWSCognitoIdentityUser?
+    var pool: AWSCognitoIdentityUserPool?
+
     
     @IBOutlet var go_btn: UIButton!
     @IBOutlet var loading_lable: UILabel!
@@ -397,38 +403,40 @@ class LoadingVC: UIViewController {
         self .stopTimerTest()
     }
     
-    func navigate()
-    {
+    func navigate() {
+        
+        self.pool = AWSCognitoIdentityUserPool(forKey: AWSCognitoUserPoolsSignInProviderKey)
+        if (self.user == nil) {
+            self.user = self.pool?.currentUser()
+        }
+        self.refresh()
+
         let details = UserDefaults(suiteName: appGroupName)!.object(forKey: "user_details")
         
-        if details == nil
-        {
-            if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "LoginVC") as? LoginVC {
-                
-                if let navigator = navigationController {
-                    navigator.pushViewController(viewController, animated: true)
-                }
-            }
-        }
-        else
-        {
-            self.navigation_btn(go_btn)
-            go_btn.sendActions(for: .touchUpInside)
-//            if let viewController = UIStoryboard(name: "Storyboard", bundle: nil).instantiateViewController(withIdentifier: "NewUserVC") as? NewUserVC {
-//                if let navigator = self.navigationController {
-//                    navigator.pushViewController(viewController, animated: false)
+//        if details == nil {
+//            if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "LoginVC") as? LoginVC {
+//                
+//                if let navigator = navigationController {
+//                    navigator.pushViewController(viewController, animated: true)
 //                }
 //            }
-         //   let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-         //  let vc = storyboard.instantiateViewController(withIdentifier: "HomeVC") as! HomeVC
-         //   self.show(vc, sender: self)
-        }
+//        } else {
+//            //go_btn.sendActions(for: .touchUpInside)
+//        }
         
         
     }
 
-    @IBAction func navigation_btn(_ sender: UIButton) {
-//
-        
+    
+    func refresh() {
+        self.user?.getDetails().continueOnSuccessWith { (task) -> AnyObject? in
+            DispatchQueue.main.async(execute: {
+                self.response = task.result
+                self.go_btn.sendActions(for: .touchUpInside)
+
+            })
+            return nil
+        }
     }
+
 }

@@ -4,6 +4,16 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>AWSCognitoIdentityProvider.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>AWSCore.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Alamofire.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -77,7 +87,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>162CAD95CC0F402AED98F345659DC633</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>332F91393FB1DE033D370B4CEDDD5FCF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>4283C06B172E5FA8988583E1507D78B6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -97,11 +117,6 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>727E5DB554E6AA5D6891C579BB877596</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>7335E9C9689F3B8A16F063A884748533</key>
 		<dict>
 			<key>primary</key>
@@ -112,12 +127,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A7FEAA14E89971698ACA148F7F7202F2</key>
+		<key>90C2ACA98AA888A3E636AAB3CC854F4C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B24FFECC46331EC38FD184994439A885</key>
+		<key>9BEB5210CD18A52706591701451BF86E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A7FEAA14E89971698ACA148F7F7202F2</key>
 		<dict>
 			<key>primary</key>
 			<true/>

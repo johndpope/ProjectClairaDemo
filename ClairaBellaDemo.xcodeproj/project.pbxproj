@@ -3714,6 +3714,8 @@
 		7929835C1FAF996A008813D2 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7929835A1FAF996A008813D2 /* LoginVC.swift */; };
 		7929835D1FAF996A008813D2 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7929835B1FAF996A008813D2 /* SignUpVC.swift */; };
 		792983601FAF9993008813D2 /* WalkThrough.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7929835E1FAF9993008813D2 /* WalkThrough.storyboard */; };
+		792B066920067DA60094F377 /* MFAViewControllerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792B066820067DA60094F377 /* MFAViewControllerVC.swift */; };
+		792B066B20069A3D0094F377 /* LoginSignupDashboardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792B066A20069A3D0094F377 /* LoginSignupDashboardVC.swift */; };
 		792E1A261F7C056B00A7F4C5 /* APICalls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79183D5F1F55102900A00D50 /* APICalls.swift */; };
 		792E1A281F7C081600A7F4C5 /* EmojiCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 792E1A271F7C081600A7F4C5 /* EmojiCell.xib */; };
 		7932BB961F61BBD200A25AAF /* AccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7932BB951F61BBD200A25AAF /* AccountVC.swift */; };
@@ -6030,6 +6032,8 @@
 		7929835B1FAF996A008813D2 /* SignUpVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
 		7929835F1FAF9993008813D2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/WalkThrough.storyboard; sourceTree = "<group>"; };
 		792AF7A71FDC687A0015F548 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/ClairaBellaDemo-cwypmtblpioslcgnwgxmwpyconrp/Build/Products/Debug-iphonesimulator/Alamofire/Alamofire.framework"; sourceTree = "<group>"; };
+		792B066820067DA60094F377 /* MFAViewControllerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFAViewControllerVC.swift; sourceTree = "<group>"; };
+		792B066A20069A3D0094F377 /* LoginSignupDashboardVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginSignupDashboardVC.swift; sourceTree = "<group>"; };
 		792E1A271F7C081600A7F4C5 /* EmojiCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmojiCell.xib; sourceTree = "<group>"; };
 		7932BB951F61BBD200A25AAF /* AccountVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountVC.swift; sourceTree = "<group>"; };
 		7932BB991F61C8CB00A25AAF /* LoadingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingVC.swift; sourceTree = "<group>"; };
@@ -8555,6 +8559,8 @@
 				7929835A1FAF996A008813D2 /* LoginVC.swift */,
 				7929835B1FAF996A008813D2 /* SignUpVC.swift */,
 				133752D71FB413E900A535E6 /* ForgotPasswordVC.swift */,
+				792B066820067DA60094F377 /* MFAViewControllerVC.swift */,
+				792B066A20069A3D0094F377 /* LoginSignupDashboardVC.swift */,
 			);
 			path = LoginSignupVCs;
 			sourceTree = "<group>";
@@ -12596,6 +12602,7 @@
 				133752D81FB413E900A535E6 /* ForgotPasswordVC.swift in Sources */,
 				7932BBC11F61D1C700A25AAF /* LogoImage.swift in Sources */,
 				7932BBB51F61D06600A25AAF /* Global.swift in Sources */,
+				792B066B20069A3D0094F377 /* LoginSignupDashboardVC.swift in Sources */,
 				7932BBC21F61D1C700A25AAF /* Head_image.swift in Sources */,
 				792294431F5F0A17004845DE /* EmojiesVC.swift in Sources */,
 				7932BBD91F61D1DD00A25AAF /* CustomPhotoAlbum.swift in Sources */,
@@ -12605,6 +12612,7 @@
 				791E4E6C1FE03BFE0070380E /* CharacterModels.swift in Sources */,
 				792294461F5F0BDD004845DE /* Constant.swift in Sources */,
 				7932BBC71F61D1C700A25AAF /* Loading1.swift in Sources */,
+				792B066920067DA60094F377 /* MFAViewControllerVC.swift in Sources */,
 				7917CA2F1F89455100EE7824 /* CharacterAlertView.swift in Sources */,
 				7932BBC31F61D1C700A25AAF /* Bella_image.swift in Sources */,
 				792721251FCDE54100DC67AE /* RConverter.swift in Sources */,
