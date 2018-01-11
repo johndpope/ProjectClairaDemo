@@ -10,7 +10,7 @@
 import UIKit
 import FBSDKCoreKit
 import FBSDKLoginKit
-
+import AWSCognitoIdentityProvider
 
 protocol LoginVCDelegate: class {
     func loginWith(email: String, password: String)
@@ -25,7 +25,10 @@ class LoginVC: ParentVC, UITextFieldDelegate {
     @IBOutlet var tblHeaderView: UIView?
     @IBOutlet var lblErrorMessage: UILabel!
 
+    
 
+    var user:AWSCognitoIdentityUser?
+    
     weak var delegate: LoginVCDelegate?
     
     let progressHUD = ProgressView(text: "Please Wait")
@@ -119,35 +122,42 @@ class LoginVC: ParentVC, UITextFieldDelegate {
             let password = txtPassword.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
 
             
-            delegate?.loginWith(email: email, password: password)
-            
-            
-            
-            return
-            
-            let params = ["password_attempt" : password]
-            APICall.shared.loginUser_APICall(email: email, params: params, block: { (response,success) in
-                if success {
-                    let json  = response as! [String : String]
-                    if let _ = json["success"] {
-                        let name = ""//firstname + " " + lastName
-                        let result = ["name" : name, "email": email]
-                        UserDefaults(suiteName: appGroupName)!.setValue(result, forKey: "user_details")
-                        //UserDefaults.standard.setValue(result, forKey: "user_details")
-                        //UserDefaults.standard.synchronize()
-                        //self.btn_pressed.sendActions(for: .touchUpInside)
-                        appDelegate.getCharactersFromServer()
-                    } else  {
-                        print("Email and password is wrong.")
-                        self.errorListView.isHidden = false
-                        self.progressHUD.hide()
+//            let serviceConfiguration = AWSServiceConfiguration(region: CognitoIdentityUserPoolRegion, credentialsProvider: nil)
+//            
+//            // create pool configuration
+//            let poolConfiguration = AWSCognitoIdentityUserPoolConfiguration(clientId: CognitoIdentityUserPoolAppClientId, clientSecret: CognitoIdentityUserPoolAppClientSecret, poolId: CognitoIdentityUserPoolId)
+//            
+//            // initialize user pool client
+//            AWSCognitoIdentityUserPool.register(with: serviceConfiguration, userPoolConfiguration: poolConfiguration, forKey: AWSCognitoUserPoolsSignInProviderKey)
+//
+//            let pool = AWSCognitoIdentityUserPool(forKey: AWSCognitoUserPoolsSignInProviderKey)
 
-                    }
+            user = appDelegate.pool?.getUser(email)
+            
+            user?.getSession(email, password: password, validationData: nil).continueWith(executor: AWSExecutor.mainThread(), block: { (task) -> Any? in
+                self.progressHUD.hide()
+               
+                if let error = task.error as? NSError {
+                    self.showAlert(message: (error.userInfo["message"] as? String) ?? "")
                 } else {
-                    self.progressHUD.hide()
+                    //
+                    
+                    let result = ["email": email]
+                    UserDefaults(suiteName: appGroupName)!.setValue(result, forKey: "user_details")
+
+                    appDelegate.getCharactersFromServer()
+                    self.performSegue(withIdentifier: "goToHome", sender: nil)
+
                 }
+                return nil
+
             })
+           
+            //delegate?.loginWith(email: email, password: password)
+            
+            
         }
+        
     }
     
     @IBAction func backBtnClicked(_ sender: UIButton) {

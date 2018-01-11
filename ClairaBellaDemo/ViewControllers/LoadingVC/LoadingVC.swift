@@ -405,24 +405,25 @@ class LoadingVC: UIViewController {
     
     func navigate() {
         
-        self.pool = AWSCognitoIdentityUserPool(forKey: AWSCognitoUserPoolsSignInProviderKey)
-        if (self.user == nil) {
-            self.user = self.pool?.currentUser()
-        }
-        self.refresh()
+//        self.pool = AWSCognitoIdentityUserPool(forKey: AWSCognitoUserPoolsSignInProviderKey)
+//        if (self.user == nil) {
+//            self.user = self.pool?.currentUser()
+//        }
+//        self.refresh()
 
         let details = UserDefaults(suiteName: appGroupName)!.object(forKey: "user_details")
-        
-//        if details == nil {
-//            if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "LoginVC") as? LoginVC {
-//                
-//                if let navigator = navigationController {
-//                    navigator.pushViewController(viewController, animated: true)
-//                }
-//            }
-//        } else {
-//            //go_btn.sendActions(for: .touchUpInside)
-//        }
+    
+        if details == nil {
+            if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "LoginDashboard") as? LoginSignupDashboardVC {
+                
+                if let navigator = navigationController {
+                    navigator.pushViewController(viewController, animated: true)
+                }
+            }
+        } else {
+            //go_btn.sendActions(for: .touchUpInside)
+            self.performSegue(withIdentifier: "gotoHomeSegue", sender: nil)
+        }
         
         
     }

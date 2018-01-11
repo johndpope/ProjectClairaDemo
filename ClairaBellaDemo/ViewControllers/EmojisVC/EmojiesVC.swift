@@ -521,15 +521,26 @@ extension EmojiesVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLay
 extension EmojiesVC {
     func shareOnFacebook(_ image: UIImage) {
         
-        let photo = FBSDKSharePhoto(image: image, userGenerated: true)
-        let content = FBSDKSharePhotoContent()
-        content.photos = [photo]
+        func sharePhoto() {
+            let photo = FBSDKSharePhoto(image: image, userGenerated: false)
+            let content = FBSDKSharePhotoContent()
+            content.photos = [photo!]
+            
+            let dialog = FBSDKShareDialog()
+            dialog.shareContent = content
+            dialog.fromViewController = self
+            
+            if UIApplication.shared.canOpenURL(URL(string: "fbauth2://")!) {
+                dialog.mode = .native
+            } else {
+                dialog.mode = .browser
+            }
+            
+            dialog.show()
+            
+        }
         
-        let dialog = FBSDKShareDialog()
-        dialog.fromViewController = self
-        dialog.shareContent = content
-        dialog.mode = .automatic
-        dialog.show()
+        sharePhoto()
 
     }
     

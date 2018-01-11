@@ -55,6 +55,14 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
         NotificationCenter.default.removeObserver(self)
     }
     
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "confirmSignUpSegue" {
+            let vc = segue.destination as! MFAViewControllerVC
+            vc.user = sender as? AWSCognitoIdentityUser
+        }
+    }
+    
     //Keyboard notifications
     func keyboardWillShow(nf: Notification) {
         tblSignupForm.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 150, right: 0)
@@ -160,6 +168,7 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
         //sign up the user
         self.pool?.signUp(email, password: password, userAttributes: [emailAtt!, nameAtt!, dobAtt!], validationData: nil).continueWith {[weak self] (task) -> Any? in
             guard let strongSelf = self else { return nil }
+            
             DispatchQueue.main.async(execute: {
                 if let error = task.error as NSError? {
                     let alertController = UIAlertController(title: error.userInfo["__type"] as? String,
@@ -173,7 +182,7 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
                     // handle the case where user has to confirm his identity via email / SMS
                     if (result.user.confirmedStatus != AWSCognitoIdentityUserStatus.confirmed) {
                         strongSelf.sentTo = result.codeDeliveryDetails?.destination
-                        strongSelf.performSegue(withIdentifier: "confirmSignUpSegue", sender:sender)
+                        strongSelf.performSegue(withIdentifier: "confirmSignUpSegue", sender:task.result?.user)
                     } else {
                         let _ = strongSelf.navigationController?.popToRootViewController(animated: true)
                     }

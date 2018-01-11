@@ -106,11 +106,12 @@ class ProfileVC: ParentVC {
     
     @IBAction func logOutBtn_clicked(_ sender: UIButton) {
         UserDefaults(suiteName: appGroupName)?.setValue(nil, forKey: "user_details")
-        let loginStoryboard = UIStoryboard(name: "WalkThrough", bundle: nil)
-        let loginVC = loginStoryboard.instantiateViewController(withIdentifier: "LoginVC")
-        let rootNavVC = appDelegate.window?.rootViewController as! UINavigationController
-        rootNavVC.viewControllers = [loginVC]
-        self.dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true) {
+            let loginStoryboard = UIStoryboard(name: "WalkThrough", bundle: nil)
+            let loginVC = loginStoryboard.instantiateViewController(withIdentifier: "LoginDashboard")
+            let rootNavVC = appDelegate.window?.rootViewController as! UINavigationController
+            rootNavVC.viewControllers = [loginVC]
+        }
     }
 
     @IBAction func close_btnClicked(_ sender: UIButton) {

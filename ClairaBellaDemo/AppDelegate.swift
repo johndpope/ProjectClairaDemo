@@ -37,6 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var storyboard = UIStoryboard(name: "WalkThrough", bundle: nil)
 
     var rememberDeviceCompletionSource: AWSTaskCompletionSource<NSNumber>?
+    var pool:AWSCognitoIdentityUserPool?
 
     var mainTabbarController: UITabBarController? {
         if let childViewControlelrs = self.window?.rootViewController?.childViewControllers {
@@ -98,9 +99,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // initialize user pool client
         AWSCognitoIdentityUserPool.register(with: serviceConfiguration, userPoolConfiguration: poolConfiguration, forKey: AWSCognitoUserPoolsSignInProviderKey)
         
+        pool = AWSCognitoIdentityUserPool(forKey: AWSCognitoUserPoolsSignInProviderKey)
         // fetch the user pool client we initialized in above step
-        let pool = AWSCognitoIdentityUserPool(forKey: AWSCognitoUserPoolsSignInProviderKey)
-        pool.delegate = self
+       // pool.delegate = self
 
     }
     

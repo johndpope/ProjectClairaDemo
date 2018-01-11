@@ -16,7 +16,7 @@ class MFAViewControllerVC: ParentVC {
     
     var mfaCodeCompletionSource: AWSTaskCompletionSource<NSString>?
     var destination: String?
-
+    var user: AWSCognitoIdentityUser?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,8 +43,16 @@ class MFAViewControllerVC: ParentVC {
     @IBAction func verifyCode_btnClicked(_ sender: UIButton) {
         if isValidate() {
             let code = txtCode.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-            self.mfaCodeCompletionSource?.set(result: code as NSString)
-
+            //self.mfaCodeCompletionSource?.set(result: code as NSString)
+            user?.confirmSignUp(code).continueWith(executor: AWSExecutor.mainThread(), block: { (task) -> Any? in
+                print(task)
+                if let error = task.error as? NSError {
+                    self.showAlert(message: (error.userInfo["message"] as? String) ?? "")
+                } else {
+                    
+                }
+                return nil
+            })
         }
     }
 
