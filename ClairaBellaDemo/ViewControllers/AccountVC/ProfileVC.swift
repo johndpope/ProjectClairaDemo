@@ -7,6 +7,13 @@
 //
 
 import UIKit
+import AWSCognitoIdentityProvider
+
+enum AWSUserAttributeKey {
+    static let name = "given_name"
+    static let birthdate = "birthdate"
+    static let email = "email"
+}
 
 class ProfileVC: ParentVC {
     @IBOutlet var txtEmail: UITextField!
@@ -25,17 +32,20 @@ class ProfileVC: ParentVC {
         self.setUserInfo()
     }
     
+    
+    
     func setUserInfo() {
         if let userDetails = UserDefaults(suiteName: appGroupName)!.value(forKey: "user_details")as? [String : String] {
             
-            let email: String = userDetails["email"] ?? ""
+            let email: String = userDetails[AWSUserAttributeKey.email] ?? ""
+            
             if !email.isEmpty {
                 txtEmail.text = email
             } else {
                 txtEmail.background = UIImage(named: "textboxBack_selected")
             }
 
-            let name = userDetails["name"] ?? ""
+            let name = userDetails[AWSUserAttributeKey.name] ?? ""
             lblName.text = "Hey There, \(name)"
             
             if !name.isEmpty {
@@ -44,9 +54,9 @@ class ProfileVC: ParentVC {
                 txtName.background = UIImage(named: "textboxBack_selected")
             }
             
-            let dob = userDetails["dob"] ?? ""
-            if !dob.isEmpty {
-                let dobSeparates = dob.components(separatedBy: CharacterSet(charactersIn: ","))
+            let dob = userDetails[AWSUserAttributeKey.birthdate] ?? ""
+            if !dob.isEmpty && dob != "00-00-0000" {
+                let dobSeparates = dob.components(separatedBy: CharacterSet(charactersIn: "-"))
                 let day = dobSeparates[0]
                 let month = dobSeparates[1]
                 let year = dobSeparates[2]
@@ -104,6 +114,8 @@ class ProfileVC: ParentVC {
     }
     
     
+    //MARK:- IBAction
+    
     @IBAction func logOutBtn_clicked(_ sender: UIButton) {
         UserDefaults(suiteName: appGroupName)?.setValue(nil, forKey: "user_details")
         self.dismiss(animated: true) {
@@ -117,7 +129,31 @@ class ProfileVC: ParentVC {
     @IBAction func close_btnClicked(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
+    
+    @IBAction func saveChanges_btnClicked(_ sender: UIButton) {
+        let name = txtName.text ?? ""
+        let birthdate = [txtDobDay.text!, txtDobMonth.text!, txtDobYear.text!].joined(separator: "-")
+        
+        let nameAtt = AWSCognitoIdentityUserAttributeType()
+        nameAtt?.name = AWSUserAttributeKey.name
+        nameAtt?.value = name
+        
+        let birthDateAtt = AWSCognitoIdentityUserAttributeType()
+        birthDateAtt?.name = AWSUserAttributeKey.birthdate
+        birthDateAtt?.value = birthdate
+        
+    
+        
+        appDelegate.currentUser?.update([nameAtt!, birthDateAtt!]).continueWith(executor: AWSExecutor.mainThread(), block: { (response) -> Any? in
+            if response.error == nil {
+                
+            }
+            return nil
+        })
+    }
 }
+
+//MARK:- UITextFieldDelegate
 
 extension ProfileVC : UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -143,6 +179,9 @@ extension ProfileVC : UITextFieldDelegate {
     }
 
 }
+
+
+//MARK:- UITableViewDelegation
 
 extension ProfileVC: UITableViewDataSource, UITableViewDelegate {
     

@@ -121,20 +121,9 @@ class LoginVC: ParentVC, UITextFieldDelegate {
 
             let password = txtPassword.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
 
+            appDelegate.currentUser = appDelegate.pool?.getUser(email)
             
-//            let serviceConfiguration = AWSServiceConfiguration(region: CognitoIdentityUserPoolRegion, credentialsProvider: nil)
-//            
-//            // create pool configuration
-//            let poolConfiguration = AWSCognitoIdentityUserPoolConfiguration(clientId: CognitoIdentityUserPoolAppClientId, clientSecret: CognitoIdentityUserPoolAppClientSecret, poolId: CognitoIdentityUserPoolId)
-//            
-//            // initialize user pool client
-//            AWSCognitoIdentityUserPool.register(with: serviceConfiguration, userPoolConfiguration: poolConfiguration, forKey: AWSCognitoUserPoolsSignInProviderKey)
-//
-//            let pool = AWSCognitoIdentityUserPool(forKey: AWSCognitoUserPoolsSignInProviderKey)
-
-            user = appDelegate.pool?.getUser(email)
-            
-            user?.getSession(email, password: password, validationData: nil).continueWith(executor: AWSExecutor.mainThread(), block: { (task) -> Any? in
+            appDelegate.currentUser?.getSession(email, password: password, validationData: nil).continueWith(executor: AWSExecutor.mainThread(), block: { (task) -> Any? in
                 self.progressHUD.hide()
                
                 if let error = task.error as? NSError {
@@ -142,7 +131,7 @@ class LoginVC: ParentVC, UITextFieldDelegate {
                 } else {
                     //
                     
-                    let result = ["email": email]
+                    let result = ["email": email, "password": password]
                     UserDefaults(suiteName: appGroupName)!.setValue(result, forKey: "user_details")
 
                     appDelegate.getCharactersFromServer()

@@ -38,7 +38,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var rememberDeviceCompletionSource: AWSTaskCompletionSource<NSNumber>?
     var pool:AWSCognitoIdentityUserPool?
-
+    
+    var currentUser: AWSCognitoIdentityUser? //current logged in User in the app.
+    
     var mainTabbarController: UITabBarController? {
         if let childViewControlelrs = self.window?.rootViewController?.childViewControllers {
             for vc in childViewControlelrs {
@@ -75,7 +77,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
        
         //configure AWS Cognito Auth
         self.awsConfiguration()
-        
+        self.refreshUserSession()
         
 
         return true
@@ -104,6 +106,47 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
        // pool.delegate = self
 
     }
+    
+    func refreshUserSession() {
+        if var userDetails =  UserDefaults(suiteName: appGroupName)!.value(forKey: "user_details")as? [String : String] {
+            
+            let email: String = userDetails["email"] ?? ""
+            let password: String = userDetails["password"] ?? ""
+            
+            
+            
+            
+            func fetchUserDetails() {
+                currentUser?.getDetails().continueWith(executor:AWSExecutor.mainThread(), block: { (response) -> Any? in
+                    
+                    if response.error == nil {
+                        if let attributes = response.result?.userAttributes {
+                            for att in attributes {
+                                userDetails[att.name!] = att.value
+                            }
+                            
+                            UserDefaults(suiteName: appGroupName)?.set(userDetails, forKey: "user_details")
+                        }
+                    }
+                    
+                    return nil
+                })
+            }
+
+            appDelegate.currentUser = appDelegate.pool?.getUser(email)
+            
+            appDelegate.currentUser?.getSession(email, password: password, validationData: nil).continueWith(executor: AWSExecutor.mainThread(), block: { (task) -> Any? in
+                
+                if task.error == nil {
+                    fetchUserDetails()
+                }
+                return nil
+            })
+            
+            
+        }
+    }
+    
     
     func applicationWillResignActive(_ application: UIApplication) {
         FBSDKAppEvents.activateApp()
