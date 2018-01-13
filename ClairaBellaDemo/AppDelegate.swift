@@ -113,32 +113,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let email: String = userDetails["email"] ?? ""
             let password: String = userDetails["password"] ?? ""
             
-            
-            
-            
-            func fetchUserDetails() {
-                currentUser?.getDetails().continueWith(executor:AWSExecutor.mainThread(), block: { (response) -> Any? in
-                    
-                    if response.error == nil {
-                        if let attributes = response.result?.userAttributes {
-                            for att in attributes {
-                                userDetails[att.name!] = att.value
-                            }
-                            
-                            UserDefaults(suiteName: appGroupName)?.set(userDetails, forKey: "user_details")
-                        }
-                    }
-                    
-                    return nil
-                })
-            }
-
             appDelegate.currentUser = appDelegate.pool?.getUser(email)
             
             appDelegate.currentUser?.getSession(email, password: password, validationData: nil).continueWith(executor: AWSExecutor.mainThread(), block: { (task) -> Any? in
                 
                 if task.error == nil {
-                    fetchUserDetails()
+                    self.fetchUserDetails()
                 }
                 return nil
             })
@@ -148,6 +128,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     
+    func fetchUserDetails() {
+        
+        currentUser?.getDetails().continueWith(executor:AWSExecutor.mainThread(), block: { (response) -> Any? in
+            
+            if var userDetails =  UserDefaults(suiteName: appGroupName)!.value(forKey: "user_details")as? [String : String] {
+               
+                if response.error == nil {
+                    if let attributes = response.result?.userAttributes {
+                        for att in attributes {
+                            userDetails[att.name!] = att.value
+                        }
+                        
+                        UserDefaults(suiteName: appGroupName)?.set(userDetails, forKey: "user_details")
+                    }
+                }
+            }
+            
+            return nil
+     })
+}
+
+
     func applicationWillResignActive(_ application: UIApplication) {
         FBSDKAppEvents.activateApp()
     }

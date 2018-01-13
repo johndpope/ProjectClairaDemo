@@ -30,7 +30,7 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.pool = AWSCognitoIdentityUserPool.init(forKey: AWSCognitoUserPoolsSignInProviderKey)
+        self.pool = appDelegate.pool
 
         nameTextField.setCornerRadius()
         emailTextField.setCornerRadius()
@@ -98,10 +98,10 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
     
     func isValidate()-> Bool {
         var isValid = true
-        let email = emailTextField.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-        let firstname = nameTextField.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-        let lastName = lastNameTextField.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-        let password = passwordTextField.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        let email = emailTextField.text!.trimmedString()
+        let firstname = nameTextField.text!.trimmedString()
+        let lastName = lastNameTextField.text!.trimmedString()
+        let password = passwordTextField.text!.trimmedString()
         
         emailTextField.setBorder(color:UIColor.clear)
         nameTextField.setBorder(color:UIColor.clear)
@@ -143,10 +143,10 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
         self.view.addSubview(progressHUD)
         progressHUD.show()
 
-        let email = emailTextField.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-        let firstname = nameTextField.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-        let lastName = lastNameTextField.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-        let password = passwordTextField.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        let email = emailTextField.text!.trimmedString()
+        let firstname = nameTextField.text!.trimmedString()
+        let lastName = lastNameTextField.text!.trimmedString()
+        let password = passwordTextField.text!.trimmedString()
 
         
 
@@ -192,23 +192,6 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
             return nil
         }
         
-        
-        
-//        let params = ["first_name" : firstname,  "Last_name" : lastName, "password" : password]
-//        
-//        APICall.shared.signupUser_APICall(email: email, params: params) { (response,success) in
-//            if success {
-//                let name = firstname + " " + lastName
-//                let result = ["name" : name, "email": email]
-//                UserDefaults(suiteName: appGroupName)!.setValue(result, forKey: "user_details")
-//                //UserDefaults.standard.setValue(result, forKey: "user_details")
-//                //UserDefaults.standard.synchronize()
-//                //self.btn_pressed.sendActions(for: .touchUpInside)
-//                appDelegate.getCharactersFromServer()
-//            } else {
-//                self.progressHUD.hide()
-//            }
-//        }
     }
     
     @IBAction func Btn_Facebook_Login(_ sender: UIButton) {

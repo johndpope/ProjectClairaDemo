@@ -109,10 +109,10 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="menuCell" rowHeight="75" id="tMT-D8-SVZ" customClass="MenuTableViewCell" customModule="ClairaBellaDemo" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="1000" height="75"/>
+                                        <rect key="frame" x="0.0" y="28" width="375" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tMT-D8-SVZ" id="nEP-Hf-JSd">
-                                            <frame key="frameInset" width="1000" height="75"/>
+                                            <frame key="frameInset" width="375" height="75"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jNA-wG-N7l">
@@ -184,10 +184,10 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="squareOptionsCell" rowHeight="164" id="fKe-Se-XJO" customClass="OptionsTableViewCell" customModule="ClairaBellaDemo" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="103" width="1000" height="164"/>
+                                        <rect key="frame" x="0.0" y="103" width="375" height="164"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fKe-Se-XJO" id="p0s-Lc-4S7">
-                                            <frame key="frameInset" width="1000" height="164"/>
+                                            <frame key="frameInset" width="375" height="164"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="sgS-Xg-3Ug">
@@ -251,10 +251,10 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="circleOptionsCell" rowHeight="50" id="eGb-Y1-FPY" customClass="OptionsTableViewCell" customModule="ClairaBellaDemo" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="267" width="1000" height="50"/>
+                                        <rect key="frame" x="0.0" y="267" width="375" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eGb-Y1-FPY" id="gPS-c5-w6b">
-                                            <frame key="frameInset" width="1000" height="50"/>
+                                            <frame key="frameInset" width="375" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="e0S-Zd-wkx">
@@ -996,10 +996,10 @@
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="bannerCell" rowHeight="135" id="vzO-hU-kbn">
-                                        <rect key="frame" x="0.0" y="28" width="1000" height="135"/>
+                                        <rect key="frame" x="0.0" y="28" width="375" height="135"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vzO-hU-kbn" id="q9w-JZ-SlB">
-                                            <frame key="frameInset" width="1000" height="135"/>
+                                            <frame key="frameInset" width="375" height="135"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MmI-27-aFw">
@@ -1037,10 +1037,10 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="charNameCell" rowHeight="60" id="yBx-tk-78G" customClass="TableCell" customModule="ClairaBellaDemo" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="163" width="1000" height="60"/>
+                                        <rect key="frame" x="0.0" y="163" width="375" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yBx-tk-78G" id="jzX-jH-nf3">
-                                            <frame key="frameInset" width="1000" height="60"/>
+                                            <frame key="frameInset" width="375" height="60"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Character Name Emoji's" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="npo-Ur-2Ic">
@@ -1073,10 +1073,10 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="emojiesCell" rowHeight="341" id="vTV-RX-W0k" customClass="EmojiTableViewCell" customModule="ClairaBellaDemo" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="223" width="1000" height="341"/>
+                                        <rect key="frame" x="0.0" y="223" width="375" height="341"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vTV-RX-W0k" id="YsZ-Ij-QKs">
-                                            <frame key="frameInset" width="1000" height="341"/>
+                                            <frame key="frameInset" width="375" height="341"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="2wY-Tk-Zav">
@@ -1132,10 +1132,10 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="createMoreCharCell" rowHeight="753" id="Dru-7I-NqS" customClass="TableCell" customModule="ClairaBellaDemo" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="564" width="1000" height="753"/>
+                                        <rect key="frame" x="0.0" y="564" width="375" height="753"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Dru-7I-NqS" id="ly2-kj-iia">
-                                            <frame key="frameInset" width="1000" height="753"/>
+                                            <frame key="frameInset" width="375" height="753"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6P2-wQ-FNX" userLabel="no characters view">
@@ -1254,10 +1254,10 @@
                                                         </constraints>
                                                         <prototypes>
                                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="characterCell" rowHeight="120" id="V3I-Ms-pPT" customClass="CharacterCell" customModule="ClairaBellaDemo" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="28" width="1000" height="120"/>
+                                                                <rect key="frame" x="0.0" y="28" width="345" height="120"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="V3I-Ms-pPT" id="RK5-lh-JLh">
-                                                                    <frame key="frameInset" width="1000" height="119"/>
+                                                                    <frame key="frameInset" width="345" height="119"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Character Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lt4-1e-1Sr">
@@ -1539,7 +1539,7 @@
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Vee-RA-BwO">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <view key="tableHeaderView" contentMode="scaleToFill" misplaced="YES" id="JWG-xD-Uny">
+                                <view key="tableHeaderView" contentMode="scaleToFill" id="JWG-xD-Uny">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="680"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
@@ -2022,7 +2022,7 @@
                             </scrollView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ANP-eu-Xhd">
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <view key="tableHeaderView" contentMode="scaleToFill" misplaced="YES" id="jhB-aj-Y00">
+                                <view key="tableHeaderView" contentMode="scaleToFill" id="jhB-aj-Y00">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="480"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
@@ -2200,7 +2200,7 @@
                                     </constraints>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="characterListCell" rowHeight="300" id="Ypl-f5-E7V" customClass="CharacterListCell" customModule="ClairaBellaDemo" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="characterListCell" rowHeight="300" id="Ypl-f5-E7V" customClass="CharacterListCell" customModule="ClairaBellaDemo" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="508" width="375" height="300"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ypl-f5-E7V" id="uwo-JE-cup">
@@ -2213,11 +2213,11 @@
                                                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fzG-AJ-yiq">
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             <prototypes>
-                                                                <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="characterCell" rowHeight="120" id="N0Q-ss-x6Z" customClass="CharacterCell" customModule="ClairaBellaDemo" customModuleProvider="target">
-                                                                    <rect key="frame" x="0.0" y="28" width="970" height="120"/>
+                                                                <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="characterCell" rowHeight="120" id="N0Q-ss-x6Z" customClass="CharacterCell" customModule="ClairaBellaDemo" customModuleProvider="target">
+                                                                    <rect key="frame" x="0.0" y="28" width="345" height="120"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="N0Q-ss-x6Z" id="W0L-9p-LHT">
-                                                                        <frame key="frameInset" width="970" height="119"/>
+                                                                        <frame key="frameInset" width="345" height="119"/>
                                                                         <autoresizingMask key="autoresizingMask"/>
                                                                         <subviews>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Character Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eud-Un-Jfh">
@@ -2331,7 +2331,7 @@
                                             <outlet property="tblView" destination="fzG-AJ-yiq" id="NMr-qW-PJl"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="createCharBtnCell" rowHeight="300" id="xzJ-b0-Let" customClass="TableCell" customModule="ClairaBellaDemo" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="createCharBtnCell" rowHeight="300" id="xzJ-b0-Let" customClass="TableCell" customModule="ClairaBellaDemo" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="808" width="375" height="300"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xzJ-b0-Let" id="Ga3-do-XAX">
@@ -2779,7 +2779,7 @@
                 <navigationController restorationIdentifier="PostcardsVC" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="WA2-t6-pCw" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Postcards" image="icon_tab_postcards" id="xn7-UT-V6d"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="0ch-Kc-ZsK">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="0ch-Kc-ZsK">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -2877,7 +2877,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <inset key="separatorInset" minX="25" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="AD7-zN-lAK">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="341"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="400"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cte-iI-kUO">
@@ -2976,6 +2976,18 @@
                                                         <outlet property="delegate" destination="vsy-8q-Zip" id="Kns-iW-uoD"/>
                                                     </connections>
                                                 </textField>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e0f-QM-27G">
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="47" id="wy6-AC-oZ3"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="17"/>
+                                                    <state key="normal" title="Save Changes" backgroundImage="btnBack2">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="saveChanges_btnClicked:" destination="vsy-8q-Zip" eventType="touchUpInside" id="ed5-9T-HTV"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
@@ -2987,8 +2999,10 @@
                                                 <constraint firstItem="YS6-cg-NrV" firstAttribute="top" secondItem="r4M-kT-4Lm" secondAttribute="top" id="8PA-4K-HqW"/>
                                                 <constraint firstItem="ak9-wh-8dp" firstAttribute="leading" secondItem="YS6-cg-NrV" secondAttribute="trailing" constant="16" id="9Gj-gT-dIY"/>
                                                 <constraint firstItem="GTH-YO-fUO" firstAttribute="top" secondItem="SOr-hm-V4h" secondAttribute="bottom" constant="10" id="9IC-9e-7Dh"/>
-                                                <constraint firstAttribute="height" constant="281" id="HxW-gL-yLn"/>
+                                                <constraint firstAttribute="height" constant="340" id="HxW-gL-yLn"/>
+                                                <constraint firstItem="e0f-QM-27G" firstAttribute="leading" secondItem="eU9-Ea-GtO" secondAttribute="leading" constant="15" id="JV5-ew-mfV"/>
                                                 <constraint firstItem="SOr-hm-V4h" firstAttribute="height" secondItem="oUq-K8-E5z" secondAttribute="height" id="Mor-ZW-Bzt"/>
+                                                <constraint firstAttribute="trailing" secondItem="e0f-QM-27G" secondAttribute="trailing" constant="15" id="OOb-ac-2O6"/>
                                                 <constraint firstItem="qU1-Cj-ntF" firstAttribute="top" secondItem="oUq-K8-E5z" secondAttribute="bottom" constant="10" id="QKu-pg-gb5"/>
                                                 <constraint firstItem="r4M-kT-4Lm" firstAttribute="top" secondItem="GTH-YO-fUO" secondAttribute="bottom" constant="13" id="SbR-6j-2Jp"/>
                                                 <constraint firstItem="YS6-cg-NrV" firstAttribute="leading" secondItem="r4M-kT-4Lm" secondAttribute="trailing" constant="16" id="X0L-kJ-QE0"/>
@@ -3002,6 +3016,7 @@
                                                 <constraint firstItem="SOr-hm-V4h" firstAttribute="top" secondItem="qU1-Cj-ntF" secondAttribute="bottom" constant="8" id="nls-PG-zkp"/>
                                                 <constraint firstItem="r4M-kT-4Lm" firstAttribute="leading" secondItem="SOr-hm-V4h" secondAttribute="leading" id="reF-Yo-LaF"/>
                                                 <constraint firstItem="YS6-cg-NrV" firstAttribute="width" secondItem="r4M-kT-4Lm" secondAttribute="width" id="uAM-3g-esH"/>
+                                                <constraint firstAttribute="bottom" secondItem="e0f-QM-27G" secondAttribute="bottom" constant="15" id="xKC-Bk-Q9c"/>
                                                 <constraint firstItem="nf6-aP-QVO" firstAttribute="leading" secondItem="eU9-Ea-GtO" secondAttribute="leading" constant="15" id="yRC-aL-Ghu"/>
                                             </constraints>
                                         </view>
@@ -3017,25 +3032,18 @@
                                     </constraints>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="changePasswordCell" rowHeight="330" id="zq7-RP-TTK" customClass="TableCell" customModule="ClairaBellaDemo" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="369" width="375" height="330"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="changePasswordCell" rowHeight="250" id="zq7-RP-TTK" customClass="ChangePasswordCell" customModule="ClairaBellaDemo" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="428" width="375" height="250"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zq7-RP-TTK" id="L7K-Bt-Vuv">
-                                            <frame key="frameInset" width="375" height="329"/>
+                                            <frame key="frameInset" width="375" height="249"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ULF-XT-4TT">
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="47" id="o2h-MO-IAm"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="17"/>
-                                                    <state key="normal" title="Save Changes" backgroundImage="btnBack2">
-                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
-                                                    <connections>
-                                                        <action selector="saveChanges_btnClicked:" destination="vsy-8q-Zip" eventType="touchUpInside" id="H7U-Di-GDP"/>
-                                                    </connections>
-                                                </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Change Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UkZ-W3-Gkk">
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                                    <color key="textColor" red="0.87843137250000003" green="0.062745098040000002" blue="0.61568627450000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rao-sS-wRG">
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v2B-e0-pqX">
@@ -3083,28 +3091,52 @@
                                                         <constraint firstItem="v2B-e0-pqX" firstAttribute="top" secondItem="Rao-sS-wRG" secondAttribute="top" constant="18" id="oqu-Os-szY"/>
                                                     </constraints>
                                                 </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Change Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UkZ-W3-Gkk">
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                                    <color key="textColor" red="0.87843137250000003" green="0.062745098040000002" blue="0.61568627450000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="ULF-XT-4TT" secondAttribute="trailing" constant="15" id="16A-V4-dHg"/>
                                                 <constraint firstItem="UkZ-W3-Gkk" firstAttribute="top" secondItem="L7K-Bt-Vuv" secondAttribute="top" constant="14" id="6nN-6p-L8H"/>
                                                 <constraint firstAttribute="trailing" secondItem="Rao-sS-wRG" secondAttribute="trailing" id="Mwp-wg-7ZW"/>
                                                 <constraint firstItem="UkZ-W3-Gkk" firstAttribute="leading" secondItem="L7K-Bt-Vuv" secondAttribute="leading" constant="15" id="Ou1-qn-htn"/>
-                                                <constraint firstItem="ULF-XT-4TT" firstAttribute="top" secondItem="Rao-sS-wRG" secondAttribute="bottom" constant="25" id="c04-Eg-KlY"/>
-                                                <constraint firstItem="ULF-XT-4TT" firstAttribute="leading" secondItem="L7K-Bt-Vuv" secondAttribute="leading" constant="15" id="fHV-Vg-itw"/>
                                                 <constraint firstItem="Rao-sS-wRG" firstAttribute="leading" secondItem="L7K-Bt-Vuv" secondAttribute="leading" id="wAM-0D-q3c"/>
-                                                <constraint firstAttribute="bottom" secondItem="Rao-sS-wRG" secondAttribute="bottom" constant="90" id="xEh-4M-6wT"/>
+                                                <constraint firstAttribute="bottom" secondItem="Rao-sS-wRG" secondAttribute="bottom" constant="10" id="xEh-4M-6wT"/>
                                                 <constraint firstItem="Rao-sS-wRG" firstAttribute="top" secondItem="L7K-Bt-Vuv" secondAttribute="top" constant="44" id="yal-NJ-tBF"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <outlet property="newPasswordField" destination="ZKq-gB-ljW" id="whN-Yt-E77"/>
+                                            <outlet property="oldPasswodField" destination="nyc-wQ-vsc" id="LyQ-7c-ik7"/>
+                                        </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" id="cSq-6p-wZ5" customClass="TableCell" customModule="ClairaBellaDemo" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="699" width="375" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="saveChangeBtnCell" rowHeight="70" id="0go-a7-gCE" customClass="TableCell" customModule="ClairaBellaDemo" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="678" width="375" height="70"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0go-a7-gCE" id="i1i-ua-nKy">
+                                            <frame key="frameInset" width="375" height="69"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ULF-XT-4TT">
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="47" id="o2h-MO-IAm"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="17"/>
+                                                    <state key="normal" title="Change Password" backgroundImage="btnBack2">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="changePassword_btnClicked:" destination="vsy-8q-Zip" eventType="touchUpInside" id="COj-Ad-dlg"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="ULF-XT-4TT" secondAttribute="trailing" constant="15" id="gjK-Kh-BFZ"/>
+                                                <constraint firstItem="ULF-XT-4TT" firstAttribute="leading" secondItem="i1i-ua-nKy" secondAttribute="leading" constant="15" id="hkq-dZ-J1u"/>
+                                                <constraint firstAttribute="bottom" secondItem="ULF-XT-4TT" secondAttribute="bottom" constant="10" id="kKy-lA-eTj"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" id="cSq-6p-wZ5" customClass="TableCell" customModule="ClairaBellaDemo" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="748" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cSq-6p-wZ5" id="P2q-63-0bt">
                                             <frame key="frameInset" width="375" height="43"/>
@@ -3129,31 +3161,31 @@
                                             <outlet property="lblTitle" destination="WFI-7J-LIv" id="6l7-85-vfj"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="logoutCell" rowHeight="100" id="0go-a7-gCE" customClass="TableCell" customModule="ClairaBellaDemo" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="743" width="375" height="100"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="logoutCell" rowHeight="100" id="3JF-CE-nEb" customClass="TableCell" customModule="ClairaBellaDemo" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="792" width="375" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0go-a7-gCE" id="i1i-ua-nKy">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3JF-CE-nEb" id="neR-GG-Q0i">
                                             <frame key="frameInset" width="375" height="99"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l71-rg-uyf">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fUR-x9-8Ab">
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="47" id="5ie-F6-wQj"/>
+                                                        <constraint firstAttribute="height" constant="47" id="kv3-wL-O2F"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="17"/>
                                                     <state key="normal" title="Sign Out">
                                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <connections>
-                                                        <action selector="logOutBtn_clicked:" destination="vsy-8q-Zip" eventType="touchUpInside" id="OV5-1f-4ut"/>
+                                                        <action selector="logOutBtn_clicked:" destination="vsy-8q-Zip" eventType="touchUpInside" id="beV-Ay-ChK"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="l71-rg-uyf" firstAttribute="leading" secondItem="i1i-ua-nKy" secondAttribute="leading" constant="15" id="4GH-FZ-QUk"/>
-                                                <constraint firstAttribute="trailing" secondItem="l71-rg-uyf" secondAttribute="trailing" constant="15" id="7QR-gG-Dfy"/>
-                                                <constraint firstAttribute="bottom" secondItem="l71-rg-uyf" secondAttribute="bottom" constant="10" id="xkw-Hi-ye8"/>
+                                                <constraint firstItem="fUR-x9-8Ab" firstAttribute="leading" secondItem="neR-GG-Q0i" secondAttribute="leading" constant="15" id="HBO-Nm-pWl"/>
+                                                <constraint firstAttribute="trailing" secondItem="fUR-x9-8Ab" secondAttribute="trailing" constant="15" id="JHc-sX-Ao5"/>
+                                                <constraint firstAttribute="bottom" secondItem="fUR-x9-8Ab" secondAttribute="bottom" constant="10" id="UWi-JR-iQx"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -3341,7 +3373,7 @@
                 <navigationController restorationIdentifier="ProfileVC" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="eEv-NT-HZg" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Shop" image="icon_tab_shop" id="33s-en-IA2"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="OsM-Q3-QCx">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="OsM-Q3-QCx">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -3601,10 +3633,10 @@
                                                         </constraints>
                                                         <prototypes>
                                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="characterCell" rowHeight="120" id="p8h-x9-G2d" customClass="CharacterCell" customModule="ClairaBellaDemo" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="28" width="1000" height="120"/>
+                                                                <rect key="frame" x="0.0" y="28" width="345" height="120"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="p8h-x9-G2d" id="Eby-zn-bgD">
-                                                                    <frame key="frameInset" width="1000" height="119"/>
+                                                                    <frame key="frameInset" width="345" height="119"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Character Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iCO-rI-wWZ">
@@ -3789,7 +3821,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleAspectFill" bounces="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="i1y-iD-0N5">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="3nZ-fi-vKH">
-                                    <rect key="frame" x="0.0" y="0.0" width="1000" height="2250"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="2250"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8et-kB-blU">

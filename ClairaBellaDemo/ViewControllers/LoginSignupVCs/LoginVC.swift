@@ -72,8 +72,8 @@ class LoginVC: ParentVC, UITextFieldDelegate {
     //validation method
     func isValidate()-> Bool {
         var isValid = true
-        let email = txtEmail.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-        let password = txtPassword.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        let email = txtEmail.text!.trimmedString()
+        let password = txtPassword.text!.trimmedString()
         
         txtEmail.setBorder(color:UIColor.clear)
         txtPassword.setBorder(color:UIColor.clear)
@@ -117,9 +117,9 @@ class LoginVC: ParentVC, UITextFieldDelegate {
             self.view.addSubview(progressHUD)
             //progressHUD.show()
 
-            let email = txtEmail.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+            let email = txtEmail.text!.trimmedString()
 
-            let password = txtPassword.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+            let password = txtPassword.text!.trimmedString()
 
             appDelegate.currentUser = appDelegate.pool?.getUser(email)
             

@@ -536,6 +536,8 @@ extension DateFormatter {
 //TableCell
 class TableCell: UITableViewCell {
     @IBOutlet var lblTitle: UILabel!
+    @IBOutlet var textField: UITextField!
+    
     @IBOutlet var horizontalConstraints: [NSLayoutConstraint]?
 
     override func awakeFromNib() {
