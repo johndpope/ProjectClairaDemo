@@ -13,7 +13,6 @@ class LoginSignupDashboardVC: ParentVC {
 
     var passwordAuthenticationCompletion: AWSTaskCompletionSource<AWSCognitoIdentityPasswordAuthenticationDetails>?
     var usernameText: String?
-    let progressHUD = ProgressView(text: "Please Wait")
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +36,6 @@ class LoginSignupDashboardVC: ParentVC {
 
 extension LoginSignupDashboardVC: LoginVCDelegate {
     func loginWith(email: String, password: String) {
-        progressHUD.show()
         
         let authDetails = AWSCognitoIdentityPasswordAuthenticationDetails(username: email, password: password )
         self.passwordAuthenticationCompletion?.set(result: authDetails)

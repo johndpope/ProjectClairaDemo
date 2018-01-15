@@ -21,6 +21,8 @@
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>fb104387963500939</string>
@@ -46,7 +48,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1.54</string>
+	<string>1.55</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>

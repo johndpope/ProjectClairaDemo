@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ClairaBellaDemo/ViewControllers/AccountVC/ProfileVC.swift"
-            timestampString = "537535099.966627"
+            timestampString = "537734222.562592"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "127"
-            endingLineNumber = "127"
+            startingLineNumber = "146"
+            endingLineNumber = "146"
             landmarkName = "updateProfile()"
             landmarkType = "7">
          </BreakpointContent>
@@ -90,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ClairaBellaDemo/ViewControllers/AccountVC/ProfileVC.swift"
-            timestampString = "537535100.999859"
+            timestampString = "537734222.562592"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "130"
-            endingLineNumber = "130"
+            startingLineNumber = "151"
+            endingLineNumber = "151"
             landmarkName = "updateProfile()"
             landmarkType = "7">
          </BreakpointContent>
@@ -106,11 +106,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ClairaBellaDemo/ViewControllers/AccountVC/ProfileVC.swift"
-            timestampString = "537535117.697408"
+            timestampString = "537734222.562592"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "103"
-            endingLineNumber = "103"
+            startingLineNumber = "122"
+            endingLineNumber = "122"
             landmarkName = "saveChanges_btnClicked(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -122,12 +122,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ClairaBellaDemo/ViewControllers/AccountVC/ProfileVC.swift"
-            timestampString = "537535145.095946"
+            timestampString = "537734222.562592"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "185"
-            endingLineNumber = "185"
+            startingLineNumber = "207"
+            endingLineNumber = "207"
             landmarkName = "isValidProfileData()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ClairaBellaDemo/ViewControllers/AccountVC/ProfileVC.swift"
+            timestampString = "537734222.562592"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "108"
+            endingLineNumber = "108"
+            landmarkName = "logOutBtn_clicked(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

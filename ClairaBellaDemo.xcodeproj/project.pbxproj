@@ -3720,7 +3720,6 @@
 		792E1A281F7C081600A7F4C5 /* EmojiCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 792E1A271F7C081600A7F4C5 /* EmojiCell.xib */; };
 		7932BB961F61BBD200A25AAF /* AccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7932BB951F61BBD200A25AAF /* AccountVC.swift */; };
 		7932BB9A1F61C8CB00A25AAF /* LoadingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7932BB991F61C8CB00A25AAF /* LoadingVC.swift */; };
-		7932BB9E1F61C8DF00A25AAF /* NewUserVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7932BB9B1F61C8DF00A25AAF /* NewUserVC.swift */; };
 		7932BBB51F61D06600A25AAF /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7932BBB41F61D06600A25AAF /* Global.swift */; };
 		7932BBC11F61D1C700A25AAF /* LogoImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7932BBB91F61D1C700A25AAF /* LogoImage.swift */; };
 		7932BBC21F61D1C700A25AAF /* Head_image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7932BBBA1F61D1C700A25AAF /* Head_image.swift */; };
@@ -6037,7 +6036,6 @@
 		792E1A271F7C081600A7F4C5 /* EmojiCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmojiCell.xib; sourceTree = "<group>"; };
 		7932BB951F61BBD200A25AAF /* AccountVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountVC.swift; sourceTree = "<group>"; };
 		7932BB991F61C8CB00A25AAF /* LoadingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingVC.swift; sourceTree = "<group>"; };
-		7932BB9B1F61C8DF00A25AAF /* NewUserVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewUserVC.swift; sourceTree = "<group>"; };
 		7932BBB41F61D06600A25AAF /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		7932BBB91F61D1C700A25AAF /* LogoImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogoImage.swift; sourceTree = "<group>"; };
 		7932BBBA1F61D1C700A25AAF /* Head_image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Head_image.swift; sourceTree = "<group>"; };
@@ -8555,7 +8553,6 @@
 		7932BB981F61C8B900A25AAF /* LoginSignupVCs */ = {
 			isa = PBXGroup;
 			children = (
-				7932BB9B1F61C8DF00A25AAF /* NewUserVC.swift */,
 				7929835A1FAF996A008813D2 /* LoginVC.swift */,
 				7929835B1FAF996A008813D2 /* SignUpVC.swift */,
 				133752D71FB413E900A535E6 /* ForgotPasswordVC.swift */,
@@ -12583,7 +12580,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7932BB9E1F61C8DF00A25AAF /* NewUserVC.swift in Sources */,
 				1347CF461FBAECB5008ABD9D /* iOSDevCenters+GIF.swift in Sources */,
 				792738021F63BCCE00C238F0 /* UtilityClasses.swift in Sources */,
 				79185ADB1F86A1ED0035B92F /* KeyboardCell.swift in Sources */,

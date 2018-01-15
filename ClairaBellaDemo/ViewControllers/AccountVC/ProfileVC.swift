@@ -29,6 +29,8 @@ class ProfileVC: ParentVC {
     @IBOutlet var txtConfirmPassword: UITextField!
     
     
+
+    
     var navigationItems = ["Privacy Policy", "Terms of Service", "Customer Service"]
     
     override func viewDidLoad() {
@@ -37,9 +39,17 @@ class ProfileVC: ParentVC {
         self.setUserInfo()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.setUserInfo), name: NSNotification.Name(rawValue: "NofiticationDidFinishFetchingUserDetails"), object: nil)
+    }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
+    }
     
-    func setUserInfo() {
+    @objc func setUserInfo() {
         if let userDetails = UserDefaults(suiteName: appGroupName)!.value(forKey: "user_details")as? [String : String] {
             
             let email: String = userDetails[AWSUserAttributeKey.email] ?? ""
@@ -87,11 +97,20 @@ class ProfileVC: ParentVC {
     
     @IBAction func logOutBtn_clicked(_ sender: UIButton) {
         UserDefaults(suiteName: appGroupName)?.setValue(nil, forKey: "user_details")
+        appDelegate.currentUser?.signOut()
+        let rootNavVC = appDelegate.window?.rootViewController as! UINavigationController
+//        if let presentdController = rootNavVC.presentedViewController {
+//            presentdController.dismiss(animated: false, completion: nil)
+//        }
+
         self.dismiss(animated: true) {
+            
             let loginStoryboard = UIStoryboard(name: "WalkThrough", bundle: nil)
             let loginVC = loginStoryboard.instantiateViewController(withIdentifier: "LoginDashboard")
-            let rootNavVC = appDelegate.window?.rootViewController as! UINavigationController
             rootNavVC.viewControllers = [loginVC]
+            if let presentdController = rootNavVC.presentedViewController {
+                presentdController.dismiss(animated: false, completion: nil)
+            }
         }
     }
 
@@ -126,8 +145,10 @@ class ProfileVC: ParentVC {
         birthDateAtt?.name = AWSUserAttributeKey.birthdate
         birthDateAtt?.value = birthdate
         
+        self.showHud()
+
         appDelegate.currentUser?.update([nameAtt!, birthDateAtt!]).continueWith(executor: AWSExecutor.mainThread(), block: { (response) -> Any? in
-            
+            self.hideHud()
             if let error = response.error as? NSError {
                 self.showAlert(message: (error.userInfo["message"] as? String) ?? "Something happen wrong")
             } else {
@@ -165,8 +186,9 @@ class ProfileVC: ParentVC {
     }
     
     func changePasswordServiceCall(newPass: String, currentPass: String) {
+        self.showHud()
         appDelegate.currentUser?.changePassword(currentPass, proposedPassword: newPass).continueWith(executor: AWSExecutor.mainThread(), block: { (task) -> Any? in
-            
+            self.hideHud()
             if let error = task.error as? NSError {
                 self.showAlert(message: (error.userInfo["message"] as? String) ?? "Something happen wrong.")
             } else {

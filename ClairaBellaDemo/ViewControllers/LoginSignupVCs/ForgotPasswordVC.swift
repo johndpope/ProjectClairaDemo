@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import AWSCognitoIdentityProvider
 
-class ForgotPasswordVC: UIViewController, UITextFieldDelegate {
+class ForgotPasswordVC: ParentVC, UITextFieldDelegate {
     @IBOutlet var txtEmail: UITextField!
     @IBOutlet var errorListView: UIView!
     
@@ -36,7 +37,19 @@ class ForgotPasswordVC: UIViewController, UITextFieldDelegate {
 
     @IBAction func restPassword_clicked(_ sender: UIButton) {
         if isValidate() {
-            
+            self.showHud()
+            let email = txtEmail.text!.trimmedString()
+
+            appDelegate.pool?.getUser(email).forgotPassword().continueWith(executor: AWSExecutor.mainThread(), block: { (task) -> Any? in
+                self.hideHud()
+                
+                if let error = task.error as? NSError {
+                    self.showAlert(message: (error.userInfo["message"] as? String) ?? "")
+                } else {
+                    self.txtEmail.text = ""
+                }
+                return nil
+            })
         }
     }
 
@@ -47,7 +60,7 @@ class ForgotPasswordVC: UIViewController, UITextFieldDelegate {
     //validation method
     func isValidate()-> Bool {
         var isValid = true
-        let email = txtEmail.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        let email = txtEmail.text!.trimmedString()
         
         txtEmail.setBorder(color:UIColor.clear)
         

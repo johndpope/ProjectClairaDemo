@@ -58,8 +58,6 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "confirmSignUpSegue" {
-            let vc = segue.destination as! MFAViewControllerVC
-            vc.user = sender as? AWSCognitoIdentityUser
         }
     }
     
@@ -140,7 +138,6 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
     @IBAction func signUpBtnClick(_ sender: UIButton) {
         if !isValidate() {return}
         
-        self.view.addSubview(progressHUD)
         progressHUD.show()
 
         let email = emailTextField.text!.trimmedString()
@@ -170,6 +167,8 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
             guard let strongSelf = self else { return nil }
             
             DispatchQueue.main.async(execute: {
+                strongSelf.progressHUD.hide()
+
                 if let error = task.error as NSError? {
                     let alertController = UIAlertController(title: error.userInfo["__type"] as? String,
                                                             message: error.userInfo["message"] as? String,
@@ -181,8 +180,10 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
                 } else if let result = task.result  {
                     // handle the case where user has to confirm his identity via email / SMS
                     if (result.user.confirmedStatus != AWSCognitoIdentityUserStatus.confirmed) {
+                       appDelegate.currentUser = task.result?.user
                         strongSelf.sentTo = result.codeDeliveryDetails?.destination
-                        strongSelf.performSegue(withIdentifier: "confirmSignUpSegue", sender:task.result?.user)
+                        
+                        strongSelf.performSegue(withIdentifier: "confirmSignUpSegue", sender:nil)
                     } else {
                         let _ = strongSelf.navigationController?.popToRootViewController(animated: true)
                     }
@@ -196,7 +197,6 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
     
     @IBAction func Btn_Facebook_Login(_ sender: UIButton) {
         
-        self.view.addSubview(progressHUD)
         progressHUD.show()
         let login: FBSDKLoginManager = FBSDKLoginManager()
         // Make login and request permissions

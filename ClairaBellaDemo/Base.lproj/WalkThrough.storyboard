@@ -275,9 +275,6 @@
                                 <frame key="frameInset" minX="137" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
-                                <connections>
-                                    <segue destination="DQD-8a-ej9" kind="modal" id="IIj-Er-xKI"/>
-                                </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bbf-uQ-ogQ">
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -541,7 +538,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0uA-jT-xwg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="230" y="-1650"/>
+            <point key="canvasLocation" x="129" y="-1693"/>
         </scene>
         <!--LoginVC-->
         <scene sceneID="Dne-L9-sRI">
@@ -797,7 +794,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="txp-Ue-uzV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="161" y="-925"/>
+            <point key="canvasLocation" x="1031" y="-971"/>
         </scene>
         <!--Forgot PasswordVC-->
         <scene sceneID="n1r-CM-xT5">
@@ -966,7 +963,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mVm-ui-qbl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="926" y="-1008"/>
+            <point key="canvasLocation" x="1796" y="-1055"/>
         </scene>
         <!--View ControllerVC-->
         <scene sceneID="CNW-qy-b0B">
@@ -992,7 +989,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter your email address below and we'll send you a link to reset your password." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dgL-DF-y1f">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter verification code below which we have sent at your email." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dgL-DF-y1f">
                                         <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="18"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -1032,7 +1029,7 @@
                                                     <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" image="imgErrorSummary" translatesAutoresizingMaskIntoConstraints="NO" id="DqE-F9-zhJ">
                                                         <frame key="frameInset" width="345" height="59"/>
                                                     </imageView>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Oops, email have not been correctly entered." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p6o-B4-UJC">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Oops, code have not been correctly entered." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p6o-B4-UJC">
                                                         <frame key="frameInset" minX="68.5" minY="6" width="208.5" height="46.5"/>
                                                         <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="17"/>
                                                         <color key="textColor" red="0.61568627450000002" green="0.17254901959999999" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1131,11 +1128,12 @@
                     <connections>
                         <outlet property="errorListView" destination="ZRA-ZM-16A" id="Ng3-oS-udR"/>
                         <outlet property="txtCode" destination="P2L-yB-5W9" id="qFI-ke-aEn"/>
+                        <segue destination="bs7-jm-5VK" kind="show" identifier="gotoLogin" id="G1G-0s-bY9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7d4-oN-BCX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="967" y="-1693"/>
+            <point key="canvasLocation" x="62" y="-661"/>
         </scene>
     </scenes>
     <resources>
@@ -1155,6 +1153,7 @@
         <image name="imgErrorSummary" width="273" height="65"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="G1G-0s-bY9"/>
         <segue reference="chL-R6-lCY"/>
     </inferredMetricsTieBreakers>
 </document>

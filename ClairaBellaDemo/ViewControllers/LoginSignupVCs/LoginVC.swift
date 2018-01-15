@@ -31,8 +31,6 @@ class LoginVC: ParentVC, UITextFieldDelegate {
     
     weak var delegate: LoginVCDelegate?
     
-    let progressHUD = ProgressView(text: "Please Wait")
-
     override func viewDidLoad() {
         super.viewDidLoad()
         txtEmail?.setCornerRadius()
@@ -114,9 +112,8 @@ class LoginVC: ParentVC, UITextFieldDelegate {
 
     @IBAction func loginBtnClick(_ sender: UIButton) {
         if isValidate() {
-            self.view.addSubview(progressHUD)
-            //progressHUD.show()
-
+            self.showHud()
+            
             let email = txtEmail.text!.trimmedString()
 
             let password = txtPassword.text!.trimmedString()
@@ -124,7 +121,7 @@ class LoginVC: ParentVC, UITextFieldDelegate {
             appDelegate.currentUser = appDelegate.pool?.getUser(email)
             
             appDelegate.currentUser?.getSession(email, password: password, validationData: nil).continueWith(executor: AWSExecutor.mainThread(), block: { (task) -> Any? in
-                self.progressHUD.hide()
+                self.hideHud()
                
                 if let error = task.error as? NSError {
                     self.showAlert(message: (error.userInfo["message"] as? String) ?? "")
@@ -133,7 +130,7 @@ class LoginVC: ParentVC, UITextFieldDelegate {
                     
                     let result = ["email": email, "password": password]
                     UserDefaults(suiteName: appGroupName)!.setValue(result, forKey: "user_details")
-
+                    appDelegate.fetchUserDetails()
                     appDelegate.getCharactersFromServer()
                     self.performSegue(withIdentifier: "goToHome", sender: nil)
 
@@ -161,8 +158,7 @@ class LoginVC: ParentVC, UITextFieldDelegate {
 
    @IBAction func Btn_Facebook_Login(_ sender: UIButton) {
         
-        self.view.addSubview(progressHUD)
-        progressHUD.show()
+        self.showHud()
         let login: FBSDKLoginManager = FBSDKLoginManager()
         // Make login and request permissions
         login.logIn(withReadPermissions: ["email", "public_profile"], from: self, handler: {(result, error) -> Void in
@@ -170,11 +166,11 @@ class LoginVC: ParentVC, UITextFieldDelegate {
             if error != nil {
                 // Handle Error
                 NSLog("Process error")
-                self.progressHUD.hide()
+                self.hideHud()
             } else if (result?.isCancelled)! {
                 // If process is cancel
                 NSLog("Cancelled")
-                self.progressHUD.hide()
+                self.hideHud()
             }
             else {
                 // Parameters for Graph Request

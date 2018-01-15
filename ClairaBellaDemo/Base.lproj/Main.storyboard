@@ -1468,7 +1468,7 @@
                 <navigationController restorationIdentifier="MyCharactersVC" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="bwH-up-kzs" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Characters" image="icon_tab_characters" id="Jkj-P9-c5a"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="gsv-2b-TeE">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="gsv-2b-TeE">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -2779,7 +2779,7 @@
                 <navigationController restorationIdentifier="PostcardsVC" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="WA2-t6-pCw" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Postcards" image="icon_tab_postcards" id="xn7-UT-V6d"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="0ch-Kc-ZsK">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="0ch-Kc-ZsK">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -2797,7 +2797,7 @@
             <objects>
                 <navigationController storyboardIdentifier="CharBuilderNavVC" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="oMH-0n-afk" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="6CF-sR-Y4t">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="6CF-sR-Y4t">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -2816,7 +2816,7 @@
                 <navigationController restorationIdentifier="EmojisVC" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="sQC-hR-Ev0" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Emojis" image="icon_tab_emoji" id="wib-9V-HJq"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Gx5-Mo-dbd">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Gx5-Mo-dbd">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -3373,7 +3373,7 @@
                 <navigationController restorationIdentifier="ProfileVC" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="eEv-NT-HZg" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Shop" image="icon_tab_shop" id="33s-en-IA2"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="OsM-Q3-QCx">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="OsM-Q3-QCx">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

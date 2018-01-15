@@ -15,6 +15,9 @@ class ParentVC: UIViewController {
     @IBOutlet var btnKeyboard: UIButton!
     @IBOutlet var btnProfile: UIButton!
     
+    
+    let progressHUD = ProgressView(text: "Please Wait")
+
     override func viewDidLoad() {
         super.viewDidLoad()
         updateConstraints()
@@ -111,5 +114,16 @@ class ParentVC: UIViewController {
         //ProfileVC
         let profileVC = self.storyboard!.instantiateViewController(withIdentifier: "ProfileVC")
         self.tabBarController?.present(profileVC, animated: true, completion: nil)
+    }
+    
+    
+    func showHud() {
+        progressHUD.show()
+        self.view.isUserInteractionEnabled = false
+    }
+    
+    func hideHud() {
+        progressHUD.hide()
+        self.view.isUserInteractionEnabled = true
     }
 }

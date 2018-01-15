@@ -79,75 +79,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.awsConfiguration()
         self.refreshUserSession()
         
-
         return true
     }
-
-    
-    
-
-    func awsConfiguration() {
-        // setup logging
-        //AWSDDLog.sharedInstance.logLevel = .verbose
-        
-        // setup service configuration
-        let serviceConfiguration = AWSServiceConfiguration(region: CognitoIdentityUserPoolRegion, credentialsProvider: nil)
-        
-        // create pool configuration
-        let poolConfiguration = AWSCognitoIdentityUserPoolConfiguration(clientId: CognitoIdentityUserPoolAppClientId,
-                                                                        clientSecret: CognitoIdentityUserPoolAppClientSecret,
-                                                                        poolId: CognitoIdentityUserPoolId)
-        
-        // initialize user pool client
-        AWSCognitoIdentityUserPool.register(with: serviceConfiguration, userPoolConfiguration: poolConfiguration, forKey: AWSCognitoUserPoolsSignInProviderKey)
-        
-        pool = AWSCognitoIdentityUserPool(forKey: AWSCognitoUserPoolsSignInProviderKey)
-        // fetch the user pool client we initialized in above step
-       // pool.delegate = self
-
-    }
-    
-    func refreshUserSession() {
-        if var userDetails =  UserDefaults(suiteName: appGroupName)!.value(forKey: "user_details")as? [String : String] {
-            
-            let email: String = userDetails["email"] ?? ""
-            let password: String = userDetails["password"] ?? ""
-            
-            appDelegate.currentUser = appDelegate.pool?.getUser(email)
-            
-            appDelegate.currentUser?.getSession(email, password: password, validationData: nil).continueWith(executor: AWSExecutor.mainThread(), block: { (task) -> Any? in
-                
-                if task.error == nil {
-                    self.fetchUserDetails()
-                }
-                return nil
-            })
-            
-            
-        }
-    }
-    
-    
-    func fetchUserDetails() {
-        
-        currentUser?.getDetails().continueWith(executor:AWSExecutor.mainThread(), block: { (response) -> Any? in
-            
-            if var userDetails =  UserDefaults(suiteName: appGroupName)!.value(forKey: "user_details")as? [String : String] {
-               
-                if response.error == nil {
-                    if let attributes = response.result?.userAttributes {
-                        for att in attributes {
-                            userDetails[att.name!] = att.value
-                        }
-                        
-                        UserDefaults(suiteName: appGroupName)?.set(userDetails, forKey: "user_details")
-                    }
-                }
-            }
-            
-            return nil
-     })
-}
 
 
     func applicationWillResignActive(_ application: UIApplication) {
@@ -155,8 +88,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     
-    
-    //Facebook Delegate Methods
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         let directedByTWTR =  Twitter.sharedInstance().application(app, open: url, options: options)
         let directedByFacebook = FBSDKApplicationDelegate.sharedInstance().application(app, open: url, options: options)
@@ -207,8 +138,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
-
 }
+
+
+
+//MARK:- Get Characters API Calls
 
 extension AppDelegate {
     func getCharactersFromServer() {
@@ -372,108 +306,180 @@ extension AppDelegate {
 }
 
 
-// MARK:- AWSCognitoIdentityInteractiveAuthenticationDelegate protocol delegate
 
-extension AppDelegate: AWSCognitoIdentityInteractiveAuthenticationDelegate {
-    
-    func startPasswordAuthentication() -> AWSCognitoIdentityPasswordAuthentication {
-        if (self.navigationController == nil) {
-            self.navigationController = UINavigationController()
-            self.navigationController?.isNavigationBarHidden = true
-        }
-        
-        if (self.loginVC == nil) { //LoginVC
-            let loginBoardScreen = self.storyboard.instantiateViewController(withIdentifier: "LoginDashboard") as! LoginSignupDashboardVC
+//MARK:- AWS Configuration
 
-            self.loginVC = loginBoardScreen
-            self.navigationController?.viewControllers = [loginBoardScreen]
-        }
+extension AppDelegate {
+   
+    func awsConfiguration() {
+        //AWSDDLog.sharedInstance.logLevel = .verbose
         
-        DispatchQueue.main.async {
-            self.navigationController!.popToRootViewController(animated: true)
-            if (!self.navigationController!.isViewLoaded
-                || self.navigationController!.view.window == nil) {
-                self.window?.rootViewController?.present(self.navigationController!,
-                                                         animated: true,
-                                                         completion: nil)
-            }
-            
-        }
-        return self.loginVC!
+        // setup service configuration
+        let serviceConfiguration = AWSServiceConfiguration(region: CognitoIdentityUserPoolRegion, credentialsProvider: nil)
+        
+        // create pool configuration
+        let poolConfiguration = AWSCognitoIdentityUserPoolConfiguration(clientId: CognitoIdentityUserPoolAppClientId,
+                                                                        clientSecret: CognitoIdentityUserPoolAppClientSecret,
+                                                                        poolId: CognitoIdentityUserPoolId)
+        
+        // initialize user pool client
+        AWSCognitoIdentityUserPool.register(with: serviceConfiguration, userPoolConfiguration: poolConfiguration, forKey: AWSCognitoUserPoolsSignInProviderKey)
+        
+        pool = AWSCognitoIdentityUserPool(forKey: AWSCognitoUserPoolsSignInProviderKey)
+        // fetch the user pool client we initialized in above step
+        // pool.delegate = self
+        
     }
     
-    func startMultiFactorAuthentication() -> AWSCognitoIdentityMultiFactorAuthentication {
-        if (self.mfaViewController == nil) {
-            self.mfaViewController = self.storyboard.instantiateViewController(withIdentifier: "MFAViewControllerVC") as! MFAViewControllerVC
-            self.mfaViewController?.modalPresentationStyle = .popover
-        }
-        
-        DispatchQueue.main.async {
-            if (!self.mfaViewController!.isViewLoaded
-                || self.mfaViewController!.view.window == nil) {
-               
-                //display mfa as popover on current view controller
-                let viewController = self.window?.rootViewController!
-                viewController?.present(self.mfaViewController!,
-                                        animated: true,
-                                        completion: nil)
+    func refreshUserSession() {
+        if var userDetails =  UserDefaults(suiteName: appGroupName)!.value(forKey: "user_details")as? [String : String] {
+            
+            let email: String = userDetails["email"] ?? ""
+            let password: String = userDetails["password"] ?? ""
+            
+            appDelegate.currentUser = appDelegate.pool?.getUser(email)
+            
+            appDelegate.currentUser?.getSession(email, password: password, validationData: nil).continueWith(executor: AWSExecutor.mainThread(), block: { (task) -> Any? in
                 
-                // configure popover vc
-                let presentationController = self.mfaViewController!.popoverPresentationController
-                presentationController?.permittedArrowDirections = UIPopoverArrowDirection.left
-                presentationController?.sourceView = viewController!.view
-                presentationController?.sourceRect = viewController!.view.bounds
-            }
-        }
-        return self.mfaViewController!
-    }
-    
-    func startRememberDevice() -> AWSCognitoIdentityRememberDevice {
-        return self
-    }
-}
-
-
-
-// MARK:- AWSCognitoIdentityRememberDevice protocol delegate
-
-extension AppDelegate: AWSCognitoIdentityRememberDevice {
-    
-    func getRememberDevice(_ rememberDeviceCompletionSource: AWSTaskCompletionSource<NSNumber>) {
-        //self.rememberDeviceCompletionSource = rememberDeviceCompletionSource
-        DispatchQueue.main.async {
-            // dismiss the view controller being present before asking to remember device
-            self.window?.rootViewController!.presentedViewController?.dismiss(animated: true, completion: nil)
-            let alertController = UIAlertController(title: "Remember Device",
-                                                    message: "Do you want to remember this device?.",
-                                                    preferredStyle: .actionSheet)
-            
-            let yesAction = UIAlertAction(title: "Yes", style: .default, handler: { (action) in
-               self.rememberDeviceCompletionSource?.set(result: true)
+                if task.error == nil {
+                    self.fetchUserDetails()
+                }
+                return nil
             })
-            let noAction = UIAlertAction(title: "No", style: .default, handler: { (action) in
-                self.rememberDeviceCompletionSource?.set(result: false)
-            })
-            alertController.addAction(yesAction)
-            alertController.addAction(noAction)
             
-            self.window?.rootViewController?.present(alertController, animated: true, completion: nil)
+            
         }
     }
     
-    func didCompleteStepWithError(_ error: Error?) {
-        DispatchQueue.main.async {
-            if let error = error as NSError? {
-                let alertController = UIAlertController(title: error.userInfo["__type"] as? String,
-                                                        message: error.userInfo["message"] as? String,
-                                                        preferredStyle: .alert)
-                let okAction = UIAlertAction(title: "ok", style: .default, handler: nil)
-                alertController.addAction(okAction)
-                DispatchQueue.main.async {
-                    self.window?.rootViewController?.present(alertController, animated: true, completion: nil)
+    
+    func fetchUserDetails() {
+        
+        currentUser?.getDetails().continueWith(executor:AWSExecutor.mainThread(), block: { (response) -> Any? in
+            
+            if var userDetails =  UserDefaults(suiteName: appGroupName)!.value(forKey: "user_details")as? [String : String] {
+                
+                if response.error == nil {
+                    if let attributes = response.result?.userAttributes {
+                        for att in attributes {
+                            userDetails[att.name!] = att.value
+                        }
+                        
+                        UserDefaults(suiteName: appGroupName)?.set(userDetails, forKey: "user_details")
+                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "NofiticationDidFinishFetchingUserDetails"), object: nil)
+                    }
                 }
             }
-        }
+            
+            return nil
+        })
     }
+    
 }
+
+
+//// MARK:- AWSCognitoIdentityInteractiveAuthenticationDelegate protocol delegate
+//
+//extension AppDelegate: AWSCognitoIdentityInteractiveAuthenticationDelegate {
+//
+//    func startPasswordAuthentication() -> AWSCognitoIdentityPasswordAuthentication {
+//        if (self.navigationController == nil) {
+//            self.navigationController = UINavigationController()
+//            self.navigationController?.isNavigationBarHidden = true
+//        }
+//
+//        if (self.loginVC == nil) { //LoginVC
+//            let loginBoardScreen = self.storyboard.instantiateViewController(withIdentifier: "LoginDashboard") as! LoginSignupDashboardVC
+//
+//            self.loginVC = loginBoardScreen
+//            self.navigationController?.viewControllers = [loginBoardScreen]
+//        }
+//
+//        DispatchQueue.main.async {
+//            self.navigationController!.popToRootViewController(animated: true)
+//            if (!self.navigationController!.isViewLoaded
+//                || self.navigationController!.view.window == nil) {
+//                self.window?.rootViewController?.present(self.navigationController!,
+//                                                         animated: true,
+//                                                         completion: nil)
+//            }
+//
+//        }
+//        return self.loginVC!
+//    }
+//
+//    func startMultiFactorAuthentication() -> AWSCognitoIdentityMultiFactorAuthentication {
+//        if (self.mfaViewController == nil) {
+//            self.mfaViewController = self.storyboard.instantiateViewController(withIdentifier: "MFAViewControllerVC") as! MFAViewControllerVC
+//            self.mfaViewController?.modalPresentationStyle = .popover
+//        }
+//
+//        DispatchQueue.main.async {
+//            if (!self.mfaViewController!.isViewLoaded
+//                || self.mfaViewController!.view.window == nil) {
+//
+//                //display mfa as popover on current view controller
+//                let viewController = self.window?.rootViewController!
+//                viewController?.present(self.mfaViewController!,
+//                                        animated: true,
+//                                        completion: nil)
+//
+//                // configure popover vc
+//                let presentationController = self.mfaViewController!.popoverPresentationController
+//                presentationController?.permittedArrowDirections = UIPopoverArrowDirection.left
+//                presentationController?.sourceView = viewController!.view
+//                presentationController?.sourceRect = viewController!.view.bounds
+//            }
+//        }
+//        return self.mfaViewController!
+//    }
+//
+//    func startRememberDevice() -> AWSCognitoIdentityRememberDevice {
+//        return self
+//    }
+//}
+//
+//
+//
+//// MARK:- AWSCognitoIdentityRememberDevice protocol delegate
+//
+//extension AppDelegate: AWSCognitoIdentityRememberDevice {
+//
+//    func getRememberDevice(_ rememberDeviceCompletionSource: AWSTaskCompletionSource<NSNumber>) {
+//        //self.rememberDeviceCompletionSource = rememberDeviceCompletionSource
+//        DispatchQueue.main.async {
+//            // dismiss the view controller being present before asking to remember device
+//            self.window?.rootViewController!.presentedViewController?.dismiss(animated: true, completion: nil)
+//            let alertController = UIAlertController(title: "Remember Device",
+//                                                    message: "Do you want to remember this device?.",
+//                                                    preferredStyle: .actionSheet)
+//
+//            let yesAction = UIAlertAction(title: "Yes", style: .default, handler: { (action) in
+//               self.rememberDeviceCompletionSource?.set(result: true)
+//            })
+//            let noAction = UIAlertAction(title: "No", style: .default, handler: { (action) in
+//                self.rememberDeviceCompletionSource?.set(result: false)
+//            })
+//            alertController.addAction(yesAction)
+//            alertController.addAction(noAction)
+//
+//            self.window?.rootViewController?.present(alertController, animated: true, completion: nil)
+//        }
+//    }
+//
+//    func didCompleteStepWithError(_ error: Error?) {
+//        DispatchQueue.main.async {
+//            if let error = error as NSError? {
+//                let alertController = UIAlertController(title: error.userInfo["__type"] as? String,
+//                                                        message: error.userInfo["message"] as? String,
+//                                                        preferredStyle: .alert)
+//                let okAction = UIAlertAction(title: "ok", style: .default, handler: nil)
+//                alertController.addAction(okAction)
+//                DispatchQueue.main.async {
+//                    self.window?.rootViewController?.present(alertController, animated: true, completion: nil)
+//                }
+//            }
+//        }
+//    }
+//}
+
 

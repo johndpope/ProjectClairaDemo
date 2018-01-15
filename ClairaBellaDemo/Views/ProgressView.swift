@@ -84,10 +84,12 @@ class ProgressView: UIVisualEffectView {
     
     func show() {
         self.isHidden = false
+        appDelegate.window?.addSubview(self)
     }
     
     func hide() {
         self.isHidden = true
+        self.removeFromSuperview()
     }
 
 }
