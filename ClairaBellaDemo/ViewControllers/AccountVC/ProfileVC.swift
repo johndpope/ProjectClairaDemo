@@ -32,6 +32,7 @@ class ProfileVC: ParentVC {
 
     
     var navigationItems = ["Privacy Policy", "Terms of Service", "Customer Service"]
+    var isLoginWithFB = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,9 +51,9 @@ class ProfileVC: ParentVC {
     }
     
     @objc func setUserInfo() {
-        if let userDetails = UserDefaults(suiteName: appGroupName)!.value(forKey: "user_details")as? [String : String] {
+        if let userDetails = UserDefaults(suiteName: appGroupName)!.value(forKey: "user_details")as? [String : Any] {
             
-            let email: String = userDetails[AWSUserAttributeKey.email] ?? ""
+            let email: String = (userDetails[AWSUserAttributeKey.email] as? String) ?? ""
             
             if !email.isEmpty {
                 txtEmail.text = email
@@ -60,7 +61,7 @@ class ProfileVC: ParentVC {
                 txtEmail.background = UIImage(named: "textboxBack_selected")
             }
 
-            let name = userDetails[AWSUserAttributeKey.name] ?? ""
+            let name = (userDetails[AWSUserAttributeKey.name] as? String) ?? ""
             lblName.text = "Hey There, \(name)"
             
             if !name.isEmpty {
@@ -69,7 +70,9 @@ class ProfileVC: ParentVC {
                 txtName.background = UIImage(named: "textboxBack_selected")
             }
             
-            let dob = userDetails[AWSUserAttributeKey.birthdate] ?? ""
+            isLoginWithFB = (userDetails["isFacebookLogin"] as? Bool) ?? false
+            
+            let dob = (userDetails[AWSUserAttributeKey.birthdate] as? String) ?? ""
             if !dob.isEmpty && dob != "00-00-0000" {
                 let dobSeparates = dob.components(separatedBy: CharacterSet(charactersIn: "-"))
                 let day = dobSeparates[0]
@@ -312,7 +315,7 @@ extension ProfileVC: UITableViewDataSource, UITableViewDelegate {
         return 2
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return  section == 0 ? 2 : (navigationItems.count + 1)
+        return  section == 0 ? (isLoginWithFB ? 0 : 2) : (navigationItems.count + 1)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

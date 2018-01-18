@@ -101,5 +101,32 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+    
+    
+    <key>AWS</key>
+    <dict>
+        <key>CredentialsProvider</key>
+        <dict>
+            <key>CognitoIdentity</key>
+            <dict>
+                <key>Default</key>
+                <dict>
+                    <key>PoolId</key>
+                    <string>eu-west-2_VAAFw8nyX</string>
+                    <key>Region</key>
+                    <string>EUWest2</string>
+                </dict>
+            </dict>
+        </dict>
+        <key>S3</key>
+        <dict>
+            <key>Default</key>
+            <dict>
+                <key>Region</key>
+                <string>EUWest2</string>
+            </dict>
+        </dict>
+    </dict>
+
 </dict>
 </plist>

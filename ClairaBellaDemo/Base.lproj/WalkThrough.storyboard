@@ -354,7 +354,7 @@
                                                     <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="16"/>
                                                     <state key="normal" title="Sign Up With Facebook" backgroundImage="btnBackground"/>
                                                     <connections>
-                                                        <action selector="Btn_Facebook_Login:" destination="AJQ-6g-LyQ" eventType="touchUpInside" id="y2c-EC-fYe"/>
+                                                        <action selector="Btn_Facebook_Login:" destination="AJQ-6g-LyQ" eventType="touchUpInside" id="m72-Ge-qET"/>
                                                     </connections>
                                                 </button>
                                                 <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="icon_fbLogo" translatesAutoresizingMaskIntoConstraints="NO" id="EKQ-6t-rUP">
@@ -534,6 +534,7 @@
                         <outlet property="tblHeaderView" destination="sdA-UY-OU2" id="UAx-V6-y1p"/>
                         <outlet property="tblSignupForm" destination="bbf-uQ-ogQ" id="AyC-yf-Oss"/>
                         <segue destination="fii-br-IRc" kind="show" identifier="confirmSignUpSegue" id="8V4-Ek-omP"/>
+                        <segue destination="DQD-8a-ej9" kind="modal" identifier="goToHome" id="4pG-1e-vnX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0uA-jT-xwg" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -604,7 +605,7 @@
                                                     </constraints>
                                                     <state key="normal" title="Sign In With Facebook" backgroundImage="btnBackground"/>
                                                     <connections>
-                                                        <action selector="Btn_Facebook_Login:" destination="bs7-jm-5VK" eventType="touchUpInside" id="hMe-4d-uSe"/>
+                                                        <action selector="Btn_Facebook_Login:" destination="bs7-jm-5VK" eventType="touchUpInside" id="Kmb-7T-Gg1"/>
                                                     </connections>
                                                 </button>
                                                 <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="icon_fbLogo" translatesAutoresizingMaskIntoConstraints="NO" id="gME-7S-sPk">
@@ -790,11 +791,12 @@
                         <outlet property="txtEmail" destination="ZJX-cv-CBy" id="0j3-TO-c81"/>
                         <outlet property="txtPassword" destination="NcA-7S-Dko" id="kEk-qV-c56"/>
                         <segue destination="DQD-8a-ej9" kind="modal" identifier="goToHome" id="chL-R6-lCY"/>
+                        <segue destination="fii-br-IRc" kind="show" identifier="confirmSignUpSegue" id="RqL-b7-Hgl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="txp-Ue-uzV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1031" y="-971"/>
+            <point key="canvasLocation" x="660" y="-884"/>
         </scene>
         <!--Forgot PasswordVC-->
         <scene sceneID="n1r-CM-xT5">
@@ -963,7 +965,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mVm-ui-qbl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1796" y="-1055"/>
+            <point key="canvasLocation" x="1577" y="-857"/>
         </scene>
         <!--View ControllerVC-->
         <scene sceneID="CNW-qy-b0B">
@@ -1053,7 +1055,7 @@
                                                     <constraint firstAttribute="height" constant="50" id="0be-AH-Q7d"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="16"/>
-                                                <state key="normal" title="Reset Password" backgroundImage="btnBack2">
+                                                <state key="normal" title="Verify Code" backgroundImage="btnBack2">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
@@ -1133,7 +1135,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7d4-oN-BCX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="62" y="-661"/>
+            <point key="canvasLocation" x="1199" y="-1888"/>
         </scene>
     </scenes>
     <resources>
@@ -1153,7 +1155,8 @@
         <image name="imgErrorSummary" width="273" height="65"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="8V4-Ek-omP"/>
+        <segue reference="4pG-1e-vnX"/>
         <segue reference="G1G-0s-bY9"/>
-        <segue reference="chL-R6-lCY"/>
     </inferredMetricsTieBreakers>
 </document>

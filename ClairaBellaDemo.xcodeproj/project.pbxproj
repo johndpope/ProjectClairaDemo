@@ -3757,6 +3757,7 @@
 		7932BC001F61D79700A25AAF /* SIL Open Font License.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7932BBFA1F61D79700A25AAF /* SIL Open Font License.txt */; };
 		7932BC021F61D7A600A25AAF /* NothingYouCouldDoBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7932BC011F61D7A600A25AAF /* NothingYouCouldDoBold.ttf */; };
 		79387AFB1F6521D300E1B3B8 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79387AFA1F6521D300E1B3B8 /* User.swift */; };
+		793A4784200E7250003D01F7 /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793A4783200E7250003D01F7 /* AuthenticationViewController.swift */; };
 		79432F1D1FD3114700113A7D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79432F1C1FD3114700113A7D /* Assets.xcassets */; };
 		795421631F460DE500DBBBE0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795421621F460DE500DBBBE0 /* AppDelegate.swift */; };
 		7954216D1F460DE500DBBBE0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7954216B1F460DE500DBBBE0 /* LaunchScreen.storyboard */; };
@@ -6073,6 +6074,7 @@
 		7932BBFA1F61D79700A25AAF /* SIL Open Font License.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "SIL Open Font License.txt"; sourceTree = "<group>"; };
 		7932BC011F61D7A600A25AAF /* NothingYouCouldDoBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NothingYouCouldDoBold.ttf; sourceTree = "<group>"; };
 		79387AFA1F6521D300E1B3B8 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		793A4783200E7250003D01F7 /* AuthenticationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationViewController.swift; sourceTree = "<group>"; };
 		79432F1C1FD3114700113A7D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7954215F1F460DE500DBBBE0 /* ClairaBellaDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ClairaBellaDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		795421621F460DE500DBBBE0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -8558,6 +8560,7 @@
 				133752D71FB413E900A535E6 /* ForgotPasswordVC.swift */,
 				792B066820067DA60094F377 /* MFAViewControllerVC.swift */,
 				792B066A20069A3D0094F377 /* LoginSignupDashboardVC.swift */,
+				793A4783200E7250003D01F7 /* AuthenticationViewController.swift */,
 			);
 			path = LoginSignupVCs;
 			sourceTree = "<group>";
@@ -12584,6 +12587,7 @@
 				792738021F63BCCE00C238F0 /* UtilityClasses.swift in Sources */,
 				79185ADB1F86A1ED0035B92F /* KeyboardCell.swift in Sources */,
 				79183D5C1F55100000A00D50 /* CharacterGenerator.swift in Sources */,
+				793A4784200E7250003D01F7 /* AuthenticationViewController.swift in Sources */,
 				7932BB9A1F61C8CB00A25AAF /* LoadingVC.swift in Sources */,
 				7932BBC61F61D1C700A25AAF /* NewUser.swift in Sources */,
 				7932BBD71F61D1DD00A25AAF /* CharacterView.swift in Sources */,

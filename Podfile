@@ -20,6 +20,9 @@ pod 'TwitterKit'
 
 pod 'AWSCore'
 pod 'AWSCognitoIdentityProvider'
+pod 'AWSCognito'
+
+pod 'UICKeyChainStore'
 
 
 end

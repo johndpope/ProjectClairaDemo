@@ -26,6 +26,8 @@ class ParentVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setKeyboardAndProfileBtn()
+        setProfileBtnStyle()
+
     }
     
     var cbKeybaordEnabled: Bool {
@@ -53,7 +55,6 @@ class ParentVC: UIViewController {
     
     func setKeyboardAndProfileBtn() {
         btnKeyboard?.isSelected = cbKeybaordEnabled
-        //btnProfile?.isSelected = true
     }
     
     //MARK:- Tabbar controller's index
@@ -125,5 +126,30 @@ class ParentVC: UIViewController {
     func hideHud() {
         progressHUD.hide()
         self.view.isUserInteractionEnabled = true
+    }
+    
+    func setProfileBtnStyle() {
+        if let userDetails = UserDefaults(suiteName: appGroupName)!.value(forKey: "user_details")as? [String : Any] {
+            
+            let email: String = (userDetails[AWSUserAttributeKey.email] as? String) ?? ""
+            
+            if email.isEmpty {
+                btnProfile?.isSelected = true
+            }
+            
+            let name = (userDetails[AWSUserAttributeKey.name] as? String) ?? ""
+            
+            if name.isEmpty {
+                btnProfile?.isSelected = true
+            }
+            
+            
+            let dob = (userDetails[AWSUserAttributeKey.birthdate] as? String) ?? ""
+            if dob.isEmpty && dob == "00-00-0000" {
+                btnProfile?.isSelected = true
+            }
+        } else {
+            btnProfile?.isSelected = false
+        }
     }
 }

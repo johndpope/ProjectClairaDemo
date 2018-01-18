@@ -1,5 +1,7 @@
 PODS:
   - Alamofire (4.4.0)
+  - AWSCognito (2.5.3):
+    - AWSCore (= 2.5.3)
   - AWSCognitoIdentityProvider (2.5.3):
     - AWSCore (= 2.5.3)
   - AWSCore (2.5.3)
@@ -38,9 +40,11 @@ PODS:
     - Fabric
   - TwitterKit (2.8.1):
     - TwitterCore (>= 2.8)
+  - UICKeyChainStore (2.1.1)
 
 DEPENDENCIES:
   - Alamofire
+  - AWSCognito
   - AWSCognitoIdentityProvider
   - AWSCore
   - FacebookCore
@@ -52,9 +56,11 @@ DEPENDENCIES:
   - PocketSVG
   - SSZipArchive
   - TwitterKit
+  - UICKeyChainStore
 
 SPEC CHECKSUMS:
   Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
+  AWSCognito: 74be06e52a2a063ab932a9d457a89e003d68631d
   AWSCognitoIdentityProvider: 1594ab95efebd3f3670bd6d2e21f0860463d672a
   AWSCore: 344e21892790650cf902246d436402257a545bde
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
@@ -72,7 +78,8 @@ SPEC CHECKSUMS:
   SSZipArchive: 63f8e11cfcc33e03e4cd666b4359ea8bd6facd0c
   TwitterCore: e959987be23c767004d29eb7fab8d85d8585a2e5
   TwitterKit: 3b6044a7320340326a4098f3e37aa1dbaeb94942
+  UICKeyChainStore: 239558492fa260531a0774cfc611ea83a6eaff3a
 
-PODFILE CHECKSUM: 698fa7db3b5498a4b7a7e0c27b729e1f22131906
+PODFILE CHECKSUM: 6a62722806cc7f7f3cda59414dc55b8662955701
 
 COCOAPODS: 1.2.1.beta.1

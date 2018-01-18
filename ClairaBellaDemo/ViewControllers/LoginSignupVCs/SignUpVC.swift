@@ -11,7 +11,7 @@ import FBSDKCoreKit
 import FBSDKLoginKit
 import AWSCognitoIdentityProvider
 
-class SignUpVC: UIViewController, UITextFieldDelegate {
+class SignUpVC: AuthenticationViewController, UITextFieldDelegate {
 
     @IBOutlet var nameTextField: UITextField!
     @IBOutlet var emailTextField: UITextField!
@@ -24,8 +24,6 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
     
     var pool: AWSCognitoIdentityUserPool?
     var sentTo: String?
-
-    let progressHUD = ProgressView(text: "Please Wait")
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -138,113 +136,22 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
     @IBAction func signUpBtnClick(_ sender: UIButton) {
         if !isValidate() {return}
         
-        progressHUD.show()
+        self.showHud()
 
         let email = emailTextField.text!.trimmedString()
         let firstname = nameTextField.text!.trimmedString()
         let lastName = lastNameTextField.text!.trimmedString()
         let password = passwordTextField.text!.trimmedString()
 
+        let name = firstname + " " + lastName
         
-
-        
-        let emailAtt = AWSCognitoIdentityUserAttributeType()
-        emailAtt?.name = "email"
-        emailAtt?.value = email
-        
-        let nameAtt = AWSCognitoIdentityUserAttributeType()
-        nameAtt?.name = "given_name"
-        nameAtt?.value = firstname + " " + lastName
-        
-        
-        let dobAtt = AWSCognitoIdentityUserAttributeType()
-        dobAtt?.name = "birthdate"
-        dobAtt?.value = "00-00-0000"
-
-        
-        //sign up the user
-        self.pool?.signUp(email, password: password, userAttributes: [emailAtt!, nameAtt!, dobAtt!], validationData: nil).continueWith {[weak self] (task) -> Any? in
-            guard let strongSelf = self else { return nil }
-            
-            DispatchQueue.main.async(execute: {
-                strongSelf.progressHUD.hide()
-
-                if let error = task.error as NSError? {
-                    let alertController = UIAlertController(title: error.userInfo["__type"] as? String,
-                                                            message: error.userInfo["message"] as? String,
-                                                            preferredStyle: .alert)
-                    let retryAction = UIAlertAction(title: "Retry", style: .default, handler: nil)
-                    alertController.addAction(retryAction)
-                    
-                    self?.present(alertController, animated: true, completion:  nil)
-                } else if let result = task.result  {
-                    // handle the case where user has to confirm his identity via email / SMS
-                    if (result.user.confirmedStatus != AWSCognitoIdentityUserStatus.confirmed) {
-                       appDelegate.currentUser = task.result?.user
-                        strongSelf.sentTo = result.codeDeliveryDetails?.destination
-                        
-                        strongSelf.performSegue(withIdentifier: "confirmSignUpSegue", sender:nil)
-                    } else {
-                        let _ = strongSelf.navigationController?.popToRootViewController(animated: true)
-                    }
-                }
-                
-            })
-            return nil
+        signup(username: email, password: password, email: email, name: name, fbLogin: false) { (success) in
+            self.hideHud()
         }
+        
         
     }
     
-    @IBAction func Btn_Facebook_Login(_ sender: UIButton) {
-        
-        progressHUD.show()
-        let login: FBSDKLoginManager = FBSDKLoginManager()
-        // Make login and request permissions
-        login.logIn(withReadPermissions: ["email", "public_profile"], from: self, handler: {(result, error) -> Void in
-            
-            if error != nil {
-                // Handle Error
-                NSLog("Process error")
-                self.progressHUD.hide()
-            } else if (result?.isCancelled)! {
-                // If process is cancel
-                NSLog("Cancelled")
-                self.progressHUD.hide()
-            }
-            else {
-                // Parameters for Graph Request
-                let parameters = ["fields": "email, name"]
-                
-                FBSDKGraphRequest(graphPath: "me", parameters: parameters).start {(connection, result, error) -> Void in
-                    if error != nil {
-                        NSLog(error.debugDescription)
-                        return
-                    }
-                    
-                    // Result
-                    print("Result: \(result)")
-                    
-                    // Handle vars
-                    if let result = result as? [String:String],
-                        let email: String = result["email"],
-                        let fbId: String = result["id"] {
-                        print("Email: \(email)")
-                        print("fbID: \(fbId)")
-                        
-                        let facebookProfileUrl = "http://graph.facebook.com/\(fbId)/picture?type=large"
-                        print("facebookProfileUrl: \(facebookProfileUrl)")
-                       
-                        UserDefaults(suiteName: appGroupName)!.setValue(result, forKey: "user_details")
-                        UserDefaults.standard.setValue(facebookProfileUrl, forKey: "user_photoUrl")
-                        appDelegate.getCharactersFromServer()
-
-                         self.btn_pressed.sendActions(for: .touchUpInside)
-                        
-                    }
-                }
-            }
-        })
-    }
     
     func charactersLoadignFinish() {
         progressHUD.hide()

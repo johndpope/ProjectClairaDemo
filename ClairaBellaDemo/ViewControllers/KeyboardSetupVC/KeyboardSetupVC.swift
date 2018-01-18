@@ -38,7 +38,7 @@ class KeyboardSetupVC: ParentVC {
     }
     
     @IBAction func keyboard_Setting_Action(_ sender: UIButton) {
-        UIApplication.shared.openURL(URL(string:"App-Prefs:root=General&path=Keyboard")!)
+        UIApplication.shared.open(URL(string:"App-Prefs:root=General&path=Keyboard")!, options: [:], completionHandler: nil)
     }
 
 }

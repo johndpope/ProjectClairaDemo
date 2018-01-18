@@ -56,6 +56,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
        
         
+        
+        
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
 
         Fabric.with([Crashlytics.self])
@@ -332,10 +334,10 @@ extension AppDelegate {
     }
     
     func refreshUserSession() {
-        if var userDetails =  UserDefaults(suiteName: appGroupName)!.value(forKey: "user_details")as? [String : String] {
+        if var userDetails =  UserDefaults(suiteName: appGroupName)!.value(forKey: "user_details")as? [String : Any] {
             
-            let email: String = userDetails["email"] ?? ""
-            let password: String = userDetails["password"] ?? ""
+            let email: String = (userDetails["email"] as? String) ?? ""
+            let password: String = (userDetails["password"] as? String) ?? ""
             
             appDelegate.currentUser = appDelegate.pool?.getUser(email)
             
@@ -356,7 +358,7 @@ extension AppDelegate {
         
         currentUser?.getDetails().continueWith(executor:AWSExecutor.mainThread(), block: { (response) -> Any? in
             
-            if var userDetails =  UserDefaults(suiteName: appGroupName)!.value(forKey: "user_details")as? [String : String] {
+            if var userDetails =  UserDefaults(suiteName: appGroupName)!.value(forKey: "user_details")as? [String : Any] {
                 
                 if response.error == nil {
                     if let attributes = response.result?.userAttributes {

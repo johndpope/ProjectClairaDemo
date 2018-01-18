@@ -16,7 +16,7 @@ protocol LoginVCDelegate: class {
     func loginWith(email: String, password: String)
 }
 
-class LoginVC: ParentVC, UITextFieldDelegate {
+class LoginVC: AuthenticationViewController, UITextFieldDelegate {
 
     @IBOutlet var txtEmail: UITextField!
     @IBOutlet var txtPassword: UITextField!
@@ -118,29 +118,11 @@ class LoginVC: ParentVC, UITextFieldDelegate {
 
             let password = txtPassword.text!.trimmedString()
 
-            appDelegate.currentUser = appDelegate.pool?.getUser(email)
-            
-            appDelegate.currentUser?.getSession(email, password: password, validationData: nil).continueWith(executor: AWSExecutor.mainThread(), block: { (task) -> Any? in
-                self.hideHud()
-               
-                if let error = task.error as? NSError {
-                    self.showAlert(message: (error.userInfo["message"] as? String) ?? "")
-                } else {
-                    //
+            login(username: email, email: email, password: password, fbLogin: false, block: { (success) in
+                if !success {
                     
-                    let result = ["email": email, "password": password]
-                    UserDefaults(suiteName: appGroupName)!.setValue(result, forKey: "user_details")
-                    appDelegate.fetchUserDetails()
-                    appDelegate.getCharactersFromServer()
-                    self.performSegue(withIdentifier: "goToHome", sender: nil)
-
                 }
-                return nil
-
             })
-           
-            //delegate?.loginWith(email: email, password: password)
-            
             
         }
         
@@ -156,55 +138,7 @@ class LoginVC: ParentVC, UITextFieldDelegate {
         self.navigationController?.pushViewController(vc, animated: true)
     }
 
-   @IBAction func Btn_Facebook_Login(_ sender: UIButton) {
-        
-        self.showHud()
-        let login: FBSDKLoginManager = FBSDKLoginManager()
-        // Make login and request permissions
-        login.logIn(withReadPermissions: ["email", "public_profile"], from: self, handler: {(result, error) -> Void in
-            
-            if error != nil {
-                // Handle Error
-                NSLog("Process error")
-                self.hideHud()
-            } else if (result?.isCancelled)! {
-                // If process is cancel
-                NSLog("Cancelled")
-                self.hideHud()
-            }
-            else {
-                // Parameters for Graph Request
-                let parameters = ["fields": "email, name"]
-                
-                FBSDKGraphRequest(graphPath: "me", parameters: parameters).start {(connection, result, error) -> Void in
-                    if error != nil {
-                        NSLog(error.debugDescription)
-                        return
-                    }
-                    
-                    // Result
-                    //print("Result: \(result)")
-                    
-                    // Handle vars
-                    if let result = result as? [String:Any], let email = result["email"] as? String, let fbId = result["id"] as? String {
-                        print("Email: \(email)")
-                        print("fbID: \(fbId)")
-                        
-                        let facebookProfileUrl = "http://graph.facebook.com/\(fbId)/picture?type=large"
-                        print("facebookProfileUrl: \(facebookProfileUrl)")
-                      
-                        UserDefaults(suiteName: appGroupName)!.setValue(result, forKey: "user_details")
-                        UserDefaults.standard.setValue(facebookProfileUrl, forKey: "user_photoUrl")
-//                        print("\(UserDefaults.standard.value(forKey: "user_details")!)")
-                        UserDefaults.standard.synchronize()
-                        
-                        appDelegate.getCharactersFromServer()
-                        
-                    }
-                }
-            }
-        })
-    }
+    
     
     func charactersLoadignFinish() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)

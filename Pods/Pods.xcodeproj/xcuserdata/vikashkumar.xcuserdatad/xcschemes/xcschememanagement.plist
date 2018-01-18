@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>AWSCognito.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>AWSCognitoIdentityProvider.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -79,6 +84,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>UICKeyChainStore.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>iCarousel.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -97,12 +107,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4283C06B172E5FA8988583E1507D78B6</key>
+		<key>44CAD6CE523055ED339E87154473A254</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>44CAD6CE523055ED339E87154473A254</key>
+		<key>53C6112213829CB147F47E473C93F271</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -127,16 +137,6 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>90C2ACA98AA888A3E636AAB3CC854F4C</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>9BEB5210CD18A52706591701451BF86E</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>A7FEAA14E89971698ACA148F7F7202F2</key>
 		<dict>
 			<key>primary</key>
@@ -147,12 +147,32 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>B8C763D28F63F1899B12C47BAE538120</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>B8D8C363B343A0778AE6633D70E11749</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>B8E465E7F12373AEC9AE244412414FDC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>C36CB2CB977A4E7D954935096D00A1ED</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C83B0F8778708382BFD09745CBCD1CBA</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CF941677361D7EC6CC060258293DB6F3</key>
 		<dict>
 			<key>primary</key>
 			<true/>
