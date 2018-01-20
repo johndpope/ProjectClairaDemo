@@ -28,7 +28,7 @@ class ProfileVC: ParentVC {
     @IBOutlet var txtNewPassword: UITextField!
     @IBOutlet var txtConfirmPassword: UITextField!
     
-    
+    var fbUser: CognitoUser?
 
     
     var navigationItems = ["Privacy Policy", "Terms of Service", "Customer Service"]
@@ -51,6 +51,10 @@ class ProfileVC: ParentVC {
     }
     
     @objc func setUserInfo() {
+        fbUser = CognitoUser.currentUser()
+        
+        isLoginWithFB = AmazonClientManager.shared.isLoggedIn()
+        
         if let userDetails = UserDefaults(suiteName: appGroupName)!.value(forKey: "user_details")as? [String : Any] {
             
             let email: String = (userDetails[AWSUserAttributeKey.email] as? String) ?? ""
@@ -70,7 +74,6 @@ class ProfileVC: ParentVC {
                 txtName.background = UIImage(named: "textboxBack_selected")
             }
             
-            isLoginWithFB = (userDetails["isFacebookLogin"] as? Bool) ?? false
             
             let dob = (userDetails[AWSUserAttributeKey.birthdate] as? String) ?? ""
             if !dob.isEmpty && dob != "00-00-0000" {
@@ -101,6 +104,8 @@ class ProfileVC: ParentVC {
     @IBAction func logOutBtn_clicked(_ sender: UIButton) {
         UserDefaults(suiteName: appGroupName)?.setValue(nil, forKey: "user_details")
         appDelegate.currentUser?.signOut()
+        AmazonClientManager.shared.logOut()
+        
         let rootNavVC = appDelegate.window?.rootViewController as! UINavigationController
 //        if let presentdController = rootNavVC.presentedViewController {
 //            presentdController.dismiss(animated: false, completion: nil)
@@ -136,31 +141,42 @@ class ProfileVC: ParentVC {
     func updateProfile() {
         
         guard isValidProfileData() else {return}
-        
         let name = txtName.text ?? ""
         let birthdate = [txtDobDay.text!, txtDobMonth.text!, txtDobYear.text!].joined(separator: "-")
         
-        let nameAtt = AWSCognitoIdentityUserAttributeType()
-        nameAtt?.name = AWSUserAttributeKey.name
-        nameAtt?.value = name
-        
-        let birthDateAtt = AWSCognitoIdentityUserAttributeType()
-        birthDateAtt?.name = AWSUserAttributeKey.birthdate
-        birthDateAtt?.value = birthdate
-        
         self.showHud()
 
-        appDelegate.currentUser?.update([nameAtt!, birthDateAtt!]).continueWith(executor: AWSExecutor.mainThread(), block: { (response) -> Any? in
-            self.hideHud()
-            if let error = response.error as? NSError {
-                self.showAlert(message: (error.userInfo["message"] as? String) ?? "Something happen wrong")
-            } else {
-                self.showAlert(message: "Profile updated successfully.")
-                appDelegate.fetchUserDetails()
-            }
+        if isLoginWithFB {
+            fbUser?.name = name
+            fbUser?.birthDate = birthdate
+            fbUser?.save(completition: { [unowned self] (success) in
+                self.hideHud()
+            })
             
-            return nil
-        })
+        } else {
+            let nameAtt = AWSCognitoIdentityUserAttributeType()
+            nameAtt?.name = AWSUserAttributeKey.name
+            nameAtt?.value = name
+            
+            let birthDateAtt = AWSCognitoIdentityUserAttributeType()
+            birthDateAtt?.name = AWSUserAttributeKey.birthdate
+            birthDateAtt?.value = birthdate
+            
+            self.showHud()
+            
+            appDelegate.currentUser?.update([nameAtt!, birthDateAtt!]).continueWith(executor: AWSExecutor.mainThread(), block: { (response) -> Any? in
+                self.hideHud()
+                if let error = response.error as? NSError {
+                    self.showAlert(message: (error.userInfo["message"] as? String) ?? "Something happen wrong")
+                } else {
+                    self.showAlert(message: "Profile updated successfully.")
+                    appDelegate.fetchUserDetails()
+                }
+                
+                return nil
+            })
+        }
+        
     }
     
     func changePassword() {

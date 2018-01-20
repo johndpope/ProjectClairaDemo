@@ -122,6 +122,7 @@ class LoginVC: AuthenticationViewController, UITextFieldDelegate {
                 if !success {
                     
                 }
+                self.hideHud()
             })
             
         }

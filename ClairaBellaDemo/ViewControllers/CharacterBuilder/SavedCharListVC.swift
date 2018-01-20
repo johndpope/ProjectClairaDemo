@@ -63,7 +63,9 @@ class SavedCharListVC: ParentVC {
         setCurrentChartInfo()
     }
     
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
     //This func should call from first controller of tabbar.
     
     

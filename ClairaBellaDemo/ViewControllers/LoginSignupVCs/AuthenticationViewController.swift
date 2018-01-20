@@ -26,69 +26,21 @@ class AuthenticationViewController: ParentVC {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        viewModel.onDone = {[unowned self] in
+            appDelegate.fetchUserDetails()
+            appDelegate.getCharactersFromServer()
+            self.performSegue(withIdentifier: "goToHome", sender: nil)
+        }
+        
+        viewModel.onError = {error in
+            AmazonClientManager.shared.logOut()
+        }
     }
 
     
 
     @IBAction func Btn_Facebook_Login(_ sender: UIButton) {
-        
         facebookLogin()
-        return
-        self.showHud()
-        let login: FBSDKLoginManager = FBSDKLoginManager()
-        // Make login and request permissions
-        login.logIn(withReadPermissions: ["email", "public_profile"], from: self, handler: {(result, error) -> Void in
-            
-            if error != nil {
-                // Handle Error
-                NSLog("Process error")
-                self.hideHud()
-            } else if (result?.isCancelled)! {
-                // If process is cancel
-                NSLog("Cancelled")
-                self.hideHud()
-            }
-            else {
-                // Parameters for Graph Request
-                let parameters = ["fields": "email, name"]
-                
-                FBSDKGraphRequest(graphPath: "me", parameters: parameters).start {(connection, result, error) -> Void in
-                    if error != nil {
-                        NSLog(error.debugDescription)
-                        return
-                    }
-                    
-                    // Result
-                    //print("Result: \(result)")
-                    
-                    // Handle vars
-                    if let result = result as? [String:Any], let email = result["email"] as? String, let fbId = result["id"] as? String, let name = result["name"] as? String {
-                        print("Email: \(email)")
-                        print("fbID: \(fbId)")
-                        
-                        let facebookProfileUrl = "http://graph.facebook.com/\(fbId)/picture?type=large"
-                        print("facebookProfileUrl: \(facebookProfileUrl)")
-                        
-                        //UserDefaults(suiteName: appGroupName)!.setValue(result, forKey: "user_details")
-                        UserDefaults.standard.setValue(facebookProfileUrl, forKey: "user_photoUrl")
-                        UserDefaults.standard.synchronize()
-                        
-                        let password = "\(fbId)"
-                        self.login(username: fbId, email: email, password: password, fbLogin: true, block: { (success) in
-                            //if login fail create new user
-                            if !success {
-                                self.signup(username: fbId, password: password, email: email, name: name, fbLogin: true, block: { (signupSuccess) in
-                                    
-                                })
-                            }
-                        })
-                    }
-                }
-            }
-        })
-        
     }
     
     
@@ -302,6 +254,7 @@ final class AmazonClientManager {
             AWSLogger.default().logLevel = .verbose
         #endif
         // Check if we have session indicator stored
+        
         sessionProvider = FBSessionProvider()
     }
     
@@ -356,7 +309,7 @@ final class AmazonClientManager {
         customIdentityProvider.tokens = logins
         
         self.credentialsProvider = AWSCognitoCredentialsProvider(regionType: CognitoIdentityUserPoolRegion,
-                                                                 identityPoolId: CognitoIdentityUserPoolId,
+                                                                 identityPoolId: "eu-west-2:68cdd82b-33c1-4047-9b8d-e63ba946e0b2",
                                                                  identityProviderManager: customIdentityProvider)
         
         self.credentialsProvider?.getIdentityId().continueWith(block:{ (task) in

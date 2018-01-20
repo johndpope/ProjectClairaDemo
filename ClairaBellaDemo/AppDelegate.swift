@@ -334,46 +334,64 @@ extension AppDelegate {
     }
     
     func refreshUserSession() {
-        if var userDetails =  UserDefaults(suiteName: appGroupName)!.value(forKey: "user_details")as? [String : Any] {
-            
-            let email: String = (userDetails["email"] as? String) ?? ""
-            let password: String = (userDetails["password"] as? String) ?? ""
-            
-            appDelegate.currentUser = appDelegate.pool?.getUser(email)
-            
-            appDelegate.currentUser?.getSession(email, password: password, validationData: nil).continueWith(executor: AWSExecutor.mainThread(), block: { (task) -> Any? in
-                
-                if task.error == nil {
-                    self.fetchUserDetails()
-                }
-                return nil
+        if AmazonClientManager.shared.isLoggedIn() { //facebook login chcek
+            AmazonClientManager.shared.resumeSession(completion: { (error) in
+                self.fetchUserDetails()
             })
-            
-            
+        } else { //email login check
+            if var userDetails =  UserDefaults(suiteName: appGroupName)!.value(forKey: "user_details")as? [String : Any] {
+                
+                let email: String = (userDetails["email"] as? String) ?? ""
+                let password: String = (userDetails["password"] as? String) ?? ""
+                
+                appDelegate.currentUser = appDelegate.pool?.getUser(email)
+                
+                appDelegate.currentUser?.getSession(email, password: password, validationData: nil).continueWith(executor: AWSExecutor.mainThread(), block: { (task) -> Any? in
+                    
+                    if task.error == nil {
+                        self.fetchUserDetails()
+                    }
+                    return nil
+                })
+                
+                
+            }
         }
     }
     
     
     func fetchUserDetails() {
         
-        currentUser?.getDetails().continueWith(executor:AWSExecutor.mainThread(), block: { (response) -> Any? in
+        if AmazonClientManager.shared.isLoggedIn() {
+            let user = CognitoUser.currentUser()
+            print(user)
+            let userDetails = [AWSUserAttributeKey.email : user.email!,
+                               AWSUserAttributeKey.name : user.name!,
+                               AWSUserAttributeKey.birthdate : user.birthDate!]
             
-            if var userDetails =  UserDefaults(suiteName: appGroupName)!.value(forKey: "user_details")as? [String : Any] {
+            UserDefaults(suiteName: appGroupName)?.set(userDetails, forKey: "user_details")
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "NofiticationDidFinishFetchingUserDetails"), object: nil)
+
+        } else {
+            currentUser?.getDetails().continueWith(executor:AWSExecutor.mainThread(), block: { (response) -> Any? in
                 
-                if response.error == nil {
-                    if let attributes = response.result?.userAttributes {
-                        for att in attributes {
-                            userDetails[att.name!] = att.value
+                if var userDetails =  UserDefaults(suiteName: appGroupName)!.value(forKey: "user_details")as? [String : Any] {
+                    
+                    if response.error == nil {
+                        if let attributes = response.result?.userAttributes {
+                            for att in attributes {
+                                userDetails[att.name!] = att.value
+                            }
+                            
+                            UserDefaults(suiteName: appGroupName)?.set(userDetails, forKey: "user_details")
+                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "NofiticationDidFinishFetchingUserDetails"), object: nil)
                         }
-                        
-                        UserDefaults(suiteName: appGroupName)?.set(userDetails, forKey: "user_details")
-                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "NofiticationDidFinishFetchingUserDetails"), object: nil)
                     }
                 }
-            }
-            
-            return nil
-        })
+                
+                return nil
+            })
+        }
     }
     
 }

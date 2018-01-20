@@ -145,7 +145,7 @@ class ParentVC: UIViewController {
             
             
             let dob = (userDetails[AWSUserAttributeKey.birthdate] as? String) ?? ""
-            if dob.isEmpty && dob == "00-00-0000" {
+            if dob.isEmpty || dob == "00-00-0000" {
                 btnProfile?.isSelected = true
             }
         } else {
