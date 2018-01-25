@@ -68,7 +68,7 @@ class EmojiesVC: ParentVC {
     var showingChartList = false
     var isDownloading = false
     
-    //MARK-
+    //MARK:-
     override func viewDidLoad() {
         super.viewDidLoad()
         self.getEmojisContexts()
@@ -155,7 +155,11 @@ extension EmojiesVC {
     @IBAction func Btn_SetupNowAction(_ sender: UIButton) {
         //self.performSegue(withIdentifier: "KeyBoardSegue", sender: nil)
         if !isDownloading {
-            UIApplication.shared.openURL(URL(string:"App-Prefs:root=General&path=Keyboard")!)
+            if let url = URL(string:UIApplicationOpenSettingsURLString) {
+                if UIApplication.shared.canOpenURL(url) {
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                }
+            }
         }
 
     }
@@ -266,7 +270,7 @@ extension EmojiesVC {
     }
     
     
-    //MARK: Convert emoji web to image
+    //MARK: Convert emoji WebView to image
     
     func startGenerateEmojiImages() {
         
@@ -462,9 +466,11 @@ extension EmojiesVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLay
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if let cl = cell as? EmojiItemCell {
             let emoji = emojis[indexPath.item]
-
-            let url = filemanager.containerURL(forSecurityApplicationGroupIdentifier: appGroupName)!.appendingPathComponent(character!.createdDate + "/" + emoji.key)
-            
+           
+//            let emojiFileNameWithDirectoryName = nonPersnolizedEmojis.contains(emoji.key) ? "NonPersnolizeEmoji/\(emoji.key)" : (character!.createdDate + "/" + emoji.key)
+//            
+//            let url = filemanager.containerURL(forSecurityApplicationGroupIdentifier: appGroupName)!.appendingPathComponent(emojiFileNameWithDirectoryName)
+            let url = emoji.getEmojiURL(char: character!)
             do  {
                 let data = try Data(contentsOf: url)
                 let image = UIImage(data: data)

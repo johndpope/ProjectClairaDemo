@@ -31,7 +31,7 @@ class SaveCharacterVC: ParentVC {
     var character: Character!
     
     var saveCharOperationDone = false
-    
+    var needsToUpdateEmojis = false
     
     enum NavigationChoice {
         case none, emoji, postcard
@@ -205,6 +205,7 @@ extension SaveCharacterVC {
                       "source": "ios_app",
                       "brand": "claireabella"] as [String : Any]
         print("Request params :=====>>>>   \n\(params)")
+       
         APICall.shared.createNewCharacter_APICall(json: params) { (response, success) in
             self.indicator.stopAnimating()
             if success {
@@ -247,7 +248,10 @@ extension SaveCharacterVC {
                     UserDefaults.standard.set(self.character.createdDate, forKey: "MainCharacter")
                 }
                 
-                deleteCharacterEmojisFromLocal(char: self.character)
+                if self.needsToUpdateEmojis {
+                    deleteCharacterEmojisFromLocal(char: self.character)
+                }
+                
                 self.character.editMode = true //used for generating emojis
                 
                 self.setUserNavigationChoice()

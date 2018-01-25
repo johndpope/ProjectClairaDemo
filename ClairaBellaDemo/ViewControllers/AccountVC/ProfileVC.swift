@@ -151,6 +151,10 @@ class ProfileVC: ParentVC {
             fbUser?.birthDate = birthdate
             fbUser?.save(completition: { [unowned self] (success) in
                 self.hideHud()
+                if success {
+                    self.showAlert(message: "Profile updated successfully.")
+                    appDelegate.fetchUserDetails()
+                }
             })
             
         } else {
@@ -161,8 +165,6 @@ class ProfileVC: ParentVC {
             let birthDateAtt = AWSCognitoIdentityUserAttributeType()
             birthDateAtt?.name = AWSUserAttributeKey.birthdate
             birthDateAtt?.value = birthdate
-            
-            self.showHud()
             
             appDelegate.currentUser?.update([nameAtt!, birthDateAtt!]).continueWith(executor: AWSExecutor.mainThread(), block: { (response) -> Any? in
                 self.hideHud()
@@ -196,6 +198,7 @@ class ProfileVC: ParentVC {
                     showAlert(message: "Please enter your current password.")
                     return
                 }
+                
                 changePasswordServiceCall(newPass: newPass, currentPass: currentPassword)
                 
             }

@@ -20,6 +20,7 @@ class ParentVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(self.setProfileBtnStyle), name: NSNotification.Name(rawValue: "NofiticationDidFinishFetchingUserDetails"), object: nil)
         updateConstraints()
     }
     
@@ -27,7 +28,7 @@ class ParentVC: UIViewController {
         super.viewWillAppear(animated)
         setKeyboardAndProfileBtn()
         setProfileBtnStyle()
-
+        
     }
     
     var cbKeybaordEnabled: Bool {
@@ -130,7 +131,8 @@ class ParentVC: UIViewController {
     
     func setProfileBtnStyle() {
         if let userDetails = UserDefaults(suiteName: appGroupName)!.value(forKey: "user_details")as? [String : Any] {
-            
+            btnProfile?.isSelected = false
+
             let email: String = (userDetails[AWSUserAttributeKey.email] as? String) ?? ""
             
             if email.isEmpty {
@@ -149,7 +151,7 @@ class ParentVC: UIViewController {
                 btnProfile?.isSelected = true
             }
         } else {
-            btnProfile?.isSelected = false
+            btnProfile?.isSelected = true
         }
     }
 }

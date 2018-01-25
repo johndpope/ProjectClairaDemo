@@ -17,8 +17,8 @@ class APICall {
     static let shared = APICall()
     
     var currentUserEmail: String? {
-        if let user_deatils = UserDefaults(suiteName: appGroupName)!.value(forKey: "user_details")as? [String:String] {
-            return user_deatils["email"]
+        if let user_deatils = UserDefaults(suiteName: appGroupName)!.value(forKey: "user_details")as? [String:Any] {
+            return user_deatils["email"] as? String
         }
         return nil
     }
@@ -233,7 +233,7 @@ class APICall {
     
     
     func createNewCharacter_APICall(json: [String : Any], block: @escaping ResponseBlock) {
-        guard let userEmail = currentUserEmail else {return}
+        guard let userEmail = currentUserEmail else {block(nil, false); return}
         //let userEmail = "test@test.com"
 
         let url = URL(string: "https://yff8t38cs8.execute-api.eu-west-1.amazonaws.com/latest/characters/\(userEmail)")!

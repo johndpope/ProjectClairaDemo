@@ -2,6 +2,30 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>AWS</key>
+	<dict>
+		<key>CredentialsProvider</key>
+		<dict>
+			<key>CognitoIdentity</key>
+			<dict>
+				<key>Default</key>
+				<dict>
+					<key>PoolId</key>
+					<string>eu-west-2_VAAFw8nyX</string>
+					<key>Region</key>
+					<string>EUWest2</string>
+				</dict>
+			</dict>
+		</dict>
+		<key>S3</key>
+		<dict>
+			<key>Default</key>
+			<dict>
+				<key>Region</key>
+				<string>EUWest2</string>
+			</dict>
+		</dict>
+	</dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -46,9 +70,17 @@
 				<string>twitterkit-DvECLbI40YUIJTVqiQaCzK4Ge</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>prefs</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1.55</string>
+	<string>1.58</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -101,32 +133,5 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
-    
-    
-    <key>AWS</key>
-    <dict>
-        <key>CredentialsProvider</key>
-        <dict>
-            <key>CognitoIdentity</key>
-            <dict>
-                <key>Default</key>
-                <dict>
-                    <key>PoolId</key>
-                    <string>eu-west-2_VAAFw8nyX</string>
-                    <key>Region</key>
-                    <string>EUWest2</string>
-                </dict>
-            </dict>
-        </dict>
-        <key>S3</key>
-        <dict>
-            <key>Default</key>
-            <dict>
-                <key>Region</key>
-                <string>EUWest2</string>
-            </dict>
-        </dict>
-    </dict>
-
 </dict>
 </plist>

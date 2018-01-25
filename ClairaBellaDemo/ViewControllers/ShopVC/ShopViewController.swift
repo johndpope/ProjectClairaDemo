@@ -49,6 +49,9 @@ class ShopViewController: ParentVC {
         static let MrCB = "http://www.toxicfox.co.uk/claireabella/mrclaireabella?utm_source=CBAPP&utm_medium=CBAPP&utm_campaign=CBAPP"
         
         static let PetaBella = "http://www.toxicfox.co.uk/petabella?utm_source=CBAPP&utm_medium=CBAPP&utm_campaign=CBAPP"
+        
+        static let Stationery = "http://www.toxicfox.co.uk/claireabella/claireabella-stationery?utm_source=CBAPP&utm_medium=CBAPP&utm_campaign=CBAPP"
+
     }
     
     
@@ -56,7 +59,7 @@ class ShopViewController: ParentVC {
         ShopBanner(imgName: "ClaireaBella_TopBanner", link: BannerLinks.ClaireaBella_TopBanner, type: .big),
         ShopBanner(imgName: "ClaireaBella_Bags", link: BannerLinks.ClaireaBella_Bags),
         ShopBanner(imgName: "ClaireaBella_Protective_Cases", link: BannerLinks.ClaireaBella_Protective_Cases),
-        ShopBanner(imgName: "ClaireaBella_Christma", link: BannerLinks.ClaireaBella_Christmas),
+        ShopBanner(imgName: "stationery", link: BannerLinks.Stationery),
         ShopBanner(imgName: "ClaireaBella_Travel", link: BannerLinks.ClaireaBella_Travel),
         ShopBanner(imgName: "ClaireaBella_Makeup_Bags", link: BannerLinks.ClaireaBella_Makeup_Bags),
         ShopBanner(imgName: "ClaireaBella_Canvas_Bags", link: BannerLinks.ClaireaBella_Canvas_Bags),

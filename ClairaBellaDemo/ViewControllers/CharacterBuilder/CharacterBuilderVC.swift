@@ -54,6 +54,19 @@ class CharacterBuilderVC: ParentVC {
     var isCharacterEditMode = false
     var character: Character!
     
+    let emojiCustomizableChoices = ["skin_tone", "hair_colour", "hair_style", "expression", "eye_colour", "eye_wear", "eye_wear_colour" , "head_wear", "head_wear_colour"]
+    
+    var updatedChoices = Set<String>()
+    
+    var needsToRegenerateEmojis: Bool {
+        for item in updatedChoices {
+            if emojiCustomizableChoices.contains(item) {
+                return true
+            }
+        }
+        return false
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         btnSave.isHidden = true
@@ -254,7 +267,7 @@ extension CharacterBuilderVC {
         if let  savCharVC = self.storyboard?.instantiateViewController(withIdentifier: "SaveCharacterVC") as? SaveCharacterVC {
             if isCharacterEditMode {
                 savCharVC.character = self.character
-                
+                savCharVC.needsToUpdateEmojis = self.needsToRegenerateEmojis
             } else {
                 savCharVC.character  = character
                 
@@ -339,10 +352,9 @@ extension CharacterBuilderVC : UITableViewDelegate, UITableViewDataSource {
 
         for choice in selectedMenu!.choices {
             setSelected(choice: choice)
+            updatedChoices.insert(choice.choiceId)
         }
         
-
-
     }
     
     
@@ -487,20 +499,6 @@ class OptionsTableViewCell: UITableViewCell,  UICollectionViewDataSource, UIColl
             viewcontroller?.colorChoice  = option.choices.first
         }
         
-//        if choice.type == .square && choice.choiceId == "hair_style" {
-//            viewcontroller?.selectedHairStyle = option.name
-//        }
-//
-//        if choice.type == .square && choice.choiceId == "head_wear" {
-//            viewcontroller?.selectedHeadWear = option
-//        }
-        
-//        if choice.choiceId == "head_wear" {
-//            viewcontroller?.character.choices["hair_style"] = option.hideHair ? "" : selectedHairStyle
-//        }
-        
-        /*if user has select color for hair style, selectedHairColorOption should be change
-        for generating hair style images for selected color.*/
         
         if choice.type == .circle && choice.choiceId == "hair_colour" {
             viewcontroller?.selectedHairColorOption = option

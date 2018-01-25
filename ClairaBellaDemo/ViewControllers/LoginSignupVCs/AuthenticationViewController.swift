@@ -27,12 +27,14 @@ class AuthenticationViewController: ParentVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.onDone = {[unowned self] in
+            self.hideHud()
             appDelegate.fetchUserDetails()
             appDelegate.getCharactersFromServer()
             self.performSegue(withIdentifier: "goToHome", sender: nil)
         }
         
-        viewModel.onError = {error in
+        viewModel.onError = {[unowned self] error in
+            self.hideHud()
             AmazonClientManager.shared.logOut()
         }
     }
@@ -61,6 +63,7 @@ class AuthenticationViewController: ParentVC {
                 return
             }
             
+            self.showHud()
             self.viewModel.login(fbToken: token)
         }
 

@@ -176,8 +176,8 @@ extension KeyboardView: UICollectionViewDataSource, UICollectionViewDelegateFlow
 extension KeyboardView {
     
     func imageFor(emoji: Emoji)-> UIImage? {
-        let url = filemanager.containerURL(forSecurityApplicationGroupIdentifier: appGroupName)!.appendingPathComponent(selectedCharacter!.createdDate + "/" + emoji.key)
-        
+//        let url = filemanager.containerURL(forSecurityApplicationGroupIdentifier: appGroupName)!.appendingPathComponent(selectedCharacter!.createdDate + "/" + emoji.key)
+        let url = emoji.getEmojiURL(char: selectedCharacter!)
         do  {
             let data = try Data(contentsOf: url)
             let image = UIImage(data: data)
@@ -203,8 +203,8 @@ extension KeyboardView {
     
     
     func saveEmojiInPastboard(emoji: Emoji) {
-        let url = filemanager.containerURL(forSecurityApplicationGroupIdentifier: appGroupName)!.appendingPathComponent(selectedCharacter!.createdDate + "/" + emoji.key)
-        
+//        let url = filemanager.containerURL(forSecurityApplicationGroupIdentifier: appGroupName)!.appendingPathComponent(selectedCharacter!.createdDate + "/" + emoji.key)
+        let url = emoji.getEmojiURL(char: selectedCharacter!)
         do  {
             let data = try Data(contentsOf: url)
             let image = UIImage(data: data)

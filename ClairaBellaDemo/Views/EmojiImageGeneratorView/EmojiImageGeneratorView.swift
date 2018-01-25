@@ -8,9 +8,21 @@
 
 import UIKit
 
+//let nonPersnolizedEmojis = ["EJ001", "EJ002","EJ003","EJ004","EJ005","EJ006",
+//                            "EJ007", "EJ008","EJ009","EJ010","EJ011","EJ012",
+//                            "EJ013", "EJ014","EJ015","EJ016","EJ017","EJ018",
+//                            "EJ019", "EJ020","EJ021","EJ022","EJ023","EJ024",
+//                            "EJ025", "EJ026","EJ027","EJ028","EJ029","EJ030",
+//                            "EJ031", "EJ032","EJ033","EJ034","EJ035","EJ036",
+//                            "EJ037", "EJ038","EJ039","EJ040","EJ041","EJ042",
+//                            "EJ043", "EJ044","EJ045","EJ046","EJ047","EJ048",
+//                            "EJ049", "EJ050","EJ051","EJ052","EJ053","EJ054","EJ055",
+//                            "EJ056", "EJ057","EJ058","EJ059","EJ060","EJ061", "EJ062"]
+
 class EmojiImageGeneratorView : UIView, UIWebViewDelegate {
     @IBOutlet var webView: UIWebView!
    
+    
     var character: Character! {
         didSet {
             if !character.emojis.isEmpty {
@@ -31,7 +43,8 @@ class EmojiImageGeneratorView : UIView, UIWebViewDelegate {
     var didImageCapturedForEmojiBlock: ((Emoji)->())?
     
     var emojiSavePath: String {
-        let url = filemanager.containerURL(forSecurityApplicationGroupIdentifier: appGroupName)!.appendingPathComponent((character.createdDate) + "/" + currentEmoji.key)
+//        let url = filemanager.containerURL(forSecurityApplicationGroupIdentifier: appGroupName)!.appendingPathComponent((character.createdDate) + "/" + currentEmoji.key)
+        let url = currentEmoji.getEmojiURL(char: character)
         return url.path
     }
     
@@ -51,7 +64,12 @@ class EmojiImageGeneratorView : UIView, UIWebViewDelegate {
             }
             currentEmoji = character.emojis[currntIndex]
             
-            let url = filemanager.containerURL(forSecurityApplicationGroupIdentifier: appGroupName)!.appendingPathComponent((character.createdDate) + "/" + currentEmoji.key)
+//            let isNonPersnolizedEmoji = nonPersnolizedEmojis.contains(currentEmoji.key)
+//
+//            let emojiFileNameWithDirectoryName = isNonPersnolizedEmoji ? "NonPersnolizeEmoji/\(currentEmoji.key)" : (character!.createdDate + "/" + currentEmoji.key)
+
+//            let url = filemanager.containerURL(forSecurityApplicationGroupIdentifier: appGroupName)!.appendingPathComponent(emojiFileNameWithDirectoryName)
+            let url = currentEmoji.getEmojiURL(char: character)
             
             if fileExistAt(path: url.path) {
                 return loadNextEmoji()
@@ -75,8 +93,12 @@ class EmojiImageGeneratorView : UIView, UIWebViewDelegate {
     }
 
     func save( emoji: Emoji, savePath: String) {
-        let directoryURl = self.filemanager.containerURL(forSecurityApplicationGroupIdentifier: appGroupName)!.appendingPathComponent( self.character.createdDate)
-        
+//        let isNonPersnolizedEmoji = nonPersnolizedEmojis.contains(emoji.key)
+//        
+//        let directoryName = isNonPersnolizedEmoji ? "NonPersnolizeEmoji" : self.character.createdDate
+       
+//        var directoryURl = self.filemanager.containerURL(forSecurityApplicationGroupIdentifier: appGroupName)!.appendingPathComponent(directoryName)
+        let directoryURl = emoji.getSaveDirectoryURL(char: character)
         let direcotryPath = directoryURl.path
        
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2) {
@@ -91,6 +113,9 @@ class EmojiImageGeneratorView : UIView, UIWebViewDelegate {
             }
             do {
                 if let img = image {
+                    //directoryURl.appendPathComponent("\(emoji.key)")
+                    
+                    //let pathToSave = isNonPersnolizedEmoji ? directoryURl : URL(fileURLWithPath: savePath)
                     try UIImageJPEGRepresentation(img, 1.0)!.write(to: URL(fileURLWithPath: savePath))
                 }
                 self.didImageCapturedForEmojiBlock?(emoji)
