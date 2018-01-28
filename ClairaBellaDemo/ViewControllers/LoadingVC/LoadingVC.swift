@@ -67,7 +67,7 @@ class LoadingVC: UIViewController {
         
         
         
-        UIImage.animatedImageNamed("allowfullaccess", duration: TimeInterval(4))
+        //UIImage.animatedImageNamed("allowfullaccess", duration: TimeInterval(4))
         
     }
    

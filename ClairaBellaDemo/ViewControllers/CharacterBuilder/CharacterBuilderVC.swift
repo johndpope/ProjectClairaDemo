@@ -15,7 +15,9 @@ class CharacterBuilderVC: ParentVC {
     @IBOutlet var tableView: UITableView!
     @IBOutlet var btnSave: UIButton!
     @IBOutlet var indicator: IndicatorView!
-
+    @IBOutlet var characterContainterView: UIView!
+    @IBOutlet var charImageView: UIImageView!
+    
     var completionBlock: (Bool)-> Void = {_ in}
     
     var showColorOption = false
@@ -70,7 +72,7 @@ class CharacterBuilderVC: ParentVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         btnSave.isHidden = true
-        
+        webView.delegate = self
         charGenerator = CharacterHTMLBuilder(builder: CharacterHTMLBuilder.shared)
         
         if !isCharacterEditMode {
@@ -98,6 +100,7 @@ class CharacterBuilderVC: ParentVC {
             self?.character.charHtml = htmlString
             DispatchQueue.main.async {
                 self?.webView.loadHTMLString(htmlString, baseURL: nil)
+                
             }
         }
         
@@ -234,6 +237,39 @@ class CharacterBuilderVC: ParentVC {
     }
     
 
+    func generateEmojiImage()->UIImage? {
+        
+        UIGraphicsBeginImageContextWithOptions(characterContainterView.bounds.size, characterContainterView.isOpaque, 2.0)
+        if let context = UIGraphicsGetCurrentContext() {
+            characterContainterView.layer.render(in: context)
+            let image = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            return image
+        }
+        return nil
+    }
+
+    
+}
+
+extension CharacterBuilderVC : UIWebViewDelegate {
+    func webViewDidStartLoad(_ webView: UIWebView) {
+        charImageView.isHidden = false
+        self.showHud()
+    }
+    
+    func webViewDidFinishLoad(_ webView: UIWebView) {
+        if !webView.isLoading {
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.3, execute: {
+                let image = self.generateEmojiImage()
+                self.charImageView.image = image
+                self.charImageView.isHidden = true
+
+                self.hideHud()
+            })
+        }
+
+    }
 }
 
 //MARK:- IBActions
@@ -329,7 +365,7 @@ extension CharacterBuilderVC : UITableViewDelegate, UITableViewDataSource {
         character!.choices[choice.choiceId] = selectedOption.name
         
         
-        charGenerator.upateCharacter(choices: character!.choices)
+//        charGenerator.upateCharacter(choices: character!.choices)
 
         if !selectedOption.choices.isEmpty {
             setSelected(choice: selectedOption.choices.first!)
@@ -355,6 +391,10 @@ extension CharacterBuilderVC : UITableViewDelegate, UITableViewDataSource {
             updatedChoices.insert(choice.choiceId)
         }
         
+        charGenerator.upateCharacter(choices: character!.choices)
+
+        
+//        print(image)
     }
     
     

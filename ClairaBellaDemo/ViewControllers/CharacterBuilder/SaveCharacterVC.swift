@@ -2,11 +2,10 @@
 //  CreatedCharacterVC.swift
 //  Claireabella
 //
-//  Created by Intelivita on 17/05/17.
-//  Copyright © 2017 Intelivita. All rights reserved.
 ///
 
 import UIKit
+import GTProgressBar
 
 
 
@@ -24,6 +23,12 @@ class SaveCharacterVC: ParentVC {
     @IBOutlet var mainCharInfoView: UIView!
     @IBOutlet var mainCharInfoViewTopConstraint: NSLayoutConstraint!
     
+    @IBOutlet var loadignContainerView: SaveCharacterLoadingView!
+    @IBOutlet weak var emojiToImageGeneratorView: EmojiImageGeneratorView!
+
+    @IBOutlet var webView: UIWebView!
+
+    
     let maxCharNameLength = 12
     var isCharacterEditMode = false
     
@@ -39,10 +44,18 @@ class SaveCharacterVC: ParentVC {
     
     var navigationChoice = NavigationChoice.none
     
-    @IBOutlet var webView: UIWebView!
+    
+    var emojisContextKeys = [String]() {
+        didSet {
+            //self.characterDidChange()
+        }
+    }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadignContainerView.isHidden = true
+        
         lblNameCharsCount?.text = "\(maxCharNameLength)"
         
         //checkbox should be checked if user haven't any saved Character.
@@ -57,6 +70,7 @@ class SaveCharacterVC: ParentVC {
         }
         
         self.setUI()
+        self.getEmojisContexts()
     }
     
     func setUI() {
@@ -116,6 +130,50 @@ class SaveCharacterVC: ParentVC {
         return strTimeStamp
     }
     
+    
+    
+    
+    //MARK: Convert emoji WebView to image
+    
+    func startGenerateEmojiImages() {
+        
+        if let char = self.character {
+            //let progressHUD = ProgressView(text: "Saving Emojis")
+            
+            self.emojiToImageGeneratorView.didStartBlock = {[weak self] in
+                
+            }
+            
+            var count = 0.0
+            let allEmojiCounts = Emoji.isNonPersnolizedEmojiDownloaded() ? self.emojisContextKeys.count-Emoji.nonPersnolizedEmojiCounts : emojisContextKeys.count
+            
+            self.emojiToImageGeneratorView.didImageCapturedForEmojiBlock = {[weak self] emoji in
+                if let weakSelf = self {
+                    count += 1
+                    let progressValue = weakSelf.emojisContextKeys.count > 0 ? CGFloat(count/Double(allEmojiCounts)) : 0
+                    
+                    self?.loadignContainerView.progress = Double(progressValue)
+                }
+            }
+            
+            self.emojiToImageGeneratorView.completionBlock = { [weak self] in
+                DispatchQueue.main.async(execute: {
+                    if let weakSelf = self {
+                        self?.loadignContainerView.progress = 1
+                        weakSelf.loadignContainerView.isHidden = true
+
+                    }
+                })
+            }
+            
+            
+            self.emojiToImageGeneratorView.character = char
+            
+        }
+        
+    }
+
+    
 }
 
 //MARK:- IBActions
@@ -134,7 +192,7 @@ extension SaveCharacterVC {
         }
     }
     
-    @IBAction func BtnSaved_ViewCharacter_Action(_ sender: UIButton?) {
+    @IBAction func saveCharacter_btnClicked(_ sender: UIButton?) {
         
         if !saveCharOperationDone {
             navigationChoice = .none
@@ -192,6 +250,7 @@ extension SaveCharacterVC {
     
     func callSaveAPI() {
         if isValidate() {
+            loadignContainerView.isHidden = false
             isCharacterEditMode ? updateCharacterAPICall() : saveCharacterAPICAll()
         }
     }
@@ -223,11 +282,15 @@ extension SaveCharacterVC {
                 self.setUserNavigationChoice()
                 
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "NewCharacterAddedNotification"), object: nil, userInfo: ["NewChar" : self.character])
-                self.saveCharOperationDone = true
                 
-                self.navigationController?.dismiss(animated: true, completion: nil)
+                self.saveCharOperationDone = true
+                self.startGenerateEmojiImages()
+
+                //self.navigationController?.dismiss(animated: true, completion: nil)
             } else {
                 self.showAlertMessage(message: "Something went wrong.")
+                self.loadignContainerView.isHidden = true
+
             }
         }
     }
@@ -257,20 +320,51 @@ extension SaveCharacterVC {
                 self.setUserNavigationChoice()
 
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "CharacterUpdateNotification"), object: nil, userInfo: ["updatedChar" : self.character])
+                
                 self.generateCharacterImage()
-                //self.showAlertMessage(message: "Character updated successfully.")
                 self.saveCharOperationDone = true
                 
-                self.navigationController?.dismiss(animated: true, completion: nil)
+                self.startGenerateEmojiImages()
+                
+                //self.navigationController?.dismiss(animated: true, completion: nil)
 
             } else {
                 self.showAlertMessage(message: "Something went wrong.")
+                self.loadignContainerView.isHidden = true
+
             }
             
         }
         
     }
     
+    
+    func getEmojisContexts() {
+        
+        APICall.shared.emojis_context_APICall { (response, success) in
+            if success {
+                if let json = response as? [String : Any] {
+                    let emojisTypes = json.map({$0.key}).sorted(by: >)
+                    print(emojisTypes)
+                    
+                    self.emojisContextKeys = emojisTypes
+                    
+                    for type in self.emojisContextKeys {
+                        let emoji = Emoji()
+                        emoji.key = type
+                        emoji.charHtml = ""
+                        emoji.characterCreatedDate = self.character?.createdDate ?? ""
+                        self.character?.emojis.append(emoji)
+                    }
+
+                }
+            } else {
+                
+            }
+            
+        }
+    }
+
     
     func generateCharacterImage() {
         let renderer = UIGraphicsImageRenderer(size: Character_View.bounds.size)
@@ -331,3 +425,34 @@ func deleteCharacterEmojisFromLocal(char: Character) {
     }
 }
 
+
+class SaveCharacterLoadingView: UIView {
+    @IBOutlet var barImageView: UIImageView!
+    @IBOutlet var progressImageview: UIImageView!
+    @IBOutlet var progressImgViewWidth: NSLayoutConstraint!
+    
+    var progressBarWidth:Double = 230
+    
+    var progress: Double = 0.0 {
+        didSet {
+            setProgressValue(progress)
+        }
+    }
+    
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+    
+    func setProgressValue(_ progress: Double) {
+        
+        let width = progress * progressBarWidth
+        UIView.animate(withDuration: 0.25, animations: {() -> Void in
+            
+            self.progressImgViewWidth.constant = CGFloat(width)
+            self.layoutIfNeeded()
+            
+            }, completion: {(_ finished: Bool) -> Void in
+        })
+    }
+}

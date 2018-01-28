@@ -55,16 +55,20 @@ class AuthenticationViewController: ParentVC {
         let facebookReadPermissions = ["public_profile", "email"]
 
         FBSDKLoginManager().logIn(withReadPermissions: facebookReadPermissions, from: self) { (result, error) in
-            guard let token = result?.token.tokenString, error == nil else {
-                // Handle cancellations
-                FBSDKLoginManager().logOut()
-                
-                //show error UI
-                return
+            if result?.isCancelled == false {
+                guard let token = result?.token.tokenString, error == nil else {
+                    // Handle cancellations
+                    FBSDKLoginManager().logOut()
+                    
+                    //show error UI
+                    return
+                }
+
+                self.showHud()
+                self.viewModel.login(fbToken: token)
+
             }
             
-            self.showHud()
-            self.viewModel.login(fbToken: token)
         }
 
     }

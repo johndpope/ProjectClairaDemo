@@ -300,7 +300,7 @@
                                                     </constraints>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="15"/>
-                                                    <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next"/>
+                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="next"/>
                                                     <connections>
                                                         <action selector="textFieldEditingBegin:" destination="AJQ-6g-LyQ" eventType="editingDidBegin" id="wDa-aU-PBC"/>
                                                         <action selector="textFieldEditingEnd:" destination="AJQ-6g-LyQ" eventType="editingDidEnd" id="0Vb-x4-KeH"/>
@@ -582,7 +582,7 @@
                                                     </constraints>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next"/>
+                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="next"/>
                                                     <connections>
                                                         <action selector="textFieldEditingBegin:" destination="bs7-jm-5VK" eventType="editingDidBegin" id="pwt-Gs-pp7"/>
                                                         <action selector="textFieldEditingEnd:" destination="bs7-jm-5VK" eventType="editingDidEnd" id="JaK-1u-Jqy"/>
@@ -660,7 +660,7 @@
                                                                 <constraint firstItem="3bM-1U-O5t" firstAttribute="centerY" secondItem="1F0-HJ-AfD" secondAttribute="centerY" id="s1c-iv-bN1"/>
                                                             </constraints>
                                                         </view>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="34v-vw-g5s">
+                                                        <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="34v-vw-g5s">
                                                             <subviews>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Zw-PZ-cK0">
                                                                     <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="14"/>
@@ -833,7 +833,7 @@
                                         </constraints>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress"/>
                                         <connections>
                                             <action selector="textFieldEditingBegin:" destination="0B8-ss-ug5" eventType="editingDidBegin" id="aFx-6W-ReH"/>
                                             <action selector="textFieldEditingEnd:" destination="0B8-ss-ug5" eventType="editingDidEnd" id="nJs-2d-Gp5"/>
@@ -1155,8 +1155,8 @@
         <image name="imgErrorSummary" width="273" height="65"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="8V4-Ek-omP"/>
-        <segue reference="4pG-1e-vnX"/>
+        <segue reference="xnQ-NB-zg0"/>
+        <segue reference="RqL-b7-Hgl"/>
         <segue reference="G1G-0s-bY9"/>
     </inferredMetricsTieBreakers>
 </document>

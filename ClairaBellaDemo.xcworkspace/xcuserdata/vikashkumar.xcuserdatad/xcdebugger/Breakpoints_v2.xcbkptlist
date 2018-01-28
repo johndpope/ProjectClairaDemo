@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ClairaBellaDemo/ViewControllers/CharacterBuilder/CharacterBuilderVC.swift"
-            timestampString = "538364681.842865"
+            timestampString = "538800991.089098"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "423"
-            endingLineNumber = "423"
+            startingLineNumber = "463"
+            endingLineNumber = "463"
             landmarkName = "collectionView(_:didSelectItemAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ClairaBellaDemo/ViewControllers/CharacterBuilder/SaveCharacterVC.swift"
-            timestampString = "538364681.842865"
+            timestampString = "538856100.674256"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "238"
-            endingLineNumber = "238"
+            startingLineNumber = "301"
+            endingLineNumber = "301"
             landmarkName = "updateCharacterAPICall()"
             landmarkType = "7">
          </BreakpointContent>
@@ -90,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ClairaBellaDemo/ViewControllers/LoginSignupVCs/AuthenticationViewController.swift"
-            timestampString = "538125228.559713"
+            timestampString = "538539974.838448"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "122"
-            endingLineNumber = "122"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
             landmarkName = "signup(username:password:email:name:fbLogin:block:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -138,11 +138,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ClairaBellaDemo/ViewControllers/LoginSignupVCs/AuthenticationViewController.swift"
-            timestampString = "538125228.559713"
+            timestampString = "538539974.838448"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "369"
-            endingLineNumber = "369"
+            startingLineNumber = "373"
+            endingLineNumber = "373"
             landmarkName = "login(fbToken:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -154,11 +154,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ClairaBellaDemo/ViewControllers/LoginSignupVCs/AuthenticationViewController.swift"
-            timestampString = "538125228.559713"
+            timestampString = "538539974.838448"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "377"
-            endingLineNumber = "377"
+            startingLineNumber = "381"
+            endingLineNumber = "381"
             landmarkName = "login(fbToken:)"
             landmarkType = "7">
             <Locations>
@@ -170,11 +170,11 @@
                   moduleName = "ClairaBellaDemo"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/vikashkumar/Desktop/Projects/ClairaBella/SourceCode/ProjectClairaDemo/ClairaBellaDemo/ViewControllers/LoginSignupVCs/AuthenticationViewController.swift"
-                  timestampString = "538423779.325754"
+                  timestampString = "538854401.01689"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "377"
-                  endingLineNumber = "377"
+                  startingLineNumber = "381"
+                  endingLineNumber = "381"
                   offsetFromSymbolStart = "139">
                </Location>
                <Location
@@ -185,11 +185,11 @@
                   moduleName = "ClairaBellaDemo"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/vikashkumar/Desktop/Projects/ClairaBella/SourceCode/ProjectClairaDemo/ClairaBellaDemo/ViewControllers/LoginSignupVCs/AuthenticationViewController.swift"
-                  timestampString = "538423779.328262"
+                  timestampString = "538854401.019264"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "378"
-                  endingLineNumber = "378"
+                  startingLineNumber = "382"
+                  endingLineNumber = "382"
                   offsetFromSymbolStart = "30">
                </Location>
             </Locations>
@@ -202,11 +202,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ClairaBellaDemo/ViewControllers/LoginSignupVCs/AuthenticationViewController.swift"
-            timestampString = "538125228.559713"
+            timestampString = "538539974.838448"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "372"
-            endingLineNumber = "372"
+            startingLineNumber = "376"
+            endingLineNumber = "376"
             landmarkName = "login(fbToken:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -218,11 +218,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ClairaBellaDemo/ViewControllers/LoginSignupVCs/AuthenticationViewController.swift"
-            timestampString = "538125228.559713"
+            timestampString = "538539974.838448"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "379"
-            endingLineNumber = "379"
+            startingLineNumber = "383"
+            endingLineNumber = "383"
             landmarkName = "login(fbToken:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -234,11 +234,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ClairaBellaDemo/ViewControllers/LoginSignupVCs/AuthenticationViewController.swift"
-            timestampString = "538125228.559713"
+            timestampString = "538539974.838448"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "389"
-            endingLineNumber = "389"
+            startingLineNumber = "393"
+            endingLineNumber = "393"
             landmarkName = "login(fbToken:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -250,11 +250,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ClairaBellaDemo/ViewControllers/LoginSignupVCs/AuthenticationViewController.swift"
-            timestampString = "538125228.559713"
+            timestampString = "538539974.838448"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "382"
-            endingLineNumber = "382"
+            startingLineNumber = "386"
+            endingLineNumber = "386"
             landmarkName = "login(fbToken:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -266,11 +266,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ClairaBellaDemo/ViewControllers/LoginSignupVCs/AuthenticationViewController.swift"
-            timestampString = "538125228.559713"
+            timestampString = "538539974.838448"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "394"
-            endingLineNumber = "394"
+            startingLineNumber = "398"
+            endingLineNumber = "398"
             landmarkName = "login(fbToken:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -314,28 +314,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ClairaBellaDemo/ViewControllers/CharacterBuilder/SaveCharacterVC.swift"
-            timestampString = "538133408.67234"
+            timestampString = "538856100.674256"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "201"
-            endingLineNumber = "201"
+            startingLineNumber = "260"
+            endingLineNumber = "260"
             landmarkName = "saveCharacterAPICAll()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ClairaBellaDemo/ViewControllers/CharacterBuilder/SavedCharListVC.swift"
-            timestampString = "538135270.142032"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "175"
-            endingLineNumber = "175"
-            landmarkName = "characterUpdateNotification(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -368,6 +352,22 @@
             startingLineNumber = "145"
             endingLineNumber = "145"
             landmarkName = "updateProfile()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ClairaBellaDemo/ViewControllers/CharacterBuilder/SaveCharacterVC.swift"
+            timestampString = "538856100.674256"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "153"
+            endingLineNumber = "153"
+            landmarkName = "startGenerateEmojiImages()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
