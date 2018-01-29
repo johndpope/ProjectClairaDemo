@@ -1482,7 +1482,7 @@
                 <navigationController restorationIdentifier="MyCharactersVC" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="bwH-up-kzs" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Characters" image="icon_tab_characters" id="Jkj-P9-c5a"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="gsv-2b-TeE">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="gsv-2b-TeE">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1821,15 +1821,41 @@
                                         <color key="textColor" red="0.87843137250000003" green="0.062745098040000002" blue="0.61568627450000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="animImage4" translatesAutoresizingMaskIntoConstraints="NO" id="rcs-Fz-pEu">
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="rcs-Fz-pEu" secondAttribute="height" multiplier="256:255" id="Otc-ba-Kfq"/>
+                                            <constraint firstAttribute="width" constant="256" id="kWy-XQ-L9o"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fun Postcards" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NUe-3I-Scj">
+                                        <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="16"/>
+                                        <color key="textColor" red="0.87843137250000003" green="0.062745098040000002" blue="0.61568627450000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Go from NewYork to catwalk  with fun background" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="91S-Fo-Siq">
+                                        <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="15"/>
+                                        <color key="textColor" red="0.87843137250000003" green="0.062745098040000002" blue="0.61568627450000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="0.89019607840000003" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
+                                    <constraint firstItem="NUe-3I-Scj" firstAttribute="centerX" secondItem="O2m-gy-EzI" secondAttribute="centerX" id="0xR-94-Mfw"/>
+                                    <constraint firstItem="91S-Fo-Siq" firstAttribute="leading" secondItem="O2m-gy-EzI" secondAttribute="leading" constant="20" id="E4P-Zx-z6C"/>
                                     <constraint firstItem="qm5-jt-nZ9" firstAttribute="centerX" secondItem="O2m-gy-EzI" secondAttribute="centerX" id="EOq-6T-Bt1"/>
-                                    <constraint firstItem="A3A-ab-XGm" firstAttribute="centerY" secondItem="O2m-gy-EzI" secondAttribute="centerY" constant="100" id="HDk-9a-nR8"/>
                                     <constraint firstItem="A3A-ab-XGm" firstAttribute="centerX" secondItem="O2m-gy-EzI" secondAttribute="centerX" id="Io1-7r-3BK"/>
+                                    <constraint firstItem="91S-Fo-Siq" firstAttribute="top" secondItem="NUe-3I-Scj" secondAttribute="bottom" constant="5" id="Jpv-EC-YWf"/>
+                                    <constraint firstAttribute="trailing" secondItem="91S-Fo-Siq" secondAttribute="trailing" constant="20" id="Nx5-FS-Qf7"/>
+                                    <constraint firstItem="NUe-3I-Scj" firstAttribute="top" secondItem="rcs-Fz-pEu" secondAttribute="bottom" constant="29" id="bif-LR-mYe"/>
+                                    <constraint firstItem="A3A-ab-XGm" firstAttribute="top" secondItem="O2m-gy-EzI" secondAttribute="top" constant="80" id="fbu-vH-gfn"/>
                                     <constraint firstItem="A3A-ab-XGm" firstAttribute="top" secondItem="qm5-jt-nZ9" secondAttribute="bottom" constant="14" id="jCR-fn-ZiQ"/>
+                                    <constraint firstItem="rcs-Fz-pEu" firstAttribute="centerY" secondItem="O2m-gy-EzI" secondAttribute="centerY" constant="-50" id="qQo-PU-T9w"/>
+                                    <constraint firstItem="rcs-Fz-pEu" firstAttribute="centerX" secondItem="O2m-gy-EzI" secondAttribute="centerX" id="zqr-0p-s8s"/>
                                 </constraints>
                                 <connections>
+                                    <outlet property="advrtDetailLabel" destination="91S-Fo-Siq" id="7bA-RS-9np"/>
+                                    <outlet property="advrtImageView" destination="rcs-Fz-pEu" id="tVA-08-M11"/>
+                                    <outlet property="advrtTitleLabel" destination="NUe-3I-Scj" id="Hn3-JI-1Nz"/>
                                     <outlet property="barImageView" destination="mfp-wW-IiY" id="kVC-XF-syt"/>
                                     <outlet property="progressImageview" destination="E9c-xd-6Bz" id="NVB-ct-FCk"/>
                                     <outlet property="progressImgViewWidth" destination="Ey1-mX-9qo" id="Sh4-qJ-3cs"/>
@@ -1839,15 +1865,20 @@
                                 <subviews>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RZa-1u-Yfk">
                                         <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sunImageBg" translatesAutoresizingMaskIntoConstraints="NO" id="ksU-hH-qTc"/>
                                             <webView opaque="NO" contentMode="scaleToFill" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xBR-2O-mcM">
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             </webView>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
+                                            <constraint firstItem="ksU-hH-qTc" firstAttribute="top" secondItem="RZa-1u-Yfk" secondAttribute="top" id="7XZ-vr-4bc"/>
                                             <constraint firstItem="xBR-2O-mcM" firstAttribute="top" secondItem="RZa-1u-Yfk" secondAttribute="top" id="DID-12-Ys3"/>
                                             <constraint firstAttribute="height" constant="320" id="DZV-AG-1UN"/>
                                             <constraint firstAttribute="trailing" secondItem="xBR-2O-mcM" secondAttribute="trailing" id="I08-Tx-3zc"/>
+                                            <constraint firstAttribute="bottom" secondItem="ksU-hH-qTc" secondAttribute="bottom" id="NBo-Mp-RyK"/>
+                                            <constraint firstItem="ksU-hH-qTc" firstAttribute="leading" secondItem="RZa-1u-Yfk" secondAttribute="leading" id="d5a-0r-DNR"/>
+                                            <constraint firstAttribute="trailing" secondItem="ksU-hH-qTc" secondAttribute="trailing" id="h4J-MJ-NBL"/>
                                             <constraint firstItem="xBR-2O-mcM" firstAttribute="leading" secondItem="RZa-1u-Yfk" secondAttribute="leading" id="iI0-hD-cxp"/>
                                             <constraint firstAttribute="bottom" secondItem="xBR-2O-mcM" secondAttribute="bottom" id="vee-Wq-ihK"/>
                                         </constraints>
@@ -2049,6 +2080,7 @@
                         <outlet property="webView2" destination="xBR-2O-mcM" id="fbl-nM-TET"/>
                         <outletCollection property="horizontalConstraints" destination="CXT-il-mMw" collectionClass="NSMutableArray" id="bLY-7d-ytT"/>
                         <outletCollection property="horizontalConstraints" destination="IBE-Yl-zi3" collectionClass="NSMutableArray" id="Vdz-xK-pmG"/>
+                        <outletCollection property="horizontalConstraints" destination="kWy-XQ-L9o" collectionClass="NSMutableArray" id="7S8-jF-s0j"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T7U-0Q-heV" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2963,7 +2995,7 @@
                 <navigationController restorationIdentifier="PostcardsVC" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="WA2-t6-pCw" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Postcards" image="icon_tab_postcards" id="xn7-UT-V6d"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="0ch-Kc-ZsK">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="0ch-Kc-ZsK">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -2981,7 +3013,7 @@
             <objects>
                 <navigationController storyboardIdentifier="CharBuilderNavVC" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="oMH-0n-afk" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="6CF-sR-Y4t">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="6CF-sR-Y4t">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -3000,7 +3032,7 @@
                 <navigationController restorationIdentifier="EmojisVC" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="sQC-hR-Ev0" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Emojis" image="icon_tab_emoji" id="wib-9V-HJq"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Gx5-Mo-dbd">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Gx5-Mo-dbd">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -3557,7 +3589,7 @@
                 <navigationController restorationIdentifier="ProfileVC" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="eEv-NT-HZg" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Shop" image="icon_tab_shop" id="33s-en-IA2"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="OsM-Q3-QCx">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="OsM-Q3-QCx">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -4627,6 +4659,7 @@
         <image name="Profile_btn" width="29" height="34"/>
         <image name="account_linkimage" width="320" height="163"/>
         <image name="alertBgImg" width="57" height="89"/>
+        <image name="animImage4" width="256" height="255"/>
         <image name="backArrow_black" width="11" height="20"/>
         <image name="bg_saveCharBtn" width="13" height="45"/>
         <image name="btnBack2" width="276" height="46"/>
@@ -4668,6 +4701,7 @@
         <image name="progressBg" width="132" height="17"/>
         <image name="secound_Image" width="319" height="261"/>
         <image name="suitcase" width="151" height="151"/>
+        <image name="sunImageBg" width="307" height="316"/>
         <image name="swipetoSee" width="132" height="32"/>
         <image name="textboxBack" width="16" height="60"/>
         <image name="three_image" width="320" height="370"/>

@@ -36,10 +36,10 @@ class Emoji: CharacterType {
     
     
 
-    func getEmojiURL(char: Character)->URL {
+    func getEmojiURL(char: Character? = nil)->URL {
         let isNonPersnolizedEmoji = nonPersnolizedEmojis.contains(self.key)
         
-        let emojiFileNameWithDirectoryName = isNonPersnolizedEmoji ? "NonPersnolizeEmoji/\(self.key)" : (char.createdDate + "/" + self.key)
+        let emojiFileNameWithDirectoryName = isNonPersnolizedEmoji ? "NonPersnolizeEmoji/\(self.key)" : (self.characterCreatedDate + "/" + self.key)
         
         let url = filemanager.containerURL(forSecurityApplicationGroupIdentifier: appGroupName)!.appendingPathComponent(emojiFileNameWithDirectoryName)
         return url

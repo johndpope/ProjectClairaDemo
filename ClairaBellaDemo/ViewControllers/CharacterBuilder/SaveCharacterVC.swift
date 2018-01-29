@@ -228,10 +228,10 @@ extension SaveCharacterVC {
     
     @IBAction func createEmoji_btnClicked(_ sender: UIButton?) {
         navigationChoice = .emoji
-        //self.callSaveAPI()
         userSelectedCharForEmoji = self.character
-        self.navigationController?.dismiss(animated: true) {
-            appDelegate.mainTabbarController?.selectedIndex = 2
+        appDelegate.mainTabbarController?.selectedIndex = 2
+
+        self.navigationController?.dismiss(animated: false) {
         }
 
     }
@@ -239,18 +239,19 @@ extension SaveCharacterVC {
     @IBAction func postcard_btnClicked(_ sender: UIButton?) {
        
         navigationChoice = .postcard
-        //self.callSaveAPI()
         selectedCharForPostcard = character
-        self.navigationController?.dismiss(animated: true) {
-            appDelegate.mainTabbarController?.selectedIndex = 1
+        appDelegate.mainTabbarController?.selectedIndex = 1
+
+        self.navigationController?.dismiss(animated: false) {
         }
 
     }
     
     @IBAction func viewCharacters_btnClicked(_ sender: UIButton?) {
         navigationChoice = .characters
-        self.navigationController?.dismiss(animated: true) {
-            appDelegate.mainTabbarController?.selectedIndex = 0
+        appDelegate.mainTabbarController?.selectedIndex = 0
+
+        self.navigationController?.dismiss(animated: false) {
         }
 
     }
@@ -284,7 +285,6 @@ extension SaveCharacterVC {
     }
     
     func saveCharacterAPICAll() {
-        indicator.startAnimating()
         
         let params = ["choices" : character.choices,
                       "saved_name": character.name,
@@ -293,7 +293,6 @@ extension SaveCharacterVC {
                       "brand": "claireabella"] as [String : Any]
         print("Request params :=====>>>>   \n\(params)")
        
-        self.showHud()
         APICall.shared.createNewCharacter_APICall(json: params) { (response, success) in
             self.indicator.stopAnimating()
             if success {
@@ -319,20 +318,17 @@ extension SaveCharacterVC {
             } else {
                 self.showAlertMessage(message: "Something went wrong.")
                 self.loadignContainerView.isHidden = true
-                self.hideHud()
             }
         }
     }
     
     
     func updateCharacterAPICall() {
-        indicator.startAnimating()
         
         let params = ["choices" : character.choices,
                       "saved_name": character.name,
                       "default": checkbox.isSelected,
                       ] as [String : Any]
-        self.showHud()
         APICall.shared.updateCharacter_APICall(params: params, createdDate: character.createdDate) { (json, success) in
             self.indicator.stopAnimating()
             if success {//CharacterUpdateNotification
@@ -360,8 +356,6 @@ extension SaveCharacterVC {
             } else {
                 self.showAlertMessage(message: "Something went wrong.")
                 self.loadignContainerView.isHidden = true
-                self.hideHud()
-
             }
         }
         
@@ -457,12 +451,18 @@ func deleteCharacterEmojisFromLocal(char: Character) {
 class SaveCharacterLoadingView: UIView {
     @IBOutlet var barImageView: UIImageView!
     @IBOutlet var progressImageview: UIImageView!
+    
+    @IBOutlet var advrtImageView: UIImageView!
+    @IBOutlet var advrtTitleLabel: UILabel!
+    @IBOutlet var advrtDetailLabel: UILabel!
+    
     @IBOutlet var progressImgViewWidth: NSLayoutConstraint!
     
     var progressBarWidth:Double = 230
     
     var progress: Double = 0.0 {
         didSet {
+            setAdvrtInfo()
             setProgressValue(progress)
         }
     }
@@ -470,6 +470,7 @@ class SaveCharacterLoadingView: UIView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        setAdvrtInfo()
     }
     
     func setProgressValue(_ progress: Double) {
@@ -482,5 +483,29 @@ class SaveCharacterLoadingView: UIView {
             
             }, completion: {(_ finished: Bool) -> Void in
         })
+    }
+    
+    func setAdvrtInfo() {
+        if progress > 0.75 {
+            advrtImageView.image = #imageLiteral(resourceName: "animImage4")
+            advrtTitleLabel.text = "Celebrity Gifts"
+            advrtDetailLabel.text = "Shop your characters across \ntreding collections."
+            
+        } else if progress > 0.50 {
+            advrtImageView.image = #imageLiteral(resourceName: "animImage3")
+            advrtTitleLabel.text = "Fun Postcards"
+            advrtDetailLabel.text = "Go fom New York to the catwalk \nwith fun backgrounds."
+
+        } else if progress > 0.25 {
+            advrtImageView.image = #imageLiteral(resourceName: "animImage2")
+            advrtTitleLabel.text = "ClaireaBella Keyboard"
+            advrtDetailLabel.text = "Share your emoji's wherever you chat."
+
+        } else {
+            advrtImageView.image = #imageLiteral(resourceName: "animImage1")
+            advrtTitleLabel.text = "Create Your Friends"
+            advrtDetailLabel.text = "Create and save multiple characters"
+
+        }
     }
 }

@@ -28,7 +28,8 @@ class ShareCharacterView: UIView {
             } else if character is Emoji {
                 let emoji = character as! Emoji
                 let filemanager = FileManager.default
-                let url = filemanager.containerURL(forSecurityApplicationGroupIdentifier: appGroupName)!.appendingPathComponent(emoji.characterCreatedDate + "/" + emoji.key)
+                 
+                let url = emoji.getEmojiURL(char: nil)
                 
                 do  {
                     let data = try Data(contentsOf: url)
