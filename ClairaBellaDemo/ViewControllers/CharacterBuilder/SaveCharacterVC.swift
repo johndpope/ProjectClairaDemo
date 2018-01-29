@@ -27,7 +27,9 @@ class SaveCharacterVC: ParentVC {
     @IBOutlet weak var emojiToImageGeneratorView: EmojiImageGeneratorView!
 
     @IBOutlet var webView: UIWebView!
+    @IBOutlet var webView2: UIWebView! //used in saved Character view
 
+    @IBOutlet var savedCharacterView: UIView!
     
     let maxCharNameLength = 12
     var isCharacterEditMode = false
@@ -39,7 +41,7 @@ class SaveCharacterVC: ParentVC {
     var needsToUpdateEmojis = false
     
     enum NavigationChoice {
-        case none, emoji, postcard
+        case none, emoji, postcard, characters
     }
     
     var navigationChoice = NavigationChoice.none
@@ -55,6 +57,8 @@ class SaveCharacterVC: ParentVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         loadignContainerView.isHidden = true
+        emojiToImageGeneratorView.isHidden = true
+        savedCharacterView.isHidden = true
         
         lblNameCharsCount?.text = "\(maxCharNameLength)"
         
@@ -133,24 +137,24 @@ class SaveCharacterVC: ParentVC {
     
     
     
-    //MARK: Convert emoji WebView to image
+    //MARK: Convert emoji HTML to image
     
     func startGenerateEmojiImages() {
         
         if let char = self.character {
             //let progressHUD = ProgressView(text: "Saving Emojis")
-            
+            self.emojiToImageGeneratorView.isHidden = false
             self.emojiToImageGeneratorView.didStartBlock = {[weak self] in
                 
             }
             
             var count = 0.0
-            let allEmojiCounts = Emoji.isNonPersnolizedEmojiDownloaded() ? self.emojisContextKeys.count-Emoji.nonPersnolizedEmojiCounts : emojisContextKeys.count
+            let emojiCountsForDownload = Emoji.isNonPersnolizedEmojiDownloaded() ? self.emojisContextKeys.count-Emoji.nonPersnolizedEmojiCounts : emojisContextKeys.count
             
             self.emojiToImageGeneratorView.didImageCapturedForEmojiBlock = {[weak self] emoji in
                 if let weakSelf = self {
                     count += 1
-                    let progressValue = weakSelf.emojisContextKeys.count > 0 ? CGFloat(count/Double(allEmojiCounts)) : 0
+                    let progressValue = weakSelf.emojisContextKeys.count > 0 ? CGFloat(count/Double(emojiCountsForDownload)) : 0
                     
                     self?.loadignContainerView.progress = Double(progressValue)
                 }
@@ -161,6 +165,9 @@ class SaveCharacterVC: ParentVC {
                     if let weakSelf = self {
                         self?.loadignContainerView.progress = 1
                         weakSelf.loadignContainerView.isHidden = true
+                        weakSelf.emojiToImageGeneratorView.isHidden = true
+                        weakSelf.showSavedCharacterView()
+                        weakSelf.hideHud()
 
                     }
                 })
@@ -173,7 +180,10 @@ class SaveCharacterVC: ParentVC {
         
     }
 
-    
+    func showSavedCharacterView() {
+        webView2.loadHTMLString(character.charHtml, baseURL: nil)
+        savedCharacterView.isHidden = false
+    }
 }
 
 //MARK:- IBActions
@@ -218,13 +228,31 @@ extension SaveCharacterVC {
     
     @IBAction func createEmoji_btnClicked(_ sender: UIButton?) {
         navigationChoice = .emoji
-        self.callSaveAPI()
+        //self.callSaveAPI()
+        userSelectedCharForEmoji = self.character
+        self.navigationController?.dismiss(animated: true) {
+            appDelegate.mainTabbarController?.selectedIndex = 2
+        }
+
     }
     
     @IBAction func postcard_btnClicked(_ sender: UIButton?) {
        
         navigationChoice = .postcard
-        self.callSaveAPI()
+        //self.callSaveAPI()
+        selectedCharForPostcard = character
+        self.navigationController?.dismiss(animated: true) {
+            appDelegate.mainTabbarController?.selectedIndex = 1
+        }
+
+    }
+    
+    @IBAction func viewCharacters_btnClicked(_ sender: UIButton?) {
+        navigationChoice = .characters
+        self.navigationController?.dismiss(animated: true) {
+            appDelegate.mainTabbarController?.selectedIndex = 0
+        }
+
     }
     
 }
@@ -265,6 +293,7 @@ extension SaveCharacterVC {
                       "brand": "claireabella"] as [String : Any]
         print("Request params :=====>>>>   \n\(params)")
        
+        self.showHud()
         APICall.shared.createNewCharacter_APICall(json: params) { (response, success) in
             self.indicator.stopAnimating()
             if success {
@@ -290,7 +319,7 @@ extension SaveCharacterVC {
             } else {
                 self.showAlertMessage(message: "Something went wrong.")
                 self.loadignContainerView.isHidden = true
-
+                self.hideHud()
             }
         }
     }
@@ -303,7 +332,7 @@ extension SaveCharacterVC {
                       "saved_name": character.name,
                       "default": checkbox.isSelected,
                       ] as [String : Any]
-        
+        self.showHud()
         APICall.shared.updateCharacter_APICall(params: params, createdDate: character.createdDate) { (json, success) in
             self.indicator.stopAnimating()
             if success {//CharacterUpdateNotification
@@ -331,9 +360,9 @@ extension SaveCharacterVC {
             } else {
                 self.showAlertMessage(message: "Something went wrong.")
                 self.loadignContainerView.isHidden = true
+                self.hideHud()
 
             }
-            
         }
         
     }
@@ -403,7 +432,6 @@ extension SaveCharacterVC {
         } else if self.navigationChoice == .postcard {
             selectedCharForPostcard = character
         } else {
-            //nothing to do.
         }
     }
 }
