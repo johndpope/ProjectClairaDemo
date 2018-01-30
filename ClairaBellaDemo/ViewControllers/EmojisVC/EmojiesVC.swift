@@ -381,15 +381,8 @@ extension EmojiesVC: UITableViewDataSource, UITableViewDelegate {
             cell.lblCharacterName.text = char.name
             cell.setBtnTag(tag: indexPath.row)
             
-            if  !char.charHtml.isEmpty {
-                cell.webview.loadHTMLString(char.charHtml, baseURL: nil)
-          
-            } else {
-                charGenerator.buildCharHTMLWith(choices: char.choices, block: { html in
-                    char.charHtml = html
-                    cell.webview.loadHTMLString(char.charHtml, baseURL: nil)
-                })
-            }
+            cell.charView.characterGenerator = charGenerator
+            cell.charView.character = char
             
             return cell
             

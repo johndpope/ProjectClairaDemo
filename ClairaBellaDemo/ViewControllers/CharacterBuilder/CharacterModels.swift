@@ -6,7 +6,7 @@
 //  Copyright © 2017 Vikash Kumar. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 
 
@@ -131,6 +131,6 @@ class Character: NSCopying, CharacterType, Equatable {
         return lhs.createdDate == rhs.createdDate
     }
     
-    //
+    var image: UIImage?
 }
 

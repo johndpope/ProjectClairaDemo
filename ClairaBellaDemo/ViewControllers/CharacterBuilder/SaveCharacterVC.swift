@@ -305,6 +305,7 @@ extension SaveCharacterVC {
                         UserDefaults.standard.set(createdDate, forKey: "MainCharacter")
                     }
                 }
+                
                 self.generateCharacterImage()
                 
                 self.setUserNavigationChoice()
@@ -341,6 +342,7 @@ extension SaveCharacterVC {
                 }
                 
                 self.character.editMode = true //used for generating emojis
+                self.character.image = nil
                 
                 self.setUserNavigationChoice()
 

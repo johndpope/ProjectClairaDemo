@@ -315,23 +315,15 @@ extension ShareCharacterVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "characterCell") as! CharacterCell
-            let char = Character.myCharacters[indexPath.row]
-            cell.lblCharacterName.text = char.name
-            cell.setBtnTag(tag: indexPath.row)
-            
-            if  !char.charHtml.isEmpty {
-                cell.webview.loadHTMLString(char.charHtml, baseURL: nil)
-                
-            } else {
-                charGenerator.buildCharHTMLWith(choices: char.choices, block: { html in
-                    char.charHtml = html
-                    cell.webview.loadHTMLString(char.charHtml, baseURL: nil)
-                })
-            }
-            
-            return cell
-            
+        let cell = tableView.dequeueReusableCell(withIdentifier: "characterCell") as! CharacterCell
+        let char = Character.myCharacters[indexPath.row]
+        cell.lblCharacterName.text = char.name
+        cell.setBtnTag(tag: indexPath.row)
+        
+        cell.charView.characterGenerator = charGenerator
+        cell.charView.character = char
+        return cell
+        
     }
     
     

@@ -79,12 +79,12 @@ class ShareCharacterView: UIView {
     
     @IBAction func shareOption_btnClicked(_ sender: UIButton) {
         if let option = ShareOptions(rawValue: sender.tag) {
-            actionBlock?(option, self.generateImage())
+            actionBlock?(option, self.generateCharImage())
         }
     }
 
     
-    func generateImage()->UIImage {
+    func generateCharImage()->UIImage {
         let renderer = UIGraphicsImageRenderer(size: cardView.bounds.size)
         let image = renderer.image { ctx in
             self.cardView.drawHierarchy(in: cardView.bounds, afterScreenUpdates: true)

@@ -144,7 +144,7 @@
                                                     </collectionViewFlowLayout>
                                                     <cells>
                                                         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="rCs-L5-3C6" customClass="CollectionViewCell" customModule="ClairaBellaDemo" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="7.5" width="60" height="60"/>
+                                                            <rect key="frame" x="0.0" y="8" width="60" height="60"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                                 <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
@@ -461,7 +461,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="La5-MR-MDU" customClass="CollectionViewCell" customModule="ClairaBellaDemo" customModuleProvider="target">
-                                        <rect key="frame" x="64.5" y="0.0" width="246" height="218"/>
+                                        <rect key="frame" x="65" y="0.0" width="246" height="218"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="246" height="218"/>
@@ -1271,7 +1271,7 @@
                                                                 <rect key="frame" x="0.0" y="28" width="345" height="120"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="V3I-Ms-pPT" id="RK5-lh-JLh">
-                                                                    <frame key="frameInset" width="345" height="119.5"/>
+                                                                    <frame key="frameInset" width="345" height="119"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Character Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lt4-1e-1Sr">
@@ -1279,21 +1279,10 @@
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
-                                                                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aH1-hd-bGd">
-                                                                            <subviews>
-                                                                                <webView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5wH-GV-Ofx">
-                                                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                                                    <constraints>
-                                                                                        <constraint firstAttribute="height" constant="400" id="Lyi-bY-S2j"/>
-                                                                                        <constraint firstAttribute="width" constant="250" id="kXI-lx-4aZ"/>
-                                                                                    </constraints>
-                                                                                </webView>
-                                                                            </subviews>
+                                                                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aH1-hd-bGd" customClass="CBCharacterView" customModule="ClairaBellaDemo" customModuleProvider="target">
                                                                             <color key="backgroundColor" red="0.87843137250000003" green="0.062745098040000002" blue="0.61568627450000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             <constraints>
-                                                                                <constraint firstItem="5wH-GV-Ofx" firstAttribute="centerX" secondItem="aH1-hd-bGd" secondAttribute="centerX" id="5uO-aG-dgf"/>
                                                                                 <constraint firstAttribute="width" constant="100" id="an4-da-4iU"/>
-                                                                                <constraint firstItem="5wH-GV-Ofx" firstAttribute="top" secondItem="aH1-hd-bGd" secondAttribute="top" constant="-25" id="bgP-bs-GsV"/>
                                                                                 <constraint firstAttribute="width" secondItem="aH1-hd-bGd" secondAttribute="height" multiplier="1:1" id="i8e-4c-u1L"/>
                                                                             </constraints>
                                                                             <userDefinedRuntimeAttributes>
@@ -1327,8 +1316,8 @@
                                                                 </tableViewCellContentView>
                                                                 <connections>
                                                                     <outlet property="btnEmojis" destination="Q3L-P6-XbD" id="veF-pe-9KS"/>
+                                                                    <outlet property="charView" destination="aH1-hd-bGd" id="RQh-Fd-1tM"/>
                                                                     <outlet property="lblCharacterName" destination="Lt4-1e-1Sr" id="eiv-Hv-wNl"/>
-                                                                    <outlet property="webview" destination="5wH-GV-Ofx" id="7Ef-wU-MfR"/>
                                                                     <outletCollection property="horizontalConstraints" destination="y0u-KL-hXb" collectionClass="NSMutableArray" id="khR-5X-N3U"/>
                                                                 </connections>
                                                             </tableViewCell>
@@ -1482,7 +1471,7 @@
                 <navigationController restorationIdentifier="MyCharactersVC" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="bwH-up-kzs" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Characters" image="icon_tab_characters" id="Jkj-P9-c5a"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="gsv-2b-TeE">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="gsv-2b-TeE">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -2441,7 +2430,7 @@
                                                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fzG-AJ-yiq">
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             <prototypes>
-                                                                <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="characterCell" rowHeight="120" id="N0Q-ss-x6Z" customClass="CharacterCell" customModule="ClairaBellaDemo" customModuleProvider="target">
+                                                                <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="characterCell" rowHeight="120" id="N0Q-ss-x6Z" customClass="CharacterCell" customModule="ClairaBellaDemo" customModuleProvider="target">
                                                                     <rect key="frame" x="0.0" y="28" width="345" height="120"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="N0Q-ss-x6Z" id="W0L-9p-LHT">
@@ -2479,22 +2468,11 @@
                                                                                     <action selector="cellEditChar_btnClicked:" destination="LjG-Tk-0tP" eventType="touchUpInside" id="2u4-5m-yc9"/>
                                                                                 </connections>
                                                                             </button>
-                                                                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rnb-2h-1xs">
-                                                                                <subviews>
-                                                                                    <webView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xOw-b9-thl">
-                                                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                                                        <constraints>
-                                                                                            <constraint firstAttribute="width" constant="250" id="G1v-ba-UH9"/>
-                                                                                            <constraint firstAttribute="height" constant="400" id="NHr-8g-BFu"/>
-                                                                                        </constraints>
-                                                                                    </webView>
-                                                                                </subviews>
+                                                                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rnb-2h-1xs" customClass="CBCharacterView" customModule="ClairaBellaDemo" customModuleProvider="target">
                                                                                 <color key="backgroundColor" red="0.87843137250000003" green="0.062745098040000002" blue="0.61568627450000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="width" constant="100" id="N1W-cZ-bTG"/>
-                                                                                    <constraint firstItem="xOw-b9-thl" firstAttribute="centerX" secondItem="rnb-2h-1xs" secondAttribute="centerX" id="psY-xY-24o"/>
                                                                                     <constraint firstAttribute="width" secondItem="rnb-2h-1xs" secondAttribute="height" multiplier="1:1" id="tMk-NS-E8t"/>
-                                                                                    <constraint firstItem="xOw-b9-thl" firstAttribute="top" secondItem="rnb-2h-1xs" secondAttribute="top" constant="-25" id="uRC-jZ-ESs"/>
                                                                                 </constraints>
                                                                                 <userDefinedRuntimeAttributes>
                                                                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -2517,8 +2495,8 @@
                                                                     <connections>
                                                                         <outlet property="btnEdit" destination="IXo-Aj-FAA" id="sjN-dP-VmZ"/>
                                                                         <outlet property="btnEmojis" destination="dHm-w1-ENR" id="i5o-1V-H9A"/>
+                                                                        <outlet property="charView" destination="rnb-2h-1xs" id="K7L-sK-7dA"/>
                                                                         <outlet property="lblCharacterName" destination="Eud-Un-Jfh" id="kOB-kT-c0y"/>
-                                                                        <outlet property="webview" destination="xOw-b9-thl" id="feQ-Sl-xfQ"/>
                                                                     </connections>
                                                                 </tableViewCell>
                                                             </prototypes>
@@ -3007,7 +2985,7 @@
                 <navigationController restorationIdentifier="PostcardsVC" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="WA2-t6-pCw" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Postcards" image="icon_tab_postcards" id="xn7-UT-V6d"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="0ch-Kc-ZsK">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="0ch-Kc-ZsK">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -3025,7 +3003,7 @@
             <objects>
                 <navigationController storyboardIdentifier="CharBuilderNavVC" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="oMH-0n-afk" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="6CF-sR-Y4t">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="6CF-sR-Y4t">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -3044,7 +3022,7 @@
                 <navigationController restorationIdentifier="EmojisVC" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="sQC-hR-Ev0" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Emojis" image="icon_tab_emoji" id="wib-9V-HJq"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Gx5-Mo-dbd">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Gx5-Mo-dbd">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -3264,7 +3242,7 @@
                                         <rect key="frame" x="0.0" y="428" width="375" height="250"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zq7-RP-TTK" id="L7K-Bt-Vuv">
-                                            <frame key="frameInset" width="375" height="249.5"/>
+                                            <frame key="frameInset" width="375" height="249"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Change Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UkZ-W3-Gkk">
@@ -3339,7 +3317,7 @@
                                         <rect key="frame" x="0.0" y="678" width="375" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0go-a7-gCE" id="i1i-ua-nKy">
-                                            <frame key="frameInset" width="375" height="69.5"/>
+                                            <frame key="frameInset" width="375" height="69"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ULF-XT-4TT">
@@ -3367,7 +3345,7 @@
                                         <rect key="frame" x="0.0" y="748" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cSq-6p-wZ5" id="P2q-63-0bt">
-                                            <frame key="frameInset" width="375" height="43.5"/>
+                                            <frame key="frameInset" width="375" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WFI-7J-LIv">
@@ -3393,7 +3371,7 @@
                                         <rect key="frame" x="0.0" y="792" width="375" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3JF-CE-nEb" id="neR-GG-Q0i">
-                                            <frame key="frameInset" width="375" height="99.5"/>
+                                            <frame key="frameInset" width="375" height="99"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fUR-x9-8Ab">
@@ -3601,7 +3579,7 @@
                 <navigationController restorationIdentifier="ProfileVC" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="eEv-NT-HZg" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Shop" image="icon_tab_shop" id="33s-en-IA2"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="OsM-Q3-QCx">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="OsM-Q3-QCx">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -3864,7 +3842,7 @@
                                                                 <rect key="frame" x="0.0" y="28" width="345" height="120"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="p8h-x9-G2d" id="Eby-zn-bgD">
-                                                                    <frame key="frameInset" width="345" height="119.5"/>
+                                                                    <frame key="frameInset" width="345" height="119"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Character Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iCO-rI-wWZ">
@@ -3872,21 +3850,10 @@
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
-                                                                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e1d-Sn-foG">
-                                                                            <subviews>
-                                                                                <webView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g2n-VO-aqX">
-                                                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                                                    <constraints>
-                                                                                        <constraint firstAttribute="width" constant="250" id="V5h-eJ-8Td"/>
-                                                                                        <constraint firstAttribute="height" constant="400" id="vYJ-fb-Eyg"/>
-                                                                                    </constraints>
-                                                                                </webView>
-                                                                            </subviews>
+                                                                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e1d-Sn-foG" customClass="CBCharacterView" customModule="ClairaBellaDemo" customModuleProvider="target">
                                                                             <color key="backgroundColor" red="0.87843137250000003" green="0.062745098040000002" blue="0.61568627450000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" constant="100" id="8dG-Xn-Rbh"/>
-                                                                                <constraint firstItem="g2n-VO-aqX" firstAttribute="centerX" secondItem="e1d-Sn-foG" secondAttribute="centerX" id="Cel-6W-L8i"/>
-                                                                                <constraint firstItem="g2n-VO-aqX" firstAttribute="top" secondItem="e1d-Sn-foG" secondAttribute="top" constant="-25" id="ff8-aY-wnC"/>
                                                                                 <constraint firstAttribute="width" secondItem="e1d-Sn-foG" secondAttribute="height" multiplier="1:1" id="mQ7-iS-ldB"/>
                                                                             </constraints>
                                                                             <userDefinedRuntimeAttributes>
@@ -3920,8 +3887,8 @@
                                                                 </tableViewCellContentView>
                                                                 <connections>
                                                                     <outlet property="btnEmojis" destination="VLS-qR-weX" id="z8b-Pi-5AT"/>
+                                                                    <outlet property="charView" destination="e1d-Sn-foG" id="6fC-FL-cgK"/>
                                                                     <outlet property="lblCharacterName" destination="iCO-rI-wWZ" id="IFu-BJ-bkJ"/>
-                                                                    <outlet property="webview" destination="g2n-VO-aqX" id="lV6-xJ-8v3"/>
                                                                     <outletCollection property="horizontalConstraints" destination="43W-79-20m" collectionClass="NSMutableArray" id="Sjf-nu-pFI"/>
                                                                 </connections>
                                                             </tableViewCell>
@@ -4721,6 +4688,6 @@
         <image name="user_detailsImage" width="337" height="164"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="5To-OK-OUu"/>
+        <segue reference="xFx-re-QEu"/>
     </inferredMetricsTieBreakers>
 </document>

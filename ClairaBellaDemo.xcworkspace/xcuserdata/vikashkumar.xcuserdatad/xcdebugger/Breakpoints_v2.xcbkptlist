@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ClairaBellaDemo/ViewControllers/CharacterBuilder/SaveCharacterVC.swift"
-            timestampString = "538944405.4886841"
+            timestampString = "539033665.958481"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "327"
-            endingLineNumber = "327"
+            startingLineNumber = "328"
+            endingLineNumber = "328"
             landmarkName = "updateCharacterAPICall()"
             landmarkType = "7">
          </BreakpointContent>
@@ -170,7 +170,7 @@
                   moduleName = "ClairaBellaDemo"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/vikashkumar/Desktop/Projects/ClairaBella/SourceCode/ProjectClairaDemo/ClairaBellaDemo/ViewControllers/LoginSignupVCs/AuthenticationViewController.swift"
-                  timestampString = "538854401.01689"
+                  timestampString = "539032534.447328"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "381"
@@ -185,7 +185,7 @@
                   moduleName = "ClairaBellaDemo"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/vikashkumar/Desktop/Projects/ClairaBella/SourceCode/ProjectClairaDemo/ClairaBellaDemo/ViewControllers/LoginSignupVCs/AuthenticationViewController.swift"
-                  timestampString = "538854401.019264"
+                  timestampString = "539032534.44929"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "382"
@@ -336,6 +336,22 @@
             startingLineNumber = "145"
             endingLineNumber = "145"
             landmarkName = "updateProfile()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ClairaBellaDemo/Views/CBCharacterView.swift"
+            timestampString = "539032533.452932"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "94"
+            endingLineNumber = "94"
+            landmarkName = "webViewDidFinishLoad(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

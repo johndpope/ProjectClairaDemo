@@ -583,17 +583,10 @@ class CharacterListCell: TableCell, UITableViewDataSource, UITableViewDelegate {
         cell.lblCharacterName.text = char.name
         cell.setBtnTag(tag: indexPath.row)
         
-        if  !char.charHtml.isEmpty {
-            cell.webview.loadHTMLString(char.charHtml, baseURL: nil)
-        } else {
-            if let charGenerator = myCharsVC?.charGenerator {
-                charGenerator.buildCharHTMLWith(choices: char.choices, block: { html in
-                    char.charHtml = html
-                    cell.webview.loadHTMLString(char.charHtml, baseURL: nil)
-                })
-            }
-        }
 
+        cell.charView.characterGenerator = myCharsVC?.charGenerator
+        cell.charView.character = char
+        
         return cell
     }
     
@@ -608,16 +601,18 @@ class CharacterListCell: TableCell, UITableViewDataSource, UITableViewDelegate {
 
 class CharacterCell: TableCell {
     @IBOutlet var lblCharacterName: UILabel!
-    @IBOutlet var webview: UIWebView!
     @IBOutlet var btnEdit: UIButton!
     @IBOutlet var btnEmojis: UIButton!
+    @IBOutlet var charView: CBCharacterView!
     
     func setBtnTag(tag: Int) {
         btnEdit?.tag = tag
         btnEmojis?.tag = tag
     }
     
+    
 }
+
 
 
 

@@ -3756,6 +3756,7 @@
 		7932BBFF1F61D79700A25AAF /* Montserrat-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7932BBF91F61D79700A25AAF /* Montserrat-Thin.ttf */; };
 		7932BC001F61D79700A25AAF /* SIL Open Font License.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7932BBFA1F61D79700A25AAF /* SIL Open Font License.txt */; };
 		7932BC021F61D7A600A25AAF /* NothingYouCouldDoBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7932BC011F61D7A600A25AAF /* NothingYouCouldDoBold.ttf */; };
+		7936B4B12020D44A007AD232 /* CBCharacterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7936B4B02020D44A007AD232 /* CBCharacterView.swift */; };
 		79387AFB1F6521D300E1B3B8 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79387AFA1F6521D300E1B3B8 /* User.swift */; };
 		793A4784200E7250003D01F7 /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793A4783200E7250003D01F7 /* AuthenticationViewController.swift */; };
 		79432F1D1FD3114700113A7D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79432F1C1FD3114700113A7D /* Assets.xcassets */; };
@@ -6073,6 +6074,7 @@
 		7932BBF91F61D79700A25AAF /* Montserrat-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Thin.ttf"; sourceTree = "<group>"; };
 		7932BBFA1F61D79700A25AAF /* SIL Open Font License.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "SIL Open Font License.txt"; sourceTree = "<group>"; };
 		7932BC011F61D7A600A25AAF /* NothingYouCouldDoBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NothingYouCouldDoBold.ttf; sourceTree = "<group>"; };
+		7936B4B02020D44A007AD232 /* CBCharacterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CBCharacterView.swift; sourceTree = "<group>"; };
 		79387AFA1F6521D300E1B3B8 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		793A4783200E7250003D01F7 /* AuthenticationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationViewController.swift; sourceTree = "<group>"; };
 		79432F1C1FD3114700113A7D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -8604,6 +8606,7 @@
 				7932BBCF1F61D1DD00A25AAF /* LogoView.swift */,
 				7932BBD01F61D1DD00A25AAF /* CustomPhotoAlbum.swift */,
 				7932BBD11F61D1DD00A25AAF /* ProgressView.swift */,
+				7936B4B02020D44A007AD232 /* CBCharacterView.swift */,
 			);
 			name = views;
 			sourceTree = "<group>";
@@ -12603,6 +12606,7 @@
 				7932BBC11F61D1C700A25AAF /* LogoImage.swift in Sources */,
 				7932BBB51F61D06600A25AAF /* Global.swift in Sources */,
 				792B066B20069A3D0094F377 /* LoginSignupDashboardVC.swift in Sources */,
+				7936B4B12020D44A007AD232 /* CBCharacterView.swift in Sources */,
 				7932BBC21F61D1C700A25AAF /* Head_image.swift in Sources */,
 				792294431F5F0A17004845DE /* EmojiesVC.swift in Sources */,
 				7932BBD91F61D1DD00A25AAF /* CustomPhotoAlbum.swift in Sources */,

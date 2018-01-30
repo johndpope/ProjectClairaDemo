@@ -30,3 +30,18 @@ extension String {
        return self.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
     }
 }
+
+
+extension UIView {
+    func generateImage()->UIImage? {
+        UIGraphicsBeginImageContextWithOptions(self.bounds.size, self.isOpaque, 2.0)
+        if let context = UIGraphicsGetCurrentContext() {
+            self.layer.render(in: context)
+            let image = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            return image
+        }
+        return nil
+    }
+
+}
