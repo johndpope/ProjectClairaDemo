@@ -1471,7 +1471,7 @@
                 <navigationController restorationIdentifier="MyCharactersVC" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="bwH-up-kzs" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Characters" image="icon_tab_characters" id="Jkj-P9-c5a"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="gsv-2b-TeE">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="gsv-2b-TeE">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -2985,7 +2985,7 @@
                 <navigationController restorationIdentifier="PostcardsVC" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="WA2-t6-pCw" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Postcards" image="icon_tab_postcards" id="xn7-UT-V6d"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="0ch-Kc-ZsK">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="0ch-Kc-ZsK">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -3003,7 +3003,7 @@
             <objects>
                 <navigationController storyboardIdentifier="CharBuilderNavVC" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="oMH-0n-afk" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="6CF-sR-Y4t">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="6CF-sR-Y4t">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -3022,7 +3022,7 @@
                 <navigationController restorationIdentifier="EmojisVC" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="sQC-hR-Ev0" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Emojis" image="icon_tab_emoji" id="wib-9V-HJq"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Gx5-Mo-dbd">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Gx5-Mo-dbd">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -3120,7 +3120,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" background="textboxBack" translatesAutoresizingMaskIntoConstraints="NO" id="oUq-K8-E5z" customClass="TextField" customModule="ClairaBellaDemo" customModuleProvider="target">
+                                                <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oUq-K8-E5z" customClass="TextField" customModule="ClairaBellaDemo" customModuleProvider="target">
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="42" id="6RY-UL-uf0"/>
                                                     </constraints>
@@ -3131,7 +3131,7 @@
                                                         <outlet property="delegate" destination="vsy-8q-Zip" id="Xei-An-Wce"/>
                                                     </connections>
                                                 </textField>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" background="textboxBack" translatesAutoresizingMaskIntoConstraints="NO" id="SOr-hm-V4h" customClass="TextField" customModule="ClairaBellaDemo" customModuleProvider="target">
+                                                <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SOr-hm-V4h" customClass="TextField" customModule="ClairaBellaDemo" customModuleProvider="target">
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
@@ -3214,13 +3214,13 @@
                                                 <constraint firstItem="YS6-cg-NrV" firstAttribute="leading" secondItem="r4M-kT-4Lm" secondAttribute="trailing" constant="16" id="X0L-kJ-QE0"/>
                                                 <constraint firstItem="qU1-Cj-ntF" firstAttribute="leading" secondItem="nf6-aP-QVO" secondAttribute="leading" id="Z5i-PG-jVR"/>
                                                 <constraint firstItem="nf6-aP-QVO" firstAttribute="top" secondItem="eU9-Ea-GtO" secondAttribute="top" constant="18" id="ae2-6E-xid"/>
-                                                <constraint firstItem="oUq-K8-E5z" firstAttribute="leading" secondItem="eU9-Ea-GtO" secondAttribute="leading" constant="15" id="baa-QZ-hio"/>
+                                                <constraint firstItem="oUq-K8-E5z" firstAttribute="leading" secondItem="eU9-Ea-GtO" secondAttribute="leading" constant="7" id="baa-QZ-hio"/>
                                                 <constraint firstItem="GTH-YO-fUO" firstAttribute="leading" secondItem="qU1-Cj-ntF" secondAttribute="leading" id="c8F-cO-Suy"/>
                                                 <constraint firstAttribute="trailing" secondItem="oUq-K8-E5z" secondAttribute="trailing" constant="15" id="irc-SJ-o0L"/>
                                                 <constraint firstItem="SOr-hm-V4h" firstAttribute="leading" secondItem="oUq-K8-E5z" secondAttribute="leading" id="ja7-IK-e3I"/>
                                                 <constraint firstItem="ak9-wh-8dp" firstAttribute="width" secondItem="r4M-kT-4Lm" secondAttribute="width" id="lER-sn-4Cm"/>
                                                 <constraint firstItem="SOr-hm-V4h" firstAttribute="top" secondItem="qU1-Cj-ntF" secondAttribute="bottom" constant="8" id="nls-PG-zkp"/>
-                                                <constraint firstItem="r4M-kT-4Lm" firstAttribute="leading" secondItem="SOr-hm-V4h" secondAttribute="leading" id="reF-Yo-LaF"/>
+                                                <constraint firstItem="r4M-kT-4Lm" firstAttribute="leading" secondItem="SOr-hm-V4h" secondAttribute="leading" constant="7" id="reF-Yo-LaF"/>
                                                 <constraint firstItem="YS6-cg-NrV" firstAttribute="width" secondItem="r4M-kT-4Lm" secondAttribute="width" id="uAM-3g-esH"/>
                                                 <constraint firstAttribute="bottom" secondItem="e0f-QM-27G" secondAttribute="bottom" constant="15" id="xKC-Bk-Q9c"/>
                                                 <constraint firstItem="nf6-aP-QVO" firstAttribute="leading" secondItem="eU9-Ea-GtO" secondAttribute="leading" constant="15" id="yRC-aL-Ghu"/>
@@ -3579,7 +3579,7 @@
                 <navigationController restorationIdentifier="ProfileVC" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="eEv-NT-HZg" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Shop" image="icon_tab_shop" id="33s-en-IA2"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="OsM-Q3-QCx">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="OsM-Q3-QCx">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
