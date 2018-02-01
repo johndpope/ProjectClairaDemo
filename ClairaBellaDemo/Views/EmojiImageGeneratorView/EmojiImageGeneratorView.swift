@@ -64,11 +64,6 @@ class EmojiImageGeneratorView : UIView, UIWebViewDelegate {
             }
             currentEmoji = character.emojis[currntIndex]
             
-//            let isNonPersnolizedEmoji = nonPersnolizedEmojis.contains(currentEmoji.key)
-//
-//            let emojiFileNameWithDirectoryName = isNonPersnolizedEmoji ? "NonPersnolizeEmoji/\(currentEmoji.key)" : (character!.createdDate + "/" + currentEmoji.key)
-
-//            let url = filemanager.containerURL(forSecurityApplicationGroupIdentifier: appGroupName)!.appendingPathComponent(emojiFileNameWithDirectoryName)
             let url = currentEmoji.getEmojiURL(char: character)
             
             if fileExistAt(path: url.path) {

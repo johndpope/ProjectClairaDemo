@@ -144,9 +144,7 @@ class SaveCharacterVC: ParentVC {
         if let char = self.character {
             //let progressHUD = ProgressView(text: "Saving Emojis")
             self.emojiToImageGeneratorView.isHidden = false
-            self.emojiToImageGeneratorView.didStartBlock = {[weak self] in
-                
-            }
+            self.emojiToImageGeneratorView.didStartBlock = {}
             
             var count = 0.0
             let emojiCountsForDownload = Emoji.isNonPersnolizedEmojiDownloaded() ? self.emojisContextKeys.count-Emoji.nonPersnolizedEmojiCounts : emojisContextKeys.count
@@ -294,7 +292,6 @@ extension SaveCharacterVC {
         print("Request params :=====>>>>   \n\(params)")
        
         APICall.shared.createNewCharacter_APICall(json: params) { (response, success) in
-            self.indicator.stopAnimating()
             if success {
                 if let json = response as? [String : Any] {
                     let createdDate = json["success"] as! String
@@ -313,6 +310,10 @@ extension SaveCharacterVC {
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "NewCharacterAddedNotification"), object: nil, userInfo: ["NewChar" : self.character])
                 
                 self.saveCharOperationDone = true
+                
+                for e in self.character.emojis {
+                    e.characterCreatedDate = self.character.createdDate
+                }
                 self.startGenerateEmojiImages()
 
                 //self.navigationController?.dismiss(animated: true, completion: nil)
