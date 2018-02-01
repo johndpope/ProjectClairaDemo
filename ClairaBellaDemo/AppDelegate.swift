@@ -339,23 +339,23 @@ extension AppDelegate {
                 self.fetchUserDetails()
             })
         } else { //email login check
-            if var userDetails =  UserDefaults(suiteName: appGroupName)!.value(forKey: "user_details")as? [String : Any] {
+//            if var userDetails =  UserDefaults(suiteName: appGroupName)!.value(forKey: "user_details")as? [String : Any] {
+//                
+//                let email: String = (userDetails["email"] as? String) ?? ""
+//                let password: String = (userDetails["password"] as? String) ?? ""
+//                
+//                appDelegate.currentUser = appDelegate.pool?.getUser(email)
+//                
+//                appDelegate.currentUser?.getSession(email, password: password, validationData: nil).continueWith(executor: AWSExecutor.mainThread(), block: { (task) -> Any? in
+//                    
+//                    if task.error == nil {
+//                        self.fetchUserDetails()
+//                    }
+//                    return nil
+//                })
+            
                 
-                let email: String = (userDetails["email"] as? String) ?? ""
-                let password: String = (userDetails["password"] as? String) ?? ""
-                
-                appDelegate.currentUser = appDelegate.pool?.getUser(email)
-                
-                appDelegate.currentUser?.getSession(email, password: password, validationData: nil).continueWith(executor: AWSExecutor.mainThread(), block: { (task) -> Any? in
-                    
-                    if task.error == nil {
-                        self.fetchUserDetails()
-                    }
-                    return nil
-                })
-                
-                
-            }
+            //}
         }
     }
     

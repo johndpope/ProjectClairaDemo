@@ -90,7 +90,7 @@ extension CBCharacterView : UIWebViewDelegate {
     
     func webViewDidFinishLoad(_ webView: UIWebView) {
         if !webView.isLoading {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
                 if let img = self.generateImage() {
                     self.character.image = img
                     self.imageView.image = img

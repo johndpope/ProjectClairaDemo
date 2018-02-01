@@ -37,6 +37,9 @@ class AuthenticationViewController: ParentVC {
             self.hideHud()
             AmazonClientManager.shared.logOut()
         }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.navigateToHome), name: NSNotification.Name(rawValue: "CharactersLoadingFinish"), object: nil)
+
     }
 
     
@@ -45,6 +48,9 @@ class AuthenticationViewController: ParentVC {
         facebookLogin()
     }
     
+    
+    
+    //MARK:- Login/Signup(Form and Facebook) on AWS Coginito Server.
     
     func facebookLogin() {
         if FBSDKAccessToken.current() != nil {
@@ -103,6 +109,8 @@ class AuthenticationViewController: ParentVC {
         
     }
     
+    
+    
     func signup(username: String,  password: String, email: String, name: String,  fbLogin: Bool = false, block: ((Bool)->Void)? = nil) {
         let emailAtt = AWSCognitoIdentityUserAttributeType()
         emailAtt?.name = "email"
@@ -155,7 +163,79 @@ class AuthenticationViewController: ParentVC {
     }
     
     
+    
+    //MARK:- Form Login and Singup with on Client's Server
+    
+    func login(email: String, password: String, block:@escaping (Bool)->Void) {
+        let params = ["password_attempt" : password]
 
+        APICall.shared.loginUser_APICall(email: email, params: params, block: { (response,success) in
+            if success {
+                let json  = response as! [String : String]
+                if let _ = json["success"] {
+                    let name = ""//firstname + " " + lastName
+                    let result = ["name" : name, "email": email]
+                    UserDefaults(suiteName: appGroupName)!.setValue(result, forKey: "user_details")
+                    //UserDefaults.standard.setValue(result, forKey: "user_details")
+                    //UserDefaults.standard.synchronize()
+                    //self.btn_pressed.sendActions(for: .touchUpInside)
+                    appDelegate.getCharactersFromServer()
+                    block(true)
+
+                } else  {
+                    print("Email and password is wrong.")
+                    block(false)
+                    
+                }
+            } else {
+            }
+            
+            self.hideHud()
+        })
+
+    }
+    
+    func signup(email: String, params: [String : String]) {
+        
+
+        APICall.shared.signupUser_APICall(email: email, params: params) { (response,success) in
+            if success {
+                let name = params["first_name"]! + " " + params["Last_name"]!
+                
+                let result = ["name" : name, "email": email]
+                
+                UserDefaults(suiteName: appGroupName)!.setValue(result, forKey: "user_details")
+                //UserDefaults.standard.setValue(result, forKey: "user_details")
+                //UserDefaults.standard.synchronize()
+                //self.btn_pressed.sendActions(for: .touchUpInside)
+                appDelegate.getCharactersFromServer()
+            } else {
+            }
+            self.hideHud()
+        }
+    }
+
+    
+    func navigateToHome() {
+            self.hideHud()
+        
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            if Character.myCharacters.isEmpty {
+                
+                //present Create character screen over Home screen if user dont have create any character yet.
+
+                let homeVC = storyboard.instantiateViewController(withIdentifier: "mainTabVC") as! UITabBarController
+                let viewController = storyboard.instantiateViewController(withIdentifier: "CharBuilderNavVC") as! UINavigationController
+                
+                self.navigationController?.present(viewController, animated: true, completion: {
+                    self.navigationController?.viewControllers = [homeVC]
+                })
+            } else {
+//                self.btn_pressed.sendActions(for: .touchUpInside)
+                self.performSegue(withIdentifier: "goToHome", sender: nil)
+
+            }
+        }
 }
 
 

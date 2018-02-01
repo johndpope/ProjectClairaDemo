@@ -45,7 +45,6 @@ class SignUpVC: AuthenticationViewController, UITextFieldDelegate {
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(nf:)), name: Notification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(nf:)), name: Notification.Name.UIKeyboardWillHide, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.charactersLoadignFinish), name: NSNotification.Name(rawValue: "CharactersLoadingFinish"), object: nil)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -145,29 +144,17 @@ class SignUpVC: AuthenticationViewController, UITextFieldDelegate {
 
         let name = firstname + " " + lastName
         
-        signup(username: email, password: password, email: email, name: name, fbLogin: false) { (success) in
-            self.hideHud()
-        }
         
+        let params = ["first_name" : firstname,  "Last_name" : lastName, "password" : password]
+
+//        signup(username: email, password: password, email: email, name: name, fbLogin: false) { (success) in
+//            self.hideHud()
+//        }
         
+        signup(email: email, params: params)
     }
     
     
-    func charactersLoadignFinish() {
-        progressHUD.hide()
-        
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        if Character.myCharacters.isEmpty {
-            let homeVC = storyboard.instantiateViewController(withIdentifier: "mainTabVC") as! UITabBarController
-            let viewController = storyboard.instantiateViewController(withIdentifier: "CharBuilderNavVC") as! UINavigationController
-           
-            self.navigationController?.present(viewController, animated: true, completion: {
-                self.navigationController?.viewControllers = [homeVC]
-            })
-        } else {
-            self.btn_pressed.sendActions(for: .touchUpInside)
-        }
-    }
 
 }
 

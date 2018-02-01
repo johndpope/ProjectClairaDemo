@@ -10,7 +10,7 @@ import UIKit
 import AWSCognitoIdentityProvider
 
 enum AWSUserAttributeKey {
-    static let name = "given_name"
+    static let name = "name"
     static let birthdate = "birthdate"
     static let email = "email"
 }
@@ -158,25 +158,25 @@ class ProfileVC: ParentVC {
             })
             
         } else {
-            let nameAtt = AWSCognitoIdentityUserAttributeType()
-            nameAtt?.name = AWSUserAttributeKey.name
-            nameAtt?.value = name
-            
-            let birthDateAtt = AWSCognitoIdentityUserAttributeType()
-            birthDateAtt?.name = AWSUserAttributeKey.birthdate
-            birthDateAtt?.value = birthdate
-            
-            appDelegate.currentUser?.update([nameAtt!, birthDateAtt!]).continueWith(executor: AWSExecutor.mainThread(), block: { (response) -> Any? in
-                self.hideHud()
-                if let error = response.error as? NSError {
-                    self.showAlert(message: (error.userInfo["message"] as? String) ?? "Something happen wrong")
-                } else {
-                    self.showAlert(message: "Profile updated successfully.")
-                    appDelegate.fetchUserDetails()
-                }
-                
-                return nil
-            })
+//            let nameAtt = AWSCognitoIdentityUserAttributeType()
+//            nameAtt?.name = AWSUserAttributeKey.name
+//            nameAtt?.value = name
+//            
+//            let birthDateAtt = AWSCognitoIdentityUserAttributeType()
+//            birthDateAtt?.name = AWSUserAttributeKey.birthdate
+//            birthDateAtt?.value = birthdate
+//            
+//            appDelegate.currentUser?.update([nameAtt!, birthDateAtt!]).continueWith(executor: AWSExecutor.mainThread(), block: { (response) -> Any? in
+//                self.hideHud()
+//                if let error = response.error as? NSError {
+//                    self.showAlert(message: (error.userInfo["message"] as? String) ?? "Something happen wrong")
+//                } else {
+//                    self.showAlert(message: "Profile updated successfully.")
+//                    appDelegate.fetchUserDetails()
+//                }
+//                
+//                return nil
+//            })
         }
         
     }
@@ -370,7 +370,7 @@ extension ProfileVC: UITableViewDataSource, UITableViewDelegate {
         } else if indexPath.row == 1 {
             openUrl("https://yahoo.com")
         } else if indexPath.row == 2 {
-            openUrl("htttps://facebook.com")
+            openUrl("http://www.toxicfox.co.uk/contacts")
         }
     }
     

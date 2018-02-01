@@ -49,7 +49,6 @@ class LoginVC: AuthenticationViewController, UITextFieldDelegate {
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(nf:)), name: Notification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(nf:)), name: Notification.Name.UIKeyboardWillHide, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.charactersLoadignFinish), name: NSNotification.Name(rawValue: "CharactersLoadingFinish"), object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -118,13 +117,17 @@ class LoginVC: AuthenticationViewController, UITextFieldDelegate {
 
             let password = txtPassword.text!.trimmedString()
 
-            login(username: email, email: email, password: password, fbLogin: false, block: { (success) in
-                if !success {
-                    
-                }
-                self.hideHud()
-            })
+//            login(username: email, email: email, password: password, fbLogin: false, block: { (success) in
+//                if !success {
+//                    
+//                }
+//                self.hideHud()
+//            })
             
+            
+            login(email: email, password: password, block: { (success) in
+                self.errorListView.isHidden = success
+            })
         }
         
     }
@@ -144,6 +147,8 @@ class LoginVC: AuthenticationViewController, UITextFieldDelegate {
     func charactersLoadignFinish() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if Character.myCharacters.isEmpty {
+            
+            //present Create character screen over Home screen if user dont have any character yet.
             let homeVC = storyboard.instantiateViewController(withIdentifier: "mainTabVC") as! UITabBarController
             let viewController = storyboard.instantiateViewController(withIdentifier: "CharBuilderNavVC") as! UINavigationController
             self.navigationController?.present(viewController, animated: true, completion: {
