@@ -42,14 +42,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var currentUser: AWSCognitoIdentityUser? //current logged in User in the app.
     
     var mainTabbarController: UITabBarController? {
+        var tbVC: UITabBarController?
+        
         if let childViewControlelrs = self.window?.rootViewController?.childViewControllers {
             for vc in childViewControlelrs {
                 if vc is UITabBarController {
-                    return vc as? UITabBarController
+                    tbVC = vc as? UITabBarController
+                    break
                 }
             }
         }
-        return nil
+        
+        if tbVC == nil {
+           tbVC = appDelegate.window?.rootViewController?.presentedViewController as? UITabBarController
+        }
+        return tbVC
     }
     
 

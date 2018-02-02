@@ -398,12 +398,11 @@ class APICall {
     
     func updateUser_APICall(email: String, params: [String : Any], block: @escaping ResponseBlock) {
         
-        // let urlString  = "https://yff8t38cs8.execute-api.eu-west-1.amazonaws.com/latest/users/\(email)"
         let urlString = "https://yff8t38cs8.execute-api.eu-west-1.amazonaws.com/latest/users/\(email)/"
         let url = URL(string: urlString)!
         
         var request = URLRequest(url: url)
-        request.httpMethod = "POST"
+        request.httpMethod = "PACH"
         let data = try? JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
         request.httpBody = data
         

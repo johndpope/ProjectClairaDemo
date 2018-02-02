@@ -179,7 +179,8 @@ class ProfileVC: ParentVC {
 //                return nil
 //            })
             
-            let params = ["date_of_birth" : birthdate]
+            let firstName = setUserInfo()
+            let params = ["date_of_birth" : birthdate, ]
             APICall.shared.updateUser_APICall(email: email, params: params, block: { (response, success) in
                 self.hideHud()
                 print(response)
@@ -341,7 +342,10 @@ extension ProfileVC: UITableViewDataSource, UITableViewDelegate {
         return 2
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return  section == 0 ? (isLoginWithFB ? 0 : 2) : (navigationItems.count + 1)
+//        return  section == 0 ? (isLoginWithFB ? 0 : 2) : (navigationItems.count + 1)
+        
+        return  section == 0 ? (isLoginWithFB ? 0 : 0) : (navigationItems.count + 1)
+
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -373,9 +377,9 @@ extension ProfileVC: UITableViewDataSource, UITableViewDelegate {
             return
         }
         if indexPath.row == 0 {
-            openUrl("https://google.com")
+            openUrl("http://www.toxicfox.co.uk/mobile-app-privacy-policy")
         } else if indexPath.row == 1 {
-            openUrl("https://yahoo.com")
+            openUrl("http://www.toxicfox.co.uk/mobile-app-terms-service")
         } else if indexPath.row == 2 {
             openUrl("http://www.toxicfox.co.uk/contacts")
         }

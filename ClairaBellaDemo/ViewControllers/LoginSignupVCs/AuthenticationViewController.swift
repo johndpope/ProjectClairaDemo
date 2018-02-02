@@ -30,7 +30,7 @@ class AuthenticationViewController: ParentVC {
             self.hideHud()
             appDelegate.fetchUserDetails()
             appDelegate.getCharactersFromServer()
-            self.performSegue(withIdentifier: "goToHome", sender: nil)
+            //self.performSegue(withIdentifier: "goToHome", sender: nil)
         }
         
         viewModel.onError = {[unowned self] error in
@@ -38,11 +38,14 @@ class AuthenticationViewController: ParentVC {
             AmazonClientManager.shared.logOut()
         }
         
-        NotificationCenter.default.addObserver(self, selector: #selector(self.navigateToHome), name: NSNotification.Name(rawValue: "CharactersLoadingFinish"), object: nil)
 
     }
 
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.navigateToHome), name: NSNotification.Name(rawValue: "CharactersLoadingFinish"), object: nil)
+
+    }
 
     @IBAction func Btn_Facebook_Login(_ sender: UIButton) {
         facebookLogin()
@@ -171,15 +174,18 @@ class AuthenticationViewController: ParentVC {
 
         APICall.shared.loginUser_APICall(email: email, params: params, block: { (response,success) in
             if success {
-                let json  = response as! [String : String]
-                if let _ = json["success"] {
-                    let name = ""//firstname + " " + lastName
-                    let result = ["name" : name, "email": email]
+                if let json = response as? [String : Any], let userInfo = json["success"] as? [String : String] {
+                    
+                    let firstName = userInfo["first_name"] ?? ""
+                    let lastName = userInfo["Last_name"] ?? ""
+                    let name = firstName + " " + lastName
+                    let dob = userInfo["date_of_birth"] ?? ""
+                    
+                    let result = ["email": email, "name": name, "first_name": firstName, "last_name" : lastName, "birthdate" : dob]
+                    
                     UserDefaults(suiteName: appGroupName)!.setValue(result, forKey: "user_details")
-                    //UserDefaults.standard.setValue(result, forKey: "user_details")
-                    //UserDefaults.standard.synchronize()
-                    //self.btn_pressed.sendActions(for: .touchUpInside)
                     appDelegate.getCharactersFromServer()
+                    
                     block(true)
 
                 } else  {
@@ -187,6 +193,7 @@ class AuthenticationViewController: ParentVC {
                     block(false)
                     
                 }
+                
             } else {
             }
             

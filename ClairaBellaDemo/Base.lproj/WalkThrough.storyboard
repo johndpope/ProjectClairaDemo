@@ -15,6 +15,9 @@
         <array key="Montserrat-Regular.ttf">
             <string>Montserrat-Regular</string>
         </array>
+        <array key="OpenSans-Bold.ttf">
+            <string>OpenSans-Bold</string>
+        </array>
         <array key="OpenSans-Regular.ttf">
             <string>OpenSans</string>
         </array>
@@ -246,7 +249,7 @@
             <objects>
                 <navigationController storyboardIdentifier="LoginNavigationVC" automaticallyAdjustsScrollViewInsets="NO" id="nYp-PB-Ifh" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="bMZ-pw-1ux">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="bMZ-pw-1ux">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -562,7 +565,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ixx-os-tco">
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="7IP-7v-Mlw">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="620"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D68-bi-uRb">
@@ -699,6 +702,43 @@
                                                         <constraint firstAttribute="trailing" secondItem="1F0-HJ-AfD" secondAttribute="trailing" id="ngM-jV-tIx"/>
                                                     </constraints>
                                                 </stackView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Need Help Signing In?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ISs-1c-hvk">
+                                                    <frame key="frameInset" minX="103" minY="536.5" width="140.5" height="18"/>
+                                                    <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="13"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4fW-Vq-m60">
+                                                    <attributedString key="attributedText">
+                                                        <fragment content="Email us at ">
+                                                            <attributes>
+                                                                <color key="NSColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                                <font key="NSFont" size="14" name="HelveticaNeue-Medium"/>
+                                                                <font key="NSOriginalFont" size="14" name="HelveticaNeue-Medium"/>
+                                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                            </attributes>
+                                                        </fragment>
+                                                        <fragment content="help@toxicfox.co.uk ">
+                                                            <attributes>
+                                                                <color key="NSColor" red="0.95286722715736039" green="0.12840670610452834" blue="0.68212155151929399" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <font key="NSFont" size="14" name="HelveticaNeue-Medium"/>
+                                                                <font key="NSOriginalFont" size="14" name="HelveticaNeue-Medium"/>
+                                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                            </attributes>
+                                                        </fragment>
+                                                        <fragment>
+                                                            <string key="content">
+our team are happy to help.</string>
+                                                            <attributes>
+                                                                <color key="NSColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                                <font key="NSFont" size="14" name="HelveticaNeue-Medium"/>
+                                                                <font key="NSOriginalFont" size="14" name="HelveticaNeue-Medium"/>
+                                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                            </attributes>
+                                                        </fragment>
+                                                    </attributedString>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
@@ -709,6 +749,7 @@
                                                 <constraint firstItem="ZJX-cv-CBy" firstAttribute="leading" secondItem="D68-bi-uRb" secondAttribute="leading" id="B2H-ZP-29d"/>
                                                 <constraint firstAttribute="trailing" secondItem="ZJX-cv-CBy" secondAttribute="trailing" id="DhP-dU-gaU"/>
                                                 <constraint firstItem="h9k-zM-Ne4" firstAttribute="top" secondItem="ipO-eh-rKe" secondAttribute="top" id="Dox-cW-Qub"/>
+                                                <constraint firstItem="4fW-Vq-m60" firstAttribute="top" secondItem="ISs-1c-hvk" secondAttribute="bottom" constant="5" id="EFl-Vc-M3B"/>
                                                 <constraint firstItem="hP8-um-4Xl" firstAttribute="leading" secondItem="D68-bi-uRb" secondAttribute="leading" id="HAi-vc-wt2"/>
                                                 <constraint firstAttribute="trailing" secondItem="h9k-zM-Ne4" secondAttribute="trailing" id="JMY-m1-sHc"/>
                                                 <constraint firstItem="ZJX-cv-CBy" firstAttribute="top" secondItem="hP8-um-4Xl" secondAttribute="bottom" constant="8" id="LpQ-a5-c3F"/>
@@ -726,11 +767,14 @@
                                                 <constraint firstItem="h9k-zM-Ne4" firstAttribute="leading" secondItem="x8v-BL-UGF" secondAttribute="trailing" constant="9" id="kQo-1d-rwy"/>
                                                 <constraint firstItem="x8v-BL-UGF" firstAttribute="leading" secondItem="ipO-eh-rKe" secondAttribute="trailing" constant="8" id="lje-eo-UVU"/>
                                                 <constraint firstItem="h9k-zM-Ne4" firstAttribute="height" secondItem="ipO-eh-rKe" secondAttribute="height" id="m99-Id-Svg"/>
+                                                <constraint firstItem="4fW-Vq-m60" firstAttribute="centerX" secondItem="ISs-1c-hvk" secondAttribute="centerX" id="nZp-lC-c5Q"/>
                                                 <constraint firstItem="hP8-um-4Xl" firstAttribute="top" secondItem="ipO-eh-rKe" secondAttribute="bottom" constant="25" id="ps1-F6-Q5J"/>
                                                 <constraint firstItem="ipO-eh-rKe" firstAttribute="leading" secondItem="D68-bi-uRb" secondAttribute="leading" id="qNZ-fP-a9Q"/>
                                                 <constraint firstItem="0aS-1z-A8Z" firstAttribute="leading" secondItem="D68-bi-uRb" secondAttribute="leading" id="usL-h1-BIO"/>
                                                 <constraint firstItem="NcA-7S-Dko" firstAttribute="leading" secondItem="D68-bi-uRb" secondAttribute="leading" id="v4U-AI-5lI"/>
                                                 <constraint firstItem="x8v-BL-UGF" firstAttribute="centerX" secondItem="D68-bi-uRb" secondAttribute="centerX" id="y3o-pP-uQo"/>
+                                                <constraint firstItem="ISs-1c-hvk" firstAttribute="top" secondItem="0aS-1z-A8Z" secondAttribute="bottom" constant="50" id="y7k-Rk-rr8"/>
+                                                <constraint firstItem="ISs-1c-hvk" firstAttribute="centerX" secondItem="0aS-1z-A8Z" secondAttribute="centerX" id="yV8-lt-kQ0"/>
                                             </constraints>
                                         </view>
                                     </subviews>
@@ -1156,8 +1200,8 @@
         <image name="imgErrorSummary" width="273" height="65"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="8V4-Ek-omP"/>
-        <segue reference="4pG-1e-vnX"/>
+        <segue reference="chL-R6-lCY"/>
         <segue reference="G1G-0s-bY9"/>
+        <segue reference="RqL-b7-Hgl"/>
     </inferredMetricsTieBreakers>
 </document>

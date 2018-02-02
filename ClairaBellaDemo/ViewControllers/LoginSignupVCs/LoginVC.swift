@@ -35,6 +35,7 @@ class LoginVC: AuthenticationViewController, UITextFieldDelegate {
         super.viewDidLoad()
         txtEmail?.setCornerRadius()
         txtPassword?.setCornerRadius()
+       
         if let hdView = tblHeaderView {
             var hdvFrame = hdView.frame
             hdvFrame.size.height = hdvFrame.size.height * widthRatio

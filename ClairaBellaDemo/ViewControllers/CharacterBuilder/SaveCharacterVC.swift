@@ -277,6 +277,8 @@ extension SaveCharacterVC {
     
     func callSaveAPI() {
         if isValidate() {
+            name_textfield.resignFirstResponder()
+            
             loadignContainerView.isHidden = false
             isCharacterEditMode ? updateCharacterAPICall() : saveCharacterAPICAll()
         }
