@@ -77,15 +77,19 @@ class LoginVC: AuthenticationViewController, UITextFieldDelegate {
         
         let errorColor = UIColor(colorLiteralRed: 150.0/255.0, green: 30.0/255.0, blue: 44.0/255.0, alpha: 0.8)
         
-        if email.isEmpty || !email.isValidEmail(){
-            isValid = false
-            txtEmail.setBorder(color:errorColor)
-        }
         
         if password.isEmpty {
             isValid = false
             txtPassword.setBorder(color:errorColor)
+            lblErrorMessage.text = "Please enter your password."
         }
+        
+        if email.isEmpty || !email.isValidEmail(){
+            isValid = false
+            txtEmail.setBorder(color:errorColor)
+            lblErrorMessage.text = "Please enter your valid email address."
+        }
+
         errorListView.isHidden = isValid
         return isValid
     }
@@ -127,6 +131,7 @@ class LoginVC: AuthenticationViewController, UITextFieldDelegate {
             
             login(email: email, password: password, block: { (success) in
                 self.errorListView.isHidden = success
+                self.lblErrorMessage.text = success ? "" : "Email and password is wrong."
             })
         }
         

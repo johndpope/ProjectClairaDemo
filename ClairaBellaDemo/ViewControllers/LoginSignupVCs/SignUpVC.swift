@@ -21,6 +21,7 @@ class SignUpVC: AuthenticationViewController, UITextFieldDelegate {
     @IBOutlet var tblHeaderView: UIView!
     @IBOutlet var btn_pressed: UIButton!
     @IBOutlet var errorListView: UIView!
+    @IBOutlet var lblErrorMessage: UILabel!
     
     var pool: AWSCognitoIdentityUserPool?
     var sentTo: String?
@@ -105,24 +106,35 @@ class SignUpVC: AuthenticationViewController, UITextFieldDelegate {
         
         let errorColor = UIColor(colorLiteralRed: 150.0/255.0, green: 30.0/255.0, blue: 44.0/255.0, alpha: 0.8)
 
-        if email.isEmpty || !email.isValidEmail(){
+        
+        
+        if password.isEmpty || password.characters.count < 6{
             isValid = false
-            emailTextField.setBorder(color:errorColor)
-        } 
-        if firstname.isEmpty {
-            isValid = false
-            nameTextField.setBorder(color:errorColor)
+            passwordTextField.setBorder(color:errorColor)
+            lblErrorMessage.text = "Please enter a password containing 6 characters or more."
         }
         
         if lastName.isEmpty {
             isValid = false
             lastNameTextField.setBorder(color:errorColor)
+            lblErrorMessage.text = "Please enter your last name."
+
         }
-        
-        if password.isEmpty {
+
+        if firstname.isEmpty {
             isValid = false
-            passwordTextField.setBorder(color:errorColor)
+            nameTextField.setBorder(color:errorColor)
+            
+            lblErrorMessage.text = "Please enter your first name."
         }
+
+        if email.isEmpty || !email.isValidEmail(){
+            isValid = false
+            emailTextField.setBorder(color:errorColor)
+            lblErrorMessage.text = "Please enter a valid email address."
+
+        }
+
         errorListView.isHidden = isValid
         return isValid
     }

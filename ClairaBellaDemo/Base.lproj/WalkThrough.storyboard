@@ -529,6 +529,7 @@
                         <outlet property="emailTextField" destination="AkK-QX-eXI" id="mY1-fe-DUZ"/>
                         <outlet property="errorListView" destination="2x7-xl-gEz" id="tsb-oc-7UD"/>
                         <outlet property="lastNameTextField" destination="MPK-3u-evE" id="cpO-Wh-wUI"/>
+                        <outlet property="lblErrorMessage" destination="4pQ-Q5-2Sm" id="eEk-ro-owM"/>
                         <outlet property="nameTextField" destination="Er4-d6-esz" id="yLh-bT-ShS"/>
                         <outlet property="passwordTextField" destination="0mQ-cG-hy0" id="Io7-UZ-dco"/>
                         <outlet property="tblHeaderView" destination="sdA-UY-OU2" id="UAx-V6-y1p"/>
@@ -1155,8 +1156,8 @@
         <image name="imgErrorSummary" width="273" height="65"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="xnQ-NB-zg0"/>
-        <segue reference="RqL-b7-Hgl"/>
+        <segue reference="8V4-Ek-omP"/>
+        <segue reference="4pG-1e-vnX"/>
         <segue reference="G1G-0s-bY9"/>
     </inferredMetricsTieBreakers>
 </document>

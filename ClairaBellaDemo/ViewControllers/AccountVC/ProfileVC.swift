@@ -141,7 +141,8 @@ class ProfileVC: ParentVC {
     func updateProfile() {
         
         guard isValidProfileData() else {return}
-        let name = txtName.text ?? ""
+        let email = txtEmail.text?.trimmedString() ?? ""
+        let name = txtName.text?.trimmedString() ?? ""
         let birthdate = [txtDobDay.text!, txtDobMonth.text!, txtDobYear.text!].joined(separator: "-")
         
         self.showHud()
@@ -177,6 +178,12 @@ class ProfileVC: ParentVC {
 //                
 //                return nil
 //            })
+            
+            let params = ["date_of_birth" : birthdate]
+            APICall.shared.updateUser_APICall(email: email, params: params, block: { (response, success) in
+                self.hideHud()
+                print(response)
+            })
         }
         
     }
