@@ -494,7 +494,7 @@ class SaveCharacterLoadingView: UIView {
         if progress > 0.75 {
             advrtImageView.image = #imageLiteral(resourceName: "animImage4")
             advrtTitleLabel.text = "Celebrity Gifts"
-            advrtDetailLabel.text = "Shop your characters across \ntreding collections."
+            advrtDetailLabel.text = "Shop your characters across \ntrending collections."
             
         } else if progress > 0.50 {
             advrtImageView.image = #imageLiteral(resourceName: "animImage3")

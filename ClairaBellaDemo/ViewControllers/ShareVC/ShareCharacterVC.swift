@@ -26,6 +26,10 @@ class ShareCharacterVC: ParentVC {
     @IBOutlet var tblView: UITableView!
     
     @IBOutlet var charTblHeightConstraint: NSLayoutConstraint!
+    @IBOutlet var webviewHeight: NSLayoutConstraint!
+    @IBOutlet var webviewWidth: NSLayoutConstraint!
+    @IBOutlet var webviewCenterX: NSLayoutConstraint!
+    @IBOutlet var webviewTopSpace: NSLayoutConstraint!
 
     var character: Character?
     
@@ -54,6 +58,7 @@ class ShareCharacterVC: ParentVC {
     }
     
     func setUI() {
+        setWebviewFrame()
         
         if selectedCharForPostcard == nil { //user select Postcard Tab
             
@@ -96,6 +101,13 @@ class ShareCharacterVC: ParentVC {
         }
         
         setTableViewHeight()
+    }
+    
+    func setWebviewFrame() {
+        webviewWidth.constant = (SCREEN_WIDTH == 320 ? 200 : 200) * widthRatio
+        webviewHeight.constant = (SCREEN_WIDTH == 320 ? 210 : 200) * widthRatio
+        webviewCenterX.constant = (SCREEN_WIDTH == 320 ? -40 : -20) * widthRatio
+        webviewTopSpace.constant = (SCREEN_WIDTH == 320 ? -5 : 20) * widthRatio
     }
     
     func loadBackgroundImages() {

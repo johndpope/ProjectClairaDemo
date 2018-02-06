@@ -411,7 +411,7 @@ class LoadingVC: UIViewController {
 //        }
 //        self.refresh()
 
-        let details = UserDefaults(suiteName: appGroupName)!.object(forKey: "user_details")
+        let details = UserDefaults(suiteName: appGroupName)!.object(forKey: UserAttributeKey.loggedInUserKey)
     
         if details == nil {
             if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "LoginDashboard") as? LoginSignupDashboardVC {

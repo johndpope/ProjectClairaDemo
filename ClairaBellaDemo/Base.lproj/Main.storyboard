@@ -3610,8 +3610,8 @@
                                     <webView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="062-95-eVi">
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="200" id="cg3-gu-4FU"/>
-                                            <constraint firstAttribute="height" constant="200" id="uB7-yO-TTb"/>
+                                            <constraint firstAttribute="width" constant="180" id="cg3-gu-4FU"/>
+                                            <constraint firstAttribute="height" constant="180" id="uB7-yO-TTb"/>
                                         </constraints>
                                     </webView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tQm-Ip-yun">
@@ -3628,13 +3628,13 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="tQm-Ip-yun" firstAttribute="top" secondItem="mkh-AT-EGN" secondAttribute="top" constant="8" id="8dk-zs-OcH"/>
-                                    <constraint firstItem="062-95-eVi" firstAttribute="centerX" secondItem="mkh-AT-EGN" secondAttribute="centerX" constant="-20" id="KcA-ER-vxk"/>
+                                    <constraint firstItem="062-95-eVi" firstAttribute="centerX" secondItem="mkh-AT-EGN" secondAttribute="centerX" constant="-40" id="KcA-ER-vxk"/>
                                     <constraint firstAttribute="trailing" secondItem="tQm-Ip-yun" secondAttribute="trailing" constant="8" id="MA4-AW-5VC"/>
                                     <constraint firstItem="Rkh-1x-7uZ" firstAttribute="top" secondItem="mkh-AT-EGN" secondAttribute="top" id="cS2-34-FBk"/>
                                     <constraint firstAttribute="trailing" secondItem="Rkh-1x-7uZ" secondAttribute="trailing" id="etY-Sf-74c"/>
                                     <constraint firstItem="Rkh-1x-7uZ" firstAttribute="leading" secondItem="mkh-AT-EGN" secondAttribute="leading" id="fmn-ea-dIy"/>
-                                    <constraint firstAttribute="height" constant="200" id="pms-n1-Iq8"/>
-                                    <constraint firstItem="062-95-eVi" firstAttribute="top" secondItem="mkh-AT-EGN" secondAttribute="top" constant="10" id="vGd-C0-lX7"/>
+                                    <constraint firstAttribute="height" constant="210" id="pms-n1-Iq8"/>
+                                    <constraint firstItem="062-95-eVi" firstAttribute="top" secondItem="mkh-AT-EGN" secondAttribute="top" constant="-5" id="vGd-C0-lX7"/>
                                     <constraint firstAttribute="bottom" secondItem="Rkh-1x-7uZ" secondAttribute="bottom" id="yYN-fJ-7Ly"/>
                                 </constraints>
                             </view>
@@ -3992,8 +3992,11 @@
                         <outlet property="noCharactersView" destination="cXB-LO-7w7" id="bpE-V5-nSK"/>
                         <outlet property="tblView" destination="Gpc-80-fEY" id="uRx-Sx-dgl"/>
                         <outlet property="webview" destination="062-95-eVi" id="2FA-hh-dYf"/>
+                        <outlet property="webviewCenterX" destination="KcA-ER-vxk" id="3jB-NE-iEh"/>
+                        <outlet property="webviewHeight" destination="uB7-yO-TTb" id="bgO-iC-nlB"/>
+                        <outlet property="webviewTopSpace" destination="vGd-C0-lX7" id="bOP-CG-zey"/>
+                        <outlet property="webviewWidth" destination="cg3-gu-4FU" id="ARv-aP-P1M"/>
                         <outletCollection property="horizontalConstraints" destination="pms-n1-Iq8" collectionClass="NSMutableArray" id="9mz-cq-BuQ"/>
-                        <outletCollection property="horizontalConstraints" destination="cg3-gu-4FU" collectionClass="NSMutableArray" id="Gne-6P-AoT"/>
                         <segue destination="oMH-0n-afk" kind="show" identifier="NewCharVCSegue" id="xFx-re-QEu"/>
                     </connections>
                 </viewController>

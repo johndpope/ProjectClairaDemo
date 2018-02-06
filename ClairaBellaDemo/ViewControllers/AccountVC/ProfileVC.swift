@@ -9,12 +9,6 @@
 import UIKit
 import AWSCognitoIdentityProvider
 
-enum AWSUserAttributeKey {
-    static let name = "name"
-    static let birthdate = "birthdate"
-    static let email = "email"
-}
-
 class ProfileVC: ParentVC {
     @IBOutlet var txtEmail: UITextField!
     @IBOutlet var txtName: UITextField!
@@ -55,9 +49,9 @@ class ProfileVC: ParentVC {
         
         isLoginWithFB = AmazonClientManager.shared.isLoggedIn()
         
-        if let userDetails = UserDefaults(suiteName: appGroupName)!.value(forKey: "user_details")as? [String : Any] {
+        if let userDetails = UserDefaults(suiteName: appGroupName)!.value(forKey: UserAttributeKey.loggedInUserKey)as? [String : Any] {
             
-            let email: String = (userDetails[AWSUserAttributeKey.email] as? String) ?? ""
+            let email: String = (userDetails[UserAttributeKey.email] as? String) ?? ""
             
             if !email.isEmpty {
                 txtEmail.text = email
@@ -65,7 +59,7 @@ class ProfileVC: ParentVC {
                 txtEmail.background = UIImage(named: "textboxBack_selected")
             }
 
-            let name = (userDetails[AWSUserAttributeKey.name] as? String) ?? ""
+            let name = (userDetails[UserAttributeKey.name] as? String) ?? ""
             lblName.text = "Hey There, \(name)"
             
             if !name.isEmpty {
@@ -75,7 +69,7 @@ class ProfileVC: ParentVC {
             }
             
             
-            let dob = (userDetails[AWSUserAttributeKey.birthdate] as? String) ?? ""
+            let dob = (userDetails[UserAttributeKey.birthdate] as? String) ?? ""
             if !dob.isEmpty && dob != "00-00-0000" {
                 let dobSeparates = dob.components(separatedBy: CharacterSet(charactersIn: "-"))
                 let day = dobSeparates[0]
@@ -102,14 +96,11 @@ class ProfileVC: ParentVC {
     //MARK:- IBAction
     
     @IBAction func logOutBtn_clicked(_ sender: UIButton) {
-        UserDefaults(suiteName: appGroupName)?.setValue(nil, forKey: "user_details")
+        UserDefaults(suiteName: appGroupName)?.setValue(nil, forKey: UserAttributeKey.loggedInUserKey)
         appDelegate.currentUser?.signOut()
         AmazonClientManager.shared.logOut()
         
         let rootNavVC = appDelegate.window?.rootViewController as! UINavigationController
-//        if let presentdController = rootNavVC.presentedViewController {
-//            presentdController.dismiss(animated: false, completion: nil)
-//        }
 
         self.dismiss(animated: true) {
             
@@ -141,6 +132,9 @@ class ProfileVC: ParentVC {
     func updateProfile() {
         
         guard isValidProfileData() else {return}
+        
+        dismissKeyboard()
+
         let email = txtEmail.text?.trimmedString() ?? ""
         let name = txtName.text?.trimmedString() ?? ""
         let birthdate = [txtDobDay.text!, txtDobMonth.text!, txtDobYear.text!].joined(separator: "-")
@@ -179,11 +173,31 @@ class ProfileVC: ParentVC {
 //                return nil
 //            })
             
-            let firstName = setUserInfo()
-            let params = ["date_of_birth" : birthdate, ]
+            
+            var firstname = ""
+            var lastname = ""
+            var savedDetail = [String : Any]()
+            
+            if let userDetails = UserDefaults(suiteName: appGroupName)!.value(forKey: UserAttributeKey.loggedInUserKey)as? [String : Any] {
+                firstname = (userDetails[UserAttributeKey.firstname]  as? String) ?? ""
+                lastname = (userDetails[UserAttributeKey.lastname] as? String) ?? ""
+                savedDetail = userDetails
+            }
+            
+//            let params = ["date_of_birth" : birthdate,
+//                          "first_name" : firstname,
+//                          "Last_name" : lastname]
+            let params = ["date_of_birth" : birthdate]
+
             APICall.shared.updateUser_APICall(email: email, params: params, block: { (response, success) in
                 self.hideHud()
                 print(response)
+                if success {
+                    savedDetail[UserAttributeKey.birthdate] = birthdate
+                    UserDefaults(suiteName: appGroupName)?.set(savedDetail, forKey: UserAttributeKey.loggedInUserKey)
+                    self.showAlert(message: "Profile updated successfully.")
+
+                }
             })
         }
         
@@ -304,6 +318,13 @@ class ProfileVC: ParentVC {
         return isValid
     }
 
+    func dismissKeyboard() {
+        txtName.resignFirstResponder()
+        txtEmail.resignFirstResponder()
+        txtDobDay.resignFirstResponder()
+        txtDobMonth.resignFirstResponder()
+        txtDobYear.resignFirstResponder()
+    }
 }
 
 //MARK:- UITextFieldDelegate

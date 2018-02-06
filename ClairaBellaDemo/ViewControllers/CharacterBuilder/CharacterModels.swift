@@ -37,6 +37,9 @@ class Emoji: CharacterType {
     
 
     func getEmojiURL(char: Character? = nil)->URL {
+//        if let ch = char {
+//            self.characterCreatedDate = ch.createdDate
+//        }
         let isNonPersnolizedEmoji = nonPersnolizedEmojis.contains(self.key)
         
         let emojiFileNameWithDirectoryName = isNonPersnolizedEmoji ? "NonPersnolizeEmoji/\(self.key)" : (self.characterCreatedDate + "/" + self.key)

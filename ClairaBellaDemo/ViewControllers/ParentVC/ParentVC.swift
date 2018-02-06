@@ -130,23 +130,23 @@ class ParentVC: UIViewController {
     }
     
     func setProfileBtnStyle() {
-        if let userDetails = UserDefaults(suiteName: appGroupName)!.value(forKey: "user_details")as? [String : Any] {
+        if let userDetails = UserDefaults(suiteName: appGroupName)!.value(forKey: UserAttributeKey.loggedInUserKey)as? [String : Any] {
             btnProfile?.isSelected = false
 
-            let email: String = (userDetails[AWSUserAttributeKey.email] as? String) ?? ""
+            let email: String = (userDetails[UserAttributeKey.email] as? String) ?? ""
             
             if email.isEmpty {
                 btnProfile?.isSelected = true
             }
             
-            let name = (userDetails[AWSUserAttributeKey.name] as? String) ?? ""
+            let name = (userDetails[UserAttributeKey.name] as? String) ?? ""
             
             if name.isEmpty {
                 btnProfile?.isSelected = true
             }
             
             
-            let dob = (userDetails[AWSUserAttributeKey.birthdate] as? String) ?? ""
+            let dob = (userDetails[UserAttributeKey.birthdate] as? String) ?? ""
             if dob.isEmpty || dob == "00-00-0000" {
                 btnProfile?.isSelected = true
             }

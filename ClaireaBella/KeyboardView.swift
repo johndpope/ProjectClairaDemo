@@ -38,6 +38,7 @@ class KeyboardView: UIView {
                 for type in emojiTypes {
                     let emoji = Emoji()
                     emoji.key = type
+                    emoji.characterCreatedDate = selectedCharacter!.createdDate
                     selectedCharacter?.emojis.append(emoji)
                 }
                 

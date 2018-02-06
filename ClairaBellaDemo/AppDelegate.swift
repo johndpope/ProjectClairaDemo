@@ -372,17 +372,17 @@ extension AppDelegate {
         if AmazonClientManager.shared.isLoggedIn() {
             let user = CognitoUser.currentUser()
             print(user)
-            let userDetails = [AWSUserAttributeKey.email : user.email!,
-                               AWSUserAttributeKey.name : user.name!,
-                               AWSUserAttributeKey.birthdate : user.birthDate!]
+            let userDetails = [UserAttributeKey.email : user.email!,
+                               UserAttributeKey.name : user.name!,
+                               UserAttributeKey.birthdate : user.birthDate!]
             
-            UserDefaults(suiteName: appGroupName)?.set(userDetails, forKey: "user_details")
+            UserDefaults(suiteName: appGroupName)?.set(userDetails, forKey: UserAttributeKey.loggedInUserKey)
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "NofiticationDidFinishFetchingUserDetails"), object: nil)
 
         } else {
             currentUser?.getDetails().continueWith(executor:AWSExecutor.mainThread(), block: { (response) -> Any? in
                 
-                if var userDetails =  UserDefaults(suiteName: appGroupName)!.value(forKey: "user_details")as? [String : Any] {
+                if var userDetails =  UserDefaults(suiteName: appGroupName)!.value(forKey: UserAttributeKey.loggedInUserKey)as? [String : Any] {
                     
                     if response.error == nil {
                         if let attributes = response.result?.userAttributes {
@@ -390,7 +390,7 @@ extension AppDelegate {
                                 userDetails[att.name!] = att.value
                             }
                             
-                            UserDefaults(suiteName: appGroupName)?.set(userDetails, forKey: "user_details")
+                            UserDefaults(suiteName: appGroupName)?.set(userDetails, forKey: UserAttributeKey.loggedInUserKey)
                             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "NofiticationDidFinishFetchingUserDetails"), object: nil)
                         }
                     }

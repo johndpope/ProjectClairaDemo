@@ -41,32 +41,12 @@ class SignUpVC: AuthenticationViewController, UITextFieldDelegate {
         tblHeaderView.frame = hdvFrame
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(nf:)), name: Notification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(nf:)), name: Notification.Name.UIKeyboardWillHide, object: nil)
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        NotificationCenter.default.removeObserver(self)
-    }
-    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "confirmSignUpSegue" {
         }
     }
     
-    //Keyboard notifications
-    func keyboardWillShow(nf: Notification) {
-        tblSignupForm.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 150, right: 0)
-    }
-    
-    func keyboardWillHide(nf: Notification) {
-        tblSignupForm.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-    }
 
     //TextField delegate
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

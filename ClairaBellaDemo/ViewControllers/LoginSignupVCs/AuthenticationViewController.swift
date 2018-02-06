@@ -98,11 +98,11 @@ class AuthenticationViewController: ParentVC {
                 //
                 
                 let result = ["email": email, "password": password, "isFacebookLogin" : fbLogin] as [String : Any]
-                UserDefaults(suiteName: appGroupName)!.setValue(result, forKey: "user_details")
+                UserDefaults(suiteName: appGroupName)!.setValue(result, forKey: UserAttributeKey.loggedInUserKey)
                 
                 appDelegate.fetchUserDetails()
                 appDelegate.getCharactersFromServer()
-                self.performSegue(withIdentifier: "goToHome", sender: nil)
+                //self.performSegue(withIdentifier: "goToHome", sender: nil)
                 
                 block?(true)
             }
@@ -116,16 +116,16 @@ class AuthenticationViewController: ParentVC {
     
     func signup(username: String,  password: String, email: String, name: String,  fbLogin: Bool = false, block: ((Bool)->Void)? = nil) {
         let emailAtt = AWSCognitoIdentityUserAttributeType()
-        emailAtt?.name = "email"
+        emailAtt?.name = UserAttributeKey.email
         emailAtt?.value = email
         
         let nameAtt = AWSCognitoIdentityUserAttributeType()
-        nameAtt?.name = "given_name"
+        nameAtt?.name = UserAttributeKey.name
         nameAtt?.value = name
         
         
         let dobAtt = AWSCognitoIdentityUserAttributeType()
-        dobAtt?.name = "birthdate"
+        dobAtt?.name = UserAttributeKey.birthdate
         dobAtt?.value = "00-00-0000"
         
         
@@ -181,9 +181,13 @@ class AuthenticationViewController: ParentVC {
                     let name = firstName + " " + lastName
                     let dob = userInfo["date_of_birth"] ?? ""
                     
-                    let result = ["email": email, "name": name, "first_name": firstName, "last_name" : lastName, "birthdate" : dob]
+                    let result = [UserAttributeKey.email: email,
+                                  UserAttributeKey.name: name,
+                                  UserAttributeKey.firstname: firstName,
+                                  UserAttributeKey.lastname : lastName,
+                                  UserAttributeKey.birthdate : dob]
                     
-                    UserDefaults(suiteName: appGroupName)!.setValue(result, forKey: "user_details")
+                    UserDefaults(suiteName: appGroupName)!.setValue(result, forKey: UserAttributeKey.loggedInUserKey)
                     appDelegate.getCharactersFromServer()
                     
                     block(true)
@@ -207,14 +211,17 @@ class AuthenticationViewController: ParentVC {
 
         APICall.shared.signupUser_APICall(email: email, params: params) { (response,success) in
             if success {
-                let name = params["first_name"]! + " " + params["Last_name"]!
+                let firstName = params["first_name"]!
+                let lastName = params["Last_name"]!
+                let name = firstName + " " + lastName
                 
-                let result = ["name" : name, "email": email]
+                let result = [UserAttributeKey.email: email,
+                              UserAttributeKey.name: name,
+                              UserAttributeKey.firstname: firstName,
+                              UserAttributeKey.lastname : lastName,
+                              UserAttributeKey.birthdate : ""]
                 
-                UserDefaults(suiteName: appGroupName)!.setValue(result, forKey: "user_details")
-                //UserDefaults.standard.setValue(result, forKey: "user_details")
-                //UserDefaults.standard.synchronize()
-                //self.btn_pressed.sendActions(for: .touchUpInside)
+                UserDefaults(suiteName: appGroupName)!.setValue(result, forKey: UserAttributeKey.loggedInUserKey)
                 appDelegate.getCharactersFromServer()
             } else {
             }

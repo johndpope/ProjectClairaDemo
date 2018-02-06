@@ -11,13 +11,25 @@ import Foundation
 
 let appGroupName = "group.claireabella.com"
 
+
+enum UserAttributeKey {
+    static let firstname = "first_name"
+    static let lastname = "last_name"
+    static let name = "name"
+    static let birthdate = "birthdate"
+    static let email = "email"
+    
+    static let loggedInUserKey = "current_user"
+}
+
+
 //APICAlls
 class APICall {
     
     static let shared = APICall()
     
     var currentUserEmail: String? {
-        if let user_deatils = UserDefaults(suiteName: appGroupName)!.value(forKey: "user_details")as? [String:Any] {
+        if let user_deatils = UserDefaults(suiteName: appGroupName)!.value(forKey: UserAttributeKey.loggedInUserKey)as? [String:Any] {
             return user_deatils["email"] as? String
         }
         return nil
@@ -402,7 +414,7 @@ class APICall {
         let url = URL(string: urlString)!
         
         var request = URLRequest(url: url)
-        request.httpMethod = "PACH"
+        request.httpMethod = "PATCH"
         let data = try? JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
         request.httpBody = data
         
